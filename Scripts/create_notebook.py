@@ -66,30 +66,36 @@ def find_local_imports(file_path):
         
         elif isinstance(node, ast.ImportFrom):
             if node.module and node.module.startswith('src'):
-                # from src.models import CNNNetwork
-                # This could be importing a class from __init__.py or a submodule
-                # We try to import the module itself
-                module_path = resolve_module_path(node.module)
+                # from src.data import loader
+                # 1. Try resolving the package itself (e.g. src/data/__init__.py)
+                pkg_path = resolve_module_path(node.module)
+                if pkg_path:
+                    # If it resolves to a file (init.py or just module.py), add it
+                    if pkg_path not in dependencies:
+                         dependencies.append(pkg_path)
+                
+                # 2. Check if the imported names are actually submodules (files)
+                # e.g. from src.data import loader -> src/data/loader.py
+                for alias in node.names:
+                     # candidate path: src.data.loader
+                     potential_module_name = f"{node.module}.{alias.name}"
+                     submodule_path = resolve_module_path(potential_module_name)
+                     if submodule_path:
+                         if submodule_path not in dependencies:
+                             dependencies.append(submodule_path)
             
             elif node.level > 0:
                 # Relative import: from . import cnn_model
-                # Resolution is tricky without full context, simplify by assuming structure
-                # . -> current dir, .. -> parent
-                
-                # Simple logic for this specific project structure:
-                # calculated based on file_path location
-                # Only handling simple '.' case for now as commonly seen in __init__.py
+                # ... (existing logic)
                 if node.module:
                     # from .module import ...
-                    # relative to current file's directory
-                    target_name = node.module
-                    candidate = os.path.join(base_dir, target_name + ".py")
-                    if os.path.exists(candidate):
+                     target_name = node.module
+                     candidate = os.path.join(base_dir, target_name + ".py")
+                     if os.path.exists(candidate):
                         dependencies.append(candidate)
                         continue
                 else:
                     # from . import module
-                    # Usually found in __init__.py
                      for alias in node.names:
                         target_name = alias.name
                         candidate = os.path.join(base_dir, target_name + ".py")
@@ -316,7 +322,7 @@ def main():
         "source": [
             "# Example: Train CNN Model\n",
             "# Make sure the data file path is correct\n",
-            "data_file = \"3C90_TX-25-15-10_Data1_Cycle.mat\"\n",
+            "data_file = \"/content/drive/MyDrive/Colab Notebooks/3C90_TX-25-15-10_Data1_Cycle.mat\"\n",
             "if not os.path.exists(data_file):\n",
             "    print(f\"Warning: {data_file} not found. Please upload it or fix the path.\")\n",
             "\n",
