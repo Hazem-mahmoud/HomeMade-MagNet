@@ -283,6 +283,10 @@ def main():
             # Replace parser.parse_args() with parser.parse_args(args)
             # Be careful with indentation and exact string match
             modified_content = re.sub(r'(\w+)\.parse_args\(\)', r'\1.parse_args(args)', modified_content)
+            
+            # Comment out if __name__ == "__main__": block
+            modified_content = modified_content.replace('if __name__ == "__main__":', '# if __name__ == "__main__":')
+            modified_content = modified_content.replace('    main()', '#    main()')
         
         # Add Markdown header
         notebook_cells.append({
