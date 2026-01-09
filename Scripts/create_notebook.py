@@ -130,18 +130,54 @@ def build_dependency_graph(root_file):
 def comment_out_local_imports(content):
     """
     Comments out lines starting with 'from src' or 'import src' 
-    or relative imports 'from .' 
+    or relative imports 'from .'
+    Returns: 
+        new_content (str)
+        flattened_modules (list): List of module names that were imported (e.g. 'loader' from 'import loader')
     """
     lines = content.splitlines()
     new_lines = []
+    flattened_modules = []
+    
     for line in lines:
         stripped = line.strip()
-        # Regex for 'from src...' or 'import src...'
+        # Check for imports to flatten
+        match_src = re.match(r'^(from\s+src\.[a-zA-Z0-9_\.]+\s+)?import\s+(.+)', stripped)
+        match_from_src = re.match(r'^from\s+(src\.[a-zA-Z0-9_\.]+)\s+import\s+(.+)', stripped)
+
         if re.match(r'^(from\s+src\.|import\s+src\.|from\s+\.)', stripped):
+            # It is a local import we want to remove
             new_lines.append(f"# [NOTEBOOK_BUNDLER] {line}")
+            
+            # Try to capture the module name being imported
+            # Case 1: from src.data import loader, preprocessing
+            if match_from_src:
+                # Part 2 is "loader, preprocessing"
+                attributes = match_from_src.group(2)
+                # Split by comma
+                for attr in attributes.split(','):
+                    attr = attr.strip()
+                    # If this attribute corresponds to a file (module), we should probably treat it as a namespace to remove
+                    # Heuristic: If it's lowercase, it's likely a module. If CamelCase, it's a class. 
+                    # We only want to remove namespace for modules.
+                    if attr[0].islower():
+                         flattened_modules.append(attr)
+                         
         else:
             new_lines.append(line)
-    return "\n".join(new_lines)
+            
+    return "\n".join(new_lines), flattened_modules
+
+def apply_namespace_reduction(content, modules_to_flatten):
+    """
+    Replaces 'loader.func()' with 'func()' for modules in the list.
+    """
+    for mod in modules_to_flatten:
+        # Regex to replace 'mod.' with '' but only if it's a standalone word at the start
+        # e.g. loader.load matches. my_loader.load does NOT.
+        pattern = r'\b' + re.escape(mod) + r'\.'
+        content = re.sub(pattern, '', content)
+    return content
 
 def main():
     script_dir = get_script_dir()
@@ -228,7 +264,11 @@ def main():
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
             
-        modified_content = comment_out_local_imports(content)
+        modified_content, flattened_modules = comment_out_local_imports(content)
+        
+        if flattened_modules:
+            print(f"  - Flattening namespaces: {flattened_modules}")
+            modified_content = apply_namespace_reduction(modified_content, flattened_modules)
         
         # Add Markdown header
         notebook_cells.append({
