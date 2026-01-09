@@ -1,0 +1,102 @@
+% --- 1. User Inputs (Replace these with your actual values) ---
+ExperimentID=60000;
+V_sec = Data.Voltage(ExperimentID,:);  % Your voltage array (Volts)
+I_prim = Data.Current(ExperimentID,:); % Current into Primary (Amps)
+N_prim = Data.Primary_Turns;     % Turns on the current-carrying winding (Primary)
+N_sec = Data.Secondary_Turns;      % Turns on the voltage-sensing winding (Secondary)
+Ae = Data.Effective_Area;            % Cross-sectional area of the core (m^2)
+Le = Data.Effective_Length;     % Effective Path Length (meters) -> e.g., 50mm
+dt = Data.Sampling_Time(ExperimentID);              % Time step (seconds)
+Hdc=Data.Hdc_command(ExperimentID);
+Temperature = Data.Temperature_command(ExperimentID);
+DutyP = Data.DutyP_command(ExperimentID);
+DutyN = Data.DutyN_command(ExperimentID);
+Frequency = Data.Frequency_command(ExperimentID);
+Flux_cmd = Data.Flux_command(ExperimentID);
+
+Material = Data.Material;
+Shape = Data.Shape;
+Ve = Data.Effective_Volume;
+CoreN = Data.CoreN;
+Dataset = Data.Dataset;
+
+% Info Strings
+Discarding_info = Data.Discarding_info;
+Freq_info = Data.Freq_info;
+Cycle_info = Data.Cycle_info;
+Date_processing = Data.Date_processing;
+
+% Create time vector (optional, for plotting)
+t = (0:length(V_sec)-1) * dt;
+
+% --- 2. Calculate Magnetizing Force (H) ---
+% H = (N * I) / Le
+H = (N_prim .* I_prim) ./ Le;
+
+% --- 3. Calculate Flux Density (B) ---
+% Remove DC offset to prevent integration drift
+V_clean = V_sec - mean(V_sec);
+
+% Integrate Voltage: Integral(V) dt
+Flux = cumtrapz(t, V_sec);
+
+
+% B = Flux / (N * Ae)
+B = Flux ./ (N_sec * Ae);
+B = B - mean(B);
+
+
+% --- 4. Plotting ---
+figure('Name', 'B-H Analysis', 'Color', 'white');
+
+% Subplot 1: Time Domain Signals
+% Subplot 1: Voltage and Current (Time Domain)
+subplot(2,2,1); % Top-Left
+yyaxis left
+plot(t, V_sec, 'LineWidth', 1.5);
+ylabel('Voltage (V)');
+xlabel('Time (s)');
+ylim auto
+
+yyaxis right
+plot(t, I_prim, 'LineWidth', 1.5);
+ylabel('Current (A)');
+title('Voltage & Current');
+legend('V (Volts)', 'I (Amps)');
+grid on;
+
+% Subplot 2: B and H (Time Domain)
+subplot(2,2,3); % Bottom-Left
+yyaxis left
+plot(t, B, 'LineWidth', 1.5);
+ylabel('Flux Density B (Tesla)');
+xlabel('Time (s)');
+ylim auto
+
+yyaxis right
+plot(t, H, 'LineWidth', 1.5);
+ylabel('Field Strength H (A/m)');
+title('B & H Waveforms');
+legend('B (Tesla)', 'H (A/m)');
+grid on;
+
+
+% Subplot 2: B-H Loop (Hysteresis)
+subplot(2,2,[2 4]); % Right side
+plot(H, B, 'LineWidth', 2);
+xlabel('Magnetizing Force H (A/m)');
+ylabel('Flux Density B (Tesla)');
+title('B-H Hysteresis Loop');
+grid on;
+axis tight;
+
+% Add Info Box to Subplot 2 (Top-Left)
+InfoString = {
+    ['Hdc: ', num2str(Hdc), 'A/m'];
+    ['Temp: ', num2str(Temperature), '°C'];
+    ['Freq: ', num2str(round(Frequency/1000)), 'kHz'];
+    ['Duty: ', num2str(DutyP)];
+    ['Flux Cmd: ', num2str(Flux_cmd, '%.3f'), 'T']
+    };
+text(0.05, 0.95, InfoString, 'Units', 'normalized', 'VerticalAlignment', 'top', ...
+    'BackgroundColor', 'white', 'EdgeColor', 'black');

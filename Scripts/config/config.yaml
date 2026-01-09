@@ -1,0 +1,36 @@
+# Configuration parameters for MagNet ML Project
+
+# Data settings
+data:
+  raw_path: "data/raw"
+  processed_path: "data/processed"
+  batch_size: 32
+  test_split: 0.2
+
+# Model settings
+models:
+  scaler:
+    hidden_dim: 64
+    layers: 3
+  sequence:
+    hidden_dim: 128
+    num_layers: 2
+  seq2seq:
+    encoder_dim: 128
+    decoder_dim: 128
+  cnn:
+    kernel_size: 3
+    num_channels: 64
+    num_layers: 3
+  transformer:
+    d_model: 64
+    nhead: 4
+    num_layers: 2
+    dim_feedforward: 128
+    dropout: 0.1
+
+# Training settings
+training:
+  epochs: 100
+  learning_rate: 0.001
+  save_dir: "checkpoints"

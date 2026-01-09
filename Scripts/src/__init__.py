@@ -1,0 +1,3 @@
+"""
+MagNet Source Package.
+"""
