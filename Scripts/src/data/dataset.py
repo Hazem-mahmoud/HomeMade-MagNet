@@ -140,7 +140,7 @@ class MagNetDataset(Dataset):
             y = torch.tensor([self.log_loss[idx]], dtype=torch.float32)
             return x, y
             
-        elif self.mode == 'sequence':
+        elif self.mode in ['sequence', 'cnn', 'transformer']:
             # Input: B waveform (or H)
             # Target: Power Loss
             # Shape: (Seq_Len, 1)

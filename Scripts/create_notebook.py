@@ -216,6 +216,18 @@ def main():
         ]
     })
 
+    # 1.5 Drive Mount Cell
+    notebook_cells.append({
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "from google.colab import drive\n",
+            "drive.mount('/content/drive')"
+        ]
+    })
+
     # 2. Setup Cell
     notebook_cells.append({
         "cell_type": "code",
