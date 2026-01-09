@@ -270,6 +270,14 @@ def main():
             print(f"  - Flattening namespaces: {flattened_modules}")
             modified_content = apply_namespace_reduction(modified_content, flattened_modules)
         
+        # 3.1 Special handling for main.py to fix argparse in notebooks
+        if os.path.basename(file_path) == "main.py":
+            print("  - Patching main() for notebook argument parsing...")
+            modified_content = modified_content.replace("def main():", "def main(args=None):")
+            # Replace parser.parse_args() with parser.parse_args(args)
+            # Be careful with indentation and exact string match
+            modified_content = re.sub(r'(\w+)\.parse_args\(\)', r'\1.parse_args(args)', modified_content)
+        
         # Add Markdown header
         notebook_cells.append({
             "cell_type": "markdown",
@@ -288,6 +296,40 @@ def main():
             "outputs": [],
             "source": modified_content.splitlines(keepends=True)
         })
+
+    
+    # 3.2 Add Example execution cell
+    notebook_cells.append({
+        "cell_type": "markdown",
+        "metadata": {},
+        "source": [
+            "### Run Training\n",
+            "Call the `main()` function with arguments as a list of strings."
+        ]
+    })
+    
+    notebook_cells.append({
+        "cell_type": "code",
+        "execution_count": None,
+        "metadata": {},
+        "outputs": [],
+        "source": [
+            "# Example: Train CNN Model\n",
+            "# Make sure the data file path is correct\n",
+            "data_file = \"3C90_TX-25-15-10_Data1_Cycle.mat\"\n",
+            "if not os.path.exists(data_file):\n",
+            "    print(f\"Warning: {data_file} not found. Please upload it or fix the path.\")\n",
+            "\n",
+            "# Arguments: --data <path> --model <model_name> --epochs <N>\n",
+            "args = ['--data', data_file, '--model', 'cnn', '--epochs', '10']\n",
+            "\n",
+            "try:\n",
+            "    main(args)\n",
+            "except SystemExit:\n",
+            "    # argparse raises SystemExit on help or error, catch it so notebook doesn't crash\n",
+            "    pass"
+        ]
+    })
 
     # 4. Construct Notebook JSON
     notebook_content = {
