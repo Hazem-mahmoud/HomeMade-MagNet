@@ -1,0 +1,81 @@
+classDiagram
+class src_data_dataset {
+    <<src.data.dataset>>
+    +test_dataset() Any
+    +__init__(self: Any, file_path: Any, mode: Any, transform: Any) Any
+    +__len__(self: Any) Any
+    +__getitem__(self: Any, idx: Any) Any
+}
+class src_data_loader {
+    <<src.data.loader>>
+    +load_experiment(file_path: Any, experiment_id: Any) Any
+    +get_dataset_info(file_path: Any) Any
+    +load_full_dataset(file_path: Any) Any
+    +get_val(obj: Any, idx: Any) Any
+    +get_scalar(key: Any) Any
+    +get_indexed(key: Any, idx: Any) Any
+    +get_arr(key: Any) Any
+}
+class src_data_preprocessing {
+    <<src.data.preprocessing>>
+    +normalize_data(data: Any, method: Any, stats: Any) Any
+    +prepare_dataset(features: Any, targets: Any, test_ratio: Any, norm_config: Any) Any
+    +calculate_flux_density(voltage: Any, sampling_time: Any, secondary_turns: Any, effective_area: Any) Any
+    +calculate_magnetizing_force(current: Any, primary_turns: Any, effective_length: Any) Any
+    +calculate_volumetric_loss(b_field: Any, h_field: Any, frequency: Any) Any
+    +load_config(config_path: Any) Any
+    +process_magnet_dataset(voltage: Any, current: Any, frequency: Any, mag_props: Any, dt: Any, model_type: Any, config_path: Any) Any
+}
+class src_models_cnn_model {
+    <<src.models.cnn_model>>
+    +__init__(self: Any, input_dim: Any, kernel_size: Any, num_channels: Any, num_layers: Any, output_dim: Any) Any
+    +forward(self: Any, x: Any) Any
+}
+class src_models_scaler_model {
+    <<src.models.scaler_model>>
+    +__init__(self: Any, input_dim: Any, hidden_dim: Any, output_dim: Any, num_layers: Any) Any
+    +forward(self: Any, x: Any) Any
+}
+class src_models_seq2seq_model {
+    <<src.models.seq2seq_model>>
+    +__init__(self: Any, input_dim: Any, hidden_dim: Any, output_dim: Any, num_layers: Any) Any
+    +forward(self: Any, x: Any) Any
+}
+class src_models_sequence_model {
+    <<src.models.sequence_model>>
+    +__init__(self: Any, input_dim: Any, hidden_dim: Any, output_dim: Any, num_layers: Any) Any
+    +forward(self: Any, x: Any) Any
+}
+class src_models_transformer_model {
+    <<src.models.transformer_model>>
+    +__init__(self: Any, d_model: Any, max_len: Any) Any
+    +forward(self: Any, x: Any) Any
+    +__init__(self: Any, input_dim: Any, d_model: Any, nhead: Any, num_layers: Any, dim_feedforward: Any, dropout: Any, output_dim: Any) Any
+    +init_weights(self: Any) Any
+    +forward(self: Any, x: Any) Any
+}
+class src_training_evaluate {
+    <<src.training.evaluate>>
+    +evaluate_model(model: Any, test_loader: Any, device: Any) Any
+}
+class src_training_train {
+    <<src.training.train>>
+    +train_model(model: Any, train_loader: Any, val_loader: Any, config: Any, device: Any) Any
+}
+class src_training_transfer {
+    <<src.training.transfer>>
+    +load_pretrained(model: Any, checkpoint_path: Any, device: Any) Any
+    +freeze_layers(model: Any, layers_to_freeze: Any) Any
+    +fine_tune(model: Any, train_loader: Any, val_loader: Any, config: Any, device: Any) Any
+}
+class src_utils_visualization {
+    <<src.utils.visualization>>
+    +plot_loss_curve(history: Any, title: Any, save_path: Any) Any
+    +plot_prediction_scatter(preds: Any, targets: Any, title: Any, save_path: Any) Any
+    +plot_bh_loop(pred_b: Any, pred_h: Any, actual_b: Any, actual_h: Any, title: Any, save_path: Any) Any
+}
+src_data_dataset ..> src_data_loader : imports
+src_data_dataset ..> src_data_preprocessing : imports
+src_data_preprocessing ..> src_data_loader : imports
+src_data_preprocessing ..> src_data_loader : imports
+src_training_transfer ..> src_training_train : imports

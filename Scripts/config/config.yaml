@@ -12,22 +12,54 @@ models:
   scaler:
     hidden_dim: 64
     layers: 3
+    features:
+      inputs:
+        B: standard
+        H: standard
+        Frequency: standard
+      targets:
+        Loss: standard
   sequence:
     hidden_dim: 128
     num_layers: 2
+    features:
+      inputs:
+        B: standard
+        H: standard
+      targets:
+        Loss: standard
   seq2seq:
     encoder_dim: 128
     decoder_dim: 128
+    features:
+      inputs:
+        B: standard
+        H: standard
+      targets:
+        Loss: standard
   cnn:
     kernel_size: 3
     num_channels: 64
     num_layers: 3
+    features:
+      inputs:
+        B: minmax
+        H: minmax
+      targets:
+        Loss: standard
   transformer:
     d_model: 64
     nhead: 4
     num_layers: 2
     dim_feedforward: 128
     dropout: 0.1
+    features:
+      inputs:
+        B: standard
+        H: standard
+        Frequency: standard
+      targets:
+        Loss: standard
 
 # Training settings
 training:

@@ -15,7 +15,8 @@ Classes:
 import torch
 from torch.utils.data import Dataset
 import numpy as np
-from src.data import loader, preprocessing
+import loader
+import preprocessing
 
 class MagNetDataset(Dataset):
     def __init__(self, file_path, mode='scaler', transform=None):
@@ -42,53 +43,19 @@ class MagNetDataset(Dataset):
         
         # Compute derived features (B, H, Power Loss)
         print("Computing B field...")
-        # Note: B calculation can be vectorized or looped.
-        # Vectorized implementation of cumulative trapezoid is cleaner but requires care with shapes.
-        # We'll use a loop or apply_along_axis if needed, but simple integration is fast.
-        # B = Integral(V) / (N * Ae)
-        
-        # Remove DC offset from V per experiment
-        v_mean = np.mean(self.voltage, axis=1, keepdims=True)
-        v_clean = self.voltage - v_mean
-        
-        # Integrate
-        # cumulative_trapezoid works on last axis by default, which is samples (dim 1)
-        from scipy.integrate import cumulative_trapezoid
-        # We need dt for each experiment.
-        # If dt is scalar, easy. If array, we need to broadcast.
-        dt = self.meta['dt']
-        if np.ndim(dt) == 0:
-            dt = float(dt)
-        else:
-            # Reshape to (N, 1) for broadcasting if possible, 
-            # but cumtrapz doesn't accept array dx easily for different rows.
-            # Assuming dt is constant for each experiment relative to time steps.
-            pass
-
-        # Since dt might vary per experiment, we might need a loop or valid avg dt
-        # For simplicity in 'scaler' mode, we might trust specific dt.
-        # Let's assume dt is constant within one cycle.
-        
-        # Efficient vector integration if dt is scalar or we average it?
-        # Let's loop for safety in this version or use simple cumsum * dt if uniform.
-        # cumtrapz is (y[i] + y[i-1])/2 * dx.
-        
-        # Vectorized cumtrapz:
-        flux = cumulative_trapezoid(v_clean, axis=1, initial=0) # * dt later
-        if np.ndim(dt) > 0:
-            flux = flux * dt[:, None]
-        else:
-            flux = flux * dt
-            
-        self.b_field = flux / (self.meta['N_sec'] * self.meta['Ae'])
-        
-        # Remove DC from B
-        b_mean = np.mean(self.b_field, axis=1, keepdims=True)
-        self.b_field = self.b_field - b_mean
+        self.b_field = preprocessing.calculate_flux_density(
+            self.voltage, 
+            self.meta['dt'], 
+            self.meta['N_sec'], 
+            self.meta['Ae']
+        )
         
         print("Computing H field...")
-        # H = (N * I) / Le
-        self.h_field = (self.meta['N_prim'] * self.current) / self.meta['Le']
+        self.h_field = preprocessing.calculate_magnetizing_force(
+            self.current, 
+            self.meta['N_prim'], 
+            self.meta['Le']
+        )
         
         print("Computing Power Loss...")
         # Refactored to use shared function (B-H Loop Area)
@@ -106,11 +73,13 @@ class MagNetDataset(Dataset):
         # Ideally: split first, then normalize.
         # For now, we normalize everything together (simple approach).
         
-        self.norm_b, _ = preprocessing.normalize_data(self.b_field)
-        self.norm_h, _ = preprocessing.normalize_data(self.h_field)
-        self.norm_freq, _ = preprocessing.normalize_data(self.freq)
-        self.norm_temp, _ = preprocessing.normalize_data(self.temp)
-        self.norm_hdc, _ = preprocessing.normalize_data(self.hdc)
+        self.norm_b, _ = preprocessing.normalize_data(self.b_field, axis=None)
+        self.norm_h, _ = preprocessing.normalize_data(self.h_field, axis=None)
+        
+        # For scalars (1D arrays), axis=0 or None yields same result (scalar min/max)
+        self.norm_freq, _ = preprocessing.normalize_data(self.freq, axis=None)
+        self.norm_temp, _ = preprocessing.normalize_data(self.temp, axis=None)
+        self.norm_hdc, _ = preprocessing.normalize_data(self.hdc, axis=None)
         
         # Target normalization (log scale is often good for loss)
         self.log_loss = np.log10(np.abs(self.power_loss) + 1e-6)
@@ -148,3 +117,49 @@ class MagNetDataset(Dataset):
             
         else:
             raise ValueError(f"Unknown mode: {self.mode}")
+
+# ==========================================
+# TEST SCRIPT
+# ==========================================
+def test_dataset():
+    """
+    Validation function to ensure the dataset loads and computes fields correctly.
+    """
+    import os
+    print("Running Dataset Validation Test...")
+    
+    # Define a test file path (assuming running from Scripts/src/data or project root)
+    # Adjust relative path to find a valid .mat file.
+    # Looking for '3C90_TX-25-15-10_Data1_Cycle.mat' in project root
+    
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # Assuming path structure: .../Scripts/src/data/dataset.py
+    # Data is in .../HomeMade MagNet/ (grandparent of Scripts?)
+    # or just use the same logic as preprocessing test
+    
+    project_root = os.path.abspath(os.path.join(current_dir, '..', '..')) 
+    # Scripts/src/data -> Scripts/src -> Scripts -> HomeMade MagNet
+    
+    test_file = os.path.join(project_root, '3C90_TX-25-15-10_Data1_Cycle.mat')
+
+    print(f"Loading {test_file}...")
+    try:
+        ds = MagNetDataset(test_file, mode='scaler')
+        
+        print("Dataset Loaded Successfully.")
+        print(f" - Num Samples: {len(ds)}")
+        print(f" - Voltage Shape: {ds.voltage.shape}")
+        print(f" - B-Field Shape: {ds.b_field.shape}, Mean: {ds.b_field.mean():.4e}")
+        print(f" - H-Field Shape: {ds.h_field.shape}, Mean: {ds.h_field.mean():.4e}")
+        print(f" - Power Loss Shape: {ds.power_loss.shape}, Mean: {ds.power_loss.mean():.4e}")
+        
+        # Verify Norms exist
+        print(f" - Norm B Shape: {ds.norm_b.shape}")
+        
+    except Exception as e:
+        print(f"Dataset validation failed: {e}")
+        import traceback
+        traceback.print_exc()
+
+if __name__ == "__main__":
+    test_dataset()
