@@ -7,21 +7,26 @@ This module provides plotting functions for inspecting model performance.
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_loss_curve(history, title='Training History'):
+def plot_loss_curve(history, title='Training History', save_path=None):
     """
     Plots Train vs Val Loss.
     """
     plt.figure(figsize=(10, 6))
-    plt.plot(history['train_loss'], label='Train Loss')
-    plt.plot(history['val_loss'], label='Val Loss')
+    plt.plot(history['train_loss'], label='Train Loss', marker='o')
+    plt.plot(history['val_loss'], label='Val Loss', marker='o')
     plt.xlabel('Epochs')
     plt.ylabel('Loss (MSE)')
     plt.title(title)
     plt.legend()
     plt.grid(True)
-    plt.show()
+    
+    if save_path:
+        plt.savefig(save_path)
+        plt.close()
+    else:
+        plt.show()
 
-def plot_prediction_scatter(preds, targets, title='Predictions vs Actuals'):
+def plot_prediction_scatter(preds, targets, title='Predictions vs Actuals', save_path=None):
     """
     Scatter plot for scalar regression.
     """
@@ -37,9 +42,14 @@ def plot_prediction_scatter(preds, targets, title='Predictions vs Actuals'):
     plt.ylabel('Predicted')
     plt.title(title)
     plt.grid(True)
-    plt.show()
     
-def plot_bh_loop(pred_b, pred_h, actual_b, actual_h, title='B-H Loop Comparison'):
+    if save_path:
+        plt.savefig(save_path)
+        plt.close()
+    else:
+        plt.show()
+    
+def plot_bh_loop(pred_b, pred_h, actual_b, actual_h, title='B-H Loop Comparison', save_path=None):
     """
     Plots predicted vs actual B-H loop.
     Args: (Seq_Len,) arrays.
@@ -52,4 +62,9 @@ def plot_bh_loop(pred_b, pred_h, actual_b, actual_h, title='B-H Loop Comparison'
     plt.title(title)
     plt.legend()
     plt.grid(True)
-    plt.show()
+    
+    if save_path:
+        plt.savefig(save_path)
+        plt.close()
+    else:
+        plt.show()

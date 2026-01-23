@@ -71,7 +71,7 @@ def main():
             # Input: B (1)
             # Output: H (1)
             model_conf = config['models']['seq2seq']
-            model = Seq2SeqNetwork(input_dim=1, encoder_dim=model_conf['encoder_dim'], decoder_dim=model_conf['decoder_dim'], output_dim=1)
+            model = Seq2SeqNetwork(input_dim=1, hidden_dim=model_conf['encoder_dim'], output_dim=1)
             
         elif model_name == 'cnn':
             # Input: B (1)
@@ -102,14 +102,74 @@ def main():
         metrics, preds, targets = evaluate_model(trained_model, val_loader, device)
         print(f"Validation Metrics: {metrics}")
         
+        # Prepare plots directory
+        plots_dir = os.path.join(train_config['save_dir'], 'plots')
+        os.makedirs(plots_dir, exist_ok=True)
+        
         # Plot Loss
-        plot_loss_curve(history, title=f'{model_name} Training Loss')
+        loss_plot_path = os.path.join(plots_dir, 'loss_curve.png')
+        plot_loss_curve(history, title=f'{model_name} Training Loss', save_path=loss_plot_path)
+        print(f"Loss plot saved to {loss_plot_path}")
         
         # Plot Predictions
         if model_name in ['scaler', 'sequence', 'cnn', 'transformer']:
-            plot_prediction_scatter(preds, targets, title=f'{model_name}: Pred vs Actual Loss')
+            pred_plot_path = os.path.join(plots_dir, 'prediction_scatter.png')
+            plot_prediction_scatter(preds, targets, title=f'{model_name}: Pred vs Actual Loss', save_path=pred_plot_path)
+            print(f"Prediction plot saved to {pred_plot_path}")
+            
         elif model_name == 'seq2seq':
-            pass
+            # Visualizing B-H loops
+            # We have sequences. Let's plot the first sample in the validation set.
+            # preds: (N, Seq, 1), targets: (N, Seq, 1)
+            # Input to seq2seq was B (dataset mode='seq2seq': x=B, y=H)
+            
+            # Note: We need the B field (Input) to plot B-H loop, but evaluate_model returns metrics, preds, targets.
+            # It doesn't return inputs.
+            # For B-H check, we need B and H. 
+            # In seq2seq mode: Target is H. Pred is H. Input is B.
+            # We can't recover B easily from just preds/targets unless we modify evaluate or re-fetch.
+            
+            # Quick fix: Let's fetch one batch from val_loader to get B and H
+            # And assume shuffle=False for val_loader so it matches? 
+            # evaluate_model iterates over whole loader.
+            
+            # Let's just grab the first batch from val_loader again for visualization purposes.
+            # This is safer.
+            
+            # Also, we likely want to inverse normalize for real units? 
+            # For now, let's plot normalized.
+            
+            from src.utils.visualization import plot_bh_loop # Ensure imported
+            
+            try:
+                # Get one batch
+                val_iter = iter(val_loader)
+                b_batch, h_batch = next(val_iter)
+                
+                # Move to device to inference
+                b_batch = b_batch.to(device)
+                
+                model.eval()
+                with torch.no_grad():
+                    pred_h_batch = model(b_batch)
+                    
+                # Take first sample
+                # b_batch: (Batch, Seq, 1)
+                sample_idx = 0
+                original_idx = val_set.indices[sample_idx]
+                print(f"Plotting sample from Validation Set (Batch Index: {sample_idx})")
+                print(f"Original Dataset Index (Experiment ID): {original_idx}")
+                
+                actual_b = b_batch[sample_idx].cpu().squeeze().numpy()
+                actual_h = h_batch[sample_idx].cpu().squeeze().numpy() # Target H
+                pred_h = pred_h_batch[sample_idx].cpu().squeeze().numpy()
+                
+                bh_plot_path = os.path.join(plots_dir, 'bh_loop_comparison.png')
+                plot_bh_loop(actual_b, pred_h, actual_b, actual_h, title=f'{model_name} B-H Loop (Norm)', save_path=bh_plot_path)
+                print(f"B-H Loop plot saved to {bh_plot_path}")
+                
+            except Exception as e:
+                print(f"Could not plot B-H loop: {e}")
 
 if __name__ == "__main__":
     main()

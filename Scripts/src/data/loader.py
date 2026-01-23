@@ -183,4 +183,88 @@ def load_full_dataset(file_path):
             }
             return data_dict
 
+# ==========================================
+# VALIDATION SCRIPT (Append to end of file)
+# ==========================================
 
+if __name__ == "__main__":
+    import os
+    
+    # --- CONFIGURATION ---
+    # Use the filename you mentioned earlier
+    TEST_FILE = '../../3C90_TX-25-15-10_Data1_Cycle.mat'
+    TEST_ID = 3859  # The ID you used in your example
+    
+    # Get absolute path to ensure we find the file
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, TEST_FILE)
+    
+    print(f"--- STARTING VALIDATION FOR: {TEST_FILE} ---")
+
+    if not os.path.exists(file_path):
+        print(f"ERROR: File not found at {file_path}")
+    else:
+        # -------------------------------------------------
+        # TEST 1: Single Experiment Loading
+        # -------------------------------------------------
+        print(f"\n[1] Testing load_experiment(id={TEST_ID})...")
+        try:
+            single_data = load_experiment(file_path, TEST_ID)
+            
+            v_shape = single_data['voltage'].shape
+            i_shape = single_data['current'].shape
+            freq = single_data['frequency']
+            
+            print(f"    Success!")
+            print(f"    Voltage Shape: {v_shape} (Expected: 1D array, e.g., (10000,))")
+            print(f"    Frequency:     {freq} Hz")
+            
+            if len(v_shape) != 1:
+                print("    WARNING: Voltage should be 1D!")
+        except Exception as e:
+            print(f"    FAILED: {e}")
+
+        # -------------------------------------------------
+        # TEST 2: Full Dataset Loading
+        # -------------------------------------------------
+        print(f"\n[2] Testing load_full_dataset()...")
+        try:
+            full_data = load_full_dataset(file_path)
+            
+            full_v_shape = full_data['voltage'].shape
+            
+            print(f"    Success!")
+            print(f"    Full Voltage Shape: {full_v_shape} (Expected: [N_experiments, N_samples])")
+            print(f"    Total Experiments:  {full_v_shape[0]}")
+            print(f"    Samples per Exp:    {full_v_shape[1]}")
+            
+        except Exception as e:
+            print(f"    FAILED: {e}")
+            full_data = None
+
+        # -------------------------------------------------
+        # TEST 3: Consistency Check (The Transpose Proof)
+        # -------------------------------------------------
+        if 'single_data' in locals() and full_data is not None:
+            print(f"\n[3] Checking Consistency (Single vs Full)...")
+            
+            # The row in full dataset (0-based) must match the single load
+            idx = TEST_ID - 1 
+            
+            # Extract row from full matrix
+            full_slice_v = full_data['voltage'][idx, :]
+            
+            # Extract array from single load
+            single_slice_v = single_data['voltage']
+            
+            # Check difference
+            diff = np.max(np.abs(full_slice_v - single_slice_v))
+            
+            if diff < 1e-9:
+                print(f"    PASSED: Data matches exactly (Diff: {diff})")
+                print("    --> This confirms your Transpose/Index logic is CORRECT.")
+            else:
+                print(f"    FAILED: Data mismatch! (Diff: {diff})")
+                print("    --> Check if Transpose (.T) is missing in load_full_dataset")
+        
+    print("\n--- VALIDATION COMPLETE ---")

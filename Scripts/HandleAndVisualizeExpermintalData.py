@@ -10,7 +10,7 @@ import os
 # Using the existing .mat file in the directory
 script_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(script_dir, '3C90_TX-25-15-10_Data1_Cycle.mat')
-experiment_id = 1  # 1-based index from MATLAB
+experiment_id = 3859  # 1-based index from MATLAB
 idx = experiment_id - 1 # Convert to 0-based index for Python
 
 print(f"Loading {file_path}...")

@@ -32,12 +32,12 @@ class MagNetDataset(Dataset):
         print(f"Loading dataset from {file_path}...")
         raw_data = loader.load_full_dataset(file_path)
         
-        self.voltage = raw_data['voltage']
-        self.current = raw_data['current']
-        self.freq = raw_data['freq']
-        self.temp = raw_data['temp']
-        self.hdc = raw_data['hdc']
-        self.duty = raw_data['duty']
+        self.voltage = raw_data['voltage'].astype(np.float32)
+        self.current = raw_data['current'].astype(np.float32)
+        self.freq = raw_data['freq'].astype(np.float32)
+        self.temp = raw_data['temp'].astype(np.float32)
+        self.hdc = raw_data['hdc'].astype(np.float32)
+        self.duty = raw_data['duty'].astype(np.float32)
         self.meta = raw_data['meta']
         
         # Compute derived features (B, H, Power Loss)
@@ -91,23 +91,13 @@ class MagNetDataset(Dataset):
         self.h_field = (self.meta['N_prim'] * self.current) / self.meta['Le']
         
         print("Computing Power Loss...")
-        # Pv = Mean(V * I) / Ve ? No, MagNet definition is usually Energy/Cycle / Volume
-        # Energy = Integral(P_inst) dt
-        p_inst = self.voltage * self.current
-        energy = np.trapz(p_inst, axis=1) # * dt
-        if np.ndim(dt) > 0:
-            energy = energy * dt
-        else:
-            energy = energy * dt
-            
-        period = (self.voltage.shape[1] * dt) if np.ndim(dt)==0 else (self.voltage.shape[1] * dt) # approx 
-        # Actually Period = 1/Freq usually.
-        # But let's use the full cycle time provided.
-        
-        # Effective Volume
-        ve = self.meta['Ae'] * self.meta['Le']
-        
-        self.power_loss = energy / (period * ve) # W/m^3
+        # Refactored to use shared function (B-H Loop Area)
+        # Pv = Frequency * Area(B-H)
+        self.power_loss = preprocessing.calculate_volumetric_loss(
+            self.b_field, 
+            self.h_field, 
+            frequency=self.freq
+        )
         
         # Normalize inputs (MinMax)
         # Store scalers for inversion? For now, simple minmax.
