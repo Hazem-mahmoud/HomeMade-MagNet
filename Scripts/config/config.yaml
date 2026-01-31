@@ -17,6 +17,8 @@ models:
         B: standard
         H: standard
         Frequency: standard
+        Temperature: standard
+        Hdc: standard
       targets:
         Loss: standard
   sequence:

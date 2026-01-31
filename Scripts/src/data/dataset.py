@@ -15,105 +15,160 @@ Classes:
 import torch
 from torch.utils.data import Dataset
 import numpy as np
-import loader
-import preprocessing
+try:
+    from . import loader
+    from . import preprocessing
+except ImportError:
+    import loader
+    import preprocessing
 
 class MagNetDataset(Dataset):
-    def __init__(self, file_path, mode='scaler', transform=None):
+    def __init__(self, file_path, mode='scaler', partition='train', transform=None, config_path=None):
         """
         Args:
             file_path (str): Path to .mat file.
             mode (str): 'scaler', 'sequence', 'seq2seq'.
-            transform (callable, optional): Optional transform to be applied on a sample.
+            partition (str): 'train' or 'test'.
+            transform (callable, optional): Optional transform to be applied.
+            config_path (str): Path to config.yaml (optional).
         """
         self.mode = mode
+        self.partition = partition
         self.transform = transform
         
         # Load raw data
-        print(f"Loading dataset from {file_path}...")
+        print(f"Loading dataset from {file_path} for partition '{partition}'...")
         raw_data = loader.load_full_dataset(file_path)
         
-        self.voltage = raw_data['voltage'].astype(np.float32)
-        self.current = raw_data['current'].astype(np.float32)
-        self.freq = raw_data['freq'].astype(np.float32)
-        self.temp = raw_data['temp'].astype(np.float32)
-        self.hdc = raw_data['hdc'].astype(np.float32)
-        self.duty = raw_data['duty'].astype(np.float32)
-        self.meta = raw_data['meta']
+        # Extract Standard Args
+        voltage = raw_data['voltage'].astype(np.float32)
+        current = raw_data['current'].astype(np.float32)
+        freq = raw_data['freq'].astype(np.float32)
         
-        # Compute derived features (B, H, Power Loss)
-        print("Computing B field...")
-        self.b_field = preprocessing.calculate_flux_density(
-            self.voltage, 
-            self.meta['dt'], 
-            self.meta['N_sec'], 
-            self.meta['Ae']
+        props = {
+            'N_prim': raw_data['meta']['N_prim'],
+            'N_sec': raw_data['meta']['N_sec'],
+            'Ae': raw_data['meta']['Ae'],
+            'Le': raw_data['meta']['Le']
+        }
+        dt = raw_data['meta']['dt']
+        if isinstance(dt, (list, np.ndarray)) and len(dt) > 1:
+            dt = dt[0]
+
+        # Extra Features
+        extra = {
+            'Temperature': raw_data['temp'].astype(np.float32),
+            'Hdc': raw_data['hdc'].astype(np.float32),
+            'Duty': raw_data['duty'].astype(np.float32)
+        }
+        
+        # Use Central Preprocessing
+        print("Running centralized preprocessing...")
+        
+        # Determine config path if not provided
+        if not config_path:
+             # Try to find it relative to this file
+             import os
+             current_dir = os.path.dirname(os.path.abspath(__file__))
+             # Scripts/src/data -> ... -> Scripts/config/config.yaml
+             config_path = os.path.abspath(os.path.join(current_dir, '..', '..', 'config', 'config.yaml'))
+        
+        if not os.path.exists(config_path):
+            print(f"WARNING: Config not found at {config_path}. Using defaults.")
+            config_path = None
+            
+        data_split, self.stats = preprocessing.process_magnet_dataset(
+            voltage, current, freq, props, dt,
+            model_type=mode,
+            config_path=config_path,
+            extra_features=extra
         )
         
-        print("Computing H field...")
-        self.h_field = preprocessing.calculate_magnetizing_force(
-            self.current, 
-            self.meta['N_prim'], 
-            self.meta['Le']
-        )
+        # Select Partition
+        if partition not in data_split:
+            raise ValueError(f"Partition '{partition}' not found in split data.")
+            
+        self.inputs = data_split[partition]['inputs']
+        self.targets = data_split[partition]['targets']
         
-        print("Computing Power Loss...")
-        # Refactored to use shared function (B-H Loop Area)
-        # Pv = Frequency * Area(B-H)
-        self.power_loss = preprocessing.calculate_volumetric_loss(
-            self.b_field, 
-            self.h_field, 
-            frequency=self.freq
-        )
-        
-        # Normalize inputs (MinMax)
-        # Store scalers for inversion? For now, simple minmax.
-        # For ML, we should calculate stats on TRAINING set only.
-        # But here we do full dataset.
-        # Ideally: split first, then normalize.
-        # For now, we normalize everything together (simple approach).
-        
-        self.norm_b, _ = preprocessing.normalize_data(self.b_field, axis=None)
-        self.norm_h, _ = preprocessing.normalize_data(self.h_field, axis=None)
-        
-        # For scalars (1D arrays), axis=0 or None yields same result (scalar min/max)
-        self.norm_freq, _ = preprocessing.normalize_data(self.freq, axis=None)
-        self.norm_temp, _ = preprocessing.normalize_data(self.temp, axis=None)
-        self.norm_hdc, _ = preprocessing.normalize_data(self.hdc, axis=None)
-        
-        # Target normalization (log scale is often good for loss)
-        self.log_loss = np.log10(np.abs(self.power_loss) + 1e-6)
+        # Validation checks
+        if not self.targets:
+             print("WARNING: No targets found in processed data.")
+             
+        if not self.inputs:
+             print("WARNING: No inputs found in processed data.")
+
+        # Store length
+        # Assuming all input arrays are same length
+        any_key = next(iter(self.inputs)) if self.inputs else next(iter(self.targets))
+        self.length = len(self.inputs[any_key]) if self.inputs else len(self.targets[any_key])
         
     def __len__(self):
-        return self.voltage.shape[0]
+        return self.length
         
     def __getitem__(self, idx):
+        # Retrieve normalized features from dictionary
+        # NOTE: Keys depend on config.yaml! 
+        # We must align code here with what we expect to be in the config for each mode.
+        # Fallback logic is needed if config is dynamic.
+        
+        # Helper to get datum safely
+        def get(dic, key):
+            if key in dic:
+                val = dic[key][idx]
+                return torch.tensor(val, dtype=torch.float32)
+            else:
+                 # Be noisy if missing expected feature
+                 raise KeyError(f"Feature '{key}' missing from dataset. Check config.yaml or preprocessing.")
+
+        # Helper to get sequence or scalar
+        def get_tens(dic, key, unsqueeze=False):
+            t = get(dic, key)
+            if unsqueeze:
+                return t.unsqueeze(-1)
+            return t
+
         if self.mode == 'scaler':
+            # Config MUST include Frequency, Temperature, Hdc in inputs
+            # Config MUST include Loss in targets
+            
             # Input: Freq, Temp, Hdc
-            # Target: Power Loss
-            x = torch.tensor([
-                self.norm_freq[idx],
-                self.norm_temp[idx],
-                self.norm_hdc[idx]
-            ], dtype=torch.float32)
-            y = torch.tensor([self.log_loss[idx]], dtype=torch.float32)
+            # We assume these are 1D arrays (scalers) in the input dict
+            f = get(self.inputs, 'Frequency')
+            t = get(self.inputs, 'Temperature')
+            h = get(self.inputs, 'Hdc')
+            
+            x = torch.stack([f.squeeze(), t.squeeze(), h.squeeze()]) 
+            # Note: normalized scalars might come as (1,) or scalar. Squeeze ensures (3,)
+            
+            y = get_tens(self.targets, 'Loss', unsqueeze=False) # (1,)
             return x, y
             
         elif self.mode in ['sequence', 'cnn', 'transformer']:
-            # Input: B waveform (or H)
-            # Target: Power Loss
-            # Shape: (Seq_Len, 1)
-            b_seq = torch.tensor(self.norm_b[idx], dtype=torch.float32).unsqueeze(-1)
-            y = torch.tensor([self.log_loss[idx]], dtype=torch.float32)
-            return b_seq, y
+            # Input: B (or H)
+            # Target: Loss
+            b = get_tens(self.inputs, 'B', unsqueeze=True) # (Seq, 1)
+            y = get_tens(self.targets, 'Loss', unsqueeze=False)
+            return b, y
             
         elif self.mode == 'seq2seq':
-            # Input: B waveform
-            # Target: H waveform (or vice versa)
-            # Many papers predict H from B.
-            x = torch.tensor(self.norm_b[idx], dtype=torch.float32).unsqueeze(-1)
-            y = torch.tensor(self.norm_h[idx], dtype=torch.float32).unsqueeze(-1)
-            return x, y
+            # Input: B
+            # Target: H
+            b = get_tens(self.inputs, 'B', unsqueeze=True)
+            h = get_tens(self.inputs, 'H', unsqueeze=True) # Assuming H is in inputs or targets?
+            # Usually H is 'target' for B->H prediction? Or Input?
+            # If we want to predict H, it should be in targets.
+            # But process_magnet_dataset puts things in 'inputs' or 'targets' based on config.
+            # Check where H is.
+            
+            if 'H' in self.targets:
+                target = get_tens(self.targets, 'H', unsqueeze=True)
+            elif 'H' in self.inputs:
+                 target = get_tens(self.inputs, 'H', unsqueeze=True)
+            else:
+                raise KeyError("H field not found in inputs or targets for seq2seq")
+                
+            return b, target
             
         else:
             raise ValueError(f"Unknown mode: {self.mode}")
@@ -128,33 +183,31 @@ def test_dataset():
     import os
     print("Running Dataset Validation Test...")
     
-    # Define a test file path (assuming running from Scripts/src/data or project root)
-    # Adjust relative path to find a valid .mat file.
-    # Looking for '3C90_TX-25-15-10_Data1_Cycle.mat' in project root
-    
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    # Assuming path structure: .../Scripts/src/data/dataset.py
-    # Data is in .../HomeMade MagNet/ (grandparent of Scripts?)
-    # or just use the same logic as preprocessing test
-    
     project_root = os.path.abspath(os.path.join(current_dir, '..', '..')) 
-    # Scripts/src/data -> Scripts/src -> Scripts -> HomeMade MagNet
-    
     test_file = os.path.join(project_root, '3C90_TX-25-15-10_Data1_Cycle.mat')
 
     print(f"Loading {test_file}...")
     try:
-        ds = MagNetDataset(test_file, mode='scaler')
-        
+        # Test Train Split
+        print("\n--- Testing 'train' partition (mode='scaler') ---")
+        ds_train = MagNetDataset(test_file, mode='scaler', partition='train')
         print("Dataset Loaded Successfully.")
-        print(f" - Num Samples: {len(ds)}")
-        print(f" - Voltage Shape: {ds.voltage.shape}")
-        print(f" - B-Field Shape: {ds.b_field.shape}, Mean: {ds.b_field.mean():.4e}")
-        print(f" - H-Field Shape: {ds.h_field.shape}, Mean: {ds.h_field.mean():.4e}")
-        print(f" - Power Loss Shape: {ds.power_loss.shape}, Mean: {ds.power_loss.mean():.4e}")
+        print(f" - Num Samples: {len(ds_train)}")
         
-        # Verify Norms exist
-        print(f" - Norm B Shape: {ds.norm_b.shape}")
+        # Test Item
+        x, y = ds_train[0]
+        print(f" - Sample[0] Input Shape: {x.shape}, Target Shape: {y.shape}")
+        
+        # Test Test Split
+        print("\n--- Testing 'test' partition (mode='cnn') ---")
+        ds_test = MagNetDataset(test_file, mode='cnn', partition='test')
+        print(f" - Num Samples: {len(ds_test)}")
+        
+        # Test Item
+        x, y = ds_test[0]
+        print(f" - Sample[0] Input Shape: {x.shape}, Target Shape: {y.shape}")
+
         
     except Exception as e:
         print(f"Dataset validation failed: {e}")

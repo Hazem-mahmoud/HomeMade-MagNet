@@ -62,17 +62,19 @@ def prepare_dataset(features, targets, test_ratio=0.2, norm_config=None):
     Generic function to split and normalize ANY set of features and targets.
     
     Args:
-        features (dict): {'FeatureName': data_array_of_shape_N_x_...}
-        targets (dict): {'TargetName': data_array_of_shape_N_x_...}
+        features (dict): Dictionary mapping FeatureName to data array.
+        targets (dict): Dictionary mapping TargetName to data array.
         test_ratio (float): Fraction of data to use for testing.
-        norm_config (dict): {'Name': 'method'}. 
+        norm_config (dict): Dictionary mapping feature/target names to methods.
                             e.g. {'B': 'standard', 'Loss': 'log10'}.
                             Defaults to 'standard' for features and 'none' for targets if not specified.
                             
     Returns:
         data_split (dict): Contains 'train' and 'test' dictionaries.
-                           data_split['train']['inputs']['FeatureName']
-                           data_split['train']['targets']['TargetName']
+
+                           - `data_split['train']['inputs']['FeatureName']`
+                           - `data_split['train']['targets']['TargetName']`
+
         stats (dict): The statistics used for normalization for each feature/target.
     """
     if norm_config is None:
@@ -188,7 +190,7 @@ def load_config(config_path):
     with open(config_path, 'r') as f:
         return yaml.safe_load(f)
 
-def process_magnet_dataset(voltage, current, frequency, mag_props, dt, model_type='scaler', config_path=None):
+def process_magnet_dataset(voltage, current, frequency, mag_props, dt, model_type='scaler', config_path=None, extra_features=None):
     """
     Orchestrates the physics calculation -> Feature Assembly -> Normalization.
     
@@ -198,6 +200,7 @@ def process_magnet_dataset(voltage, current, frequency, mag_props, dt, model_typ
         mag_props, dt: Constants
         model_type (str): Key in config['models'] (e.g. 'scaler', 'cnn')
         config_path (str, optional): Path to config.yaml.
+        extra_features (dict, optional): Additional raw features (e.g. {'Temperature': ..., 'Hdc': ...})
     """
     norm_config = {}
     
@@ -220,7 +223,9 @@ def process_magnet_dataset(voltage, current, frequency, mag_props, dt, model_typ
     
     # Fallback default if empty
     if not norm_config:
-        norm_config = {'B': 'standard', 'H': 'standard', 'Loss': 'standard', 'Frequency': 'standard'}
+        # Added defaults for Temp/Hdc just in case
+        norm_config = {'B': 'standard', 'H': 'standard', 'Loss': 'standard', 'Frequency': 'standard', 
+                       'Temperature': 'standard', 'Hdc': 'standard', 'Duty': 'standard'}
 
     print("--- 1. Physics Calculations ---")
     B_raw = calculate_flux_density(voltage, dt, mag_props['N_sec'], mag_props['Ae'])
@@ -233,6 +238,16 @@ def process_magnet_dataset(voltage, current, frequency, mag_props, dt, model_typ
         'H': H_raw,
         'Frequency': frequency.reshape(-1, 1) if np.ndim(frequency) > 0 else np.full((len(B_raw), 1), frequency)
     }
+    
+    if extra_features:
+        # Reshape scalers if needed?
+        # Assuming extra_features are (N_exp,) or (N_exp, 1) or matching B_raw length
+        # Let's ensure they are at least 2D (N, 1) if they are scalars per experiment
+        for k, v in extra_features.items():
+            if np.ndim(v) == 1:
+                all_features[k] = v.reshape(-1, 1)
+            else:
+                all_features[k] = v
     
     all_targets = {
         'Loss': Loss_raw

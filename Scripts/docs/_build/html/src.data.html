@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.data package &mdash; MagNet 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src.models package" href="src.models.html" />
+    <link rel="prev" title="src package" href="src.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MagNet
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="src.html">src package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="src.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">src.data package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.models.html">src.models package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.training.html">src.training package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="src.utils.html">src.utils package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MagNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+          <li class="breadcrumb-item"><a href="src.html">src package</a></li>
+      <li class="breadcrumb-item active">src.data package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.data.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-src.data">
+<span id="src-data-package"></span><h1>src.data package<a class="headerlink" href="#module-src.data" title="Link to this heading"></a></h1>
+<p>Data Package.
+Includes loader and preprocessing modules.</p>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-src.data.dataset">
+<span id="src-data-dataset-module"></span><h2>src.data.dataset module<a class="headerlink" href="#module-src.data.dataset" title="Link to this heading"></a></h2>
+<p>MagNet Dataset Module.</p>
+<p>This module provides a PyTorch Dataset wrapper for the MagNet data.
+It handles:
+1. Loading the full dataset into memory.
+2. Computing derived quantities (B, H, Power Loss).
+3. Normalizing features.
+4. Serving data based on the requested mode (‘scaler’, ‘sequence’, ‘seq2seq’).</p>
+<p>Classes:
+- MagNetDataset(Dataset)</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.data.dataset.MagNetDataset">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">src.data.dataset.</span></span><span class="sig-name descname"><span class="pre">MagNetDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scaler'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'train'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/dataset.html#MagNetDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.dataset.MagNetDataset" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.dataset.test_dataset">
+<span class="sig-prename descclassname"><span class="pre">src.data.dataset.</span></span><span class="sig-name descname"><span class="pre">test_dataset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/dataset.html#test_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.dataset.test_dataset" title="Link to this definition"></a></dt>
+<dd><p>Validation function to ensure the dataset loads and computes fields correctly.</p>
+</dd></dl>
+
+</section>
+<section id="module-src.data.loader">
+<span id="src-data-loader-module"></span><h2>src.data.loader module<a class="headerlink" href="#module-src.data.loader" title="Link to this heading"></a></h2>
+<p>Data Loading Module.</p>
+<p>This module is responsible for loading experimental data from MATLAB (.mat) files.
+It handles both legacy (SciPy) and v7.3 (HDF5/h5py) formats.</p>
+<p>Functions:
+- load_experiment(file_path, experiment_id): Loads data for a single experiment.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.loader.get_dataset_info">
+<span class="sig-prename descclassname"><span class="pre">src.data.loader.</span></span><span class="sig-name descname"><span class="pre">get_dataset_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/loader.html#get_dataset_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.loader.get_dataset_info" title="Link to this definition"></a></dt>
+<dd><p>Retrieves metadata about the dataset without loading full data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>num_experiments (int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.loader.load_experiment">
+<span class="sig-prename descclassname"><span class="pre">src.data.loader.</span></span><span class="sig-name descname"><span class="pre">load_experiment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/loader.html#load_experiment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.loader.load_experiment" title="Link to this definition"></a></dt>
+<dd><p>Loads data for a specific experiment ID from a .mat file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – Path to the .mat file.</p></li>
+<li><p><strong>experiment_id</strong> (<em>int</em>) – 1-based experiment index (as in MATLAB).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing experimental data (Voltage, Current, Metadata).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.loader.load_full_dataset">
+<span class="sig-prename descclassname"><span class="pre">src.data.loader.</span></span><span class="sig-name descname"><span class="pre">load_full_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/loader.html#load_full_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.loader.load_full_dataset" title="Link to this definition"></a></dt>
+<dd><p>Loads the entire dataset into memory.
+Optimized for bulk loading (reads full arrays).</p>
+</dd></dl>
+
+</section>
+<section id="module-src.data.preprocessing">
+<span id="src-data-preprocessing-module"></span><h2>src.data.preprocessing module<a class="headerlink" href="#module-src.data.preprocessing" title="Link to this heading"></a></h2>
+<p>Data Preprocessing Module.</p>
+<p>Generic processing for Time-Series FNN.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.preprocessing.calculate_flux_density">
+<span class="sig-prename descclassname"><span class="pre">src.data.preprocessing.</span></span><span class="sig-name descname"><span class="pre">calculate_flux_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voltage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondary_turns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effective_area</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/preprocessing.html#calculate_flux_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.preprocessing.calculate_flux_density" title="Link to this definition"></a></dt>
+<dd><p>Calculates B (Flux Density).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.preprocessing.calculate_magnetizing_force">
+<span class="sig-prename descclassname"><span class="pre">src.data.preprocessing.</span></span><span class="sig-name descname"><span class="pre">calculate_magnetizing_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">primary_turns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">effective_length</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/preprocessing.html#calculate_magnetizing_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.preprocessing.calculate_magnetizing_force" title="Link to this definition"></a></dt>
+<dd><p>Calculates H (Magnetizing Force).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.preprocessing.calculate_volumetric_loss">
+<span class="sig-prename descclassname"><span class="pre">src.data.preprocessing.</span></span><span class="sig-name descname"><span class="pre">calculate_volumetric_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/preprocessing.html#calculate_volumetric_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.preprocessing.calculate_volumetric_loss" title="Link to this definition"></a></dt>
+<dd><p>Calculates Volumetric Power Loss (Target).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.preprocessing.load_config">
+<span class="sig-prename descclassname"><span class="pre">src.data.preprocessing.</span></span><span class="sig-name descname"><span class="pre">load_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/preprocessing.html#load_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.preprocessing.load_config" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.preprocessing.normalize_data">
+<span class="sig-prename descclassname"><span class="pre">src.data.preprocessing.</span></span><span class="sig-name descname"><span class="pre">normalize_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/preprocessing.html#normalize_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.preprocessing.normalize_data" title="Link to this definition"></a></dt>
+<dd><p>Normalizes data using Global Scaling (Statistics computed over ALL data).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array</em>) – Input data.</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – ‘standard’ (Z-score), ‘minmax’, or ‘none’.</p></li>
+<li><p><strong>stats</strong> (<em>dict</em><em>, </em><em>optional</em>) – Pre-computed stats.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Normalized data.
+stats (dict): Statistics used.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>norm_data (np.array)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.preprocessing.prepare_dataset">
+<span class="sig-prename descclassname"><span class="pre">src.data.preprocessing.</span></span><span class="sig-name descname"><span class="pre">prepare_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ratio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/preprocessing.html#prepare_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.preprocessing.prepare_dataset" title="Link to this definition"></a></dt>
+<dd><p>Generic function to split and normalize ANY set of features and targets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<em>dict</em>) – Dictionary mapping FeatureName to data array.</p></li>
+<li><p><strong>targets</strong> (<em>dict</em>) – Dictionary mapping TargetName to data array.</p></li>
+<li><p><strong>test_ratio</strong> (<em>float</em>) – Fraction of data to use for testing.</p></li>
+<li><p><strong>norm_config</strong> (<em>dict</em>) – Dictionary mapping feature/target names to methods.
+e.g. {‘B’: ‘standard’, ‘Loss’: ‘log10’}.
+Defaults to ‘standard’ for features and ‘none’ for targets if not specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Contains ‘train’ and ‘test’ dictionaries.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>data_split[‘train’][‘inputs’][‘FeatureName’]</cite></p></li>
+<li><p><cite>data_split[‘train’][‘targets’][‘TargetName’]</cite></p></li>
+</ul>
+</div></blockquote>
+<p>stats (dict): The statistics used for normalization for each feature/target.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>data_split (dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.data.preprocessing.process_magnet_dataset">
+<span class="sig-prename descclassname"><span class="pre">src.data.preprocessing.</span></span><span class="sig-name descname"><span class="pre">process_magnet_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voltage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mag_props</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scaler'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/data/preprocessing.html#process_magnet_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.data.preprocessing.process_magnet_dataset" title="Link to this definition"></a></dt>
+<dd><p>Orchestrates the physics calculation -&gt; Feature Assembly -&gt; Normalization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>voltage</strong> – Raw arrays</p></li>
+<li><p><strong>current</strong> – Raw arrays</p></li>
+<li><p><strong>frequency</strong> – Raw frequency array</p></li>
+<li><p><strong>mag_props</strong> – Constants</p></li>
+<li><p><strong>dt</strong> – Constants</p></li>
+<li><p><strong>model_type</strong> (<em>str</em>) – Key in config[‘models’] (e.g. ‘scaler’, ‘cnn’)</p></li>
+<li><p><strong>config_path</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to config.yaml.</p></li>
+<li><p><strong>extra_features</strong> (<em>dict</em><em>, </em><em>optional</em>) – Additional raw features (e.g. {‘Temperature’: …, ‘Hdc’: …})</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="src.html" class="btn btn-neutral float-left" title="src package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="src.models.html" class="btn btn-neutral float-right" title="src.models package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Hazem Mahmoud.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

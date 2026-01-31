@@ -2,9 +2,11 @@ classDiagram
 class src_data_dataset {
     <<src.data.dataset>>
     +test_dataset() Any
-    +__init__(self: Any, file_path: Any, mode: Any, transform: Any) Any
+    +__init__(self: Any, file_path: Any, mode: Any, partition: Any, transform: Any, config_path: Any) Any
     +__len__(self: Any) Any
     +__getitem__(self: Any, idx: Any) Any
+    +get(dic: Any, key: Any) Any
+    +get_tens(dic: Any, key: Any, unsqueeze: Any) Any
 }
 class src_data_loader {
     <<src.data.loader>>
@@ -24,7 +26,7 @@ class src_data_preprocessing {
     +calculate_magnetizing_force(current: Any, primary_turns: Any, effective_length: Any) Any
     +calculate_volumetric_loss(b_field: Any, h_field: Any, frequency: Any) Any
     +load_config(config_path: Any) Any
-    +process_magnet_dataset(voltage: Any, current: Any, frequency: Any, mag_props: Any, dt: Any, model_type: Any, config_path: Any) Any
+    +process_magnet_dataset(voltage: Any, current: Any, frequency: Any, mag_props: Any, dt: Any, model_type: Any, config_path: Any, extra_features: Any) Any
 }
 class src_models_cnn_model {
     <<src.models.cnn_model>>
