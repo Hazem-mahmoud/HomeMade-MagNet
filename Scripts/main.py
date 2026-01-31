@@ -8,7 +8,11 @@ import argparse
 import torch
 from torch.utils.data import DataLoader, random_split
 from src.data.dataset import MagNetDataset
-from src.models import ScalerNetwork, SequenceToScalerNetwork, Seq2SeqNetwork, CNNNetwork, TransformerNetwork
+from src.models.scaler_model import ScalerNetwork
+from src.models.sequence_model import SequenceToScalerNetwork
+from src.models.seq2seq_model import Seq2SeqNetwork
+from src.models.cnn_model import CNNNetwork
+from src.models.transformer_model import TransformerNetwork
 from src.training.train import train_model
 from src.training.evaluate import evaluate_model
 from src.utils.visualization import plot_loss_curve, plot_prediction_scatter
@@ -21,7 +25,7 @@ def load_config(path):
 
 def main():
     parser = argparse.ArgumentParser(description="MagNet Deep Learning Pipeline")
-    parser.add_argument('--config', type=str, default='config/config.yaml', help='Path to config file')
+    parser.add_argument('--config', type=str, default='Scripts/config/config.yaml', help='Path to config file')
     parser.add_argument('--data', type=str, required=True, help='Path to .mat file')
     parser.add_argument('--model', type=str, choices=['scaler', 'sequence', 'seq2seq', 'cnn', 'transformer', 'all'], required=True, help='Model type to train')
     parser.add_argument('--epochs', type=int, help='Override epochs in config')
@@ -65,7 +69,7 @@ def main():
             # Input: B (1)
             # Output: Log Loss (1)
             model_conf = config['models']['sequence']
-            model = SequenceToScalerNetwork(input_dim=1, hidden_dim=model_conf['hidden_dim'], output_dim=1)
+            model = SequenceToScalerNetwork(input_dim=1, hidden_dim=model_conf['hidden_dim'], output_dim=1, num_layers=model_conf['num_layers'])
             
         elif model_name == 'seq2seq':
             # Input: B (1)
@@ -73,17 +77,32 @@ def main():
             model_conf = config['models']['seq2seq']
             model = Seq2SeqNetwork(input_dim=1, hidden_dim=model_conf['encoder_dim'], output_dim=1)
             
-        elif model_name == 'cnn':
             # Input: B (1)
             # Output: Log Loss (1) (Scalar)
             model_conf = config['models']['cnn']
-            model = CNNNetwork(input_dim=1, kernel_size=model_conf['kernel_size'], num_channels=model_conf['num_channels'], num_layers=model_conf['num_layers'], output_dim=1)
+            # Paderborn CNN doesn't use kernel_size/channels from config in the same way, 
+            # but we can pass them if we update CNNNetwork. 
+            # For now, use defaults or what's available.
+            # CNNNetwork(input_dim=1, hidden_dim=32, output_dim=1)
+            # Paderborn's TCN is hardcoded mostly, but we can pass generic params if we want.
+            # Let's simple instantiate it with defaults + input_dim
+            model = CNNNetwork(input_dim=1)
         
-        elif model_name == 'transformer':
             # Input: B (1)
             # Output: Log Loss (1) (Scalar)
             model_conf = config['models']['transformer']
-            model = TransformerNetwork(input_dim=1, d_model=model_conf['d_model'], nhead=model_conf['nhead'], num_layers=model_conf['num_layers'], dim_feedforward=model_conf['dim_feedforward'], dropout=model_conf['dropout'], output_dim=1)
+            # Map config keys to Fuzhou Transformer args
+            # d_model -> dim_hidden
+            # num_layers -> n_encoder_layers
+            # dim_feedforward -> dim_feedforward_encoder
+            model = TransformerNetwork(
+                B_in_channel=1024, # Default seq len
+                dim_hidden=model_conf['d_model'], 
+                n_encoder_layers=model_conf['num_layers'], 
+                dim_feedforward_encoder=model_conf['dim_feedforward'],
+                n_heads=model_conf['nhead'],
+                dropout_encoder=model_conf['dropout']
+            )
 
         # 3. Train
         print("Starting training...")

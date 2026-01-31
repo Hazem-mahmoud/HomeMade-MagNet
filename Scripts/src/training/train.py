@@ -49,13 +49,20 @@ def train_model(model, train_loader, val_loader, config, device='cpu'):
         # Use tqdm for progress bar if interactive
         pbar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{num_epochs}")
         
-        for inputs, targets in pbar:
-            inputs = inputs.to(device)
-            targets = targets.to(device)
-            
+        for batch in pbar:
+            if len(batch) == 3:
+                inputs, scalars, targets = batch
+                inputs = inputs.to(device)
+                scalars = scalars.to(device)
+                targets = targets.to(device)
+                outputs = model(inputs, scalars)
+            else:
+                inputs, targets = batch
+                inputs = inputs.to(device)
+                targets = targets.to(device)
+                outputs = model(inputs)
+
             optimizer.zero_grad()
-            
-            outputs = model(inputs)
             loss = criterion(outputs, targets)
             
             loss.backward()
@@ -72,11 +79,19 @@ def train_model(model, train_loader, val_loader, config, device='cpu'):
         model.eval()
         val_loss = 0.0
         with torch.no_grad():
-            for inputs, targets in val_loader:
-                inputs = inputs.to(device)
-                targets = targets.to(device)
+            for batch in val_loader:
+                if len(batch) == 3:
+                    inputs, scalars, targets = batch
+                    inputs = inputs.to(device)
+                    scalars = scalars.to(device)
+                    targets = targets.to(device)
+                    outputs = model(inputs, scalars)
+                else:
+                    inputs, targets = batch
+                    inputs = inputs.to(device)
+                    targets = targets.to(device)
+                    outputs = model(inputs)
                 
-                outputs = model(inputs)
                 loss = criterion(outputs, targets)
                 
                 val_loss += loss.item() * inputs.size(0)

@@ -27,7 +27,9 @@ models:
     features:
       inputs:
         B: standard
-        H: standard
+        Frequency: standard
+        Temperature: standard
+        Hdc: standard
       targets:
         Loss: standard
   seq2seq:
@@ -46,7 +48,9 @@ models:
     features:
       inputs:
         B: minmax
-        H: minmax
+        Frequency: standard
+        Temperature: standard
+        Hdc: standard
       targets:
         Loss: standard
   transformer:
@@ -58,8 +62,9 @@ models:
     features:
       inputs:
         B: standard
-        H: standard
         Frequency: standard
+        Temperature: standard
+        Hdc: standard
       targets:
         Loss: standard
 

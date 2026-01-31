@@ -1,80 +1,115 @@
-"""
-Transformer Model for Sequence Data.
-
-This module implements a Transformer-based architecture for processing
-time-series sequence data.
-"""
 
 import torch
 import torch.nn as nn
 import math
 
 class PositionalEncoding(nn.Module):
-    def __init__(self, d_model, max_len=5000):
-        super(PositionalEncoding, self).__init__()
-        
+    """
+    Injects some information about the relative or absolute position of the tokens in the sequence.
+    """
+    def __init__(self, d_model: int, dropout: float = 0.1, max_len: int = 5000):
+        super().__init__()
+        self.dropout = nn.Dropout(p=dropout)
+
+        # Compute the positional encodings once in log space.
+        position = torch.arange(max_len).unsqueeze(1) 
+        div_term = torch.exp(torch.arange(0, d_model, 2) * (-math.log(10000.0) / d_model))
         pe = torch.zeros(max_len, d_model)
-        position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
-        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
-        
         pe[:, 0::2] = torch.sin(position * div_term)
         pe[:, 1::2] = torch.cos(position * div_term)
-        
-        pe = pe.unsqueeze(0).transpose(0, 1) # Shape: (Max_Len, 1, D_Model)
         self.register_buffer('pe', pe)
 
     def forward(self, x):
-        # x shape: (Seq_Len, Batch, D_Model)
-        return x + self.pe[:x.size(0), :]
-
-class TransformerNetwork(nn.Module):
-    def __init__(self, input_dim=1, d_model=64, nhead=4, num_layers=2, dim_feedforward=128, dropout=0.1, output_dim=1):
         """
         Args:
-            input_dim (int): Number of input features.
-            d_model (int): Hidden dimension size.
-            nhead (int): Number of attention heads.
-            num_layers (int): Number of transformer encoder layers.
-            dim_feedforward (int): Dimension of the FFN.
-            dropout (float): Dropout rate.
-            output_dim (int): Output dimension (default 1 for scalar loss).
+            x: Tensor, shape [batch_size, seq_len, embedding_dim]
         """
-        super(TransformerNetwork, self).__init__()
-        
-        self.input_embedding = nn.Linear(input_dim, d_model)
-        self.pos_encoder = PositionalEncoding(d_model)
-        
-        encoder_layers = nn.TransformerEncoderLayer(d_model, nhead, dim_feedforward, dropout)
-        self.transformer_encoder = nn.TransformerEncoder(encoder_layers, num_layers)
-        
-        self.decoder = nn.Linear(d_model, output_dim)
-        self.d_model = d_model
+        x = x + self.pe[:x.size(1)]
+        return self.dropout(x)
 
-        self.init_weights()
+class TransformerNetwork(nn.Module):
+    """
+    Fuzhou's Transformer-based architecture.
+    """
+    def __init__(self, 
+        B_in_channel=1024, # Default sequence length
+        dim_hidden=24,  
+        dim_proj_fusion=40,
+        n_encoder_layers=1,
+        n_heads=4,
+        dropout_encoder=0.0,
+        dropout_pos_enc=0.0,
+        dim_feedforward_encoder=40,
+        ): 
+        super().__init__() 
 
-    def init_weights(self):
-        initrange = 0.1
-        self.input_embedding.weight.data.uniform_(-initrange, initrange)
-        self.decoder.bias.data.zero_()
-        self.decoder.weight.data.uniform_(-initrange, initrange)
+        # Projection for B-field input: maps scalar input to hidden dimension
+        self.proj_B = nn.Sequential(
+            nn.Linear(1, dim_hidden),
+            nn.Tanh(),
+            nn.Linear(dim_hidden, dim_hidden))
 
-    def forward(self, x):
-        # x shape from loader: (Batch, Seq_Len, Features)
-        # Transformer expects: (Seq_Len, Batch, Features) for default batch_first=False
+        self.positional_encoding_layer = PositionalEncoding(d_model=dim_hidden, 
+                                                            dropout=dropout_pos_enc, 
+                                                            max_len=B_in_channel)
         
-        x = x.permute(1, 0, 2) 
+        # Transformer Encoder Layer definition
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=dim_hidden, 
+            nhead=n_heads,
+            dim_feedforward=dim_feedforward_encoder,
+            dropout=dropout_encoder,
+            activation="relu",
+            batch_first=True
+            ) 
         
-        x = self.input_embedding(x) * math.sqrt(self.d_model)
-        x = self.pos_encoder(x)
+        self.encoder = nn.TransformerEncoder(encoder_layer=encoder_layer, 
+                                             num_layers=n_encoder_layers, 
+                                             norm=None)
         
-        output = self.transformer_encoder(x)
+        # Fusion Layer: Combines Transformer output (B-field features) with Temp and Freq
+        self.proj_fusion = nn.Sequential(
+            nn.Linear(dim_hidden+2, dim_proj_fusion),
+            nn.Tanh(),
+            nn.Linear(dim_proj_fusion, dim_proj_fusion),
+            nn.Tanh(),
+            nn.Linear(dim_proj_fusion, 1))
         
-        # output shape: (Seq_Len, Batch, D_Model)
+        # Final Regressor to predict Power Loss from fused features
+        self.regressor = nn.Sequential(
+            nn.Linear(B_in_channel, 1))
+
+    def forward(self, b_seq, scalars):
+        """
+        Unified Interface Wrapper.
         
-        # For sequence-to-scalar, take the output of the last time step? Or average?
-        # Let's take the mean over the sequence length.
-        output = output.mean(dim=0) # (Batch, D_Model)
+        Args:
+            b_seq (Tensor): Input B-field curve, shape (batch_size, seq_len, 1).
+            scalars (Tensor): Shape (batch_size, 3) -> Freq, Temp, Hdc.
+        """
+        # Unpack scalars
+        # Dataset returns: Freq, Temp, Hdc
+        Freq = scalars[:, 0].unsqueeze(1) # (bs, 1)
+        Temp = scalars[:, 1].unsqueeze(1) # (bs, 1)
         
-        output = self.decoder(output) # (Batch, Output_Dim)
+        B_curve = b_seq
         
-        return output
+        batch_size, len_seq, feat_dim = B_curve.shape
+        
+        # Fuzhou Logic
+        B_curve = self.proj_B(B_curve) # (bs,1024,1)->(bs,1024,24)
+
+        # Add Positional Encoding
+        B_curve = self.positional_encoding_layer(B_curve)
+        B_curve = self.encoder(B_curve) 
+
+        # Repeat Temp and Freq to match sequence length for concatenation
+        Temp_rep = Temp.unsqueeze(1).repeat(1, len_seq, 1) # (bs,1)->(bs,1024,1)
+        Freq_rep = Freq.unsqueeze(1).repeat(1, len_seq, 1) # (bs,1)->(bs,1024,1)
+
+        # Fuse B-field features with Temp and Freq
+        feat = self.proj_fusion(torch.cat([B_curve, Temp_rep, Freq_rep], dim=2)) # (bs,1024,26)->(bs,1024,1)
+        feat = feat.reshape(batch_size, -1) 
+        P_pred = self.regressor(feat) # (bs,1)
+
+        return P_pred

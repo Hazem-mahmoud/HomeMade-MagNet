@@ -148,8 +148,15 @@ class MagNetDataset(Dataset):
             # Input: B (or H)
             # Target: Loss
             b = get_tens(self.inputs, 'B', unsqueeze=True) # (Seq, 1)
+            
+            # Scalars: Freq, Temp, Hdc
+            f = get(self.inputs, 'Frequency')
+            t = get(self.inputs, 'Temperature')
+            h = get(self.inputs, 'Hdc')
+            scalars = torch.stack([f.squeeze(), t.squeeze(), h.squeeze()])
+            
             y = get_tens(self.targets, 'Loss', unsqueeze=False)
-            return b, y
+            return b, scalars, y
             
         elif self.mode == 'seq2seq':
             # Input: B

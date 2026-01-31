@@ -1,48 +1,81 @@
-"""
-Sequence-to-Scaler Model.
-
-This module implements models for mapping time-series waveforms to single scalar values.
-It uses an LSTM encoder followed by a linear head on the final hidden state.
-"""
 
 import torch
 import torch.nn as nn
 
 class SequenceToScalerNetwork(nn.Module):
-    def __init__(self, input_dim=1, hidden_dim=128, output_dim=1, num_layers=2):
-        """
-        Args:
-            input_dim (int): Number of features in input sequence (default 1: B or H).
-            hidden_dim (int): LSTM hidden dimension.
-            output_dim (int): Output size (default 1: Power Loss).
-            num_layers (int): Number of LSTM layers.
-        """
+    """
+    Bristol's LSTM Seq2One Architecture.
+    """
+    def __init__(self,
+                 input_dim=1, # Ignored, hardcoded to 3 (B, Freq, Temp)
+                 hidden_dim=30,
+                 output_dim=1, # Power Loss
+                 num_layers=3):
         super(SequenceToScalerNetwork, self).__init__()
+
+        self.hidden_size = hidden_dim
         
-        self.lstm = nn.LSTM(
-            input_size=input_dim,
-            hidden_size=hidden_dim,
-            num_layers=num_layers,
-            batch_first=True,
-            dropout=0.1 if num_layers > 1 else 0
-        )
+        # Bristol uses input_size=1 but constructs a tensor of size 3 (B, F, T) inside, NOT quite.
+        # Bristol's code actually expected input of size 3 (B, Freq, Temp) from the start?
+        # "inputs = torch.zeros(64, waveStep, 3)" -> Yes.
+        # But their LSTM init says input_size=1? 
+        # "self.lstm = nn.LSTM(input_size, ..." -> If they used input_size=1, they only fed B?
+        # Let's check their forward: "out, _ = self.lstm(in_b)" -> in_b is x[:,:,0:1]. 
+        # SO LSTM ONLY SEES B-Field!
         
-        # Head to map final hidden state to output
-        self.head = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim // 2),
-            nn.ReLU(),
-            nn.Linear(hidden_dim // 2, output_dim)
-        )
+        # LSTM layer (Processing B-Field Only)
+        self.lstm = nn.LSTM(1, # Fixed to 1 for B-field
+                            hidden_dim,
+                            num_layers=num_layers,
+                            batch_first=True)
+
+        # Fully connected layer
+        # Input to FC is: LSTM_Out + Freq + Temp = hidden_dim + 2
+        self.fc1 = nn.Linear(hidden_dim+2, 128)
+        self.fc2 = nn.Linear(128, 196)
+        self.fc3 = nn.Linear(196, 128)
+        self.fc4 = nn.Linear(128, 96)
+        self.fc5 = nn.Linear(96, 32)
+        self.fc6 = nn.Linear(32, 32)
+        self.fc7 = nn.Linear(32, 16)
+        self.fc8 = nn.Linear(16, output_dim)
+
+        # Activation function
+        self.elu = nn.ELU()
+
+
+    def forward(self, b_seq, scalars):
+        """
+        Unified Interface Wrapper.
         
-    def forward(self, x):
-        # x shape: (Batch, Seq_Len, Input_Dim)
+        Args:
+            b_seq (Tensor): (Batch, Seq, 1)
+            scalars (Tensor): (Batch, 3) -> Freq, Temp, Hdc
+        """
         
-        # LSTM output: (Batch, Seq, Hidden), (h_n, c_n)
-        # h_n shape: (Num_Layers, Batch, Hidden)
-        output, (h_n, c_n) = self.lstm(x)
+        # Unpack scalars
+        Freq = scalars[:, 0].unsqueeze(1) # (bs, 1)
+        Temp = scalars[:, 1].unsqueeze(1) # (bs, 1)
         
-        # Use final layer's final hidden state
-        final_hidden = h_n[-1] # (Batch, Hidden)
+        # Bristol's logic:
+        # 1. Feed only B-field (b_seq) into LSTM
+        # out: (Batch, Seq, Hidden)
+        out, _ = self.lstm(b_seq)
         
-        out = self.head(final_hidden)
+        # 2. Take last output
+        out = out[:, -1, :]  # (Batch, Hidden)
+        
+        # 3. Concatenate Freq and Temp to the features
+        out = torch.cat([out, Freq, Temp], dim=1) # (Batch, Hidden + 2)
+
+        # 4. Deep MLP
+        out = self.fc1(out) 
+        out = self.elu(self.fc2(out))
+        out = self.elu(self.fc3(out))
+        out = self.elu(self.fc4(out))
+        out = self.elu(self.fc5(out))
+        out = self.elu(self.fc6(out))
+        out = self.fc7(out)
+        out = self.fc8(out)
+
         return out

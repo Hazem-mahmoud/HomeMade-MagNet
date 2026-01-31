@@ -121,6 +121,7 @@ def build_dependency_graph(root_file):
         if current_file in visited:
             return
         visited.add(current_file)
+        print(f"DEBUG: Visiting {current_file}")
         
         deps = find_local_imports(current_file)
         for dep in deps:
@@ -199,6 +200,23 @@ def main():
     # But let's verify
     if main_script_path in all_files:
         all_files.remove(main_script_path)
+        
+    # FORCE INCLUDE MODELS (Crawler fix)
+    models_dir = os.path.join(script_dir, "src", "models")
+    extra_models = [
+        os.path.join(models_dir, "cnn_model.py"),
+        os.path.join(models_dir, "transformer_model.py"),
+        os.path.join(models_dir, "sequence_model.py"),
+        os.path.join(models_dir, "seq2seq_model.py"),
+        os.path.join(models_dir, "scaler_model.py"),
+        os.path.join(script_dir, "src", "data", "dataset.py"),
+        os.path.join(script_dir, "src", "training", "train.py"),
+        os.path.join(script_dir, "src", "training", "evaluate.py"),
+    ]
+    for m in extra_models:
+        if m not in all_files and os.path.exists(m):
+            print(f"Manually adding {m}")
+            all_files.append(m)
     
     files_to_process = all_files + [main_script_path]
     

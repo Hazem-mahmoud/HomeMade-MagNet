@@ -6,3 +6,6 @@ torch
 mplcursors
 pyyaml
 tqdm
+sphinx
+sphinx-rtd-theme
+sphinxcontrib-mermaid

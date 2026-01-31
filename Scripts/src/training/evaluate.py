@@ -35,11 +35,18 @@ def evaluate_model(model, test_loader, device='cpu'):
     total_mae = 0.0
     
     with torch.no_grad():
-        for inputs, targets in test_loader:
-            inputs = inputs.to(device)
-            targets = targets.to(device)
-            
-            outputs = model(inputs)
+        for batch in test_loader:
+            if len(batch) == 3:
+                inputs, scalars, targets = batch
+                inputs = inputs.to(device)
+                scalars = scalars.to(device)
+                targets = targets.to(device)
+                outputs = model(inputs, scalars)
+            else:
+                inputs, targets = batch
+                inputs = inputs.to(device)
+                targets = targets.to(device)
+                outputs = model(inputs)
             
             mse = criterion_mse(outputs, targets)
             mae = criterion_mae(outputs, targets)
