@@ -52,6 +52,11 @@ def normalize_data(data, method='standard', stats=None):
         
         norm_data = (data - min_val) / denom
         return norm_data, stats
+
+    elif method == 'log10':
+        # Log10 normalization
+        norm_data = np.log10(np.abs(data) + 1e-6)
+        return norm_data, {}
     
     else:
         raise ValueError(f"Unknown method: {method}")
@@ -232,10 +237,16 @@ def process_magnet_dataset(voltage, current, frequency, mag_props, dt, model_typ
     H_raw = calculate_magnetizing_force(current, mag_props['N_prim'], mag_props['Le'])
     Loss_raw = calculate_volumetric_loss(B_raw, H_raw, frequency)
     
+    # Calculate scalar properties (Peak-to-Peak / 2)
+    B_pk = (np.max(B_raw, axis=1, keepdims=True) - np.min(B_raw, axis=1, keepdims=True)) / 2
+    H_pk = (np.max(H_raw, axis=1, keepdims=True) - np.min(H_raw, axis=1, keepdims=True)) / 2
+
     # Pack Potential Features
     all_features = {
         'B': B_raw,
         'H': H_raw,
+        'B_pk': B_pk,
+        'H_pk': H_pk,
         'Frequency': frequency.reshape(-1, 1) if np.ndim(frequency) > 0 else np.full((len(B_raw), 1), frequency)
     }
     

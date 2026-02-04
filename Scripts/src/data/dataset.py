@@ -132,13 +132,14 @@ class MagNetDataset(Dataset):
             # Config MUST include Frequency, Temperature, Hdc in inputs
             # Config MUST include Loss in targets
             
-            # Input: Freq, Temp, Hdc
+            # Input: B_pk, Freq, Temp, Hdc
             # We assume these are 1D arrays (scalers) in the input dict
+            b = get(self.inputs, 'B_pk')
             f = get(self.inputs, 'Frequency')
             t = get(self.inputs, 'Temperature')
             h = get(self.inputs, 'Hdc')
             
-            x = torch.stack([f.squeeze(), t.squeeze(), h.squeeze()]) 
+            x = torch.stack([b.squeeze(), f.squeeze(), t.squeeze(), h.squeeze()]) 
             # Note: normalized scalars might come as (1,) or scalar. Squeeze ensures (3,)
             
             y = get_tens(self.targets, 'Loss', unsqueeze=False) # (1,)
@@ -155,7 +156,7 @@ class MagNetDataset(Dataset):
             h = get(self.inputs, 'Hdc')
             scalars = torch.stack([f.squeeze(), t.squeeze(), h.squeeze()])
             
-            y = get_tens(self.targets, 'Loss', unsqueeze=False)
+            y = get_tens(self.targets, 'Loss', unsqueeze=True)
             return b, scalars, y
             
         elif self.mode == 'seq2seq':

@@ -14,8 +14,7 @@ models:
     layers: 3
     features:
       inputs:
-        B: standard
-        H: standard
+        B_pk: standard
         Frequency: standard
         Temperature: standard
         Hdc: standard
@@ -52,7 +51,7 @@ models:
         Temperature: standard
         Hdc: standard
       targets:
-        Loss: standard
+        Loss: log10
   transformer:
     d_model: 64
     nhead: 4

@@ -3,6 +3,11 @@ import torch
 import torch.nn as nn
 import numpy as np
 
+try:
+    from torch.nn.utils.parametrizations import weight_norm
+except ImportError:
+    from torch.nn.utils import weight_norm
+
 # ==========================================
 # Paderborn's TCN Architecture Components
 # ==========================================
@@ -48,7 +53,7 @@ class TemporalBlock(nn.Module):
         super(TemporalBlock, self).__init__()
         padding = ((kernel_size - 1) // 2) * dilation
 
-        self.conv1 = nn.utils.weight_norm(
+        self.conv1 = weight_norm(
             nn.Conv1d(
                 n_inputs,
                 n_outputs,
@@ -63,7 +68,7 @@ class TemporalBlock(nn.Module):
         self.dropout1 = nn.Dropout1d(dropout)
         if double_layered:
             self.relu2 = nn.Identity()
-            self.conv2 = nn.utils.weight_norm(
+            self.conv2 = weight_norm(
                 nn.Conv1d(
                     n_inputs,
                     n_outputs,
@@ -193,49 +198,52 @@ class TCNWithScalarsAsBias(nn.Module):
         return y
 
 class LossPredictor(nn.Module):
-    def __init__(
-        self,
-        h_predictor,
-    ):
+    def __init__(self, h_predictor):
         super().__init__()
         self.h_predictor = h_predictor
         self.post_processor = nn.Sequential(
-            nn.Linear(self.h_predictor.num_input_scalar, 8), 
+            nn.Linear(self.h_predictor.num_input_scalar, 8),
             nn.Tanh(),
             nn.Linear(8, 1),
             nn.Tanh()
         )
 
-    def forward(self, x_ts, x_scalars, b_lim, h_lim, freq_scale):
-        h_pred = self.h_predictor(x_ts, x_scalars).permute(2, 0, 1)
+    def forward(self, x_ts, x_scalars, stats):
+        # 1. Predict H-field (Normalized)
+        h_pred = self.h_predictor(x_ts, x_scalars).permute(2, 0, 1) # (Seq, Batch, 1)
+
+        # 2. De-normalize Physical Quantities for the Shoelace Formula
+        # We need real units: B in Tesla, H in A/m, Freq in Hz
         
-        # scalars: Freq (0), Temp (1), Hdc (2)
-        # freq = freq_scale * torch.exp(x_scalars[:, [0]]) # Assuming log frequency input?
-        # In Paderborn code, they passed log(freq) in x_scalars and also freq_scale.
-        # Here we will adapt.
+        # Recover Frequency (Hz)
+        # x_scalars[:, 0] is Standardized Freq: (F - mu) / sigma
+        f_norm = x_scalars[:, 0]
+        freq_hz = (f_norm * stats['freq_std']) + stats['freq_mean']
+        freq_hz = torch.abs(freq_hz) # Ensure positive
+
+        # Recover B (Tesla)
+        # Scaled B and H (using learnable/fixed limits to ensure valid range)
+        # Note: Paderborn hardcoded these offsets (+5) to ensure positivity for log.
+        b_lim = 0.5   # Approx max Tesla
+        h_lim = 100.0 # Approx max A/m
         
-        freq = freq_scale * torch.exp(x_scalars[:, [0]])
+        # x_ts is (Batch, Channels, Seq) = (Batch, 1, Seq)
+        # We want (Seq, Batch, 1)
+        scaled_b = x_ts.permute(2, 0, 1) * b_lim
+        scaled_h = h_pred * h_lim
         
-        scaled_b = x_ts[:, [-1], :].permute(2, 0, 1)  # globally scaled B curve
+        # Shoelace
+        term1 = scaled_b
+        term2 = torch.roll(scaled_h, 1, dims=0) - torch.roll(scaled_h, -1, dims=0)
+        area = 0.5 * torch.sum(term1 * term2, dim=0) # (Batch, 1)
         
-        # Paderborn uses arbitrary offsets to make Shoelace positive?
-        b_with_offset = b_lim * scaled_b + 5  
-        h_with_offset = h_lim * h_pred + 5  
+        # 4. Compute Power Loss: Pv = Freq * Area * (Correction Factor)
+        # Correction factor allows network to adjust for non-ideal shapes
+        correction = 1.0 + 0.1 * self.post_processor(x_scalars)
         
-        ploss_pred = (
-            freq
-            * (0.5 + 0.1*self.post_processor(x_scalars))
-            * torch.abs(
-                torch.sum(
-                    b_with_offset
-                    * (
-                        torch.roll(h_with_offset, 1, dims=0)
-                        - torch.roll(h_with_offset, -1, dims=0)
-                    ),
-                    dim=0,
-                )
-            )
-        ) 
+        ploss_pred = freq_hz.unsqueeze(1) * torch.abs(area) * correction
+        
+        # Return Log(Pv) to match Log-Loss Target
         return torch.log(ploss_pred + 1e-6)
 
 # ==========================================
@@ -243,40 +251,27 @@ class LossPredictor(nn.Module):
 # ==========================================
 
 class CNNNetwork(nn.Module):
-    def __init__(self, input_dim=1, hidden_dim=32, output_dim=1):
+    def __init__(self, input_dim=1, hidden_dim=32, output_dim=1, stats=None):
         super(CNNNetwork, self).__init__()
         
-        # Paderborn Defaults
-        # scalars: Freq, Temp, Hdc = 3
-        
+        # Save stats for de-normalization
+        # Defaults if not provided (avoid crash, but won't be accurate)
+        if stats is None:
+            stats = {'freq_mean': 100000.0, 'freq_std': 50000.0}
+            
+        self.register_buffer('freq_mean', torch.tensor(stats.get('freq_mean', 100000.0)))
+        self.register_buffer('freq_std', torch.tensor(stats.get('freq_std', 50000.0)))
+
         self.tcn = TCNWithScalarsAsBias(
             num_input_scalars=3,
             num_input_ts=input_dim
         )
         self.model = LossPredictor(self.tcn)
-        
-        # Hyperparameters for normalization (Placeholder - should ideally come from dataset stats)
-        # We use reasonable defaults from Paderborn
-        self.register_buffer('b_lim', torch.tensor(0.5)) 
-        self.register_buffer('h_lim', torch.tensor(150.0))
-        self.register_buffer('freq_scale', torch.tensor(150000.0))
 
     def forward(self, b_seq, scalars):
-        # b_seq: (Batch, Seq, 1)
-        # scalars: (Batch, 3) -> Freq, Temp, Hdc
+        # b_seq: (Batch, Seq, 1) -> TCN wants (Batch, Channels, Seq)
+        x_ts = b_seq.permute(0, 2, 1)
         
-        # 1. Adapt B-Sequence -> (Batch, Channels, Length) for TCN
-        x_ts = b_seq.permute(0, 2, 1) # (Batch, 1, Seq)
+        stats = {'freq_mean': self.freq_mean, 'freq_std': self.freq_std}
         
-        # 2. Adapt Scalars
-        # Paderborn expects Normalized scalars. Dataset returns normalized scalars.
-        # But Paderborn expects log(Freq). Dataset provides MinMax Freq?
-        # We assume dataset provides appropriate normalized scalars.
-        # If dataset provides linear normalized Freq, we might need to adjust.
-        # For now, pass as is.
-        
-        # 3. Forward
-        # LossPredictor returns log_loss
-        log_loss = self.model(x_ts, scalars, self.b_lim, self.h_lim, self.freq_scale)
-        
-        return log_loss
+        return self.model(x_ts, scalars, stats)

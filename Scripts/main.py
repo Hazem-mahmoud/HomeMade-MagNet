@@ -60,10 +60,15 @@ def main():
         
         # 2. Model
         if model_name == 'scaler':
-            # Input: Freq, Temp, Hdc (3)
+            # Input: Dynamic based on config (B_pk, Freq, Temp, Hdc...)
             # Output: Log Loss (1)
             model_conf = config['models']['scaler']
-            model = ScalerNetwork(input_dim=3, hidden_dim=model_conf['hidden_dim'], num_layers=model_conf['layers'], output_dim=1)
+            input_dim = len(model_conf.get('features', {}).get('inputs', {})) # Default to 3 if missing? Better to rely on config.
+            # Fallback if config matches default structure but keys missing?
+            # Safe bet:
+            if input_dim == 0: input_dim = 3 # Legacy fallback
+            
+            model = ScalerNetwork(input_dim=input_dim, hidden_dim=model_conf['hidden_dim'], num_layers=model_conf['layers'], output_dim=1)
             
         elif model_name == 'sequence':
             # Input: B (1)
@@ -80,13 +85,21 @@ def main():
             # Input: B (1)
             # Output: Log Loss (1) (Scalar)
             model_conf = config['models']['cnn']
-            # Paderborn CNN doesn't use kernel_size/channels from config in the same way, 
-            # but we can pass them if we update CNNNetwork. 
-            # For now, use defaults or what's available.
-            # CNNNetwork(input_dim=1, hidden_dim=32, output_dim=1)
-            # Paderborn's TCN is hardcoded mostly, but we can pass generic params if we want.
-            # Let's simple instantiate it with defaults + input_dim
-            model = CNNNetwork(input_dim=1)
+            # Retrieve Frequency stats from the dataset
+            # The keys depend on what preprocessing returns. 
+            # Usually: dataset.stats['Frequency']['mean']
+            freq_stats = {}
+            if hasattr(dataset, 'stats') and 'Frequency' in dataset.stats:
+                f_s = dataset.stats['Frequency']
+                # Check if it's standard (has mean/std) or minmax
+                # The model expects mean/std for 'standard' normalization.
+                if 'mean' in f_s:
+                    freq_stats['freq_mean'] = f_s['mean']
+                    freq_stats['freq_std'] = f_s['std']
+            
+            print(f"Passing Stats to CNN: {freq_stats}")
+            
+            model = CNNNetwork(input_dim=1, stats=freq_stats)
         
             # Input: B (1)
             # Output: Log Loss (1) (Scalar)
