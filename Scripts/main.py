@@ -127,7 +127,8 @@ def main():
             os.makedirs(train_config['save_dir'])
         
         model = model.to(device)
-        trained_model, history = train_model(model, train_loader, val_loader, train_config, device)
+        trained_model, history = train_model(model, train_loader, val_loader, config, device)
+
         
         # 4. Evaluate & Visualize
         print("Evaluating...")
