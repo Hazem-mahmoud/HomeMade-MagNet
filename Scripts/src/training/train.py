@@ -22,13 +22,16 @@ def train_model(model, train_loader, val_loader, config, device='cpu'):
     model = model.to(device)
 
     criterion = nn.MSELoss()
+    training_cfg = config['training']
+
     optimizer = optim.Adam(
         model.parameters(),
-        lr=config.get('learning_rate', 0.001)
+        lr=training_cfg.get('learning_rate', 0.001)
     )
 
-    num_epochs = config.get('epochs', 100)
-    save_dir = config.get('save_dir', 'checkpoints')
+    num_epochs = training_cfg.get('epochs', 100)
+    save_dir = training_cfg.get('save_dir', 'checkpoints')
+    print("save dir is :",save_dir )
     os.makedirs(save_dir, exist_ok=True)
 
     # ===================== Model info =====================
