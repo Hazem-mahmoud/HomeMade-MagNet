@@ -81,7 +81,7 @@ def main():
             # Output: H (1)
             model_conf = config['models']['seq2seq']
             model = Seq2SeqNetwork(input_dim=1, hidden_dim=model_conf['encoder_dim'], output_dim=1)
-            
+        elif model_name == 'cnn':    
             # Input: B (1)
             # Output: Log Loss (1) (Scalar)
             model_conf = config['models']['cnn']
@@ -100,7 +100,7 @@ def main():
             print(f"Passing Stats to CNN: {freq_stats}")
             
             model = CNNNetwork(input_dim=1, stats=freq_stats)
-        
+        elif model_name == 'transformer':
             # Input: B (1)
             # Output: Log Loss (1) (Scalar)
             model_conf = config['models']['transformer']
@@ -116,6 +116,9 @@ def main():
                 n_heads=model_conf['nhead'],
                 dropout_encoder=model_conf['dropout']
             )
+        else:
+            print("Unknown model name")
+
 
         # 3. Train
         print("Starting training...")
@@ -127,7 +130,7 @@ def main():
             os.makedirs(train_config['save_dir'])
         
         model = model.to(device)
-        trained_model, history = train_model(model, train_loader, val_loader, config, device)
+        trained_model, history = train_model(model, train_loader, val_loader,model_name ,config, device)
 
         
         # 4. Evaluate & Visualize

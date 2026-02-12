@@ -18,7 +18,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 
 
-def train_model(model, train_loader, val_loader, config, device='cpu'):
+def train_model(model, train_loader, val_loader, model_name, config, device='cpu'):
     model = model.to(device)
 
     criterion = nn.MSELoss()
@@ -35,7 +35,7 @@ def train_model(model, train_loader, val_loader, config, device='cpu'):
     os.makedirs(save_dir, exist_ok=True)
 
     # ===================== Model info =====================
-    model_key = list(config['models'].keys())[0]
+    model_key = model_name
     model_cfg = config['models'][model_key]
     model_name = model_cfg['name']
     model_version = model_cfg['version']
