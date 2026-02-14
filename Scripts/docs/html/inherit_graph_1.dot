@@ -1,0 +1,34 @@
+digraph "Graphical Class Hierarchy"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node0 [id="Node000000",label="nn.Module",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
+  Node0 -> Node1 [id="edge2_Node000000_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 [id="Node000001",label="src.models.cnn_model.Biased_Elu",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1cnn__model_1_1_biased___elu.html",tooltip=" "];
+  Node0 -> Node2 [id="edge3_Node000000_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="src.models.cnn_model.CNNNetwork",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network.html",tooltip=" "];
+  Node0 -> Node3 [id="edge4_Node000000_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="src.models.cnn_model.Generalized\lCosinusUnit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1cnn__model_1_1_generalized_cosinus_unit.html",tooltip=" "];
+  Node0 -> Node4 [id="edge5_Node000000_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="src.models.cnn_model.Loss\lPredictor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1cnn__model_1_1_loss_predictor.html",tooltip=" "];
+  Node0 -> Node5 [id="edge6_Node000000_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="src.models.cnn_model.SinusAct",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1cnn__model_1_1_sinus_act.html",tooltip=" "];
+  Node0 -> Node6 [id="edge7_Node000000_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="src.models.cnn_model.TCNWith\lScalarsAsBias",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias.html",tooltip=" "];
+  Node0 -> Node7 [id="edge8_Node000000_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="src.models.cnn_model.Temporal\lBlock",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1cnn__model_1_1_temporal_block.html",tooltip=" "];
+  Node0 -> Node8 [id="edge9_Node000000_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="src.models.scaler_model.\lScalerNetwork",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1scaler__model_1_1_scaler_network.html",tooltip=" "];
+  Node0 -> Node9 [id="edge10_Node000000_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="src.models.seq2seq\l_model.Seq2SeqNetwork",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network.html",tooltip=" "];
+  Node0 -> Node10 [id="edge11_Node000000_Node000010",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="src.models.sequence\l_model.SequenceToScalerNetwork",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network.html",tooltip=" "];
+  Node0 -> Node11 [id="edge12_Node000000_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="src.models.transformer\l_model.PositionalEncoding",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1transformer__model_1_1_positional_encoding.html",tooltip=" "];
+  Node0 -> Node12 [id="edge13_Node000000_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="src.models.transformer\l_model.TransformerNetwork",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classsrc_1_1models_1_1transformer__model_1_1_transformer_network.html",tooltip=" "];
+}

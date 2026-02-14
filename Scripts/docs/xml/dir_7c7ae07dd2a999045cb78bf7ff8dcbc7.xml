@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7" kind="dir">
+    <compoundname>D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training</compoundname>
+    <innerfile refid="training_2____init_____8py">__init__.py</innerfile>
+    <innerfile refid="evaluate_8py">evaluate.py</innerfile>
+    <innerfile refid="train_8py">train.py</innerfile>
+    <innerfile refid="transfer_8py">transfer.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/"/>
+  </compounddef>
+</doxygen>

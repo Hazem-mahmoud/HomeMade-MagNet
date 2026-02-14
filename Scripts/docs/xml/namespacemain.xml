@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacemain" kind="namespace" language="Python">
+    <compoundname>main</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacemain_1a7896926bd887efec19288eae30c4ed85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>main.load_config</definition>
+        <argsstring>(path)</argsstring>
+        <name>load_config</name>
+        <qualifiedname>main.load_config</qualifiedname>
+        <param>
+          <type>path</type>
+          <defname>path</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" line="22" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" bodystart="22" bodyend="25"/>
+        <referencedby refid="namespacemain_1a3140e9a5b6a71ffbf498198cfc471b88" compoundref="main_8py" startline="26" endline="205">main</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacemain_1a3140e9a5b6a71ffbf498198cfc471b88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>main.main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <qualifiedname>main.main</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" line="26" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" bodystart="26" bodyend="205"/>
+        <references refid="namespacemain_1a7896926bd887efec19288eae30c4ed85" compoundref="main_8py" startline="22" endline="25">load_config</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>MagNet Project Entry Point.
+
+This script serves as the main interface for training and evaluating the neural network models.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

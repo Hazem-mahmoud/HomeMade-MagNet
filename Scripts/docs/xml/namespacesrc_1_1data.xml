@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1data" kind="namespace" language="Python">
+    <compoundname>src::data</compoundname>
+    <innernamespace refid="namespacesrc_1_1data_1_1dataset">src::data::dataset</innernamespace>
+    <innernamespace refid="namespacesrc_1_1data_1_1loader">src::data::loader</innernamespace>
+    <innernamespace refid="namespacesrc_1_1data_1_1preprocessing">src::data::preprocessing</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Data Package.
+Includes loader and preprocessing modules.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/__init__.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

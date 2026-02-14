@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1training_1_1train" kind="namespace" language="Python">
+    <compoundname>src::training::train</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesrc_1_1training_1_1train_1a8ae500222173487c67172ff4a32e7c15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.training.train.train_model</definition>
+        <argsstring>(model, train_loader, val_loader, config, device=&apos;cpu&apos;)</argsstring>
+        <name>train_model</name>
+        <qualifiedname>src.training.train.train_model</qualifiedname>
+        <param>
+          <type>model</type>
+          <defname>model</defname>
+        </param>
+        <param>
+          <type>train_loader</type>
+          <defname>train_loader</defname>
+        </param>
+        <param>
+          <type>val_loader</type>
+          <defname>val_loader</defname>
+        </param>
+        <param>
+          <type>config</type>
+          <defname>config</defname>
+        </param>
+        <param>
+          <type>device</type>
+          <defname>device</defname>
+          <defval>&apos;cpu&apos;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Generic training loop.
+
+Args:
+    model (nn.Module): The model to train.
+    train_loader (DataLoader): Training data.
+    val_loader (DataLoader): Validation data.
+    config (dict): Configuration dictionary (lr, epochs, save_dir).
+    device (str): &apos;cpu&apos; or &apos;cuda&apos;.
+    
+Returns:
+    model (nn.Module): Trained model (best weights).
+    history (dict): Training history (loss).
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/train.py" line="15" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/train.py" bodystart="15" bodyend="113"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Training Loop Module.
+
+This module contains the logic for training the neural networks.
+It includes the training loop, validation step, loss calculation, and checkpointing.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/train.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

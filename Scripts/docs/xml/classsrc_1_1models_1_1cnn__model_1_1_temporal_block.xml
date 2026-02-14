@@ -1,0 +1,364 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block" kind="class" language="Python" prot="public">
+    <compoundname>src::models::cnn_model::TemporalBlock</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a8e63c6e2dea5e93b1a02fd0c86b39948" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::conv1</definition>
+        <argsstring></argsstring>
+        <name>conv1</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.conv1</qualifiedname>
+        <initializer>=  weight_norm(
+            nn.Conv1d(
+                n_inputs,
+                n_outputs,
+                kernel_size,
+                stride=stride,
+                padding=padding,
+                dilation=dilation,
+                padding_mode=&quot;circular&quot;,
+            )
+        )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="56" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="56" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a358baddb5ef877814dc4372194cc08d6" compoundref="cnn__model_8py" startline="104" endline="110">src.models.cnn_model.TemporalBlock.init_weights</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a449eb3696c5c4602db9f37e254043a8f" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::relu1</definition>
+        <argsstring></argsstring>
+        <name>relu1</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.relu1</qualifiedname>
+        <initializer>=  ACTIVATION_FUNCS.get(act_func, nn.Identity)()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="67" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a5603a9061111e886e1766efe3ff18975" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::dropout1</definition>
+        <argsstring></argsstring>
+        <name>dropout1</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.dropout1</qualifiedname>
+        <initializer>=  nn.Dropout1d(dropout)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="68" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a2a3a91a16553188fc898140d8607564b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::relu2</definition>
+        <argsstring></argsstring>
+        <name>relu2</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.relu2</qualifiedname>
+        <initializer>=  nn.Identity()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="70" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a74bc8d2c5af9a84704d00f2205f35e09" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::conv2</definition>
+        <argsstring></argsstring>
+        <name>conv2</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.conv2</qualifiedname>
+        <initializer>=  weight_norm(
+                nn.Conv1d(
+                    n_inputs,
+                    n_outputs,
+                    kernel_size,
+                    stride=stride,
+                    padding=padding,
+                    dilation=dilation,
+                    padding_mode=&quot;circular&quot;,
+                )
+            )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="71" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="71" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a358baddb5ef877814dc4372194cc08d6" compoundref="cnn__model_8py" startline="104" endline="110">src.models.cnn_model.TemporalBlock.init_weights</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a90d585b3ca17833234ecdda4aeff6e51" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::dropout2</definition>
+        <argsstring></argsstring>
+        <name>dropout2</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.dropout2</qualifiedname>
+        <initializer>=  nn.Dropout1d(dropout)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="82" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1ab174667fb87d5c0192298e4c0fac1448" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::net</definition>
+        <argsstring></argsstring>
+        <name>net</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.net</qualifiedname>
+        <initializer>=  nn.Sequential(
+                self.conv1,
+                self.relu1,
+                self.dropout1,
+                self.conv2,
+                self.relu2,
+                self.dropout2,
+            )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="83" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="83" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1af4aba8b5c4ca9a33d43c27e380cf2236" compoundref="cnn__model_8py" startline="111" endline="123">src.models.cnn_model.TemporalBlock.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a6d75e765ac525ca9d8977bf5f3ee16b6" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::relu</definition>
+        <argsstring></argsstring>
+        <name>relu</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.relu</qualifiedname>
+        <initializer>=  nn.ReLU()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="93" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="93" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1af4aba8b5c4ca9a33d43c27e380cf2236" compoundref="cnn__model_8py" startline="111" endline="123">src.models.cnn_model.TemporalBlock.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a42784276c3430d51108d583578f7eb59" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::residual</definition>
+        <argsstring></argsstring>
+        <name>residual</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.residual</qualifiedname>
+        <initializer>=  residual</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="94" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="94" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1af4aba8b5c4ca9a33d43c27e380cf2236" compoundref="cnn__model_8py" startline="111" endline="123">src.models.cnn_model.TemporalBlock.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1acb73d7834bf9141c3a78298ac135f362" prot="public" static="no" mutable="no">
+        <type>tuple</type>
+        <definition>tuple src.models.cnn_model.TemporalBlock::downsample</definition>
+        <argsstring></argsstring>
+        <name>downsample</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.downsample</qualifiedname>
+        <initializer>=  (
+                nn.Conv1d(n_inputs, n_outputs, 1) if n_inputs != n_outputs else None
+            )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="96" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="96" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1af4aba8b5c4ca9a33d43c27e380cf2236" compoundref="cnn__model_8py" startline="111" endline="123">src.models.cnn_model.TemporalBlock.forward</referencedby>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a358baddb5ef877814dc4372194cc08d6" compoundref="cnn__model_8py" startline="104" endline="110">src.models.cnn_model.TemporalBlock.init_weights</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1aa1181685a7df3e437076db5958db6b1f" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock::double_layered</definition>
+        <argsstring></argsstring>
+        <name>double_layered</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.double_layered</qualifiedname>
+        <initializer>=  double_layered</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="101" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="101" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a358baddb5ef877814dc4372194cc08d6" compoundref="cnn__model_8py" startline="104" endline="110">src.models.cnn_model.TemporalBlock.init_weights</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1abf57d3c1e9da461f00a6d4f73e76ae33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock.__init__</definition>
+        <argsstring>(self, n_inputs, n_outputs, kernel_size, stride, dilation, residual=True, double_layered=True, dropout=0.0, act_func=None)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>n_inputs</type>
+          <defname>n_inputs</defname>
+        </param>
+        <param>
+          <type>n_outputs</type>
+          <defname>n_outputs</defname>
+        </param>
+        <param>
+          <type>kernel_size</type>
+          <defname>kernel_size</defname>
+        </param>
+        <param>
+          <type>stride</type>
+          <defname>stride</defname>
+        </param>
+        <param>
+          <type>dilation</type>
+          <defname>dilation</defname>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a42784276c3430d51108d583578f7eb59" kindref="member">residual</ref></type>
+          <defname>residual</defname>
+          <defval>True</defval>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1aa1181685a7df3e437076db5958db6b1f" kindref="member">double_layered</ref></type>
+          <defname>double_layered</defname>
+          <defval>True</defval>
+        </param>
+        <param>
+          <type>dropout</type>
+          <defname>dropout</defname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>act_func</type>
+          <defname>act_func</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="41" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="52" bodyend="103"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1abf57d3c1e9da461f00a6d4f73e76ae33" compoundref="cnn__model_8py" startline="52" endline="103">src.models.cnn_model.TemporalBlock.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1abf57d3c1e9da461f00a6d4f73e76ae33" compoundref="cnn__model_8py" startline="52" endline="103">src.models.cnn_model.TemporalBlock.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a358baddb5ef877814dc4372194cc08d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock.init_weights</definition>
+        <argsstring>(self)</argsstring>
+        <name>init_weights</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.init_weights</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="104" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="104" bodyend="110"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a8e63c6e2dea5e93b1a02fd0c86b39948" compoundref="cnn__model_8py" startline="56">src.models.cnn_model.TemporalBlock.conv1</references>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a74bc8d2c5af9a84704d00f2205f35e09" compoundref="cnn__model_8py" startline="71">src.models.cnn_model.TemporalBlock.conv2</references>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1aa1181685a7df3e437076db5958db6b1f" compoundref="cnn__model_8py" startline="101">src.models.cnn_model.TemporalBlock.double_layered</references>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1acb73d7834bf9141c3a78298ac135f362" compoundref="cnn__model_8py" startline="96">src.models.cnn_model.TemporalBlock.downsample</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1af4aba8b5c4ca9a33d43c27e380cf2236" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.TemporalBlock.forward</definition>
+        <argsstring>(self, x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.cnn_model.TemporalBlock.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>x</type>
+          <defname>x</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="111" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="111" bodyend="123"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1acb73d7834bf9141c3a78298ac135f362" compoundref="cnn__model_8py" startline="96">src.models.cnn_model.TemporalBlock.downsample</references>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1ab174667fb87d5c0192298e4c0fac1448" compoundref="cnn__model_8py" startline="83">src.models.cnn_model.TemporalBlock.net</references>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a6d75e765ac525ca9d8977bf5f3ee16b6" compoundref="cnn__model_8py" startline="93">src.models.cnn_model.TemporalBlock.relu</references>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a42784276c3430d51108d583578f7eb59" compoundref="cnn__model_8py" startline="94">src.models.cnn_model.TemporalBlock.residual</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.TemporalBlock</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.TemporalBlock</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="40" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="40" bodyend="123"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1abf57d3c1e9da461f00a6d4f73e76ae33" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a8e63c6e2dea5e93b1a02fd0c86b39948" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>conv1</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a74bc8d2c5af9a84704d00f2205f35e09" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>conv2</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1aa1181685a7df3e437076db5958db6b1f" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>double_layered</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1acb73d7834bf9141c3a78298ac135f362" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>downsample</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a5603a9061111e886e1766efe3ff18975" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>dropout1</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a90d585b3ca17833234ecdda4aeff6e51" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>dropout2</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1af4aba8b5c4ca9a33d43c27e380cf2236" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>forward</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a358baddb5ef877814dc4372194cc08d6" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>init_weights</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1ab174667fb87d5c0192298e4c0fac1448" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>net</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a6d75e765ac525ca9d8977bf5f3ee16b6" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>relu</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a449eb3696c5c4602db9f37e254043a8f" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>relu1</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a2a3a91a16553188fc898140d8607564b" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>relu2</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a42784276c3430d51108d583578f7eb59" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TemporalBlock</scope><name>residual</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc" kind="namespace" language="Python">
+    <compoundname>src</compoundname>
+    <innernamespace refid="namespacesrc_1_1data">src::data</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models">src::models</innernamespace>
+    <innernamespace refid="namespacesrc_1_1training">src::training</innernamespace>
+    <innernamespace refid="namespacesrc_1_1utils">src::utils</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>MagNet Source Package.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/__init__.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

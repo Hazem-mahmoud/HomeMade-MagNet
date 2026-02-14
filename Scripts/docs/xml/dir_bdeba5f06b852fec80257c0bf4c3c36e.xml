@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_bdeba5f06b852fec80257c0bf4c3c36e" kind="dir">
+    <compoundname>D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models</compoundname>
+    <innerfile refid="models_2____init_____8py">__init__.py</innerfile>
+    <innerfile refid="cnn__model_8py">cnn_model.py</innerfile>
+    <innerfile refid="scaler__model_8py">scaler_model.py</innerfile>
+    <innerfile refid="seq2seq__model_8py">seq2seq_model.py</innerfile>
+    <innerfile refid="sequence__model_8py">sequence_model.py</innerfile>
+    <innerfile refid="transformer__model_8py">transformer_model.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,450 @@
+\doxysection{preprocessing.\+py}
+\hypertarget{preprocessing_8py_source}{}\label{preprocessing_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py}}
+\doxymbox{\hyperlink{preprocessing_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00002}00002\ \textcolor{stringliteral}{Data\ Preprocessing\ Module.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00004}00004\ \textcolor{stringliteral}{Generic\ processing\ for\ Time-\/Series\ FNN.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00005}00005\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00006}00006\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00007}00007\ \textcolor{keyword}{from}\ scipy.integrate\ \textcolor{keyword}{import}\ cumulative\_trapezoid,\ trapezoid}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00009}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050}{00009}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050}{normalize\_data}}(data,\ method='standard',\ stats=None):}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00010}00010\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00011}00011\ \textcolor{stringliteral}{\ \ \ \ Normalizes\ data\ using\ Global\ Scaling\ (Statistics\ computed\ over\ ALL\ data).}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00012}00012\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00013}00013\ \textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00014}00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ data\ (np.array):\ Input\ data.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00015}00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ method\ (str):\ 'standard'\ (Z-\/score),\ 'minmax',\ or\ 'none'.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00016}00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ stats\ (dict,\ optional):\ Pre-\/computed\ stats.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ norm\_data\ (np.array):\ Normalized\ data.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00020}00020\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ stats\ (dict):\ Statistics\ used.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00021}00021\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00022}00022\ \ \ \ \ \textcolor{comment}{\#\ Force\ float32}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00023}00023\ \ \ \ \ data\ =\ data.astype(np.float32)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{if}\ method\ ==\ \textcolor{stringliteral}{'none'}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data,\ \{\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{if}\ method\ ==\ \textcolor{stringliteral}{'standard'}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ stats:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ mean\ =\ stats[\textcolor{stringliteral}{'mean'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ std\ =\ stats[\textcolor{stringliteral}{'std'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ mean\ =\ np.mean(data,\ axis=\textcolor{keywordtype}{None})\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ std\ =\ np.std(data,\ axis=\textcolor{keywordtype}{None})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ std\ ==\ 0:\ std\ =\ 1.0}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ \ \ \ \ stats\ =\ \{\textcolor{stringliteral}{'mean'}:\ mean,\ \textcolor{stringliteral}{'std'}:\ std\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ norm\_data\ =\ (data\ -\/\ mean)\ /\ std}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ norm\_data,\ stats}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{elif}\ method\ ==\ \textcolor{stringliteral}{'minmax'}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ stats:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ min\_val\ =\ stats[\textcolor{stringliteral}{'min'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ max\_val\ =\ stats[\textcolor{stringliteral}{'max'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ min\_val\ =\ np.min(data,\ axis=\textcolor{keywordtype}{None})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ max\_val\ =\ np.max(data,\ axis=\textcolor{keywordtype}{None})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ stats\ =\ \{\textcolor{stringliteral}{'min'}:\ min\_val,\ \textcolor{stringliteral}{'max'}:\ max\_val\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ denom\ =\ max\_val\ -\/\ min\_val}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ denom\ ==\ 0:\ denom\ =\ 1.0}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ norm\_data\ =\ (data\ -\/\ min\_val)\ /\ denom}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ norm\_data,\ stats}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{elif}\ method\ ==\ \textcolor{stringliteral}{'log10'}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Log10\ normalization}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ norm\_data\ =\ np.log10(np.abs(data)\ +\ 1e-\/6)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ norm\_data,\ \{\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00060}00060\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(f\textcolor{stringliteral}{"{}Unknown\ method:\ \{method\}"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00065}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a84f013aee5c17ec66380873ecbf8445f}{00065}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a84f013aee5c17ec66380873ecbf8445f}{prepare\_dataset}}(features,\ targets,\ test\_ratio=0.2,\ norm\_config=None):}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00066}00066\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00067}00067\ \textcolor{stringliteral}{\ \ \ \ Generic\ function\ to\ split\ and\ normalize\ ANY\ set\ of\ features\ and\ targets.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00068}00068\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00069}00069\ \textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00070}00070\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ features\ (dict):\ Dictionary\ mapping\ FeatureName\ to\ data\ array.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00071}00071\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ targets\ (dict):\ Dictionary\ mapping\ TargetName\ to\ data\ array.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00072}00072\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ test\_ratio\ (float):\ Fraction\ of\ data\ to\ use\ for\ testing.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00073}00073\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ norm\_config\ (dict):\ Dictionary\ mapping\ feature/target\ names\ to\ methods.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00074}00074\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.g.\ \{'B':\ 'standard',\ 'Loss':\ 'log10'\}.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00075}00075\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Defaults\ to\ 'standard'\ for\ features\ and\ 'none'\ for\ targets\ if\ not\ specified.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00076}00076\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00077}00077\ \textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00078}00078\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ data\_split\ (dict):\ Contains\ 'train'\ and\ 'test'\ dictionaries.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00079}00079\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00080}00080\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ \`{}data\_split['train']['inputs']['FeatureName']\`{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00081}00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ \`{}data\_split['train']['targets']['TargetName']\`{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00082}00082\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00083}00083\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ stats\ (dict):\ The\ statistics\ used\ for\ normalization\ for\ each\ feature/target.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00084}00084\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{if}\ norm\_config\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ norm\_config\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00088}00088\ \ \ \ \ \textcolor{comment}{\#\ 1.\ Determine\ Split\ Index}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00089}00089\ \ \ \ \ \textcolor{comment}{\#\ Assume\ all\ arrays\ have\ same\ length\ N\ in\ dimension\ 0.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00090}00090\ \ \ \ \ any\_key\ =\ next(iter(features))}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00091}00091\ \ \ \ \ N\ =\ len(features[any\_key])}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00092}00092\ \ \ \ \ split\_idx\ =\ int(N\ *\ (1\ -\/\ test\_ratio))}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00093}00093\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00094}00094\ \ \ \ \ split\_data\ =\ \{}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'train'}:\ \{\textcolor{stringliteral}{'inputs'}:\ \{\},\ \textcolor{stringliteral}{'targets'}:\ \{\}\},}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'test'}:\ \{\textcolor{stringliteral}{'inputs'}:\ \{\},\ \textcolor{stringliteral}{'targets'}:\ \{\}\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00098}00098\ \ \ \ \ stats\_out\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00099}00099\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00100}00100\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Splitting\ Dataset:\ \{N\}\ Samples\ -\/>\ \{split\_idx\}\ Train,\ \{N\ -\/\ split\_idx\}\ Test"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00101}00101\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00102}00102\ \ \ \ \ \textcolor{comment}{\#\ 2.\ Process\ Inputs\ (Features)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00103}00103\ \ \ \ \ print(\textcolor{stringliteral}{"{}Processing\ Features..."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00104}00104\ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ data\ \textcolor{keywordflow}{in}\ features.items():}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Get\ method\ (Default\ to\ 'standard'\ for\ inputs)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ method\ =\ norm\_config.get(name,\ \textcolor{stringliteral}{'standard'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Split}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ train\_part\ =\ data[:split\_idx]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ test\_part\ =\ data[split\_idx:]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Normalize\ Train}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ -\/\ Normalizing\ '\{name\}'\ with\ \{method\}..."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ train\_norm,\ stat\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050}{normalize\_data}}(train\_part,\ method=method)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ stats\_out[name]\ =\ stat}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Normalize\ Test\ (using\ Train\ stats)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ test\_norm,\ \_\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050}{normalize\_data}}(test\_part,\ method=method,\ stats=stat)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ split\_data[\textcolor{stringliteral}{'train'}][\textcolor{stringliteral}{'inputs'}][name]\ =\ train\_norm}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ split\_data[\textcolor{stringliteral}{'test'}][\textcolor{stringliteral}{'inputs'}][name]\ =\ test\_norm}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00123}00123\ \ \ \ \ \textcolor{comment}{\#\ 3.\ Process\ Targets}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00124}00124\ \ \ \ \ print(\textcolor{stringliteral}{"{}Processing\ Targets..."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00125}00125\ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ data\ \textcolor{keywordflow}{in}\ targets.items():}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Get\ method\ (Default\ to\ 'none'\ for\ targets\ unless\ specified)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Often\ we\ don't\ normalize\ targets\ for\ regression\ unless\ specifically\ asked\ (like\ Log\ Loss)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00128}00128\ \ \ \ \ \ \ \ \ method\ =\ norm\_config.get(name,\ \textcolor{stringliteral}{'none'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Split}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ train\_part\ =\ data[:split\_idx]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ test\_part\ =\ data[split\_idx:]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Normalize\ Train}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ method\ !=\ \textcolor{stringliteral}{'none'}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ -\/\ Normalizing\ Target\ '\{name\}'\ with\ \{method\}..."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ train\_norm,\ stat\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050}{normalize\_data}}(train\_part,\ method=method)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ method\ !=\ \textcolor{stringliteral}{'none'}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ stats\_out[name]\ =\ stat}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Normalize\ Test}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ test\_norm,\ \_\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050}{normalize\_data}}(test\_part,\ method=method,\ stats=stat)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00145}00145\ \ \ \ \ \ \ \ \ split\_data[\textcolor{stringliteral}{'train'}][\textcolor{stringliteral}{'targets'}][name]\ =\ train\_norm}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00146}00146\ \ \ \ \ \ \ \ \ split\_data[\textcolor{stringliteral}{'test'}][\textcolor{stringliteral}{'targets'}][name]\ =\ test\_norm}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00148}00148\ \ \ \ \ \textcolor{keywordflow}{return}\ split\_data,\ stats\_out}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00151}00151\ \textcolor{comment}{\#\ -\/-\/-\/\ PHYSICS\ FUNCTIONS\ (Vectorized)\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00152}00152\ \textcolor{comment}{\#\ Kept\ as\ helpers,\ but\ they\ are\ just\ ONE\ way\ to\ generate\ features.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00154}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}{00154}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}{calculate\_flux\_density}}(voltage,\ sampling\_time,\ secondary\_turns,\ effective\_area):}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00155}00155\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ Calculates\ B\ (Flux\ Density).\ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00156}00156\ \ \ \ \ v\_mean\ =\ np.mean(voltage,\ axis=1,\ keepdims=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00157}00157\ \ \ \ \ v\_clean\ =\ voltage\ -\/\ v\_mean}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00158}00158\ \ \ \ \ flux\ =\ cumulative\_trapezoid(v\_clean,\ axis=-\/1,\ initial=0)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00159}00159\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00160}00160\ \ \ \ \ \textcolor{keywordflow}{if}\ np.ndim(sampling\_time)\ ==\ 0:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00161}00161\ \ \ \ \ \ \ \ \ flux\ =\ flux\ *\ sampling\_time}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00162}00162\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ st\ =\ np.array(sampling\_time).reshape(-\/1,\ 1)\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ flux\ =\ flux\ *\ st}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00166}00166\ \ \ \ \ b\ =\ flux\ /\ (secondary\_turns\ *\ effective\_area)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00167}00167\ \ \ \ \ b\_mean\ =\ np.mean(b,\ axis=1,\ keepdims=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00168}00168\ \ \ \ \ b\ =\ b\ -\/\ b\_mean}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00169}00169\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00170}00170\ \ \ \ \ \textcolor{keywordflow}{return}\ b.astype(np.float32)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00171}00171\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00172}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}{00172}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}{calculate\_magnetizing\_force}}(current,\ primary\_turns,\ effective\_length):}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00173}00173\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ Calculates\ H\ (Magnetizing\ Force).\ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00174}00174\ \ \ \ \ h\ =\ (primary\_turns\ *\ current)\ /\ effective\_length}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00175}00175\ \ \ \ \ \textcolor{keywordflow}{return}\ h.astype(np.float32)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00177}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3b6e1a1fc4cd9191d7f6963330cd6b4f}{00177}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3b6e1a1fc4cd9191d7f6963330cd6b4f}{calculate\_volumetric\_loss}}(b\_field,\ h\_field,\ frequency):}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00178}00178\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ Calculates\ Volumetric\ Power\ Loss\ (Target).\ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00179}00179\ \ \ \ \ energy\_density\ =\ trapezoid(y=h\_field,\ x=b\_field,\ axis=-\/1)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00180}00180\ \ \ \ \ energy\_density\ =\ np.abs(energy\_density)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00181}00181\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{if}\ np.ndim(frequency)\ >\ 0:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ freq\ =\ np.array(frequency).squeeze()}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00184}00184\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00185}00185\ \ \ \ \ \ \ \ \ freq\ =\ frequency}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00186}00186\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00187}00187\ \ \ \ \ pv\ =\ energy\_density\ *\ freq}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00188}00188\ \ \ \ \ \textcolor{keywordflow}{return}\ pv.astype(np.float32)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00191}00191\ \textcolor{comment}{\#\ -\/-\/-\/\ WRAPPER\ FOR\ FULL\ MagNet\ PIPELINE\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00193}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3cfbef7569b765019480a5000aca2586}{00193}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3cfbef7569b765019480a5000aca2586}{load\_config}}(config\_path):}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00194}00194\ \ \ \ \ \textcolor{keyword}{import}\ yaml}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00195}00195\ \ \ \ \ \textcolor{keyword}{with}\ open(config\_path,\ \textcolor{stringliteral}{'r'})\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00196}00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ yaml.safe\_load(f)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00198}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4bff0b7a0c8070a26001c86ed09d6b93}{00198}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4bff0b7a0c8070a26001c86ed09d6b93}{process\_magnet\_dataset}}(voltage,\ current,\ frequency,\ mag\_props,\ dt,\ model\_type='scaler',\ config\_path=None,\ extra\_features=None):}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00199}00199\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00200}00200\ \textcolor{stringliteral}{\ \ \ \ Orchestrates\ the\ physics\ calculation\ -\/>\ Feature\ Assembly\ -\/>\ Normalization.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00201}00201\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00202}00202\ \textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00203}00203\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ voltage,\ current:\ Raw\ arrays}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00204}00204\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ frequency:\ Raw\ frequency\ array}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00205}00205\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ mag\_props,\ dt:\ Constants}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00206}00206\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\_type\ (str):\ Key\ in\ config['models']\ (e.g.\ 'scaler',\ 'cnn')}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00207}00207\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ config\_path\ (str,\ optional):\ Path\ to\ config.yaml.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00208}00208\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ extra\_features\ (dict,\ optional):\ Additional\ raw\ features\ (e.g.\ \{'Temperature':\ ...,\ 'Hdc':\ ...\})}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00209}00209\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00210}00210\ \ \ \ \ norm\_config\ =\ \{\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00211}00211\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00212}00212\ \ \ \ \ \textcolor{comment}{\#\ 1.\ Load\ Config\ if\ path\ provided}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00213}00213\ \ \ \ \ \textcolor{keywordflow}{if}\ config\_path:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00214}00214\ \ \ \ \ \ \ \ \ full\_config\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3cfbef7569b765019480a5000aca2586}{load\_config}}(config\_path)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00215}00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'models'}\ \textcolor{keywordflow}{in}\ full\_config\ \textcolor{keywordflow}{and}\ model\_type\ \textcolor{keywordflow}{in}\ full\_config[\textcolor{stringliteral}{'models'}]:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ model\_conf\ =\ full\_config[\textcolor{stringliteral}{'models'}][model\_type]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'features'}\ \textcolor{keywordflow}{in}\ model\_conf:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Merge\ inputs\ and\ targets\ into\ one\ simple\ config\ dict\ for\ prepare\_dataset}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ prepare\_dataset\ expects\ \{'B':\ 'method',\ 'Loss':\ 'method'\}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ feats\ =\ model\_conf[\textcolor{stringliteral}{'features'}].get(\textcolor{stringliteral}{'inputs'},\ \{\})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targs\ =\ model\_conf[\textcolor{stringliteral}{'features'}].get(\textcolor{stringliteral}{'targets'},\ \{\})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ norm\_config\ =\ \{**feats,\ **targs\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loaded\ config\ for\ '\{model\_type\}':\ \{norm\_config\}"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}WARNING:\ No\ 'features'\ section\ found\ for\ model\ '\{model\_type\}'.\ Using\ defaults."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00226}00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}WARNING:\ Model\ '\{model\_type\}'\ not\ found\ in\ config.\ Using\ defaults."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00228}00228\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00229}00229\ \ \ \ \ \textcolor{comment}{\#\ Fallback\ default\ if\ empty}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00230}00230\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ norm\_config:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Added\ defaults\ for\ Temp/Hdc\ just\ in\ case}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00232}00232\ \ \ \ \ \ \ \ \ norm\_config\ =\ \{\textcolor{stringliteral}{'B'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'H'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'Loss'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'Frequency'}:\ \textcolor{stringliteral}{'standard'},\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Temperature'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'Hdc'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'Duty'}:\ \textcolor{stringliteral}{'standard'}\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00235}00235\ \ \ \ \ print(\textcolor{stringliteral}{"{}-\/-\/-\/\ 1.\ Physics\ Calculations\ -\/-\/-\/"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00236}00236\ \ \ \ \ B\_raw\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}{calculate\_flux\_density}}(voltage,\ dt,\ mag\_props[\textcolor{stringliteral}{'N\_sec'}],\ mag\_props[\textcolor{stringliteral}{'Ae'}])}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00237}00237\ \ \ \ \ H\_raw\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}{calculate\_magnetizing\_force}}(current,\ mag\_props[\textcolor{stringliteral}{'N\_prim'}],\ mag\_props[\textcolor{stringliteral}{'Le'}])}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00238}00238\ \ \ \ \ Loss\_raw\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3b6e1a1fc4cd9191d7f6963330cd6b4f}{calculate\_volumetric\_loss}}(B\_raw,\ H\_raw,\ frequency)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00239}00239\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00240}00240\ \ \ \ \ \textcolor{comment}{\#\ Calculate\ scalar\ properties\ (Peak-\/to-\/Peak\ /\ 2)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00241}00241\ \ \ \ \ B\_pk\ =\ (np.max(B\_raw,\ axis=1,\ keepdims=\textcolor{keyword}{True})\ -\/\ np.min(B\_raw,\ axis=1,\ keepdims=\textcolor{keyword}{True}))\ /\ 2}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00242}00242\ \ \ \ \ H\_pk\ =\ (np.max(H\_raw,\ axis=1,\ keepdims=\textcolor{keyword}{True})\ -\/\ np.min(H\_raw,\ axis=1,\ keepdims=\textcolor{keyword}{True}))\ /\ 2}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00243}00243\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00244}00244\ \ \ \ \ \textcolor{comment}{\#\ Pack\ Potential\ Features}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00245}00245\ \ \ \ \ all\_features\ =\ \{}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00246}00246\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'B'}:\ B\_raw,}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00247}00247\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'H'}:\ H\_raw,}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00248}00248\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'B\_pk'}:\ B\_pk,}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'H\_pk'}:\ H\_pk,}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Frequency'}:\ frequency.reshape(-\/1,\ 1)\ \textcolor{keywordflow}{if}\ np.ndim(frequency)\ >\ 0\ \textcolor{keywordflow}{else}\ np.full((len(B\_raw),\ 1),\ frequency)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00251}00251\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00252}00252\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00253}00253\ \ \ \ \ \textcolor{keywordflow}{if}\ extra\_features:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00254}00254\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reshape\ scalers\ if\ needed?}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Assuming\ extra\_features\ are\ (N\_exp,)\ or\ (N\_exp,\ 1)\ or\ matching\ B\_raw\ length}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00256}00256\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Let's\ ensure\ they\ are\ at\ least\ 2D\ (N,\ 1)\ if\ they\ are\ scalars\ per\ experiment}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00257}00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ k,\ v\ \textcolor{keywordflow}{in}\ extra\_features.items():}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.ndim(v)\ ==\ 1:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ all\_features[k]\ =\ v.reshape(-\/1,\ 1)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00261}00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ all\_features[k]\ =\ v}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00262}00262\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00263}00263\ \ \ \ \ all\_targets\ =\ \{}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00264}00264\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Loss'}:\ Loss\_raw}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00265}00265\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00266}00266\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00267}00267\ \ \ \ \ \textcolor{comment}{\#\ 2.\ Filter\ Features/Targets\ based\ on\ Config}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00268}00268\ \ \ \ \ \textcolor{comment}{\#\ We\ only\ include\ keys\ that\ are\ in\ the\ norm\_config}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00269}00269\ \ \ \ \ selected\_features\ =\ \{k:\ v\ \textcolor{keywordflow}{for}\ k,\ v\ \textcolor{keywordflow}{in}\ all\_features.items()\ \textcolor{keywordflow}{if}\ k\ \textcolor{keywordflow}{in}\ norm\_config\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00270}00270\ \ \ \ \ selected\_targets\ =\ \{k:\ v\ \textcolor{keywordflow}{for}\ k,\ v\ \textcolor{keywordflow}{in}\ all\_targets.items()\ \textcolor{keywordflow}{if}\ k\ \textcolor{keywordflow}{in}\ norm\_config\}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00271}00271\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00272}00272\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ selected\_features:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00273}00273\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}WARNING:\ No\ features\ selected!\ Checking\ config..."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00274}00274\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback\ to\ keeping\ all\ if\ config\ was\ malformed\ to\ avoid\ returning\ nothing}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00275}00275\ \ \ \ \ \ \ \ \ selected\_features\ =\ all\_features}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00276}00276\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00277}00277\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Selected\ Features:\ \{list(selected\_features.keys())\}"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00278}00278\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Selected\ Targets:\ \{list(selected\_targets.keys())\}"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00279}00279\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00280}00280\ \ \ \ \ print(\textcolor{stringliteral}{"{}-\/-\/-\/\ 2.\ Generic\ Normalization\ \&\ Split\ -\/-\/-\/"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00281}00281\ \ \ \ \ data\_split,\ stats\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a84f013aee5c17ec66380873ecbf8445f}{prepare\_dataset}}(selected\_features,\ selected\_targets,\ test\_ratio=0.2,\ norm\_config=norm\_config)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00282}00282\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00283}00283\ \ \ \ \ \textcolor{keywordflow}{return}\ data\_split,\ stats}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00284}00284\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00285}00285\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00286}00286\ \ \ \ \ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00287}00287\ \ \ \ \ \textcolor{keyword}{import}\ matplotlib.pyplot\ \textcolor{keyword}{as}\ plt}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00288}00288\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00289}00289\ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ data.loader\ \textcolor{keyword}{import}\ load\_full\_dataset}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00290}00290\ \ \ \ \ \textcolor{keywordflow}{except}\ ImportError:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback\ if\ running\ directly\ from\ script\ location}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00292}00292\ \ \ \ \ \ \ \ \ \textcolor{keyword}{import}\ sys}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00293}00293\ \ \ \ \ \ \ \ \ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(\_\_file\_\_),\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'})))}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00294}00294\ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader}{src.data.loader}}\ \textcolor{keyword}{import}\ load\_full\_dataset}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00296}00296\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/\ CONFIGURATION\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00297}00297\ \ \ \ \ \textcolor{comment}{\#\ Adjust\ path\ to\ where\ the\ .mat\ file\ is\ located\ relative\ to\ this\ script}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00298}00298\ \ \ \ \ \textcolor{comment}{\#\ Script\ is\ in\ Scripts/src/data}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00299}00299\ \ \ \ \ \textcolor{comment}{\#\ File\ is\ in\ Scripts/3C90\_TX-\/25-\/15-\/10\_Data1\_Cycle.mat}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00300}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{00300}}\ \ \ \ \ MAT\_FILE\_NAME\ =\ \textcolor{stringliteral}{'3C90\_TX-\/25-\/15-\/10\_Data1\_Cycle.mat'}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00301}00301\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00302}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{00302}}\ \ \ \ \ current\_dir\ =\ os.path.dirname(os.path.abspath(\_\_file\_\_))}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00303}00303\ \ \ \ \ \textcolor{comment}{\#\ Go\ up\ two\ levels\ to\ Scripts/}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00304}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}{00304}}\ \ \ \ \ data\_dir\ =\ os.path.abspath(os.path.join(current\_dir,\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'}))\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00305}00305\ \ \ \ \ \textcolor{comment}{\#\ Check\ if\ file\ exists\ there,\ or\ one\ level\ deeper\ in\ Scripts}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00306}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a9aa710813cf9cccdd625eab33f3ca563}{00306}}\ \ \ \ \ possible\_path\_1\ =\ os.path.join(data\_dir,\ MAT\_FILE\_NAME)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00307}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab18c1f18f4a69d9fd6c3aec8ed65085c}{00307}}\ \ \ \ \ possible\_path\_2\ =\ os.path.join(data\_dir,\ \textcolor{stringliteral}{'Scripts'},\ MAT\_FILE\_NAME)\ \textcolor{comment}{\#\ If\ cwd\ was\ deeper}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00308}00308\ \ \ \ \ \textcolor{comment}{\#\ Based\ on\ previous\ file\ exploration,\ it\ seems\ to\ be\ in\ 'Scripts'\ folder\ which\ is\ parent\ of\ src?}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00309}00309\ \ \ \ \ \textcolor{comment}{\#\ Actually\ user\ said\ "{}Scripts\(\backslash\)src\(\backslash\)data\(\backslash\)preprocessing.py"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00310}00310\ \ \ \ \ \textcolor{comment}{\#\ And\ file\ found\ at\ "{}Scripts\(\backslash\)3C90\_TX-\/25-\/15-\/10\_Data1\_Cycle.mat"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00311}00311\ \ \ \ \ \textcolor{comment}{\#\ So\ from\ src/data,\ we\ go\ up\ to\ src,\ then\ up\ to\ Scripts.\ -\/>\ ../..}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00312}00312\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00313}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ad38589b31bd58842a55947800239789b}{00313}}\ \ \ \ \ mat\_file\_path\ =\ os.path.abspath(os.path.join(current\_dir,\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'},\ MAT\_FILE\_NAME))}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00314}00314\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00315}00315\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Looking\ for\ data\ at:\ \{mat\_file\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00316}00316\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00317}00317\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(mat\_file\_path):}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00318}00318\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}ERROR:\ Data\ file\ not\ found\ at\ \{mat\_file\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00319}00319\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Please\ ensure\ the\ .mat\ file\ is\ in\ the\ correct\ directory."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00320}00320\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00321}00321\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Loading\ Full\ Dataset..."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00322}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{00322}}\ \ \ \ \ \ \ \ \ full\_data\ =\ load\_full\_dataset(mat\_file\_path)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00323}00323\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00324}00324\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extract\ features}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00325}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6b69238e4448b5ea0c2cbbf35979c47f}{00325}}\ \ \ \ \ \ \ \ \ volts\ =\ full\_data[\textcolor{stringliteral}{'voltage'}]\ \textcolor{comment}{\#\ (N\_exp,\ N\_samples)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00326}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8c26c60bf5709d787cd66fb117a302d9}{00326}}\ \ \ \ \ \ \ \ \ amps\ =\ full\_data[\textcolor{stringliteral}{'current'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00327}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af26152f3250702a4b01931111019e0c5}{00327}}\ \ \ \ \ \ \ \ \ freqs\ =\ full\_data[\textcolor{stringliteral}{'freq'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00328}00328\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00329}00329\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Metadata}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00330}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{00330}}\ \ \ \ \ \ \ \ \ props\ =\ \{}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_prim'}:\ full\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'N\_prim'}],}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_sec'}:\ full\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'N\_sec'}],}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Ae'}:\ full\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'Ae'}],}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Le'}:\ full\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'Le'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00335}00335\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00336}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330}{00336}}\ \ \ \ \ \ \ \ \ dt\ =\ full\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'dt'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00337}00337\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(dt,\ (list,\ np.ndarray))\ \textcolor{keywordflow}{and}\ len(dt)\ >\ 1:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ dt\ =\ dt[0]\ \textcolor{comment}{\#\ Assume\ constant\ dt\ for\ now\ or\ take\ first}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00339}00339\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00340}00340\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ Running\ Normalization\ Check\ -\/-\/-\/"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00341}00341\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Define\ a\ detailed\ config\ to\ test\ specific\ normalizations}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00342}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8dd6c815fe028469eda1f8a4ea6ddb3f}{00342}}\ \ \ \ \ \ \ \ \ config\_path\ =\ os.path.abspath(os.path.join(current\_dir,\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'config'},\ \textcolor{stringliteral}{'config.yaml'}))}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00343}00343\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00344}00344\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ can\ force\ a\ config\ here\ for\ testing\ purposes\ if\ we\ want\ to\ ensure\ 'standard'\ or\ 'minmax'}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00345}00345\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Let's\ verify\ 'standard'\ which\ is\ the\ default}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00346}00346\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00347}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}{00347}}\ \ \ \ \ \ \ \ \ split\_data,\ stats\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4bff0b7a0c8070a26001c86ed09d6b93}{process\_magnet\_dataset}}(}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ volts,\ amps,\ freqs,\ props,\ dt,\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00349}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a546ef5b271eed66755f8f8595c686a4a}{00349}}\ \ \ \ \ \ \ \ \ \ \ \ \ model\_type=\textcolor{stringliteral}{'scaler'},\ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00350}00350\ \ \ \ \ \ \ \ \ \ \ \ \ config\_path=config\_path}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00351}00351\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00352}00352\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00353}00353\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nNormalization\ Stats\ Computed:"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00354}00354\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ k,\ v\ \textcolor{keywordflow}{in}\ stats.items():}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00355}00355\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \{k\}:\ \{v\}"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00356}00356\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00357}00357\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/\ VISUALIZATION\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00358}00358\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)nPlotting\ Verification..."{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00359}00359\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00360}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{00360}}\ \ \ \ \ \ \ \ \ inputs\ =\ split\_data[\textcolor{stringliteral}{'train'}][\textcolor{stringliteral}{'inputs'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00361}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a2f8ed3af33832e2be099a7ab6210c919}{00361}}\ \ \ \ \ \ \ \ \ targets\ =\ split\_data[\textcolor{stringliteral}{'train'}][\textcolor{stringliteral}{'targets'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00362}00362\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00363}00363\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Pick\ a\ random\ experiment\ index\ from\ the\ TRAIN\ set\ range}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00364}00364\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ volts\ contains\ ALL\ data,\ but\ inputs\ contains\ only\ current\ split.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00365}00365\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ want\ to\ verify\ that\ normalized\ data\ matches\ raw\ data\ FOR\ THE\ SAME\ SAMPLE.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00366}00366\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ The\ split\ logic\ does:\ train\_part\ =\ data[:split\_idx]}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00367}00367\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ So\ inputs['B'][i]\ corresponds\ to\ volts[i]\ (and\ B\_raw[i])\ for\ i\ <\ split\_idx.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00368}00368\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00369}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af52e06ab0bf85fb402ea9e26bfa33375}{00369}}\ \ \ \ \ \ \ \ \ N\_train\ =\ len(inputs[\textcolor{stringliteral}{'B'}])\ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'B'}\ \textcolor{keywordflow}{in}\ inputs\ \textcolor{keywordflow}{else}\ len(list(inputs.values())[0])}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00370}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{00370}}\ \ \ \ \ \ \ \ \ idx\ =\ 73680}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00371}00371\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00372}00372\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Verifying\ Sample\ Inded:\ \{idx\}\ (Train\ Split)"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00373}00373\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00374}00374\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Get\ Raw\ Data\ (Corresponding\ to\ the\ same\ index\ in\ the\ original\ array,\ since\ train\ is\ the\ first\ chunk)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00375}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ac80408f309e7a21705098af0d10522eb}{00375}}\ \ \ \ \ \ \ \ \ raw\_v\ =\ volts[idx]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00376}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6ba3896be6c71afcf461900cac1b2a11}{00376}}\ \ \ \ \ \ \ \ \ raw\_i\ =\ amps[idx]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00377}00377\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00378}00378\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Get\ Normalized\ Data}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00379}00379\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Note:\ process\_magnet\_dataset\ creates\ features\ B\ and\ H.\ }}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00380}00380\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ But\ 'voltage'\ and\ 'current'\ themselves\ might\ not\ be\ in\ the\ output\ unless\ requested.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00381}00381\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ The\ default\ config\ usually\ asks\ for\ B,\ H,\ Loss.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00382}00382\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Let's\ inspect\ what's\ in\ split\_data}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00383}00383\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00384}00384\ \ \ \ \ \ \ \ \ inputs\ =\ split\_data[\textcolor{stringliteral}{'train'}][\textcolor{stringliteral}{'inputs'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00385}00385\ \ \ \ \ \ \ \ \ targets\ =\ split\_data[\textcolor{stringliteral}{'train'}][\textcolor{stringliteral}{'targets'}]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00386}00386\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00387}00387\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ If\ B\ and\ H\ are\ there,\ let's\ plot\ those\ vs\ raw\ Voltage/Current\ (shape-\/wise\ comparison)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00388}00388\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Or\ better,\ let's\ reconstruct\ B/H\ manually\ to\ compare\ apples\ to\ apples.}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00389}00389\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00390}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a713428b99171b0c68757c056b092e1ea}{00390}}\ \ \ \ \ \ \ \ \ B\_norm\ =\ inputs[\textcolor{stringliteral}{'B'}][idx]\ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'B'}\ \textcolor{keywordflow}{in}\ inputs\ \textcolor{keywordflow}{else}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00391}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a43df187d3d218aa26b00bf2aba674580}{00391}}\ \ \ \ \ \ \ \ \ H\_norm\ =\ inputs[\textcolor{stringliteral}{'H'}][idx]\ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'H'}\ \textcolor{keywordflow}{in}\ inputs\ \textcolor{keywordflow}{else}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00392}00392\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00393}00393\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Calculate\ Raw\ B/H\ for\ comparison}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00394}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a376e5f4d2451407dda1a6dac62031072}{00394}}\ \ \ \ \ \ \ \ \ B\_raw\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}{calculate\_flux\_density}}(raw\_v.reshape(1,\ -\/1),\ dt,\ props[\textcolor{stringliteral}{'N\_sec'}],\ props[\textcolor{stringliteral}{'Ae'}]).flatten()}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00395}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ac0b8b7e99f204297407afffe99987a00}{00395}}\ \ \ \ \ \ \ \ \ H\_raw\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}{calculate\_magnetizing\_force}}(raw\_i.reshape(1,\ -\/1),\ props[\textcolor{stringliteral}{'N\_prim'}],\ props[\textcolor{stringliteral}{'Le'}]).flatten()}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00396}00396\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00397}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4360bdf792033574f76644feaf8f60c}{00397}}\ \ \ \ \ \ \ \ \ fig,\ axes\ =\ plt.subplots(2,\ 2,\ figsize=(12,\ 10))}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00398}00398\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00399}00399\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Plot\ 1:\ Flux\ Density\ (B)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00400}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a15f9ffafb007492caaa7769ed638117d}{00400}}\ \ \ \ \ \ \ \ \ ax\ =\ axes[0,\ 0]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00401}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af33201b48098689fcd6c06c9d3110501}{00401}}\ \ \ \ \ \ \ \ \ ax.plot(B\_raw,\ label=\textcolor{stringliteral}{'Raw\ Calculated\ B'},\ color=\textcolor{stringliteral}{'blue'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00402}00402\ \ \ \ \ \ \ \ \ ax.set\_title(f\textcolor{stringliteral}{'Raw\ Flux\ Density\ (Exp\ \{idx\})'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00403}00403\ \ \ \ \ \ \ \ \ ax.grid(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00404}00404\ \ \ \ \ \ \ \ \ ax.legend()}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00405}00405\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00406}00406\ \ \ \ \ \ \ \ \ ax\ =\ axes[0,\ 1]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00407}00407\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ B\_norm\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00408}00408\ \ \ \ \ \ \ \ \ \ \ \ \ ax.plot(B\_norm,\ label=\textcolor{stringliteral}{'Normalized\ B'},\ color=\textcolor{stringliteral}{'orange'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00409}00409\ \ \ \ \ \ \ \ \ \ \ \ \ ax.set\_title(f\textcolor{stringliteral}{'Normalized\ B\ (Method:\ \{stats["{}B"{}].get("{}mean"{},\ "{}N/A"{})\ if\ "{}B"{}\ in\ stats\ else\ "{}Unknown"{}\})'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00410}00410\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Add\ text\ for\ stats}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00411}00411\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'B'}\ \textcolor{keywordflow}{in}\ stats:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00412}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aef56d257937ab4e2a7ae70154e50bb44}{00412}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ txt\ =\ f\textcolor{stringliteral}{"{}Mean:\ \{stats['B'].get('mean',\ 0):.2e\}\(\backslash\)nStd:\ \{stats['B'].get('std',\ 1):.2e\}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00413}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a32d2404c107da962891d072caab44cc9}{00413}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ax.text(0.05,\ 0.95,\ txt,\ transform=ax.transAxes,\ verticalalignment=\textcolor{stringliteral}{'top'},\ bbox=dict(boxstyle=\textcolor{stringliteral}{'round'},\ facecolor=\textcolor{stringliteral}{'white'},\ alpha=0.5))}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00414}00414\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00415}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ac7809073c7e93974cd000ea8e1b50566}{00415}}\ \ \ \ \ \ \ \ \ \ \ \ \ ax.text(0.5,\ 0.5,\ \textcolor{stringliteral}{"{}B\ not\ in\ output\ features"{}},\ ha=\textcolor{stringliteral}{'center'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00416}00416\ \ \ \ \ \ \ \ \ ax.grid(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00417}00417\ \ \ \ \ \ \ \ \ ax.legend()}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00418}00418\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00419}00419\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Plot\ 2:\ Magnetizing\ Force\ (H)}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00420}00420\ \ \ \ \ \ \ \ \ ax\ =\ axes[1,\ 0]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00421}00421\ \ \ \ \ \ \ \ \ ax.plot(H\_raw,\ label=\textcolor{stringliteral}{'Raw\ Calculated\ H'},\ color=\textcolor{stringliteral}{'green'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00422}00422\ \ \ \ \ \ \ \ \ ax.set\_title(f\textcolor{stringliteral}{'Raw\ Magnetizing\ Force\ (Exp\ \{idx\})'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00423}00423\ \ \ \ \ \ \ \ \ ax.grid(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00424}00424\ \ \ \ \ \ \ \ \ ax.legend()}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00425}00425\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00426}00426\ \ \ \ \ \ \ \ \ ax\ =\ axes[1,\ 1]}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00427}00427\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ H\_norm\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00428}00428\ \ \ \ \ \ \ \ \ \ \ \ \ ax.plot(H\_norm,\ label=\textcolor{stringliteral}{'Normalized\ H'},\ color=\textcolor{stringliteral}{'red'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00429}00429\ \ \ \ \ \ \ \ \ \ \ \ \ ax.set\_title(\textcolor{stringliteral}{'Normalized\ H'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00430}00430\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Add\ text\ for\ stats}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00431}00431\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'H'}\ \textcolor{keywordflow}{in}\ stats:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00432}00432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ txt\ =\ f\textcolor{stringliteral}{"{}Mean:\ \{stats['H'].get('mean',\ 0):.2e\}\(\backslash\)nStd:\ \{stats['H'].get('std',\ 1):.2e\}"{}}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00433}00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ax.text(0.05,\ 0.95,\ txt,\ transform=ax.transAxes,\ verticalalignment=\textcolor{stringliteral}{'top'},\ bbox=dict(boxstyle=\textcolor{stringliteral}{'round'},\ facecolor=\textcolor{stringliteral}{'white'},\ alpha=0.5))}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00434}00434\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ ax.text(0.5,\ 0.5,\ \textcolor{stringliteral}{"{}H\ not\ in\ output\ features"{}},\ ha=\textcolor{stringliteral}{'center'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00436}00436\ \ \ \ \ \ \ \ \ ax.grid(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00437}00437\ \ \ \ \ \ \ \ \ ax.legend()}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00438}00438\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00439}00439\ \ \ \ \ \ \ \ \ plt.tight\_layout()}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00440}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ad7274507e2fa183880a7e9e36b8280e0}{00440}}\ \ \ \ \ \ \ \ \ save\_path\ =\ os.path.join(current\_dir,\ \textcolor{stringliteral}{'normalization\_check.png'})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00441}00441\ \ \ \ \ \ \ \ \ plt.savefig(save\_path)}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00442}00442\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Plot\ saved\ to:\ \{save\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00443}00443\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ plt.show()\ \#\ Comment\ out\ for\ headless\ environments}}
+\DoxyCodeLine{\Hypertarget{preprocessing_8py_source_l00444}00444\ }
+
+\end{DoxyCode}

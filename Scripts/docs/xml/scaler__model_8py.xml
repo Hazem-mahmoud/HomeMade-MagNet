@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="scaler__model_8py" kind="file" language="Python">
+    <compoundname>scaler_model.py</compoundname>
+    <innerclass refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network" prot="public">src::models::scaler_model::ScalerNetwork</innerclass>
+    <innernamespace refid="namespacesrc">src</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models">src::models</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models_1_1scaler__model">src::models::scaler_model</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="namespacesrc_1_1models_1_1scaler__model" refkind="compound"><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="2"><highlight class="stringliteral">Scaler-to-Scaler<sp/>Model.</highlight></codeline>
+<codeline lineno="3"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="4"><highlight class="stringliteral">This<sp/>module<sp/>implements<sp/>a<sp/>standard<sp/>Multi-Layer<sp/>Perceptron<sp/>(MLP)<sp/>for<sp/>predicting</highlight></codeline>
+<codeline lineno="5"><highlight class="stringliteral">scalar<sp/>outputs<sp/>(e.g.,<sp/>Power<sp/>Loss)<sp/>from<sp/>scalar<sp/>inputs<sp/>(Frequency,<sp/>Temperature,<sp/>Hdc).</highlight></codeline>
+<codeline lineno="6"><highlight class="stringliteral">&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>torch</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>torch.nn<sp/></highlight><highlight class="keyword">as</highlight><highlight class="normal"><sp/>nn</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network" kindref="compound">ScalerNetwork</ref>(nn.Module):</highlight></codeline>
+<codeline lineno="12" refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ab6a59b3ed09285fe7d392e80dd380d79" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ab6a59b3ed09285fe7d392e80dd380d79" kindref="member">__init__</ref>(self,<sp/>input_dim=3,<sp/>hidden_dim=64,<sp/>output_dim=1,<sp/>num_layers=3):</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="14"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Args:</highlight></codeline>
+<codeline lineno="15"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>input_dim<sp/>(int):<sp/>Number<sp/>of<sp/>input<sp/>features<sp/>(default<sp/>3:<sp/>Freq,<sp/>Temp,<sp/>Hdc).</highlight></codeline>
+<codeline lineno="16"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hidden_dim<sp/>(int):<sp/>Number<sp/>of<sp/>neurons<sp/>in<sp/>hidden<sp/>layers.</highlight></codeline>
+<codeline lineno="17"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>output_dim<sp/>(int):<sp/>Number<sp/>of<sp/>output<sp/>features<sp/>(default<sp/>1:<sp/>Power<sp/>Loss).</highlight></codeline>
+<codeline lineno="18"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_layers<sp/>(int):<sp/>Number<sp/>of<sp/>hidden<sp/>layers.</highlight></codeline>
+<codeline lineno="19"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>super(ScalerNetwork,<sp/>self).<ref refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ab6a59b3ed09285fe7d392e80dd380d79" kindref="member">__init__</ref>()</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layers<sp/>=<sp/>[]</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Input<sp/>Layer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layers.append(nn.Linear(input_dim,<sp/>hidden_dim))</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layers.append(nn.ReLU())</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layers.append(nn.BatchNorm1d(hidden_dim))</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Hidden<sp/>Layers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>_<sp/></highlight><highlight class="keywordflow">in</highlight><highlight class="normal"><sp/>range(num_layers<sp/>-<sp/>1):</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layers.append(nn.Linear(hidden_dim,<sp/>hidden_dim))</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layers.append(nn.ReLU())</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layers.append(nn.BatchNorm1d(hidden_dim))</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Output<sp/>Layer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>layers.append(nn.Linear(hidden_dim,<sp/>output_dim))</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="38" refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ad0e0ef26c530ebc22eeb97a54c08900d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>self.<ref refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ad0e0ef26c530ebc22eeb97a54c08900d" kindref="member">model</ref><sp/>=<sp/>nn.Sequential(*layers)</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="40" refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1a7dd561364d8c5009fd360aa6e28be1ce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1a7dd561364d8c5009fd360aa6e28be1ce" kindref="member">forward</ref>(self,<sp/>x):</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>self.<ref refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ad0e0ef26c530ebc22eeb97a54c08900d" kindref="member">model</ref>(x)</highlight></codeline>
+    </programlisting>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py"/>
+  </compounddef>
+</doxygen>

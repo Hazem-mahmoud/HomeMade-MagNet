@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
+    <compoundname>D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src</compoundname>
+    <innerdir refid="dir_c1be8d27e7f84178e95f152701110b19">D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data</innerdir>
+    <innerdir refid="dir_bdeba5f06b852fec80257c0bf4c3c36e">D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models</innerdir>
+    <innerdir refid="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7">D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training</innerdir>
+    <innerdir refid="dir_313caf1132e152dd9b58bea13a4052ca">D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils</innerdir>
+    <innerfile refid="____init_____8py">__init__.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/"/>
+  </compounddef>
+</doxygen>

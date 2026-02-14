@@ -1,0 +1,133 @@
+\doxysection{src.\+utils.\+visualization Namespace Reference}
+\hypertarget{namespacesrc_1_1utils_1_1visualization}{}\label{namespacesrc_1_1utils_1_1visualization}\index{src.utils.visualization@{src.utils.visualization}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization_a1f8a76623215976799986570af4d723f}{plot\+\_\+loss\+\_\+curve}} (history, title=\textquotesingle{}Training History\textquotesingle{}, save\+\_\+path=None)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization_a9600ff5011cb5c64d0acc73608a1d9d8}{plot\+\_\+prediction\+\_\+scatter}} (preds, targets, title=\textquotesingle{}Predictions vs Actuals\textquotesingle{}, save\+\_\+path=None)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization_aca85b5a75300044725bde9ca69d1c719}{plot\+\_\+bh\+\_\+loop}} (pred\+\_\+b, pred\+\_\+h, actual\+\_\+b, actual\+\_\+h, title=\textquotesingle{}B-\/H Loop Comparison\textquotesingle{}, save\+\_\+path=None)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Visualization Module.
+
+This module provides plotting functions for inspecting model performance.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacesrc_1_1utils_1_1visualization_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacesrc_1_1utils_1_1visualization_aca85b5a75300044725bde9ca69d1c719}\index{src.utils.visualization@{src.utils.visualization}!plot\_bh\_loop@{plot\_bh\_loop}}
+\index{plot\_bh\_loop@{plot\_bh\_loop}!src.utils.visualization@{src.utils.visualization}}
+\doxysubsubsection{\texorpdfstring{plot\_bh\_loop()}{plot\_bh\_loop()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1utils_1_1visualization_aca85b5a75300044725bde9ca69d1c719} 
+src.\+utils.\+visualization.\+plot\+\_\+bh\+\_\+loop (\begin{DoxyParamCaption}\item[{}]{pred\+\_\+b}{, }\item[{}]{pred\+\_\+h}{, }\item[{}]{actual\+\_\+b}{, }\item[{}]{actual\+\_\+h}{, }\item[{}]{title}{ = {\ttfamily \textquotesingle{}B-\/H~Loop~Comparison\textquotesingle{}}, }\item[{}]{save\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Plots predicted vs actual B-H loop.
+Args: (Seq_Len,) arrays.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{visualization_8py_source_l00052}{52}} of file \doxymbox{\hyperlink{visualization_8py_source}{visualization.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00052\ \textcolor{keyword}{def\ }plot\_bh\_loop(pred\_b,\ pred\_h,\ actual\_b,\ actual\_h,\ title='B-\/H\ Loop\ Comparison',\ save\_path=None): }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00054\ \textcolor{stringliteral}{\ \ \ \ Plots\ predicted\ vs\ actual\ B-\/H\ loop. }}
+\DoxyCodeLine{00055\ \textcolor{stringliteral}{\ \ \ \ Args:\ (Seq\_Len,)\ arrays. }}
+\DoxyCodeLine{00056\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00057\ \ \ \ \ plt.figure(figsize=(8,\ 6)) }
+\DoxyCodeLine{00058\ \ \ \ \ plt.plot(actual\_h,\ actual\_b,\ \textcolor{stringliteral}{'b-\/'},\ label=\textcolor{stringliteral}{'Actual'},\ linewidth=2) }
+\DoxyCodeLine{00059\ \ \ \ \ plt.plot(pred\_h,\ pred\_b,\ \textcolor{stringliteral}{'r-\/-\/'},\ label=\textcolor{stringliteral}{'Predicted'},\ linewidth=2) }
+\DoxyCodeLine{00060\ \ \ \ \ plt.xlabel(\textcolor{stringliteral}{'H\ (A/m)'}) }
+\DoxyCodeLine{00061\ \ \ \ \ plt.ylabel(\textcolor{stringliteral}{'B\ (T)'}) }
+\DoxyCodeLine{00062\ \ \ \ \ plt.title(title) }
+\DoxyCodeLine{00063\ \ \ \ \ plt.legend() }
+\DoxyCodeLine{00064\ \ \ \ \ plt.grid(\textcolor{keyword}{True}) }
+\DoxyCodeLine{00065\ \ \ \ \  }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{if}\ save\_path: }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ plt.savefig(save\_path) }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ plt.close() }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ plt.show() }
+
+\end{DoxyCode}
+\Hypertarget{namespacesrc_1_1utils_1_1visualization_a1f8a76623215976799986570af4d723f}\index{src.utils.visualization@{src.utils.visualization}!plot\_loss\_curve@{plot\_loss\_curve}}
+\index{plot\_loss\_curve@{plot\_loss\_curve}!src.utils.visualization@{src.utils.visualization}}
+\doxysubsubsection{\texorpdfstring{plot\_loss\_curve()}{plot\_loss\_curve()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1utils_1_1visualization_a1f8a76623215976799986570af4d723f} 
+src.\+utils.\+visualization.\+plot\+\_\+loss\+\_\+curve (\begin{DoxyParamCaption}\item[{}]{history}{, }\item[{}]{title}{ = {\ttfamily \textquotesingle{}Training~History\textquotesingle{}}, }\item[{}]{save\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Plots Train vs Val Loss.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{visualization_8py_source_l00010}{10}} of file \doxymbox{\hyperlink{visualization_8py_source}{visualization.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \textcolor{keyword}{def\ }plot\_loss\_curve(history,\ title='Training\ History',\ save\_path=None): }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{\ \ \ \ Plots\ Train\ vs\ Val\ Loss. }}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00014\ \ \ \ \ plt.figure(figsize=(10,\ 6)) }
+\DoxyCodeLine{00015\ \ \ \ \ plt.plot(history[\textcolor{stringliteral}{'train\_loss'}],\ label=\textcolor{stringliteral}{'Train\ Loss'},\ marker=\textcolor{stringliteral}{'o'}) }
+\DoxyCodeLine{00016\ \ \ \ \ plt.plot(history[\textcolor{stringliteral}{'val\_loss'}],\ label=\textcolor{stringliteral}{'Val\ Loss'},\ marker=\textcolor{stringliteral}{'o'}) }
+\DoxyCodeLine{00017\ \ \ \ \ plt.xlabel(\textcolor{stringliteral}{'Epochs'}) }
+\DoxyCodeLine{00018\ \ \ \ \ plt.ylabel(\textcolor{stringliteral}{'Loss\ (MSE)'}) }
+\DoxyCodeLine{00019\ \ \ \ \ plt.title(title) }
+\DoxyCodeLine{00020\ \ \ \ \ plt.legend() }
+\DoxyCodeLine{00021\ \ \ \ \ plt.grid(\textcolor{keyword}{True}) }
+\DoxyCodeLine{00022\ \ \ \ \  }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{if}\ save\_path: }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ plt.savefig(save\_path) }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ plt.close() }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ plt.show() }
+\DoxyCodeLine{00028\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacesrc_1_1utils_1_1visualization_a9600ff5011cb5c64d0acc73608a1d9d8}\index{src.utils.visualization@{src.utils.visualization}!plot\_prediction\_scatter@{plot\_prediction\_scatter}}
+\index{plot\_prediction\_scatter@{plot\_prediction\_scatter}!src.utils.visualization@{src.utils.visualization}}
+\doxysubsubsection{\texorpdfstring{plot\_prediction\_scatter()}{plot\_prediction\_scatter()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1utils_1_1visualization_a9600ff5011cb5c64d0acc73608a1d9d8} 
+src.\+utils.\+visualization.\+plot\+\_\+prediction\+\_\+scatter (\begin{DoxyParamCaption}\item[{}]{preds}{, }\item[{}]{targets}{, }\item[{}]{title}{ = {\ttfamily \textquotesingle{}Predictions~vs~Actuals\textquotesingle{}}, }\item[{}]{save\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Scatter plot for scalar regression.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{visualization_8py_source_l00029}{29}} of file \doxymbox{\hyperlink{visualization_8py_source}{visualization.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00029\ \textcolor{keyword}{def\ }plot\_prediction\_scatter(preds,\ targets,\ title='Predictions\ vs\ Actuals',\ save\_path=None): }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00031\ \textcolor{stringliteral}{\ \ \ \ Scatter\ plot\ for\ scalar\ regression. }}
+\DoxyCodeLine{00032\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00033\ \ \ \ \ plt.figure(figsize=(8,\ 8)) }
+\DoxyCodeLine{00034\ \ \ \ \ plt.scatter(targets,\ preds,\ alpha=0.5) }
+\DoxyCodeLine{00035\ \ \ \ \  }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{\#\ Perfect\ line }}
+\DoxyCodeLine{00037\ \ \ \ \ min\_val\ =\ min(np.min(targets),\ np.min(preds)) }
+\DoxyCodeLine{00038\ \ \ \ \ max\_val\ =\ max(np.max(targets),\ np.max(preds)) }
+\DoxyCodeLine{00039\ \ \ \ \ plt.plot([min\_val,\ max\_val],\ [min\_val,\ max\_val],\ \textcolor{stringliteral}{'r-\/-\/'}) }
+\DoxyCodeLine{00040\ \ \ \ \  }
+\DoxyCodeLine{00041\ \ \ \ \ plt.xlabel(\textcolor{stringliteral}{'Actual'}) }
+\DoxyCodeLine{00042\ \ \ \ \ plt.ylabel(\textcolor{stringliteral}{'Predicted'}) }
+\DoxyCodeLine{00043\ \ \ \ \ plt.title(title) }
+\DoxyCodeLine{00044\ \ \ \ \ plt.grid(\textcolor{keyword}{True}) }
+\DoxyCodeLine{00045\ \ \ \ \  }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{if}\ save\_path: }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ plt.savefig(save\_path) }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ plt.close() }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ plt.show() }
+\DoxyCodeLine{00051\ \ \ \ \  }
+
+\end{DoxyCode}

@@ -1,0 +1,175 @@
+\doxysection{src.\+models.\+cnn\+\_\+model.\+CNNNetwork Class Reference}
+\hypertarget{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network}{}\label{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network}\index{src.models.cnn\_model.CNNNetwork@{src.models.cnn\_model.CNNNetwork}}
+
+
+Inheritance diagram for src.\+models.\+cnn\+\_\+model.\+CNNNetwork:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+models.\+cnn\+\_\+model.\+CNNNetwork:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_a0f0fa278a2ff3da9ba52ec7e25b5b1c4}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, input\+\_\+dim=1, hidden\+\_\+dim=32, output\+\_\+dim=1, stats=None)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_a9082ef649d9cc32ae3291f6141707de2}{forward}} (self, b\+\_\+seq, scalars)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_ad274760febb1e62cc34bc77a87eb609a}{tcn}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_ae653849afe0c39a658ebeb0cfbe1adc5}{model}} = \doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor}{Loss\+Predictor}}(self.\+tcn)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00253}{253}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_a0f0fa278a2ff3da9ba52ec7e25b5b1c4}\index{src.models.cnn\_model.CNNNetwork@{src.models.cnn\_model.CNNNetwork}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.models.cnn\_model.CNNNetwork@{src.models.cnn\_model.CNNNetwork}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_a0f0fa278a2ff3da9ba52ec7e25b5b1c4} 
+src.\+models.\+cnn\+\_\+model.\+CNNNetwork.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{input\+\_\+dim}{ = {\ttfamily 1}, }\item[{}]{hidden\+\_\+dim}{ = {\ttfamily 32}, }\item[{}]{output\+\_\+dim}{ = {\ttfamily 1}, }\item[{}]{stats}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00254}{254}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ input\_dim=1,\ hidden\_dim=32,\ output\_dim=1,\ stats=None): }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ super(CNNNetwork,\ self).\_\_init\_\_() }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Save\ stats\ for\ de-\/normalization }}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Defaults\ if\ not\ provided\ (avoid\ crash,\ but\ won't\ be\ accurate) }}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ stats\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ stats\ =\ \{\textcolor{stringliteral}{'freq\_mean'}:\ 100000.0,\ \textcolor{stringliteral}{'freq\_std'}:\ 50000.0\} }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ self.register\_buffer(\textcolor{stringliteral}{'freq\_mean'},\ torch.tensor(stats.get(\textcolor{stringliteral}{'freq\_mean'},\ 100000.0))) }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ self.register\_buffer(\textcolor{stringliteral}{'freq\_std'},\ torch.tensor(stats.get(\textcolor{stringliteral}{'freq\_std'},\ 50000.0))) }
+\DoxyCodeLine{00264\  }
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ self.tcn\ =\ TCNWithScalarsAsBias( }
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ num\_input\_scalars=3, }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ num\_input\_ts=input\_dim }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ self.model\ =\ LossPredictor(self.tcn) }
+\DoxyCodeLine{00270\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00254}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00254}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_a0f0fa278a2ff3da9ba52ec7e25b5b1c4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_a0f0fa278a2ff3da9ba52ec7e25b5b1c4_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_a9082ef649d9cc32ae3291f6141707de2}\index{src.models.cnn\_model.CNNNetwork@{src.models.cnn\_model.CNNNetwork}!forward@{forward}}
+\index{forward@{forward}!src.models.cnn\_model.CNNNetwork@{src.models.cnn\_model.CNNNetwork}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_a9082ef649d9cc32ae3291f6141707de2} 
+src.\+models.\+cnn\+\_\+model.\+CNNNetwork.\+forward (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{b\+\_\+seq}{, }\item[{}]{scalars}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00271}{271}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keyword}{def\ }forward(self,\ b\_seq,\ scalars): }
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ b\_seq:\ (Batch,\ Seq,\ 1)\ -\/>\ TCN\ wants\ (Batch,\ Channels,\ Seq) }}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ x\_ts\ =\ b\_seq.permute(0,\ 2,\ 1) }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ stats\ =\ \{\textcolor{stringliteral}{'freq\_mean'}:\ self.freq\_mean,\ \textcolor{stringliteral}{'freq\_std'}:\ self.freq\_std\} }
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.model(x\_ts,\ scalars,\ stats) }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00269}{model}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_ae653849afe0c39a658ebeb0cfbe1adc5}\index{src.models.cnn\_model.CNNNetwork@{src.models.cnn\_model.CNNNetwork}!model@{model}}
+\index{model@{model}!src.models.cnn\_model.CNNNetwork@{src.models.cnn\_model.CNNNetwork}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_ae653849afe0c39a658ebeb0cfbe1adc5} 
+src.\+models.\+cnn\+\_\+model.\+CNNNetwork.\+model = \doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor}{Loss\+Predictor}}(self.\+tcn)}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00269}{269}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00271}{forward()}}, and \doxymbox{\hyperlink{scaler__model_8py_source_l00040}{src.\+models.\+scaler\+\_\+model.\+Scaler\+Network.\+forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_ad274760febb1e62cc34bc77a87eb609a}\index{src.models.cnn\_model.CNNNetwork@{src.models.cnn\_model.CNNNetwork}!tcn@{tcn}}
+\index{tcn@{tcn}!src.models.cnn\_model.CNNNetwork@{src.models.cnn\_model.CNNNetwork}}
+\doxysubsubsection{\texorpdfstring{tcn}{tcn}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_ad274760febb1e62cc34bc77a87eb609a} 
+src.\+models.\+cnn\+\_\+model.\+CNNNetwork.\+tcn}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ TCNWithScalarsAsBias(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ num\_input\_scalars=3,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ num\_input\_ts=input\_dim}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00265}{265}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+models/\+\doxymbox{\hyperlink{cnn__model_8py}{cnn\+\_\+model.\+py}}\end{DoxyCompactItemize}

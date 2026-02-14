@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias" kind="class" language="Python" prot="public">
+    <compoundname>src::models::cnn_model::TCNWithScalarsAsBias</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a66ec7ecf8c1baa9d2141163dc252907d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TCNWithScalarsAsBias::num_input_ts</definition>
+        <argsstring></argsstring>
+        <name>num_input_ts</name>
+        <qualifiedname>src.models.cnn_model.TCNWithScalarsAsBias.num_input_ts</qualifiedname>
+        <initializer>=  num_input_ts</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="133" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a57181b2e0b404a5b7401db5ecfb0892b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TCNWithScalarsAsBias::num_input_scalar</definition>
+        <argsstring></argsstring>
+        <name>num_input_scalar</name>
+        <qualifiedname>src.models.cnn_model.TCNWithScalarsAsBias.num_input_scalar</qualifiedname>
+        <initializer>=  num_input_scalars</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="134" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1aafc0e134fc543f59048fdda9b7f32eec" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TCNWithScalarsAsBias::ts_branch</definition>
+        <argsstring></argsstring>
+        <name>ts_branch</name>
+        <qualifiedname>src.models.cnn_model.TCNWithScalarsAsBias.ts_branch</qualifiedname>
+        <initializer>=  cnn_layers.pop()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="172" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="172" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1ac1b77571f9ee1b73882fca73c1ad15b3" compoundref="cnn__model_8py" startline="184" endline="199">src.models.cnn_model.TCNWithScalarsAsBias.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a3656b584a4a02a421e5e1e87931f8fd8" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TCNWithScalarsAsBias::upper_tcn</definition>
+        <argsstring></argsstring>
+        <name>upper_tcn</name>
+        <qualifiedname>src.models.cnn_model.TCNWithScalarsAsBias.upper_tcn</qualifiedname>
+        <initializer>=  nn.Sequential(*cnn_layers)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="173" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="173" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1ac1b77571f9ee1b73882fca73c1ad15b3" compoundref="cnn__model_8py" startline="184" endline="199">src.models.cnn_model.TCNWithScalarsAsBias.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a3a0143ea0c4eb0109828f50c58c62164" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.TCNWithScalarsAsBias::scalar_branch</definition>
+        <argsstring></argsstring>
+        <name>scalar_branch</name>
+        <qualifiedname>src.models.cnn_model.TCNWithScalarsAsBias.scalar_branch</qualifiedname>
+        <initializer>=  nn.Sequential(*scalar_layers)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="182" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="182" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1ac1b77571f9ee1b73882fca73c1ad15b3" compoundref="cnn__model_8py" startline="184" endline="199">src.models.cnn_model.TCNWithScalarsAsBias.forward</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a24ad8a51da91c591d2d7ac1c49e1e116" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.TCNWithScalarsAsBias.__init__</definition>
+        <argsstring>(self, num_input_scalars, num_input_ts=1, tcn_layer_cfg=None, scalar_layer_cfg=None)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.cnn_model.TCNWithScalarsAsBias.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>num_input_scalars</type>
+          <defname>num_input_scalars</defname>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a66ec7ecf8c1baa9d2141163dc252907d" kindref="member">num_input_ts</ref></type>
+          <defname>num_input_ts</defname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>tcn_layer_cfg</type>
+          <defname>tcn_layer_cfg</defname>
+          <defval>None</defval>
+        </param>
+        <param>
+          <type>scalar_layer_cfg</type>
+          <defname>scalar_layer_cfg</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="125" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="131" bodyend="183"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a24ad8a51da91c591d2d7ac1c49e1e116" compoundref="cnn__model_8py" startline="131" endline="183">src.models.cnn_model.TCNWithScalarsAsBias.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a24ad8a51da91c591d2d7ac1c49e1e116" compoundref="cnn__model_8py" startline="131" endline="183">src.models.cnn_model.TCNWithScalarsAsBias.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1ac1b77571f9ee1b73882fca73c1ad15b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.TCNWithScalarsAsBias.forward</definition>
+        <argsstring>(self, x_ts, x_scalars)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.cnn_model.TCNWithScalarsAsBias.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>x_ts</type>
+          <defname>x_ts</defname>
+        </param>
+        <param>
+          <type>x_scalars</type>
+          <defname>x_scalars</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>x_ts has shape (#batch, #channels, #length)</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="184" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="184" bodyend="199"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a3a0143ea0c4eb0109828f50c58c62164" compoundref="cnn__model_8py" startline="182">src.models.cnn_model.TCNWithScalarsAsBias.scalar_branch</references>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1aafc0e134fc543f59048fdda9b7f32eec" compoundref="cnn__model_8py" startline="172">src.models.cnn_model.TCNWithScalarsAsBias.ts_branch</references>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a3656b584a4a02a421e5e1e87931f8fd8" compoundref="cnn__model_8py" startline="173">src.models.cnn_model.TCNWithScalarsAsBias.upper_tcn</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.TCNWithScalarsAsBias</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.TCNWithScalarsAsBias</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="124" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="124" bodyend="199"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a24ad8a51da91c591d2d7ac1c49e1e116" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TCNWithScalarsAsBias</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1ac1b77571f9ee1b73882fca73c1ad15b3" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TCNWithScalarsAsBias</scope><name>forward</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a57181b2e0b404a5b7401db5ecfb0892b" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TCNWithScalarsAsBias</scope><name>num_input_scalar</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a66ec7ecf8c1baa9d2141163dc252907d" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TCNWithScalarsAsBias</scope><name>num_input_ts</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a3a0143ea0c4eb0109828f50c58c62164" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TCNWithScalarsAsBias</scope><name>scalar_branch</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1aafc0e134fc543f59048fdda9b7f32eec" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TCNWithScalarsAsBias</scope><name>ts_branch</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a3656b584a4a02a421e5e1e87931f8fd8" prot="public" virt="non-virtual"><scope>src::models::cnn_model::TCNWithScalarsAsBias</scope><name>upper_tcn</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

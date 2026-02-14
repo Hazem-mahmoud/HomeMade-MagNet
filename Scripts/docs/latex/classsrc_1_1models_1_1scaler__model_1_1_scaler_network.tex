@@ -1,0 +1,167 @@
+\doxysection{src.\+models.\+scaler\+\_\+model.\+Scaler\+Network Class Reference}
+\hypertarget{classsrc_1_1models_1_1scaler__model_1_1_scaler_network}{}\label{classsrc_1_1models_1_1scaler__model_1_1_scaler_network}\index{src.models.scaler\_model.ScalerNetwork@{src.models.scaler\_model.ScalerNetwork}}
+
+
+Inheritance diagram for src.\+models.\+scaler\+\_\+model.\+Scaler\+Network:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classsrc_1_1models_1_1scaler__model_1_1_scaler_network__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+models.\+scaler\+\_\+model.\+Scaler\+Network:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classsrc_1_1models_1_1scaler__model_1_1_scaler_network__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ab6a59b3ed09285fe7d392e80dd380d79}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, input\+\_\+dim=3, hidden\+\_\+dim=64, output\+\_\+dim=1, num\+\_\+layers=3)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_a7dd561364d8c5009fd360aa6e28be1ce}{forward}} (self, x)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ad0e0ef26c530ebc22eeb97a54c08900d}{model}} = nn.\+Sequential(\texorpdfstring{$\ast$}{*}layers)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{scaler__model_8py_source_l00011}{11}} of file \doxymbox{\hyperlink{scaler__model_8py_source}{scaler\+\_\+model.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ab6a59b3ed09285fe7d392e80dd380d79}\index{src.models.scaler\_model.ScalerNetwork@{src.models.scaler\_model.ScalerNetwork}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.models.scaler\_model.ScalerNetwork@{src.models.scaler\_model.ScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ab6a59b3ed09285fe7d392e80dd380d79} 
+src.\+models.\+scaler\+\_\+model.\+Scaler\+Network.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{input\+\_\+dim}{ = {\ttfamily 3}, }\item[{}]{hidden\+\_\+dim}{ = {\ttfamily 64}, }\item[{}]{output\+\_\+dim}{ = {\ttfamily 1}, }\item[{}]{num\+\_\+layers}{ = {\ttfamily 3}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Args:
+    input_dim (int): Number of input features (default 3: Freq, Temp, Hdc).
+    hidden_dim (int): Number of neurons in hidden layers.
+    output_dim (int): Number of output features (default 1: Power Loss).
+    num_layers (int): Number of hidden layers.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{scaler__model_8py_source_l00012}{12}} of file \doxymbox{\hyperlink{scaler__model_8py_source}{scaler\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ input\_dim=3,\ hidden\_dim=64,\ output\_dim=1,\ num\_layers=3): }
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args: }}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ input\_dim\ (int):\ Number\ of\ input\ features\ (default\ 3:\ Freq,\ Temp,\ Hdc). }}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ hidden\_dim\ (int):\ Number\ of\ neurons\ in\ hidden\ layers. }}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ output\_dim\ (int):\ Number\ of\ output\ features\ (default\ 1:\ Power\ Loss). }}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ num\_layers\ (int):\ Number\ of\ hidden\ layers. }}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ super(ScalerNetwork,\ self).\_\_init\_\_() }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ layers\ =\ [] }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input\ Layer }}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ layers.append(nn.Linear(input\_dim,\ hidden\_dim)) }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ layers.append(nn.ReLU()) }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ layers.append(nn.BatchNorm1d(hidden\_dim)) }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Hidden\ Layers }}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ \_\ \textcolor{keywordflow}{in}\ range(num\_layers\ -\/\ 1): }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ layers.append(nn.Linear(hidden\_dim,\ hidden\_dim)) }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ layers.append(nn.ReLU()) }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ layers.append(nn.BatchNorm1d(hidden\_dim)) }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Output\ Layer }}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ layers.append(nn.Linear(hidden\_dim,\ output\_dim)) }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ self.model\ =\ nn.Sequential(*layers) }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{scaler__model_8py_source_l00012}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{scaler__model_8py_source_l00012}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ab6a59b3ed09285fe7d392e80dd380d79_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ab6a59b3ed09285fe7d392e80dd380d79_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_a7dd561364d8c5009fd360aa6e28be1ce}\index{src.models.scaler\_model.ScalerNetwork@{src.models.scaler\_model.ScalerNetwork}!forward@{forward}}
+\index{forward@{forward}!src.models.scaler\_model.ScalerNetwork@{src.models.scaler\_model.ScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_a7dd561364d8c5009fd360aa6e28be1ce} 
+src.\+models.\+scaler\+\_\+model.\+Scaler\+Network.\+forward (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{scaler__model_8py_source_l00040}{40}} of file \doxymbox{\hyperlink{scaler__model_8py_source}{scaler\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{def\ }forward(self,\ x): }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.model(x) }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00269}{src.\+models.\+cnn\+\_\+model.\+CNNNetwork.\+model}}, and \doxymbox{\hyperlink{scaler__model_8py_source_l00038}{model}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ad0e0ef26c530ebc22eeb97a54c08900d}\index{src.models.scaler\_model.ScalerNetwork@{src.models.scaler\_model.ScalerNetwork}!model@{model}}
+\index{model@{model}!src.models.scaler\_model.ScalerNetwork@{src.models.scaler\_model.ScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ad0e0ef26c530ebc22eeb97a54c08900d} 
+src.\+models.\+scaler\+\_\+model.\+Scaler\+Network.\+model = nn.\+Sequential(\texorpdfstring{$\ast$}{*}layers)}
+
+
+
+Definition at line \doxymbox{\hyperlink{scaler__model_8py_source_l00038}{38}} of file \doxymbox{\hyperlink{scaler__model_8py_source}{scaler\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{scaler__model_8py_source_l00040}{forward()}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+models/\+\doxymbox{\hyperlink{scaler__model_8py}{scaler\+\_\+model.\+py}}\end{DoxyCompactItemize}

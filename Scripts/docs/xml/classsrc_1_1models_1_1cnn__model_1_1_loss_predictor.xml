@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor" kind="class" language="Python" prot="public">
+    <compoundname>src::models::cnn_model::LossPredictor</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1add606cfb853d459d15184d437917c14e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.LossPredictor::h_predictor</definition>
+        <argsstring></argsstring>
+        <name>h_predictor</name>
+        <qualifiedname>src.models.cnn_model.LossPredictor.h_predictor</qualifiedname>
+        <initializer>=  h_predictor</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="203" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="203" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1aa98ee38170a9382bb57567943e4fade5" compoundref="cnn__model_8py" startline="211" endline="252">src.models.cnn_model.LossPredictor.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1acfb7073878021554e0cfa61718f47021" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.LossPredictor::post_processor</definition>
+        <argsstring></argsstring>
+        <name>post_processor</name>
+        <qualifiedname>src.models.cnn_model.LossPredictor.post_processor</qualifiedname>
+        <initializer>=  nn.Sequential(
+            nn.Linear(self.h_predictor.num_input_scalar, 8),
+            nn.Tanh(),
+            nn.Linear(8, 1),
+            nn.Tanh()
+        )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="204" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="204" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1aa98ee38170a9382bb57567943e4fade5" compoundref="cnn__model_8py" startline="211" endline="252">src.models.cnn_model.LossPredictor.forward</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1ab83a6d7828fd3891f0f0eb405cea5b59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.LossPredictor.__init__</definition>
+        <argsstring>(self, h_predictor)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.cnn_model.LossPredictor.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1add606cfb853d459d15184d437917c14e" kindref="member">h_predictor</ref></type>
+          <defname>h_predictor</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="201" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="201" bodyend="210"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1ab83a6d7828fd3891f0f0eb405cea5b59" compoundref="cnn__model_8py" startline="201" endline="210">src.models.cnn_model.LossPredictor.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1ab83a6d7828fd3891f0f0eb405cea5b59" compoundref="cnn__model_8py" startline="201" endline="210">src.models.cnn_model.LossPredictor.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1aa98ee38170a9382bb57567943e4fade5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.LossPredictor.forward</definition>
+        <argsstring>(self, x_ts, x_scalars, stats)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.cnn_model.LossPredictor.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>x_ts</type>
+          <defname>x_ts</defname>
+        </param>
+        <param>
+          <type>x_scalars</type>
+          <defname>x_scalars</defname>
+        </param>
+        <param>
+          <type>stats</type>
+          <defname>stats</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="211" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="211" bodyend="252"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1add606cfb853d459d15184d437917c14e" compoundref="cnn__model_8py" startline="203">src.models.cnn_model.LossPredictor.h_predictor</references>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1acfb7073878021554e0cfa61718f47021" compoundref="cnn__model_8py" startline="204">src.models.cnn_model.LossPredictor.post_processor</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.LossPredictor</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.LossPredictor</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="200" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="200" bodyend="252"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1ab83a6d7828fd3891f0f0eb405cea5b59" prot="public" virt="non-virtual"><scope>src::models::cnn_model::LossPredictor</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1aa98ee38170a9382bb57567943e4fade5" prot="public" virt="non-virtual"><scope>src::models::cnn_model::LossPredictor</scope><name>forward</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1add606cfb853d459d15184d437917c14e" prot="public" virt="non-virtual"><scope>src::models::cnn_model::LossPredictor</scope><name>h_predictor</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1acfb7073878021554e0cfa61718f47021" prot="public" virt="non-virtual"><scope>src::models::cnn_model::LossPredictor</scope><name>post_processor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

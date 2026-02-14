@@ -1,0 +1,22 @@
+digraph "src.data.preprocessing.process_magnet_dataset"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="src.data.preprocessing.process\l_magnet_dataset",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge7_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="src.data.preprocessing.calculate\l_flux_density",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacesrc_1_1data_1_1preprocessing.html#a798bccc182e36d11e0da2dce4c6dc31f",tooltip=" "];
+  Node1 -> Node3 [id="edge8_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="src.data.preprocessing.calculate\l_magnetizing_force",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacesrc_1_1data_1_1preprocessing.html#a370875391e05027c2ae9687c9e770f23",tooltip=" "];
+  Node1 -> Node4 [id="edge9_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="src.data.preprocessing.calculate\l_volumetric_loss",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacesrc_1_1data_1_1preprocessing.html#a3b6e1a1fc4cd9191d7f6963330cd6b4f",tooltip=" "];
+  Node1 -> Node5 [id="edge10_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="src.data.preprocessing.load\l_config",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacesrc_1_1data_1_1preprocessing.html#a3cfbef7569b765019480a5000aca2586",tooltip=" "];
+  Node1 -> Node6 [id="edge11_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="src.data.preprocessing.prepare\l_dataset",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacesrc_1_1data_1_1preprocessing.html#a84f013aee5c17ec66380873ecbf8445f",tooltip=" "];
+  Node6 -> Node7 [id="edge12_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="src.data.preprocessing.normalize_data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacesrc_1_1data_1_1preprocessing.html#a792ff15e476f8dcf1db97b3bb0fc0050",tooltip=" "];
+}

@@ -1,0 +1,87 @@
+\doxysection{sequence\+\_\+model.\+py}
+\hypertarget{sequence__model_8py_source}{}\label{sequence__model_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence\_model.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence\_model.py}}
+\doxymbox{\hyperlink{sequence__model_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1models_1_1sequence__model}{00001}}\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00002}00002\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00003}00003\ \textcolor{keyword}{import}\ torch.nn\ \textcolor{keyword}{as}\ nn}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00005}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network}{00005}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network}{SequenceToScalerNetwork}}(nn.Module):}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00006}00006\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00007}00007\ \textcolor{stringliteral}{\ \ \ \ Bristol's\ LSTM\ Seq2One\ Architecture.}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00008}00008\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00009}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a7018cf179decde7211f8f01374c6bd87}{00009}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a7018cf179decde7211f8f01374c6bd87}{\_\_init\_\_}}(self,}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00010}00010\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ input\_dim=1,\ \textcolor{comment}{\#\ Ignored,\ hardcoded\ to\ 3\ (B,\ Freq,\ Temp)}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00011}00011\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hidden\_dim=30,}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00012}00012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output\_dim=1,\ \textcolor{comment}{\#\ Power\ Loss}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=3):}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00014}00014\ \ \ \ \ \ \ \ \ super(SequenceToScalerNetwork,\ self).\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a7018cf179decde7211f8f01374c6bd87}{\_\_init\_\_}}()}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00016}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab88766e54ae092df9c5cde262599607f}{00016}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab88766e54ae092df9c5cde262599607f}{hidden\_size}}\ =\ hidden\_dim}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00017}00017\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Bristol\ uses\ input\_size=1\ but\ constructs\ a\ tensor\ of\ size\ 3\ (B,\ F,\ T)\ inside,\ NOT\ quite.}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Bristol's\ code\ actually\ expected\ input\ of\ size\ 3\ (B,\ Freq,\ Temp)\ from\ the\ start?}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ "{}inputs\ =\ torch.zeros(64,\ waveStep,\ 3)"{}\ -\/>\ Yes.}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ But\ their\ LSTM\ init\ says\ input\_size=1?\ }}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ "{}self.lstm\ =\ nn.LSTM(input\_size,\ ..."{}\ -\/>\ If\ they\ used\ input\_size=1,\ they\ only\ fed\ B?}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Let's\ check\ their\ forward:\ "{}out,\ \_\ =\ self.lstm(in\_b)"{}\ -\/>\ in\_b\ is\ x[:,:,0:1].\ }}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ SO\ LSTM\ ONLY\ SEES\ B-\/Field!}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ LSTM\ layer\ (Processing\ B-\/Field\ Only)}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00027}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a0a4501cfe22ba0478b3e020f1f0bc62a}{00027}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a0a4501cfe22ba0478b3e020f1f0bc62a}{lstm}}\ =\ nn.LSTM(1,\ \textcolor{comment}{\#\ Fixed\ to\ 1\ for\ B-\/field}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hidden\_dim,}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=num\_layers,}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ batch\_first=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fully\ connected\ layer}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input\ to\ FC\ is:\ LSTM\_Out\ +\ Freq\ +\ Temp\ =\ hidden\_dim\ +\ 2}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00034}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a018ef8bab5edc89d615350c9b05f3816}{00034}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a018ef8bab5edc89d615350c9b05f3816}{fc1}}\ =\ nn.Linear(hidden\_dim+2,\ 128)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00035}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a55404c9d459633a2b4c201619fe01243}{00035}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a55404c9d459633a2b4c201619fe01243}{fc2}}\ =\ nn.Linear(128,\ 196)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00036}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a52d676aebd29df747a9493d23296c35e}{00036}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a52d676aebd29df747a9493d23296c35e}{fc3}}\ =\ nn.Linear(196,\ 128)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00037}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a3c50a795050f23cd8cdcaf8ad3150567}{00037}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a3c50a795050f23cd8cdcaf8ad3150567}{fc4}}\ =\ nn.Linear(128,\ 96)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00038}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a669301bc0a9f176a8e50f3795c3da919}{00038}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a669301bc0a9f176a8e50f3795c3da919}{fc5}}\ =\ nn.Linear(96,\ 32)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00039}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab752cc3abd5ad12bb7eb4692dc00d22d}{00039}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab752cc3abd5ad12bb7eb4692dc00d22d}{fc6}}\ =\ nn.Linear(32,\ 32)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00040}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a15a44bb5843de572a733f09a78062dac}{00040}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a15a44bb5843de572a733f09a78062dac}{fc7}}\ =\ nn.Linear(32,\ 16)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00041}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aad7cce47030693d268682f918e2e2c85}{00041}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aad7cce47030693d268682f918e2e2c85}{fc8}}\ =\ nn.Linear(16,\ output\_dim)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Activation\ function}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00044}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42}{00044}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42}{elu}}\ =\ nn.ELU()}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00047}\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aee08c0acde1f95cae4c67c7b1fcbf4ac}{00047}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aee08c0acde1f95cae4c67c7b1fcbf4ac}{forward}}(self,\ b\_seq,\ scalars):}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00049}00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Unified\ Interface\ Wrapper.}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00050}00050\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00051}00051\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00052}00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ b\_seq\ (Tensor):\ (Batch,\ Seq,\ 1)}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00053}00053\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ scalars\ (Tensor):\ (Batch,\ 3)\ -\/>\ Freq,\ Temp,\ Hdc}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00054}00054\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Unpack\ scalars}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ Freq\ =\ scalars[:,\ 0].unsqueeze(1)\ \textcolor{comment}{\#\ (bs,\ 1)}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ Temp\ =\ scalars[:,\ 1].unsqueeze(1)\ \textcolor{comment}{\#\ (bs,\ 1)}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Bristol's\ logic:}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 1.\ Feed\ only\ B-\/field\ (b\_seq)\ into\ LSTM}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ out:\ (Batch,\ Seq,\ Hidden)}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ out,\ \_\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a0a4501cfe22ba0478b3e020f1f0bc62a}{lstm}}(b\_seq)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 2.\ Take\ last\ output}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ out\ =\ out[:,\ -\/1,\ :]\ \ \textcolor{comment}{\#\ (Batch,\ Hidden)}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 3.\ Concatenate\ Freq\ and\ Temp\ to\ the\ features}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ out\ =\ torch.cat([out,\ Freq,\ Temp],\ dim=1)\ \textcolor{comment}{\#\ (Batch,\ Hidden\ +\ 2)}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 4.\ Deep\ MLP}}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ out\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a018ef8bab5edc89d615350c9b05f3816}{fc1}}(out)\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ out\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42}{elu}}(self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a55404c9d459633a2b4c201619fe01243}{fc2}}(out))}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ out\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42}{elu}}(self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a52d676aebd29df747a9493d23296c35e}{fc3}}(out))}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ out\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42}{elu}}(self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a3c50a795050f23cd8cdcaf8ad3150567}{fc4}}(out))}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ out\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42}{elu}}(self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a669301bc0a9f176a8e50f3795c3da919}{fc5}}(out))}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ out\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42}{elu}}(self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab752cc3abd5ad12bb7eb4692dc00d22d}{fc6}}(out))}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ out\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a15a44bb5843de572a733f09a78062dac}{fc7}}(out)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ out\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aad7cce47030693d268682f918e2e2c85}{fc8}}(out)}
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{sequence__model_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out}
+
+\end{DoxyCode}

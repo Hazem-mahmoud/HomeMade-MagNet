@@ -1,0 +1,276 @@
+\doxysection{loader.\+py}
+\hypertarget{loader_8py_source}{}\label{loader_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py}}
+\doxymbox{\hyperlink{loader_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00002}00002\ \textcolor{stringliteral}{Data\ Loading\ Module.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00004}00004\ \textcolor{stringliteral}{This\ module\ is\ responsible\ for\ loading\ experimental\ data\ from\ MATLAB\ (.mat)\ files.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00005}00005\ \textcolor{stringliteral}{It\ handles\ both\ legacy\ (SciPy)\ and\ v7.3\ (HDF5/h5py)\ formats.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00006}00006\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00007}00007\ \textcolor{stringliteral}{Functions:}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00008}00008\ \textcolor{stringliteral}{-\/\ load\_experiment(file\_path,\ experiment\_id):\ Loads\ data\ for\ a\ single\ experiment.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00009}00009\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00011}00011\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00012}00012\ \textcolor{keyword}{import}\ scipy.io}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00013}00013\ \textcolor{keyword}{import}\ h5py}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00014}00014\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00016}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a089d5bb344a1115ae3affe163b854505}{00016}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a089d5bb344a1115ae3affe163b854505}{load\_experiment}}(file\_path,\ experiment\_id):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00017}00017\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ Loads\ data\ for\ a\ specific\ experiment\ ID\ from\ a\ .mat\ file.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00020}00020\ \textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00021}00021\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ file\_path\ (str):\ Path\ to\ the\ .mat\ file.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00022}00022\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ experiment\_id\ (int):\ 1-\/based\ experiment\ index\ (as\ in\ MATLAB).}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00023}00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00024}00024\ \textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ dict:\ Dictionary\ containing\ experimental\ data\ (Voltage,\ Current,\ Metadata).}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00026}00026\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00027}00027\ \ \ \ \ idx\ =\ experiment\_id\ -\/\ 1\ \ \textcolor{comment}{\#\ Convert\ to\ 0-\/based\ index}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00028}00028\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(file\_path):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(f\textcolor{stringliteral}{"{}File\ not\ found:\ \{file\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ loading\ with\ scipy\ (for\ v7\ and\ earlier)}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ mat\ =\ scipy.io.loadmat(file\_path,\ squeeze\_me=\textcolor{keyword}{True},\ struct\_as\_record=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ Data\ =\ mat[\textcolor{stringliteral}{'Data'}]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_val(obj,\ idx):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.ndim(obj)\ >\ 0:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj[idx]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ data\_dict\ =\ \{}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'voltage'}:\ Data.Voltage[idx,\ :],}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'current'}:\ Data.Current[idx,\ :],}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'primary\_turns'}:\ Data.Primary\_Turns,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'secondary\_turns'}:\ Data.Secondary\_Turns,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'effective\_area'}:\ Data.Effective\_Area,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'effective\_length'}:\ Data.Effective\_Length,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'sampling\_time'}:\ get\_val(Data.Sampling\_Time,\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'hdc'}:\ get\_val(Data.Hdc\_command,\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'temperature'}:\ get\_val(Data.Temperature\_command,\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'duty\_p'}:\ get\_val(Data.DutyP\_command,\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'frequency'}:\ get\_val(Data.Frequency\_command,\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'flux\_cmd'}:\ get\_val(Data.Flux\_command,\ idx)}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_dict}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{except}\ NotImplementedError:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback\ to\ h5py\ for\ v7.3\ files}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ h5py.File(file\_path,\ \textcolor{stringliteral}{'r'})\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ Data\ =\ f[\textcolor{stringliteral}{'Data'}]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ to\ access\ h5py\ data}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Arrays\ are\ transposed\ in\ h5py\ relative\ to\ MATLAB}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ MATLAB:\ Voltage(ExperimentID,\ :)\ -\/>\ h5py:\ Voltage[Samples,\ ExperimentID]}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ want\ all\ samples\ for\ the\ specific\ experiment\ column}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ v\_sec\ =\ Data[\textcolor{stringliteral}{'Voltage'}][:,\ idx]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ i\_prim\ =\ Data[\textcolor{stringliteral}{'Current'}][:,\ idx]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_scalar(key):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ np.array(Data[key])}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ val.size\ ==\ 1:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ val.item()}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ val}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_indexed(key,\ idx):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ np.array(Data[key]).flatten()}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(val)\ >\ idx:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ val[idx]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ val.item()}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ data\_dict\ =\ \{}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'voltage'}:\ v\_sec,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'current'}:\ i\_prim,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'primary\_turns'}:\ get\_scalar(\textcolor{stringliteral}{'Primary\_Turns'}),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'secondary\_turns'}:\ get\_scalar(\textcolor{stringliteral}{'Secondary\_Turns'}),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'effective\_area'}:\ get\_scalar(\textcolor{stringliteral}{'Effective\_Area'}),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'effective\_length'}:\ get\_scalar(\textcolor{stringliteral}{'Effective\_Length'}),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'sampling\_time'}:\ get\_indexed(\textcolor{stringliteral}{'Sampling\_Time'},\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'hdc'}:\ get\_indexed(\textcolor{stringliteral}{'Hdc\_command'},\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'temperature'}:\ get\_indexed(\textcolor{stringliteral}{'Temperature\_command'},\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'duty\_p'}:\ get\_indexed(\textcolor{stringliteral}{'DutyP\_command'},\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'frequency'}:\ get\_indexed(\textcolor{stringliteral}{'Frequency\_command'},\ idx),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'flux\_cmd'}:\ get\_indexed(\textcolor{stringliteral}{'Flux\_command'},\ idx)}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_dict}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00099}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a94d4cb0c1311c48bcff1d499f8274b0f}{00099}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a94d4cb0c1311c48bcff1d499f8274b0f}{get\_dataset\_info}}(file\_path):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00100}00100\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00101}00101\ \textcolor{stringliteral}{\ \ \ \ Retrieves\ metadata\ about\ the\ dataset\ without\ loading\ full\ data.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00102}00102\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00103}00103\ \textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00104}00104\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ num\_experiments\ (int)}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00105}00105\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00106}00106\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(file\_path):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(f\textcolor{stringliteral}{"{}File\ not\ found:\ \{file\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00109}00109\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ scipy}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ mat\ =\ scipy.io.loadmat(file\_path,\ squeeze\_me=\textcolor{keyword}{True},\ struct\_as\_record=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ shape\ might\ be\ (Experiments,\ samples)\ or\ transposed.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Based\ on\ prev\ code:\ Data.Voltage\ was\ accessed\ as\ [idx,\ :]\ -\/>\ (N\_exp,\ N\_samples)}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat[\textcolor{stringliteral}{'Data'}].Voltage.shape[0]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00115}00115\ \ \ \ \ \textcolor{keywordflow}{except}\ NotImplementedError:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ h5py.File(file\_path,\ \textcolor{stringliteral}{'r'})\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ h5py:\ Voltage\ shape\ (Samples,\ Experiments)}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ f[\textcolor{stringliteral}{'Data'}][\textcolor{stringliteral}{'Voltage'}].shape[1]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00120}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a589e7bca72e24e7bbb8441818124155b}{00120}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a589e7bca72e24e7bbb8441818124155b}{load\_full\_dataset}}(file\_path):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00121}00121\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00122}00122\ \textcolor{stringliteral}{\ \ \ \ Loads\ the\ entire\ dataset\ into\ memory.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00123}00123\ \textcolor{stringliteral}{\ \ \ \ Optimized\ for\ bulk\ loading\ (reads\ full\ arrays).}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00124}00124\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00125}00125\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(file\_path):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(f\textcolor{stringliteral}{"{}File\ not\ found:\ \{file\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ SciPy}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00130}00130\ \ \ \ \ \ \ \ \ mat\ =\ scipy.io.loadmat(file\_path,\ squeeze\_me=\textcolor{keyword}{True},\ struct\_as\_record=\textcolor{keyword}{False})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ Data\ =\ mat[\textcolor{stringliteral}{'Data'}]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'voltage'}:\ Data.Voltage,\ \ \ \textcolor{comment}{\#\ (N\_exp,\ N\_samples)}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'current'}:\ Data.Current,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'freq'}:\ Data.Frequency\_command,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'temp'}:\ Data.Temperature\_command,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'hdc'}:\ Data.Hdc\_command,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'duty'}:\ Data.DutyP\_command,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Add\ other\ fields\ as\ needed}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'meta'}:\ \{}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_prim'}:\ Data.Primary\_Turns,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_sec'}:\ Data.Secondary\_Turns,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Ae'}:\ Data.Effective\_Area,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Le'}:\ Data.Effective\_Length,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'dt'}:\ Data.Sampling\_Time}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00148}00148\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00149}00149\ \ \ \ \ \textcolor{keywordflow}{except}\ NotImplementedError:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ h5py}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ h5py.File(file\_path,\ \textcolor{stringliteral}{'r'})\ \textcolor{keyword}{as}\ f:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ Data\ =\ f[\textcolor{stringliteral}{'Data'}]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Read\ all\ at\ once.\ Transpose\ to\ (N\_exp,\ N\_samples)}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ h5py\ stores\ as\ (samples,\ experiments).}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ T\ operation\ in\ numpy\ is\ cheap\ (view),\ but\ reading\ might\ be\ slow\ if\ chunked.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ reading\ as\ [:]\ reads\ into\ memory.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Reading\ full\ arrays\ from\ HDF5...\ this\ may\ take\ a\ moment."{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ v\_all\ =\ np.array(Data[\textcolor{stringliteral}{'Voltage'}]).T}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ i\_all\ =\ np.array(Data[\textcolor{stringliteral}{'Current'}]).T}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 1D\ arrays}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_arr(key):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.array(Data[key]).flatten()}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ data\_dict\ =\ \{}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'voltage'}:\ v\_all,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'current'}:\ i\_all,}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'freq'}:\ get\_arr(\textcolor{stringliteral}{'Frequency\_command'}),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'temp'}:\ get\_arr(\textcolor{stringliteral}{'Temperature\_command'}),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'hdc'}:\ get\_arr(\textcolor{stringliteral}{'Hdc\_command'}),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'duty'}:\ get\_arr(\textcolor{stringliteral}{'DutyP\_command'}),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'meta'}:\ \{}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_prim'}:\ np.array(Data[\textcolor{stringliteral}{'Primary\_Turns'}]).item(),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_sec'}:\ np.array(Data[\textcolor{stringliteral}{'Secondary\_Turns'}]).item(),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Ae'}:\ np.array(Data[\textcolor{stringliteral}{'Effective\_Area'}]).item(),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Le'}:\ np.array(Data[\textcolor{stringliteral}{'Effective\_Length'}]).item(),}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Sampling\ time\ might\ be\ an\ array\ or\ scalar?\ }}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Assuming\ scalar\ for\ uniform\ sampling\ usually,\ or\ array.}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'dt'}:\ np.array(Data[\textcolor{stringliteral}{'Sampling\_Time'}]).flatten()}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_dict}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00186}00186\ \textcolor{comment}{\#\ ==========================================}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00187}00187\ \textcolor{comment}{\#\ VALIDATION\ SCRIPT\ (Append\ to\ end\ of\ file)}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00188}00188\ \textcolor{comment}{\#\ ==========================================}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00189}00189\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00190}00190\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00191}00191\ \ \ \ \ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00192}00192\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00193}00193\ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/\ CONFIGURATION\ -\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00194}00194\ \ \ \ \ \textcolor{comment}{\#\ Use\ the\ filename\ you\ mentioned\ earlier}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00195}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ae9ae4bc23fcdfe0679078ba5a22dc101}{00195}}\ \ \ \ \ TEST\_FILE\ =\ \textcolor{stringliteral}{'../../3C90\_TX-\/25-\/15-\/10\_Data1\_Cycle.mat'}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00196}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_af76ba16c08d0320cce2e0ba9406728be}{00196}}\ \ \ \ \ TEST\_ID\ =\ 3859\ \ \textcolor{comment}{\#\ The\ ID\ you\ used\ in\ your\ example}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00197}00197\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00198}00198\ \ \ \ \ \textcolor{comment}{\#\ Get\ absolute\ path\ to\ ensure\ we\ find\ the\ file}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00199}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a1ece502f8126cab8f84f4901a8acc7a9}{00199}}\ \ \ \ \ script\_dir\ =\ os.path.dirname(os.path.abspath(\_\_file\_\_))}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00200}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}{00200}}\ \ \ \ \ file\_path\ =\ os.path.join(script\_dir,\ TEST\_FILE)}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00201}00201\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00202}00202\ \ \ \ \ print(f\textcolor{stringliteral}{"{}-\/-\/-\/\ STARTING\ VALIDATION\ FOR:\ \{TEST\_FILE\}\ -\/-\/-\/"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00203}00203\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00204}00204\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(file\_path):}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00205}00205\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}ERROR:\ File\ not\ found\ at\ \{file\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00206}00206\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00207}00207\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00208}00208\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ TEST\ 1:\ Single\ Experiment\ Loading}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00209}00209\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00210}00210\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\(\backslash\)n[1]\ Testing\ load\_experiment(id=\{TEST\_ID\})..."{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00211}00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00212}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{00212}}\ \ \ \ \ \ \ \ \ \ \ \ \ single\_data\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a089d5bb344a1115ae3affe163b854505}{load\_experiment}}(file\_path,\ TEST\_ID)}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00214}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a9e57c5da1076c1d344535721578bcf4c}{00214}}\ \ \ \ \ \ \ \ \ \ \ \ \ v\_shape\ =\ single\_data[\textcolor{stringliteral}{'voltage'}].shape}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00215}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a74c5d45e17a54217e72fcfd83162909d}{00215}}\ \ \ \ \ \ \ \ \ \ \ \ \ i\_shape\ =\ single\_data[\textcolor{stringliteral}{'current'}].shape}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00216}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a9d69c46c24ed007c2e9c4e2ef6c8d918}{00216}}\ \ \ \ \ \ \ \ \ \ \ \ \ freq\ =\ single\_data[\textcolor{stringliteral}{'frequency'}]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ Success!"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ Voltage\ Shape:\ \{v\_shape\}\ (Expected:\ 1D\ array,\ e.g.,\ (10000,))"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ Frequency:\ \ \ \ \ \{freq\}\ Hz"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(v\_shape)\ !=\ 1:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ \ \ \ WARNING:\ Voltage\ should\ be\ 1D!"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00224}00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ FAILED:\ \{e\}"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00228}00228\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ TEST\ 2:\ Full\ Dataset\ Loading}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00230}00230\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\(\backslash\)n[2]\ Testing\ load\_full\_dataset()..."{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00231}00231\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00232}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a617fc2f85a5e702d2209071c766f67e4}{00232}}\ \ \ \ \ \ \ \ \ \ \ \ \ full\_data\ =\ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a589e7bca72e24e7bbb8441818124155b}{load\_full\_dataset}}(file\_path)}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00234}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ada03b7936448e5da21906f752545870b}{00234}}\ \ \ \ \ \ \ \ \ \ \ \ \ full\_v\_shape\ =\ full\_data[\textcolor{stringliteral}{'voltage'}].shape}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ Success!"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ Full\ Voltage\ Shape:\ \{full\_v\_shape\}\ (Expected:\ [N\_experiments,\ N\_samples])"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ Total\ Experiments:\ \ \{full\_v\_shape[0]\}"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ Samples\ per\ Exp:\ \ \ \ \{full\_v\_shape[1]\}"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00241}00241\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ FAILED:\ \{e\}"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ full\_data\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00245}00245\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00246}00246\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ TEST\ 3:\ Consistency\ Check\ (The\ Transpose\ Proof)}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00247}00247\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00248}00248\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'single\_data'}\ \textcolor{keywordflow}{in}\ locals()\ \textcolor{keywordflow}{and}\ full\_data\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\(\backslash\)n[3]\ Checking\ Consistency\ (Single\ vs\ Full)..."{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ The\ row\ in\ full\ dataset\ (0-\/based)\ must\ match\ the\ single\ load}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00252}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a9dc235e7d79cf928cdf660e661983c4a}{00252}}\ \ \ \ \ \ \ \ \ \ \ \ \ idx\ =\ TEST\_ID\ -\/\ 1\ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extract\ row\ from\ full\ matrix}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00255}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a209783d013259d2db490314db9d92272}{00255}}\ \ \ \ \ \ \ \ \ \ \ \ \ full\_slice\_v\ =\ full\_data[\textcolor{stringliteral}{'voltage'}][idx,\ :]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extract\ array\ from\ single\ load}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00258}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a037745ef9df930e15469afb3a1127c6d}{00258}}\ \ \ \ \ \ \ \ \ \ \ \ \ single\_slice\_v\ =\ single\_data[\textcolor{stringliteral}{'voltage'}]}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Check\ difference}}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00261}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a99db6aa9c7ee56850a960f818c3c3d77}{00261}}\ \ \ \ \ \ \ \ \ \ \ \ \ diff\ =\ np.max(np.abs(full\_slice\_v\ -\/\ single\_slice\_v))}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ diff\ <\ 1e-\/9:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ PASSED:\ Data\ matches\ exactly\ (Diff:\ \{diff\})"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ \ \ \ -\/-\/>\ This\ confirms\ your\ Transpose/Index\ logic\ is\ CORRECT."{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ \ \ FAILED:\ Data\ mismatch!\ (Diff:\ \{diff\})"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\ \ \ \ -\/-\/>\ Check\ if\ Transpose\ (.T)\ is\ missing\ in\ load\_full\_dataset"{}})}
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00269}00269\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{loader_8py_source_l00270}00270\ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ VALIDATION\ COMPLETE\ -\/-\/-\/"{}})}
+
+\end{DoxyCode}

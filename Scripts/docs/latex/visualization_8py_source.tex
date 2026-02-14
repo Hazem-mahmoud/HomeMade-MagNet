@@ -1,0 +1,76 @@
+\doxysection{visualization.\+py}
+\hypertarget{visualization_8py_source}{}\label{visualization_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils/visualization.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils/visualization.py}}
+\doxymbox{\hyperlink{visualization_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00002}00002\ \textcolor{stringliteral}{Visualization\ Module.}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00004}00004\ \textcolor{stringliteral}{This\ module\ provides\ plotting\ functions\ for\ inspecting\ model\ performance.}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00005}00005\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00007}00007\ \textcolor{keyword}{import}\ matplotlib.pyplot\ \textcolor{keyword}{as}\ plt}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00008}00008\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00010}\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization_a1f8a76623215976799986570af4d723f}{00010}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization_a1f8a76623215976799986570af4d723f}{plot\_loss\_curve}}(history,\ title='Training\ History',\ save\_path=None):}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00011}00011\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00012}00012\ \textcolor{stringliteral}{\ \ \ \ Plots\ Train\ vs\ Val\ Loss.}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00013}00013\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00014}00014\ \ \ \ \ plt.figure(figsize=(10,\ 6))}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00015}00015\ \ \ \ \ plt.plot(history[\textcolor{stringliteral}{'train\_loss'}],\ label=\textcolor{stringliteral}{'Train\ Loss'},\ marker=\textcolor{stringliteral}{'o'})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00016}00016\ \ \ \ \ plt.plot(history[\textcolor{stringliteral}{'val\_loss'}],\ label=\textcolor{stringliteral}{'Val\ Loss'},\ marker=\textcolor{stringliteral}{'o'})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00017}00017\ \ \ \ \ plt.xlabel(\textcolor{stringliteral}{'Epochs'})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00018}00018\ \ \ \ \ plt.ylabel(\textcolor{stringliteral}{'Loss\ (MSE)'})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00019}00019\ \ \ \ \ plt.title(title)}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00020}00020\ \ \ \ \ plt.legend()}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00021}00021\ \ \ \ \ plt.grid(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00022}00022\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00023}00023\ \ \ \ \ \textcolor{keywordflow}{if}\ save\_path:}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ plt.savefig(save\_path)}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ plt.close()}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00026}00026\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ plt.show()}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00029}\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization_a9600ff5011cb5c64d0acc73608a1d9d8}{00029}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization_a9600ff5011cb5c64d0acc73608a1d9d8}{plot\_prediction\_scatter}}(preds,\ targets,\ title='Predictions\ vs\ Actuals',\ save\_path=None):}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00030}00030\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00031}00031\ \textcolor{stringliteral}{\ \ \ \ Scatter\ plot\ for\ scalar\ regression.}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00032}00032\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00033}00033\ \ \ \ \ plt.figure(figsize=(8,\ 8))}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00034}00034\ \ \ \ \ plt.scatter(targets,\ preds,\ alpha=0.5)}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00035}00035\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00036}00036\ \ \ \ \ \textcolor{comment}{\#\ Perfect\ line}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00037}00037\ \ \ \ \ min\_val\ =\ min(np.min(targets),\ np.min(preds))}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00038}00038\ \ \ \ \ max\_val\ =\ max(np.max(targets),\ np.max(preds))}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00039}00039\ \ \ \ \ plt.plot([min\_val,\ max\_val],\ [min\_val,\ max\_val],\ \textcolor{stringliteral}{'r-\/-\/'})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00040}00040\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00041}00041\ \ \ \ \ plt.xlabel(\textcolor{stringliteral}{'Actual'})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00042}00042\ \ \ \ \ plt.ylabel(\textcolor{stringliteral}{'Predicted'})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00043}00043\ \ \ \ \ plt.title(title)}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00044}00044\ \ \ \ \ plt.grid(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00045}00045\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{if}\ save\_path:}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ plt.savefig(save\_path)}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ plt.close()}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00049}00049\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ plt.show()}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00051}00051\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00052}\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization_aca85b5a75300044725bde9ca69d1c719}{00052}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization_aca85b5a75300044725bde9ca69d1c719}{plot\_bh\_loop}}(pred\_b,\ pred\_h,\ actual\_b,\ actual\_h,\ title='B-\/H\ Loop\ Comparison',\ save\_path=None):}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00053}00053\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00054}00054\ \textcolor{stringliteral}{\ \ \ \ Plots\ predicted\ vs\ actual\ B-\/H\ loop.}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00055}00055\ \textcolor{stringliteral}{\ \ \ \ Args:\ (Seq\_Len,)\ arrays.}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00056}00056\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00057}00057\ \ \ \ \ plt.figure(figsize=(8,\ 6))}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00058}00058\ \ \ \ \ plt.plot(actual\_h,\ actual\_b,\ \textcolor{stringliteral}{'b-\/'},\ label=\textcolor{stringliteral}{'Actual'},\ linewidth=2)}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00059}00059\ \ \ \ \ plt.plot(pred\_h,\ pred\_b,\ \textcolor{stringliteral}{'r-\/-\/'},\ label=\textcolor{stringliteral}{'Predicted'},\ linewidth=2)}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00060}00060\ \ \ \ \ plt.xlabel(\textcolor{stringliteral}{'H\ (A/m)'})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00061}00061\ \ \ \ \ plt.ylabel(\textcolor{stringliteral}{'B\ (T)'})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00062}00062\ \ \ \ \ plt.title(title)}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00063}00063\ \ \ \ \ plt.legend()}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00064}00064\ \ \ \ \ plt.grid(\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00065}00065\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{if}\ save\_path:}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ plt.savefig(save\_path)}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ plt.close()}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{visualization_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ plt.show()}
+
+\end{DoxyCode}

@@ -1,0 +1,257 @@
+\doxysection{src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias Class Reference}
+\hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias}{}\label{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias}\index{src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}}
+
+
+Inheritance diagram for src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a24ad8a51da91c591d2d7ac1c49e1e116}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, num\+\_\+input\+\_\+scalars, \doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a66ec7ecf8c1baa9d2141163dc252907d}{num\+\_\+input\+\_\+ts}}=1, tcn\+\_\+layer\+\_\+cfg=None, scalar\+\_\+layer\+\_\+cfg=None)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_ac1b77571f9ee1b73882fca73c1ad15b3}{forward}} (self, x\+\_\+ts, x\+\_\+scalars)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a66ec7ecf8c1baa9d2141163dc252907d}{num\+\_\+input\+\_\+ts}} = num\+\_\+input\+\_\+ts
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a57181b2e0b404a5b7401db5ecfb0892b}{num\+\_\+input\+\_\+scalar}} = num\+\_\+input\+\_\+scalars
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_aafc0e134fc543f59048fdda9b7f32eec}{ts\+\_\+branch}} = cnn\+\_\+layers.\+pop()
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a3656b584a4a02a421e5e1e87931f8fd8}{upper\+\_\+tcn}} = nn.\+Sequential(\texorpdfstring{$\ast$}{*}cnn\+\_\+layers)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a3a0143ea0c4eb0109828f50c58c62164}{scalar\+\_\+branch}} = nn.\+Sequential(\texorpdfstring{$\ast$}{*}scalar\+\_\+layers)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00124}{124}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a24ad8a51da91c591d2d7ac1c49e1e116}\index{src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a24ad8a51da91c591d2d7ac1c49e1e116} 
+src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{num\+\_\+input\+\_\+scalars}{, }\item[{}]{num\+\_\+input\+\_\+ts}{ = {\ttfamily 1}, }\item[{}]{tcn\+\_\+layer\+\_\+cfg}{ = {\ttfamily None}, }\item[{}]{scalar\+\_\+layer\+\_\+cfg}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00125}{125}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00131\ \ \ \ \ ): }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ super().\_\_init\_\_() }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ self.num\_input\_ts\ =\ num\_input\_ts }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ self.num\_input\_scalar\ =\ num\_input\_scalars }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ tcn\_layer\_cfg\ =\ tcn\_layer\_cfg\ \textcolor{keywordflow}{or}\ \{ }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}f"{}}:\ [ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}units"{}}:\ (num\_input\_scalars\ +\ 1),\ \textcolor{stringliteral}{"{}act\_func"{}}:\ \textcolor{stringliteral}{"{}tanh"{}}\}, }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}units"{}}:\ 8,\ \textcolor{stringliteral}{"{}act\_func"{}}:\ \textcolor{stringliteral}{"{}tanh"{}}\}, }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}units"{}}:\ 1\}, }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ ] }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ scalar\_layer\_cfg\ =\ scalar\_layer\_cfg\ \textcolor{keywordflow}{or}\ \{ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}f"{}}:\ [ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}units"{}}:\ num\_input\_scalars,\ \textcolor{stringliteral}{"{}act\_func"{}}:\ \textcolor{stringliteral}{"{}tanh"{}}\}, }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ ] }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ build\ CNN\ layer\ path }}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ cnn\_layers\ =\ [] }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ dilation\_offset\ =\ tcn\_layer\_cfg.get(\textcolor{stringliteral}{"{}starting\_dilation\_rate"{}},\ 2)\ \ \textcolor{comment}{\#\ >=\ 0 }}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ i,\ l\_cfg\ \textcolor{keywordflow}{in}\ enumerate(tcn\_layer\_cfg[\textcolor{stringliteral}{"{}f"{}}]): }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ kernel\_size\ =\ l\_cfg.get(\textcolor{stringliteral}{"{}kernel\_size"{}},\ 9) }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ dropout\_rate\ =\ tcn\_layer\_cfg.get(\textcolor{stringliteral}{"{}dropout"{}},\ 0.0) }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ dilation\_size\ =\ 2\ **\ (i\ +\ dilation\_offset) }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ i\ ==\ 0: }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\_channels\ =\ num\_input\_ts\ \  }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\_channels\ =\ tcn\_layer\_cfg[\textcolor{stringliteral}{"{}f"{}}][i\ -\/\ 1][\textcolor{stringliteral}{"{}units"{}}] }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ cnn\_layers\ +=\ [ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TemporalBlock( }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ in\_channels, }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l\_cfg[\textcolor{stringliteral}{"{}units"{}}], }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kernel\_size, }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stride=1, }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dilation=dilation\_size, }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ residual=tcn\_layer\_cfg.get(\textcolor{stringliteral}{"{}residual"{}},\ \textcolor{keyword}{False}), }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ double\_layered=tcn\_layer\_cfg.get(\textcolor{stringliteral}{"{}double\_layered"{}},\ \textcolor{keyword}{False}), }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dropout=dropout\_rate, }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ act\_func=l\_cfg.get(\textcolor{stringliteral}{"{}act\_func"{}},\ nn.Identity), }
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ), }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ ] }
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ i\ ==\ 0: }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.ts\_branch\ =\ cnn\_layers.pop() }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ self.upper\_tcn\ =\ nn.Sequential(*cnn\_layers) }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ build\ scalar\ NN\ path }}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ scalar\_layers\ =\ [] }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ fan\_in\ =\ num\_input\_scalars }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ i,\ l\_cfg\ \textcolor{keywordflow}{in}\ enumerate(scalar\_layer\_cfg[\textcolor{stringliteral}{"{}f"{}}]): }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ scalar\_layers.append(nn.Linear(fan\_in,\ l\_cfg[\textcolor{stringliteral}{"{}units"{}}])) }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ scalar\_layers.append(ACTIVATION\_FUNCS.get(l\_cfg[\textcolor{stringliteral}{"{}act\_func"{}}],\ nn.Identity)()) }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ fan\_in\ =\ l\_cfg[\textcolor{stringliteral}{"{}units"{}}] }
+\DoxyCodeLine{00181\  }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ self.scalar\_branch\ =\ nn.Sequential(*scalar\_layers) }
+\DoxyCodeLine{00183\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00131}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00131}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a24ad8a51da91c591d2d7ac1c49e1e116_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a24ad8a51da91c591d2d7ac1c49e1e116_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_ac1b77571f9ee1b73882fca73c1ad15b3}\index{src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}!forward@{forward}}
+\index{forward@{forward}!src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_ac1b77571f9ee1b73882fca73c1ad15b3} 
+src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias.\+forward (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x\+\_\+ts}{, }\item[{}]{x\+\_\+scalars}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}x_ts has shape (#batch, #channels, #length)\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00184}{184}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keyword}{def\ }forward(self,\ x\_ts,\ x\_scalars): }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}x\_ts\ has\ shape\ (\#batch,\ \#channels,\ \#length)"{}"{}"{}} }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ b\_proc\ =\ self.ts\_branch(x\_ts) }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ scalar\_proc\ =\ self.scalar\_branch(x\_scalars) }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ catted\ =\ torch.cat( }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ [ }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b\_proc[:,\ :\ -\/scalar\_proc.shape[1],\ :], }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b\_proc[:,\ -\/scalar\_proc.shape[1]\ :,\ :]\ +\ scalar\_proc.unsqueeze(-\/1), }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ ], }
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ dim=1, }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ y\ =\ self.upper\_tcn(catted) }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ y\ =\ y\ +\ x\_ts[:,\ [0],\ :] }
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ y\ =\ y\ -\/\ y.mean(dim=-\/1).unsqueeze(-\/1) }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ y }
+\DoxyCodeLine{00199\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00182}{scalar\+\_\+branch}}, \doxymbox{\hyperlink{cnn__model_8py_source_l00172}{ts\+\_\+branch}}, and \doxymbox{\hyperlink{cnn__model_8py_source_l00173}{upper\+\_\+tcn}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a57181b2e0b404a5b7401db5ecfb0892b}\index{src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}!num\_input\_scalar@{num\_input\_scalar}}
+\index{num\_input\_scalar@{num\_input\_scalar}!src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}}
+\doxysubsubsection{\texorpdfstring{num\_input\_scalar}{num\_input\_scalar}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a57181b2e0b404a5b7401db5ecfb0892b} 
+src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias.\+num\+\_\+input\+\_\+scalar = num\+\_\+input\+\_\+scalars}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00134}{134}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a66ec7ecf8c1baa9d2141163dc252907d}\index{src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}!num\_input\_ts@{num\_input\_ts}}
+\index{num\_input\_ts@{num\_input\_ts}!src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}}
+\doxysubsubsection{\texorpdfstring{num\_input\_ts}{num\_input\_ts}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a66ec7ecf8c1baa9d2141163dc252907d} 
+src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias.\+num\+\_\+input\+\_\+ts = num\+\_\+input\+\_\+ts}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00133}{133}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a3a0143ea0c4eb0109828f50c58c62164}\index{src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}!scalar\_branch@{scalar\_branch}}
+\index{scalar\_branch@{scalar\_branch}!src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}}
+\doxysubsubsection{\texorpdfstring{scalar\_branch}{scalar\_branch}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a3a0143ea0c4eb0109828f50c58c62164} 
+src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias.\+scalar\+\_\+branch = nn.\+Sequential(\texorpdfstring{$\ast$}{*}scalar\+\_\+layers)}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00182}{182}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00184}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_aafc0e134fc543f59048fdda9b7f32eec}\index{src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}!ts\_branch@{ts\_branch}}
+\index{ts\_branch@{ts\_branch}!src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}}
+\doxysubsubsection{\texorpdfstring{ts\_branch}{ts\_branch}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_aafc0e134fc543f59048fdda9b7f32eec} 
+src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias.\+ts\+\_\+branch = cnn\+\_\+layers.\+pop()}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00172}{172}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00184}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a3656b584a4a02a421e5e1e87931f8fd8}\index{src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}!upper\_tcn@{upper\_tcn}}
+\index{upper\_tcn@{upper\_tcn}!src.models.cnn\_model.TCNWithScalarsAsBias@{src.models.cnn\_model.TCNWithScalarsAsBias}}
+\doxysubsubsection{\texorpdfstring{upper\_tcn}{upper\_tcn}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_a3656b584a4a02a421e5e1e87931f8fd8} 
+src.\+models.\+cnn\+\_\+model.\+TCNWith\+Scalars\+As\+Bias.\+upper\+\_\+tcn = nn.\+Sequential(\texorpdfstring{$\ast$}{*}cnn\+\_\+layers)}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00173}{173}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00184}{forward()}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+models/\+\doxymbox{\hyperlink{cnn__model_8py}{cnn\+\_\+model.\+py}}\end{DoxyCompactItemize}

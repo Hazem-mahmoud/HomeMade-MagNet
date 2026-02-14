@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1utils_1_1visualization" kind="namespace" language="Python">
+    <compoundname>src::utils::visualization</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesrc_1_1utils_1_1visualization_1a1f8a76623215976799986570af4d723f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.utils.visualization.plot_loss_curve</definition>
+        <argsstring>(history, title=&apos;Training History&apos;, save_path=None)</argsstring>
+        <name>plot_loss_curve</name>
+        <qualifiedname>src.utils.visualization.plot_loss_curve</qualifiedname>
+        <param>
+          <type>history</type>
+          <defname>history</defname>
+        </param>
+        <param>
+          <type>title</type>
+          <defname>title</defname>
+          <defval>&apos;Training History&apos;</defval>
+        </param>
+        <param>
+          <type>save_path</type>
+          <defname>save_path</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Plots Train vs Val Loss.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils/visualization.py" line="10" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils/visualization.py" bodystart="10" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1utils_1_1visualization_1a9600ff5011cb5c64d0acc73608a1d9d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.utils.visualization.plot_prediction_scatter</definition>
+        <argsstring>(preds, targets, title=&apos;Predictions vs Actuals&apos;, save_path=None)</argsstring>
+        <name>plot_prediction_scatter</name>
+        <qualifiedname>src.utils.visualization.plot_prediction_scatter</qualifiedname>
+        <param>
+          <type>preds</type>
+          <defname>preds</defname>
+        </param>
+        <param>
+          <type>targets</type>
+          <defname>targets</defname>
+        </param>
+        <param>
+          <type>title</type>
+          <defname>title</defname>
+          <defval>&apos;Predictions vs Actuals&apos;</defval>
+        </param>
+        <param>
+          <type>save_path</type>
+          <defname>save_path</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Scatter plot for scalar regression.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils/visualization.py" line="29" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils/visualization.py" bodystart="29" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1utils_1_1visualization_1aca85b5a75300044725bde9ca69d1c719" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.utils.visualization.plot_bh_loop</definition>
+        <argsstring>(pred_b, pred_h, actual_b, actual_h, title=&apos;B-H Loop Comparison&apos;, save_path=None)</argsstring>
+        <name>plot_bh_loop</name>
+        <qualifiedname>src.utils.visualization.plot_bh_loop</qualifiedname>
+        <param>
+          <type>pred_b</type>
+          <defname>pred_b</defname>
+        </param>
+        <param>
+          <type>pred_h</type>
+          <defname>pred_h</defname>
+        </param>
+        <param>
+          <type>actual_b</type>
+          <defname>actual_b</defname>
+        </param>
+        <param>
+          <type>actual_h</type>
+          <defname>actual_h</defname>
+        </param>
+        <param>
+          <type>title</type>
+          <defname>title</defname>
+          <defval>&apos;B-H Loop Comparison&apos;</defval>
+        </param>
+        <param>
+          <type>save_path</type>
+          <defname>save_path</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Plots predicted vs actual B-H loop.
+Args: (Seq_Len,) arrays.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils/visualization.py" line="52" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils/visualization.py" bodystart="52" bodyend="71"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Visualization Module.
+
+This module provides plotting functions for inspecting model performance.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils/visualization.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

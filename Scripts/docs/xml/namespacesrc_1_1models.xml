@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1models" kind="namespace" language="Python">
+    <compoundname>src::models</compoundname>
+    <innernamespace refid="namespacesrc_1_1models_1_1cnn__model">src::models::cnn_model</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models_1_1scaler__model">src::models::scaler_model</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models_1_1seq2seq__model">src::models::seq2seq_model</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models_1_1sequence__model">src::models::sequence_model</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models_1_1transformer__model">src::models::transformer_model</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Neural Network Models Module.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/__init__.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

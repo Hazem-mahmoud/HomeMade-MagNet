@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1data_1_1loader" kind="namespace" language="Python">
+    <compoundname>src::data::loader</compoundname>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1ae9ae4bc23fcdfe0679078ba5a22dc101" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>str src::data::loader.TEST_FILE</definition>
+        <argsstring></argsstring>
+        <name>TEST_FILE</name>
+        <qualifiedname>src.data.loader.TEST_FILE</qualifiedname>
+        <initializer>=  &apos;../../3C90_TX-25-15-10_Data1_Cycle.mat&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="195" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1af76ba16c08d0320cce2e0ba9406728be" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int src::data::loader.TEST_ID</definition>
+        <argsstring></argsstring>
+        <name>TEST_ID</name>
+        <qualifiedname>src.data.loader.TEST_ID</qualifiedname>
+        <initializer>=  3859</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="196" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a1ece502f8126cab8f84f4901a8acc7a9" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.script_dir</definition>
+        <argsstring></argsstring>
+        <name>script_dir</name>
+        <qualifiedname>src.data.loader.script_dir</qualifiedname>
+        <initializer>=  os.path.dirname(os.path.abspath(__file__))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="199" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1ad26b5a98ba19053b925ab9413604d149" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.file_path</definition>
+        <argsstring></argsstring>
+        <name>file_path</name>
+        <qualifiedname>src.data.loader.file_path</qualifiedname>
+        <initializer>=  os.path.join(<ref refid="namespacesrc_1_1data_1_1loader_1a1ece502f8126cab8f84f4901a8acc7a9" kindref="member">script_dir</ref>, <ref refid="namespacesrc_1_1data_1_1loader_1ae9ae4bc23fcdfe0679078ba5a22dc101" kindref="member">TEST_FILE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="200" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a6c5499f680602c400cc36ade3db03082" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.single_data</definition>
+        <argsstring></argsstring>
+        <name>single_data</name>
+        <qualifiedname>src.data.loader.single_data</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1loader_1a089d5bb344a1115ae3affe163b854505" kindref="member">load_experiment</ref>(<ref refid="namespacesrc_1_1data_1_1loader_1ad26b5a98ba19053b925ab9413604d149" kindref="member">file_path</ref>, <ref refid="namespacesrc_1_1data_1_1loader_1af76ba16c08d0320cce2e0ba9406728be" kindref="member">TEST_ID</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="212" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a9e57c5da1076c1d344535721578bcf4c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.v_shape</definition>
+        <argsstring></argsstring>
+        <name>v_shape</name>
+        <qualifiedname>src.data.loader.v_shape</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1loader_1a6c5499f680602c400cc36ade3db03082" kindref="member">single_data</ref>[&apos;voltage&apos;].shape</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="214" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a74c5d45e17a54217e72fcfd83162909d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.i_shape</definition>
+        <argsstring></argsstring>
+        <name>i_shape</name>
+        <qualifiedname>src.data.loader.i_shape</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1loader_1a6c5499f680602c400cc36ade3db03082" kindref="member">single_data</ref>[&apos;current&apos;].shape</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="215" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a9d69c46c24ed007c2e9c4e2ef6c8d918" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.freq</definition>
+        <argsstring></argsstring>
+        <name>freq</name>
+        <qualifiedname>src.data.loader.freq</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1loader_1a6c5499f680602c400cc36ade3db03082" kindref="member">single_data</ref>[&apos;frequency&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="216" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a617fc2f85a5e702d2209071c766f67e4" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.full_data</definition>
+        <argsstring></argsstring>
+        <name>full_data</name>
+        <qualifiedname>src.data.loader.full_data</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1loader_1a589e7bca72e24e7bbb8441818124155b" kindref="member">load_full_dataset</ref>(<ref refid="namespacesrc_1_1data_1_1loader_1ad26b5a98ba19053b925ab9413604d149" kindref="member">file_path</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="232" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1ada03b7936448e5da21906f752545870b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.full_v_shape</definition>
+        <argsstring></argsstring>
+        <name>full_v_shape</name>
+        <qualifiedname>src.data.loader.full_v_shape</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1loader_1a617fc2f85a5e702d2209071c766f67e4" kindref="member">full_data</ref>[&apos;voltage&apos;].shape</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="234" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a9dc235e7d79cf928cdf660e661983c4a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int src::data::loader.idx</definition>
+        <argsstring></argsstring>
+        <name>idx</name>
+        <qualifiedname>src.data.loader.idx</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1loader_1af76ba16c08d0320cce2e0ba9406728be" kindref="member">TEST_ID</ref> - 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="252" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a209783d013259d2db490314db9d92272" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.full_slice_v</definition>
+        <argsstring></argsstring>
+        <name>full_slice_v</name>
+        <qualifiedname>src.data.loader.full_slice_v</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1loader_1a617fc2f85a5e702d2209071c766f67e4" kindref="member">full_data</ref>[&apos;voltage&apos;][<ref refid="namespacesrc_1_1data_1_1loader_1a9dc235e7d79cf928cdf660e661983c4a" kindref="member">idx</ref>, :]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="255" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="255" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a037745ef9df930e15469afb3a1127c6d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.single_slice_v</definition>
+        <argsstring></argsstring>
+        <name>single_slice_v</name>
+        <qualifiedname>src.data.loader.single_slice_v</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1loader_1a6c5499f680602c400cc36ade3db03082" kindref="member">single_data</ref>[&apos;voltage&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="258" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1loader_1a99db6aa9c7ee56850a960f818c3c3d77" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::loader.diff</definition>
+        <argsstring></argsstring>
+        <name>diff</name>
+        <qualifiedname>src.data.loader.diff</qualifiedname>
+        <initializer>=  np.max(np.abs(<ref refid="namespacesrc_1_1data_1_1loader_1a209783d013259d2db490314db9d92272" kindref="member">full_slice_v</ref> - <ref refid="namespacesrc_1_1data_1_1loader_1a037745ef9df930e15469afb3a1127c6d" kindref="member">single_slice_v</ref>))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="261" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="261" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1loader_1a089d5bb344a1115ae3affe163b854505" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.loader.load_experiment</definition>
+        <argsstring>(file_path, experiment_id)</argsstring>
+        <name>load_experiment</name>
+        <qualifiedname>src.data.loader.load_experiment</qualifiedname>
+        <param>
+          <type><ref refid="namespacesrc_1_1data_1_1loader_1ad26b5a98ba19053b925ab9413604d149" kindref="member">file_path</ref></type>
+          <defname>file_path</defname>
+        </param>
+        <param>
+          <type>experiment_id</type>
+          <defname>experiment_id</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Loads data for a specific experiment ID from a .mat file.
+
+Args:
+    file_path (str): Path to the .mat file.
+    experiment_id (int): 1-based experiment index (as in MATLAB).
+    
+Returns:
+    dict: Dictionary containing experimental data (Voltage, Current, Metadata).
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="16" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="16" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1loader_1a94d4cb0c1311c48bcff1d499f8274b0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.loader.get_dataset_info</definition>
+        <argsstring>(file_path)</argsstring>
+        <name>get_dataset_info</name>
+        <qualifiedname>src.data.loader.get_dataset_info</qualifiedname>
+        <param>
+          <type><ref refid="namespacesrc_1_1data_1_1loader_1ad26b5a98ba19053b925ab9413604d149" kindref="member">file_path</ref></type>
+          <defname>file_path</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Retrieves metadata about the dataset without loading full data.
+
+Returns:
+    num_experiments (int)
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="99" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="99" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1loader_1a589e7bca72e24e7bbb8441818124155b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.loader.load_full_dataset</definition>
+        <argsstring>(file_path)</argsstring>
+        <name>load_full_dataset</name>
+        <qualifiedname>src.data.loader.load_full_dataset</qualifiedname>
+        <param>
+          <type><ref refid="namespacesrc_1_1data_1_1loader_1ad26b5a98ba19053b925ab9413604d149" kindref="member">file_path</ref></type>
+          <defname>file_path</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Loads the entire dataset into memory.
+Optimized for bulk loading (reads full arrays).
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="120" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" bodystart="120" bodyend="189"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Data Loading Module.
+
+This module is responsible for loading experimental data from MATLAB (.mat) files.
+It handles both legacy (SciPy) and v7.3 (HDF5/h5py) formats.
+
+Functions:
+- load_experiment(file_path, experiment_id): Loads data for a single experiment.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/loader.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

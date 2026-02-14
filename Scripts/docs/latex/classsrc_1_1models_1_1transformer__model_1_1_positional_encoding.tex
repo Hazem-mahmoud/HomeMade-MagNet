@@ -1,0 +1,156 @@
+\doxysection{src.\+models.\+transformer\+\_\+model.\+Positional\+Encoding Class Reference}
+\hypertarget{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding}{}\label{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding}\index{src.models.transformer\_model.PositionalEncoding@{src.models.transformer\_model.PositionalEncoding}}
+
+
+Inheritance diagram for src.\+models.\+transformer\+\_\+model.\+Positional\+Encoding:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+models.\+transformer\+\_\+model.\+Positional\+Encoding:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a9bec562f3cfbfb7ec59d2faf8b9fd450}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, int d\+\_\+model, float \doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_adc9404435d2aff36572de4adcfbbb759}{dropout}}=0.\+1, int max\+\_\+len=5000)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a51a0de3ad593a089d39da0939ec33a22}{forward}} (self, x)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_adc9404435d2aff36572de4adcfbbb759}{dropout}} = nn.\+Dropout(p=dropout)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Injects some information about the relative or absolute position of the tokens in the sequence.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00006}{6}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a9bec562f3cfbfb7ec59d2faf8b9fd450}\index{src.models.transformer\_model.PositionalEncoding@{src.models.transformer\_model.PositionalEncoding}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.models.transformer\_model.PositionalEncoding@{src.models.transformer\_model.PositionalEncoding}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a9bec562f3cfbfb7ec59d2faf8b9fd450} 
+src.\+models.\+transformer\+\_\+model.\+Positional\+Encoding.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{d\+\_\+model}{, }\item[{float }]{dropout}{ = {\ttfamily 0.1}, }\item[{int }]{max\+\_\+len}{ = {\ttfamily 5000}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00010}{10}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ d\_model:\ int,\ dropout:\ float\ =\ 0.1,\ max\_len:\ int\ =\ 5000): }
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ super().\_\_init\_\_() }
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ self.dropout\ =\ nn.Dropout(p=dropout) }
+\DoxyCodeLine{00013\  }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Compute\ the\ positional\ encodings\ once\ in\ log\ space. }}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ position\ =\ torch.arange(max\_len).unsqueeze(1)\  }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ div\_term\ =\ torch.exp(torch.arange(0,\ d\_model,\ 2)\ *\ (-\/math.log(10000.0)\ /\ d\_model)) }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ pe\ =\ torch.zeros(max\_len,\ d\_model) }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ pe[:,\ 0::2]\ =\ torch.sin(position\ *\ div\_term) }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ pe[:,\ 1::2]\ =\ torch.cos(position\ *\ div\_term) }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ self.register\_buffer(\textcolor{stringliteral}{'pe'},\ pe) }
+\DoxyCodeLine{00021\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{transformer__model_8py_source_l00010}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{transformer__model_8py_source_l00010}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a9bec562f3cfbfb7ec59d2faf8b9fd450_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a9bec562f3cfbfb7ec59d2faf8b9fd450_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a51a0de3ad593a089d39da0939ec33a22}\index{src.models.transformer\_model.PositionalEncoding@{src.models.transformer\_model.PositionalEncoding}!forward@{forward}}
+\index{forward@{forward}!src.models.transformer\_model.PositionalEncoding@{src.models.transformer\_model.PositionalEncoding}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a51a0de3ad593a089d39da0939ec33a22} 
+src.\+models.\+transformer\+\_\+model.\+Positional\+Encoding.\+forward (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Args:
+    x: Tensor, shape [batch_size, seq_len, embedding_dim]
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00022}{22}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{def\ }forward(self,\ x): }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args: }}
+\DoxyCodeLine{00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ x:\ Tensor,\ shape\ [batch\_size,\ seq\_len,\ embedding\_dim] }}
+\DoxyCodeLine{00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ x\ =\ x\ +\ self.pe[:x.size(1)] }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.dropout(x) }
+\DoxyCodeLine{00029\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{transformer__model_8py_source_l00012}{dropout}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_adc9404435d2aff36572de4adcfbbb759}\index{src.models.transformer\_model.PositionalEncoding@{src.models.transformer\_model.PositionalEncoding}!dropout@{dropout}}
+\index{dropout@{dropout}!src.models.transformer\_model.PositionalEncoding@{src.models.transformer\_model.PositionalEncoding}}
+\doxysubsubsection{\texorpdfstring{dropout}{dropout}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_adc9404435d2aff36572de4adcfbbb759} 
+src.\+models.\+transformer\+\_\+model.\+Positional\+Encoding.\+dropout = nn.\+Dropout(p=dropout)}
+
+
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00012}{12}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{transformer__model_8py_source_l00022}{forward()}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+models/\+\doxymbox{\hyperlink{transformer__model_8py}{transformer\+\_\+model.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="transformer__model_8py" kind="file" language="Python">
+    <compoundname>transformer_model.py</compoundname>
+    <innerclass refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding" prot="public">src::models::transformer_model::PositionalEncoding</innerclass>
+    <innerclass refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network" prot="public">src::models::transformer_model::TransformerNetwork</innerclass>
+    <innernamespace refid="namespacesrc">src</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models">src::models</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models_1_1transformer__model">src::models::transformer_model</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="namespacesrc_1_1models_1_1transformer__model" refkind="compound"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>torch</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>torch.nn<sp/></highlight><highlight class="keyword">as</highlight><highlight class="normal"><sp/>nn</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>math</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding" kindref="compound">PositionalEncoding</ref>(nn.Module):</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="8"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Injects<sp/>some<sp/>information<sp/>about<sp/>the<sp/>relative<sp/>or<sp/>absolute<sp/>position<sp/>of<sp/>the<sp/>tokens<sp/>in<sp/>the<sp/>sequence.</highlight></codeline>
+<codeline lineno="9"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a9bec562f3cfbfb7ec59d2faf8b9fd450" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a9bec562f3cfbfb7ec59d2faf8b9fd450" kindref="member">__init__</ref>(self,<sp/>d_model:<sp/>int,<sp/>dropout:<sp/>float<sp/>=<sp/>0.1,<sp/>max_len:<sp/>int<sp/>=<sp/>5000):</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>super().<ref refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a9bec562f3cfbfb7ec59d2faf8b9fd450" kindref="member">__init__</ref>()</highlight></codeline>
+<codeline lineno="12" refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1adc9404435d2aff36572de4adcfbbb759" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1adc9404435d2aff36572de4adcfbbb759" kindref="member">dropout</ref><sp/>=<sp/>nn.Dropout(p=dropout)</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Compute<sp/>the<sp/>positional<sp/>encodings<sp/>once<sp/>in<sp/>log<sp/>space.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>position<sp/>=<sp/>torch.arange(max_len).unsqueeze(1)<sp/></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>div_term<sp/>=<sp/>torch.exp(torch.arange(0,<sp/>d_model,<sp/>2)<sp/>*<sp/>(-math.log(10000.0)<sp/>/<sp/>d_model))</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pe<sp/>=<sp/>torch.zeros(max_len,<sp/>d_model)</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pe[:,<sp/>0::2]<sp/>=<sp/>torch.sin(position<sp/>*<sp/>div_term)</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pe[:,<sp/>1::2]<sp/>=<sp/>torch.cos(position<sp/>*<sp/>div_term)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>self.register_buffer(</highlight><highlight class="stringliteral">&apos;pe&apos;</highlight><highlight class="normal">,<sp/>pe)</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a51a0de3ad593a089d39da0939ec33a22" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a51a0de3ad593a089d39da0939ec33a22" kindref="member">forward</ref>(self,<sp/>x):</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="24"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Args:</highlight></codeline>
+<codeline lineno="25"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x:<sp/>Tensor,<sp/>shape<sp/>[batch_size,<sp/>seq_len,<sp/>embedding_dim]</highlight></codeline>
+<codeline lineno="26"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x<sp/>=<sp/>x<sp/>+<sp/>self.pe[:x.size(1)]</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1adc9404435d2aff36572de4adcfbbb759" kindref="member">dropout</ref>(x)</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network" kindref="compound">TransformerNetwork</ref>(nn.Module):</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="32"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>Fuzhou&apos;s<sp/>Transformer-based<sp/>architecture.</highlight></codeline>
+<codeline lineno="33"><highlight class="stringliteral"><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a0e58e9c4308d8256c1dc05b10bcfe667" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a0e58e9c4308d8256c1dc05b10bcfe667" kindref="member">__init__</ref>(self,<sp/></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B_in_channel=1024,<sp/></highlight><highlight class="comment">#<sp/>Default<sp/>sequence<sp/>length</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dim_hidden=24,<sp/><sp/></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dim_proj_fusion=40,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n_encoder_layers=1,</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n_heads=4,</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dropout_encoder=0.0,</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dropout_pos_enc=0.0,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dim_feedforward_encoder=40,</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>):<sp/></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>super().<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a0e58e9c4308d8256c1dc05b10bcfe667" kindref="member">__init__</ref>()<sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Projection<sp/>for<sp/>B-field<sp/>input:<sp/>maps<sp/>scalar<sp/>input<sp/>to<sp/>hidden<sp/>dimension</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a1d5f0e15438cd9cbc513ec33b551df2c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a1d5f0e15438cd9cbc513ec33b551df2c" kindref="member">proj_B</ref><sp/>=<sp/>nn.Sequential(</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nn.Linear(1,<sp/>dim_hidden),</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nn.Tanh(),</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nn.Linear(dim_hidden,<sp/>dim_hidden))</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a689d2bd691d5160b5c6f7fa9c1961161" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a689d2bd691d5160b5c6f7fa9c1961161" kindref="member">positional_encoding_layer</ref><sp/>=<sp/><ref refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding" kindref="compound">PositionalEncoding</ref>(d_model=dim_hidden,<sp/></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dropout=dropout_pos_enc,<sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>max_len=B_in_channel)</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Transformer<sp/>Encoder<sp/>Layer<sp/>definition</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>encoder_layer<sp/>=<sp/>nn.TransformerEncoderLayer(</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>d_model=dim_hidden,<sp/></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nhead=n_heads,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dim_feedforward=dim_feedforward_encoder,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dropout=dropout_encoder,</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>activation=</highlight><highlight class="stringliteral">&quot;relu&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>batch_first=</highlight><highlight class="keyword">True</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>)<sp/></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66" refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1aea40a2129ffd02f4a12418ba24670037" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1aea40a2129ffd02f4a12418ba24670037" kindref="member">encoder</ref><sp/>=<sp/>nn.TransformerEncoder(encoder_layer=encoder_layer,<sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>num_layers=n_encoder_layers,<sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>norm=</highlight><highlight class="keywordtype">None</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Fusion<sp/>Layer:<sp/>Combines<sp/>Transformer<sp/>output<sp/>(B-field<sp/>features)<sp/>with<sp/>Temp<sp/>and<sp/>Freq</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a4785766fb29a657e28d6aa0c645cffed" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a4785766fb29a657e28d6aa0c645cffed" kindref="member">proj_fusion</ref><sp/>=<sp/>nn.Sequential(</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nn.Linear(dim_hidden+2,<sp/>dim_proj_fusion),</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nn.Tanh(),</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nn.Linear(dim_proj_fusion,<sp/>dim_proj_fusion),</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nn.Tanh(),</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nn.Linear(dim_proj_fusion,<sp/>1))</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Final<sp/>Regressor<sp/>to<sp/>predict<sp/>Power<sp/>Loss<sp/>from<sp/>fused<sp/>features</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a7d529f2c456e9ac3906ad019c9aa9912" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a7d529f2c456e9ac3906ad019c9aa9912" kindref="member">regressor</ref><sp/>=<sp/>nn.Sequential(</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nn.Linear(B_in_channel,<sp/>1))</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">def<sp/></highlight><highlight class="normal"><ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" kindref="member">forward</ref>(self,<sp/>b_seq,<sp/>scalars):</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="84"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Unified<sp/>Interface<sp/>Wrapper.</highlight></codeline>
+<codeline lineno="85"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="86"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Args:</highlight></codeline>
+<codeline lineno="87"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b_seq<sp/>(Tensor):<sp/>Input<sp/>B-field<sp/>curve,<sp/>shape<sp/>(batch_size,<sp/>seq_len,<sp/>1).</highlight></codeline>
+<codeline lineno="88"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>scalars<sp/>(Tensor):<sp/>Shape<sp/>(batch_size,<sp/>3)<sp/>-&gt;<sp/>Freq,<sp/>Temp,<sp/>Hdc.</highlight></codeline>
+<codeline lineno="89"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Unpack<sp/>scalars</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Dataset<sp/>returns:<sp/>Freq,<sp/>Temp,<sp/>Hdc</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Freq<sp/>=<sp/>scalars[:,<sp/>0].unsqueeze(1)<sp/></highlight><highlight class="comment">#<sp/>(bs,<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Temp<sp/>=<sp/>scalars[:,<sp/>1].unsqueeze(1)<sp/></highlight><highlight class="comment">#<sp/>(bs,<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B_curve<sp/>=<sp/>b_seq</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>batch_size,<sp/>len_seq,<sp/>feat_dim<sp/>=<sp/>B_curve.shape</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Fuzhou<sp/>Logic</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B_curve<sp/>=<sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a1d5f0e15438cd9cbc513ec33b551df2c" kindref="member">proj_B</ref>(B_curve)<sp/></highlight><highlight class="comment">#<sp/>(bs,1024,1)-&gt;(bs,1024,24)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Add<sp/>Positional<sp/>Encoding</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B_curve<sp/>=<sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a689d2bd691d5160b5c6f7fa9c1961161" kindref="member">positional_encoding_layer</ref>(B_curve)</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B_curve<sp/>=<sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1aea40a2129ffd02f4a12418ba24670037" kindref="member">encoder</ref>(B_curve)<sp/></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Repeat<sp/>Temp<sp/>and<sp/>Freq<sp/>to<sp/>match<sp/>sequence<sp/>length<sp/>for<sp/>concatenation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Temp_rep<sp/>=<sp/>Temp.unsqueeze(1).repeat(1,<sp/>len_seq,<sp/>1)<sp/></highlight><highlight class="comment">#<sp/>(bs,1)-&gt;(bs,1024,1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Freq_rep<sp/>=<sp/>Freq.unsqueeze(1).repeat(1,<sp/>len_seq,<sp/>1)<sp/></highlight><highlight class="comment">#<sp/>(bs,1)-&gt;(bs,1024,1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">#<sp/>Fuse<sp/>B-field<sp/>features<sp/>with<sp/>Temp<sp/>and<sp/>Freq</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>feat<sp/>=<sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a4785766fb29a657e28d6aa0c645cffed" kindref="member">proj_fusion</ref>(torch.cat([B_curve,<sp/>Temp_rep,<sp/>Freq_rep],<sp/>dim=2))<sp/></highlight><highlight class="comment">#<sp/>(bs,1024,26)-&gt;(bs,1024,1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>feat<sp/>=<sp/>feat.reshape(batch_size,<sp/>-1)<sp/></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>P_pred<sp/>=<sp/>self.<ref refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a7d529f2c456e9ac3906ad019c9aa9912" kindref="member">regressor</ref>(feat)<sp/></highlight><highlight class="comment">#<sp/>(bs,1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>P_pred</highlight></codeline>
+    </programlisting>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py"/>
+  </compounddef>
+</doxygen>

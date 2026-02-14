@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="models_2____init_____8py" kind="file" language="Python">
+    <compoundname>__init__.py</compoundname>
+    <innernamespace refid="namespacesrc">src</innernamespace>
+    <innernamespace refid="namespacesrc_1_1models">src::models</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1" refid="namespacesrc_1_1models" refkind="compound"><highlight class="stringliteral">&quot;&quot;&quot;</highlight></codeline>
+<codeline lineno="2"><highlight class="stringliteral">Neural<sp/>Network<sp/>Models<sp/>Module.</highlight></codeline>
+<codeline lineno="3"><highlight class="stringliteral">&quot;&quot;&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>.scaler_model<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>ScalerNetwork</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>.sequence_model<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>SequenceToScalerNetwork</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>.seq2seq_model<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>Seq2SeqNetwork</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>.cnn_model<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>CNNNetwork</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">from</highlight><highlight class="normal"><sp/>.transformer_model<sp/></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>TransformerNetwork</highlight></codeline>
+    </programlisting>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/__init__.py"/>
+  </compounddef>
+</doxygen>

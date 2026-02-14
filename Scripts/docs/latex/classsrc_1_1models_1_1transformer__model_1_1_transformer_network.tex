@@ -1,0 +1,314 @@
+\doxysection{src.\+models.\+transformer\+\_\+model.\+Transformer\+Network Class Reference}
+\hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network}{}\label{classsrc_1_1models_1_1transformer__model_1_1_transformer_network}\index{src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}}
+
+
+Inheritance diagram for src.\+models.\+transformer\+\_\+model.\+Transformer\+Network:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classsrc_1_1models_1_1transformer__model_1_1_transformer_network__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+models.\+transformer\+\_\+model.\+Transformer\+Network:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classsrc_1_1models_1_1transformer__model_1_1_transformer_network__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a0e58e9c4308d8256c1dc05b10bcfe667}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, B\+\_\+in\+\_\+channel=1024, dim\+\_\+hidden=24, dim\+\_\+proj\+\_\+fusion=40, n\+\_\+encoder\+\_\+layers=1, n\+\_\+heads=4, dropout\+\_\+encoder=0.\+0, dropout\+\_\+pos\+\_\+enc=0.\+0, dim\+\_\+feedforward\+\_\+encoder=40)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_ab547eea976cd7f9e58fba2d6f9abfd37}{forward}} (self, b\+\_\+seq, scalars)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a1d5f0e15438cd9cbc513ec33b551df2c}{proj\+\_\+B}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a689d2bd691d5160b5c6f7fa9c1961161}{positional\+\_\+encoding\+\_\+layer}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_aea40a2129ffd02f4a12418ba24670037}{encoder}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a4785766fb29a657e28d6aa0c645cffed}{proj\+\_\+fusion}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a7d529f2c456e9ac3906ad019c9aa9912}{regressor}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Fuzhou's Transformer-based architecture.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00030}{30}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a0e58e9c4308d8256c1dc05b10bcfe667}\index{src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a0e58e9c4308d8256c1dc05b10bcfe667} 
+src.\+models.\+transformer\+\_\+model.\+Transformer\+Network.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{B\+\_\+in\+\_\+channel}{ = {\ttfamily 1024}, }\item[{}]{dim\+\_\+hidden}{ = {\ttfamily 24}, }\item[{}]{dim\+\_\+proj\+\_\+fusion}{ = {\ttfamily 40}, }\item[{}]{n\+\_\+encoder\+\_\+layers}{ = {\ttfamily 1}, }\item[{}]{n\+\_\+heads}{ = {\ttfamily 4}, }\item[{}]{dropout\+\_\+encoder}{ = {\ttfamily 0.0}, }\item[{}]{dropout\+\_\+pos\+\_\+enc}{ = {\ttfamily 0.0}, }\item[{}]{dim\+\_\+feedforward\+\_\+encoder}{ = {\ttfamily 40}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00034}{34}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ ):\  }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ super().\_\_init\_\_()\  }
+\DoxyCodeLine{00045\  }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Projection\ for\ B-\/field\ input:\ maps\ scalar\ input\ to\ hidden\ dimension }}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ self.proj\_B\ =\ nn.Sequential( }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(1,\ dim\_hidden), }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(), }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_hidden,\ dim\_hidden)) }
+\DoxyCodeLine{00051\  }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ self.positional\_encoding\_layer\ =\ PositionalEncoding(d\_model=dim\_hidden,\  }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dropout=dropout\_pos\_enc,\  }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_len=B\_in\_channel) }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Transformer\ Encoder\ Layer\ definition }}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ encoder\_layer\ =\ nn.TransformerEncoderLayer( }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ d\_model=dim\_hidden,\  }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ nhead=n\_heads, }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ dim\_feedforward=dim\_feedforward\_encoder, }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ dropout=dropout\_encoder, }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ activation=\textcolor{stringliteral}{"{}relu"{}}, }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ batch\_first=\textcolor{keyword}{True} }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ )\  }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ self.encoder\ =\ nn.TransformerEncoder(encoder\_layer=encoder\_layer,\  }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=n\_encoder\_layers,\  }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ norm=\textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fusion\ Layer:\ Combines\ Transformer\ output\ (B-\/field\ features)\ with\ Temp\ and\ Freq }}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ self.proj\_fusion\ =\ nn.Sequential( }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_hidden+2,\ dim\_proj\_fusion), }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(), }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_proj\_fusion,\ dim\_proj\_fusion), }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(), }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_proj\_fusion,\ 1)) }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Final\ Regressor\ to\ predict\ Power\ Loss\ from\ fused\ features }}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ self.regressor\ =\ nn.Sequential( }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(B\_in\_channel,\ 1)) }
+\DoxyCodeLine{00081\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{transformer__model_8py_source_l00043}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{transformer__model_8py_source_l00043}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a0e58e9c4308d8256c1dc05b10bcfe667_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a0e58e9c4308d8256c1dc05b10bcfe667_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_ab547eea976cd7f9e58fba2d6f9abfd37}\index{src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}!forward@{forward}}
+\index{forward@{forward}!src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_ab547eea976cd7f9e58fba2d6f9abfd37} 
+src.\+models.\+transformer\+\_\+model.\+Transformer\+Network.\+forward (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{b\+\_\+seq}{, }\item[{}]{scalars}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Unified Interface Wrapper.
+
+Args:
+    b_seq (Tensor): Input B-field curve, shape (batch_size, seq_len, 1).
+    scalars (Tensor): Shape (batch_size, 3) -> Freq, Temp, Hdc.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00082}{82}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{def\ }forward(self,\ b\_seq,\ scalars): }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Unified\ Interface\ Wrapper. }}
+\DoxyCodeLine{00085\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00086\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args: }}
+\DoxyCodeLine{00087\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ b\_seq\ (Tensor):\ Input\ B-\/field\ curve,\ shape\ (batch\_size,\ seq\_len,\ 1). }}
+\DoxyCodeLine{00088\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ scalars\ (Tensor):\ Shape\ (batch\_size,\ 3)\ -\/>\ Freq,\ Temp,\ Hdc. }}
+\DoxyCodeLine{00089\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Unpack\ scalars }}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Dataset\ returns:\ Freq,\ Temp,\ Hdc }}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ Freq\ =\ scalars[:,\ 0].unsqueeze(1)\ \textcolor{comment}{\#\ (bs,\ 1) }}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ Temp\ =\ scalars[:,\ 1].unsqueeze(1)\ \textcolor{comment}{\#\ (bs,\ 1) }}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ B\_curve\ =\ b\_seq }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ batch\_size,\ len\_seq,\ feat\_dim\ =\ B\_curve.shape }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fuzhou\ Logic }}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ B\_curve\ =\ self.proj\_B(B\_curve)\ \textcolor{comment}{\#\ (bs,1024,1)-\/>(bs,1024,24) }}
+\DoxyCodeLine{00101\  }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Add\ Positional\ Encoding }}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ B\_curve\ =\ self.positional\_encoding\_layer(B\_curve) }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ B\_curve\ =\ self.encoder(B\_curve)\  }
+\DoxyCodeLine{00105\  }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Repeat\ Temp\ and\ Freq\ to\ match\ sequence\ length\ for\ concatenation }}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ Temp\_rep\ =\ Temp.unsqueeze(1).repeat(1,\ len\_seq,\ 1)\ \textcolor{comment}{\#\ (bs,1)-\/>(bs,1024,1) }}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ Freq\_rep\ =\ Freq.unsqueeze(1).repeat(1,\ len\_seq,\ 1)\ \textcolor{comment}{\#\ (bs,1)-\/>(bs,1024,1) }}
+\DoxyCodeLine{00109\  }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fuse\ B-\/field\ features\ with\ Temp\ and\ Freq }}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ feat\ =\ self.proj\_fusion(torch.cat([B\_curve,\ Temp\_rep,\ Freq\_rep],\ dim=2))\ \textcolor{comment}{\#\ (bs,1024,26)-\/>(bs,1024,1) }}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ feat\ =\ feat.reshape(batch\_size,\ -\/1)\  }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ P\_pred\ =\ self.regressor(feat)\ \textcolor{comment}{\#\ (bs,1) }}
+\DoxyCodeLine{00114\  }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ P\_pred }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{seq2seq__model_8py_source_l00023}{src.\+models.\+seq2seq\+\_\+model.\+Seq2\+Seq\+Network.\+encoder}}, \doxymbox{\hyperlink{transformer__model_8py_source_l00066}{encoder}}, \doxymbox{\hyperlink{transformer__model_8py_source_l00052}{positional\+\_\+encoding\+\_\+layer}}, \doxymbox{\hyperlink{transformer__model_8py_source_l00047}{proj\+\_\+B}}, \doxymbox{\hyperlink{transformer__model_8py_source_l00071}{proj\+\_\+fusion}}, and \doxymbox{\hyperlink{transformer__model_8py_source_l00079}{regressor}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_aea40a2129ffd02f4a12418ba24670037}\index{src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}!encoder@{encoder}}
+\index{encoder@{encoder}!src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}}
+\doxysubsubsection{\texorpdfstring{encoder}{encoder}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_aea40a2129ffd02f4a12418ba24670037} 
+src.\+models.\+transformer\+\_\+model.\+Transformer\+Network.\+encoder}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ nn.TransformerEncoder(encoder\_layer=encoder\_layer,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=n\_encoder\_layers,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ norm=\textcolor{keywordtype}{None})}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00066}{66}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{transformer__model_8py_source_l00082}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a689d2bd691d5160b5c6f7fa9c1961161}\index{src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}!positional\_encoding\_layer@{positional\_encoding\_layer}}
+\index{positional\_encoding\_layer@{positional\_encoding\_layer}!src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}}
+\doxysubsubsection{\texorpdfstring{positional\_encoding\_layer}{positional\_encoding\_layer}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a689d2bd691d5160b5c6f7fa9c1961161} 
+src.\+models.\+transformer\+\_\+model.\+Transformer\+Network.\+positional\+\_\+encoding\+\_\+layer}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ PositionalEncoding(d\_model=dim\_hidden,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dropout=dropout\_pos\_enc,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_len=B\_in\_channel)}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00052}{52}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{transformer__model_8py_source_l00082}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a1d5f0e15438cd9cbc513ec33b551df2c}\index{src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}!proj\_B@{proj\_B}}
+\index{proj\_B@{proj\_B}!src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}}
+\doxysubsubsection{\texorpdfstring{proj\_B}{proj\_B}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a1d5f0e15438cd9cbc513ec33b551df2c} 
+src.\+models.\+transformer\+\_\+model.\+Transformer\+Network.\+proj\+\_\+B}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ nn.Sequential(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(1,\ dim\_hidden),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_hidden,\ dim\_hidden))}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00047}{47}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{transformer__model_8py_source_l00082}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a4785766fb29a657e28d6aa0c645cffed}\index{src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}!proj\_fusion@{proj\_fusion}}
+\index{proj\_fusion@{proj\_fusion}!src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}}
+\doxysubsubsection{\texorpdfstring{proj\_fusion}{proj\_fusion}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a4785766fb29a657e28d6aa0c645cffed} 
+src.\+models.\+transformer\+\_\+model.\+Transformer\+Network.\+proj\+\_\+fusion}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ nn.Sequential(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_hidden+2,\ dim\_proj\_fusion),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_proj\_fusion,\ dim\_proj\_fusion),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_proj\_fusion,\ 1))}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00071}{71}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{transformer__model_8py_source_l00082}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a7d529f2c456e9ac3906ad019c9aa9912}\index{src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}!regressor@{regressor}}
+\index{regressor@{regressor}!src.models.transformer\_model.TransformerNetwork@{src.models.transformer\_model.TransformerNetwork}}
+\doxysubsubsection{\texorpdfstring{regressor}{regressor}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a7d529f2c456e9ac3906ad019c9aa9912} 
+src.\+models.\+transformer\+\_\+model.\+Transformer\+Network.\+regressor}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ nn.Sequential(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(B\_in\_channel,\ 1))}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{transformer__model_8py_source_l00079}{79}} of file \doxymbox{\hyperlink{transformer__model_8py_source}{transformer\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{transformer__model_8py_source_l00082}{forward()}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+models/\+\doxymbox{\hyperlink{transformer__model_8py}{transformer\+\_\+model.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,109 @@
+\doxysection{D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+data/\+preprocessing.py File Reference}
+\hypertarget{preprocessing_8py}{}\label{preprocessing_8py}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacesrc}{src}}
+\item 
+namespace \doxymbox{\hyperlink{namespacesrc_1_1data}{src.\+data}}
+\item 
+namespace \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing}{src.\+data.\+preprocessing}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050}{src.\+data.\+preprocessing.\+normalize\+\_\+data}} (\doxymbox{\hyperlink{namespacesrc_1_1data}{data}}, method=\textquotesingle{}standard\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{stats}}=None)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a84f013aee5c17ec66380873ecbf8445f}{src.\+data.\+preprocessing.\+prepare\+\_\+dataset}} (features, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a2f8ed3af33832e2be099a7ab6210c919}{targets}}, test\+\_\+ratio=0.\+2, norm\+\_\+config=None)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}{src.\+data.\+preprocessing.\+calculate\+\_\+flux\+\_\+density}} (voltage, sampling\+\_\+time, secondary\+\_\+turns, effective\+\_\+area)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}{src.\+data.\+preprocessing.\+calculate\+\_\+magnetizing\+\_\+force}} (current, primary\+\_\+turns, effective\+\_\+length)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3b6e1a1fc4cd9191d7f6963330cd6b4f}{src.\+data.\+preprocessing.\+calculate\+\_\+volumetric\+\_\+loss}} (b\+\_\+field, h\+\_\+field, frequency)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3cfbef7569b765019480a5000aca2586}{src.\+data.\+preprocessing.\+load\+\_\+config}} (\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8dd6c815fe028469eda1f8a4ea6ddb3f}{config\+\_\+path}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4bff0b7a0c8070a26001c86ed09d6b93}{src.\+data.\+preprocessing.\+process\+\_\+magnet\+\_\+dataset}} (voltage, current, frequency, mag\+\_\+props, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330}{dt}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a546ef5b271eed66755f8f8595c686a4a}{model\+\_\+type}}=\textquotesingle{}scaler\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8dd6c815fe028469eda1f8a4ea6ddb3f}{config\+\_\+path}}=None, extra\+\_\+features=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{src.\+data.\+preprocessing.\+MAT\+\_\+\+FILE\+\_\+\+NAME}} = \textquotesingle{}3C90\+\_\+\+TX-\/25-\/15-\/10\+\_\+\+Data1\+\_\+\+Cycle.\+mat\textquotesingle{}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{src.\+data.\+preprocessing.\+current\+\_\+dir}} = os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+))
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}{src.\+data.\+preprocessing.\+data\+\_\+dir}} = os.\+path.\+abspath(os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}))
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a9aa710813cf9cccdd625eab33f3ca563}{src.\+data.\+preprocessing.\+possible\+\_\+path\+\_\+1}} = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}{data\+\_\+dir}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab18c1f18f4a69d9fd6c3aec8ed65085c}{src.\+data.\+preprocessing.\+possible\+\_\+path\+\_\+2}} = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}{data\+\_\+dir}}, \textquotesingle{}Scripts\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ad38589b31bd58842a55947800239789b}{src.\+data.\+preprocessing.\+mat\+\_\+file\+\_\+path}} = os.\+path.\+abspath(os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}}))
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{src.\+data.\+preprocessing.\+full\+\_\+data}} = load\+\_\+full\+\_\+dataset(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ad38589b31bd58842a55947800239789b}{mat\+\_\+file\+\_\+path}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6b69238e4448b5ea0c2cbbf35979c47f}{src.\+data.\+preprocessing.\+volts}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8c26c60bf5709d787cd66fb117a302d9}{src.\+data.\+preprocessing.\+amps}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}current\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af26152f3250702a4b01931111019e0c5}{src.\+data.\+preprocessing.\+freqs}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}freq\textquotesingle{}]\+
+\item 
+dict \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{src.\+data.\+preprocessing.\+props}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330}{src.\+data.\+preprocessing.\+dt}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}meta\textquotesingle{}]\+\+[\textquotesingle{}dt\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8dd6c815fe028469eda1f8a4ea6ddb3f}{src.\+data.\+preprocessing.\+config\+\_\+path}} = os.\+path.\+abspath(os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}config\textquotesingle{}, \textquotesingle{}config.\+yaml\textquotesingle{}))
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}{src.\+data.\+preprocessing.\+split\+\_\+data}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{src.\+data.\+preprocessing.\+stats}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a546ef5b271eed66755f8f8595c686a4a}{src.\+data.\+preprocessing.\+model\+\_\+type}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{src.\+data.\+preprocessing.\+inputs}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}{split\+\_\+data}}\+[\textquotesingle{}train\textquotesingle{}]\+\+[\textquotesingle{}inputs\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a2f8ed3af33832e2be099a7ab6210c919}{src.\+data.\+preprocessing.\+targets}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}{split\+\_\+data}}\+[\textquotesingle{}train\textquotesingle{}]\+\+[\textquotesingle{}targets\textquotesingle{}]\+
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af52e06ab0bf85fb402ea9e26bfa33375}{src.\+data.\+preprocessing.\+N\+\_\+train}} = len(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}}\+[\textquotesingle{}B\textquotesingle{}]\+) if \textquotesingle{}B\textquotesingle{} in \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} else len(list(inputs.\+values())\+[0]\+)
+\item 
+int \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{src.\+data.\+preprocessing.\+idx}} = 73680
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ac80408f309e7a21705098af0d10522eb}{src.\+data.\+preprocessing.\+raw\+\_\+v}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6b69238e4448b5ea0c2cbbf35979c47f}{volts}}\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6ba3896be6c71afcf461900cac1b2a11}{src.\+data.\+preprocessing.\+raw\+\_\+i}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8c26c60bf5709d787cd66fb117a302d9}{amps}}\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a713428b99171b0c68757c056b092e1ea}{src.\+data.\+preprocessing.\+B\+\_\+norm}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}}\+[\textquotesingle{}B\textquotesingle{}]\+\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+ if \textquotesingle{}B\textquotesingle{} in \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} else None
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a43df187d3d218aa26b00bf2aba674580}{src.\+data.\+preprocessing.\+H\+\_\+norm}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}}\+[\textquotesingle{}H\textquotesingle{}]\+\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+ if \textquotesingle{}H\textquotesingle{} in \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} else None
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a376e5f4d2451407dda1a6dac62031072}{src.\+data.\+preprocessing.\+B\+\_\+raw}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}{calculate\+\_\+flux\+\_\+density}}(raw\+\_\+v.\+reshape(1, -\/1), \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330}{dt}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}N\+\_\+sec\textquotesingle{}]\+, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}Ae\textquotesingle{}]\+).flatten()
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ac0b8b7e99f204297407afffe99987a00}{src.\+data.\+preprocessing.\+H\+\_\+raw}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}{calculate\+\_\+magnetizing\+\_\+force}}(raw\+\_\+i.\+reshape(1, -\/1), \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}N\+\_\+prim\textquotesingle{}]\+, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}Le\textquotesingle{}]\+).flatten()
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a434d34720d1a32069f3b54b918165c66}{src.\+data.\+preprocessing.\+fig}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4360bdf792033574f76644feaf8f60c}{src.\+data.\+preprocessing.\+axes}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aa153a91dd0990baac28ae7f4f68c1688}{src.\+data.\+preprocessing.\+figsize}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a15f9ffafb007492caaa7769ed638117d}{src.\+data.\+preprocessing.\+ax}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4360bdf792033574f76644feaf8f60c}{axes}}\+[0, 0]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a9fe1578120f646f0edc1518f37bc5c58}{src.\+data.\+preprocessing.\+label}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af33201b48098689fcd6c06c9d3110501}{src.\+data.\+preprocessing.\+color}}
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aef56d257937ab4e2a7ae70154e50bb44}{src.\+data.\+preprocessing.\+txt}} = f"{}\+Mean:\+ \{\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{stats}}\+[\textquotesingle{}B\textquotesingle{}]\+.get(\textquotesingle{}mean\textquotesingle{}, 0):\+.\+2e\}\textbackslash{}n\+Std:\+ \{\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{stats}}\+[\textquotesingle{}B\textquotesingle{}]\+.get(\textquotesingle{}std\textquotesingle{}, 1):\+.\+2e\}"{}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6fb2610fc598ace2f756a8c3463a8ad0}{src.\+data.\+preprocessing.\+transform}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a26bc645e7092a58d5c7896f23d9cafd1}{src.\+data.\+preprocessing.\+trans\+Axes}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a1874e79ffb69245ac9cc62eface5af43}{src.\+data.\+preprocessing.\+verticalalignment}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a32d2404c107da962891d072caab44cc9}{src.\+data.\+preprocessing.\+bbox}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ac7809073c7e93974cd000ea8e1b50566}{src.\+data.\+preprocessing.\+ha}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ad7274507e2fa183880a7e9e36b8280e0}{src.\+data.\+preprocessing.\+save\+\_\+path}} = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}normalization\+\_\+check.\+png\textquotesingle{})
+\end{DoxyCompactItemize}

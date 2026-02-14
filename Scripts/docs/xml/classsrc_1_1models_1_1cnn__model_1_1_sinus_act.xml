@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1cnn__model_1_1_sinus_act" kind="class" language="Python" prot="public">
+    <compoundname>src::models::cnn_model::SinusAct</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_sinus_act_1a0c6e1c60a389bb8b1e6c4118b201ec39" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.SinusAct.forward</definition>
+        <argsstring>(self, x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.cnn_model.SinusAct.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>x</type>
+          <defname>x</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="24" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="24" bodyend="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.SinusAct</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_sinus_act"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.SinusAct</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_sinus_act"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="23" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="23" bodyend="26"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_sinus_act_1a0c6e1c60a389bb8b1e6c4118b201ec39" prot="public" virt="non-virtual"><scope>src::models::cnn_model::SinusAct</scope><name>forward</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

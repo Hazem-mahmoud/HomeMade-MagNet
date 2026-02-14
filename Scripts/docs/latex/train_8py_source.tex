@@ -1,0 +1,118 @@
+\doxysection{train.\+py}
+\hypertarget{train_8py_source}{}\label{train_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/train.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/train.py}}
+\doxymbox{\hyperlink{train_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1training_1_1train}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00002}00002\ \textcolor{stringliteral}{Training\ Loop\ Module.}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00004}00004\ \textcolor{stringliteral}{This\ module\ contains\ the\ logic\ for\ training\ the\ neural\ networks.}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00005}00005\ \textcolor{stringliteral}{It\ includes\ the\ training\ loop,\ validation\ step,\ loss\ calculation,\ and\ checkpointing.}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00008}00008\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00009}00009\ \textcolor{keyword}{import}\ torch.nn\ \textcolor{keyword}{as}\ nn}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00010}00010\ \textcolor{keyword}{import}\ torch.optim\ \textcolor{keyword}{as}\ optim}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00011}00011\ \textcolor{keyword}{from}\ tqdm\ \textcolor{keyword}{import}\ tqdm}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00012}00012\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00013}00013\ \textcolor{keyword}{import}\ copy}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00015}\doxymbox{\hyperlink{namespacesrc_1_1training_1_1train_a8ae500222173487c67172ff4a32e7c15}{00015}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1training_1_1train_a8ae500222173487c67172ff4a32e7c15}{train\_model}}(model,\ train\_loader,\ val\_loader,\ config,\ device='cpu'):}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00016}00016\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ Generic\ training\ loop.}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00020}00020\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\ (nn.Module):\ The\ model\ to\ train.}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00021}00021\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ train\_loader\ (DataLoader):\ Training\ data.}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00022}00022\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ val\_loader\ (DataLoader):\ Validation\ data.}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00023}00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ config\ (dict):\ Configuration\ dictionary\ (lr,\ epochs,\ save\_dir).}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00024}00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ device\ (str):\ 'cpu'\ or\ 'cuda'.}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00026}00026\ \textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00027}00027\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\ (nn.Module):\ Trained\ model\ (best\ weights).}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00028}00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ history\ (dict):\ Training\ history\ (loss).}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00029}00029\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00030}00030\ \ \ \ \ model\ =\ model.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00031}00031\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00032}00032\ \ \ \ \ criterion\ =\ nn.MSELoss()}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00033}00033\ \ \ \ \ optimizer\ =\ optim.Adam(model.parameters(),\ lr=config.get(\textcolor{stringliteral}{'learning\_rate'},\ 0.001))}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00034}00034\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00035}00035\ \ \ \ \ num\_epochs\ =\ config.get(\textcolor{stringliteral}{'epochs'},\ 100)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00036}00036\ \ \ \ \ save\_dir\ =\ config.get(\textcolor{stringliteral}{'save\_dir'},\ \textcolor{stringliteral}{'checkpoints'})}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00037}00037\ \ \ \ \ os.makedirs(save\_dir,\ exist\_ok=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00038}00038\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00039}00039\ \ \ \ \ best\_loss\ =\ float(\textcolor{stringliteral}{'inf'})}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00040}00040\ \ \ \ \ best\_model\_wts\ =\ copy.deepcopy(model.state\_dict())}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00041}00041\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00042}00042\ \ \ \ \ history\ =\ \{\textcolor{stringliteral}{'train\_loss'}:\ [],\ \textcolor{stringliteral}{'val\_loss'}:\ []\}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00043}00043\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{for}\ epoch\ \textcolor{keywordflow}{in}\ range(num\_epochs):}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Training\ Phase}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ model.train()}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ running\_loss\ =\ 0.0}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Use\ tqdm\ for\ progress\ bar\ if\ interactive}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ pbar\ =\ tqdm(train\_loader,\ desc=f\textcolor{stringliteral}{"{}Epoch\ \{epoch+1\}/\{num\_epochs\}"{}})}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ batch\ \textcolor{keywordflow}{in}\ pbar:}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(batch)\ ==\ 3:}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ scalars,\ targets\ =\ batch}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scalars\ =\ scalars.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs,\ scalars)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ targets\ =\ batch}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ optimizer.zero\_grad()}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ loss\ =\ criterion(outputs,\ targets)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ loss.backward()}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ optimizer.step()}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ running\_loss\ +=\ loss.item()\ *\ inputs.size(0)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ pbar.set\_postfix(\{\textcolor{stringliteral}{'loss'}:\ loss.item()\})}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ epoch\_loss\ =\ running\_loss\ /\ len(train\_loader.dataset)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ history[\textcolor{stringliteral}{'train\_loss'}].append(epoch\_loss)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Validation\ Phase}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ model.eval()}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ val\_loss\ =\ 0.0}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ torch.no\_grad():}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ batch\ \textcolor{keywordflow}{in}\ val\_loader:}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(batch)\ ==\ 3:}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ scalars,\ targets\ =\ batch}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scalars\ =\ scalars.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs,\ scalars)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ targets\ =\ batch}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loss\ =\ criterion(outputs,\ targets)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\_loss\ +=\ loss.item()\ *\ inputs.size(0)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ epoch\_val\_loss\ =\ val\_loss\ /\ len(val\_loader.dataset)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ history[\textcolor{stringliteral}{'val\_loss'}].append(epoch\_val\_loss)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Epoch\ \{epoch+1\}/\{num\_epochs\}\ -\/\ Train\ Loss:\ \{epoch\_loss:.4f\}\ -\/\ Val\ Loss:\ \{epoch\_val\_loss:.4f\}"{}})}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Deep\ Copy\ Best\ Model}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ epoch\_val\_loss\ <\ best\_loss:}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ best\_loss\ =\ epoch\_val\_loss}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ best\_model\_wts\ =\ copy.deepcopy(model.state\_dict())}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ torch.save(model.state\_dict(),\ os.path.join(save\_dir,\ \textcolor{stringliteral}{'best\_model.pth'}))}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00110}00110\ \ \ \ \ \textcolor{comment}{\#\ Load\ best\ model\ weights}}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00111}00111\ \ \ \ \ model.load\_state\_dict(best\_model\_wts)}
+\DoxyCodeLine{\Hypertarget{train_8py_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{return}\ model,\ history}
+
+\end{DoxyCode}

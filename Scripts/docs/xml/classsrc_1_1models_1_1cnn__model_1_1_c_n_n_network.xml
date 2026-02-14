@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network" kind="class" language="Python" prot="public">
+    <compoundname>src::models::cnn_model::CNNNetwork</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1ad274760febb1e62cc34bc77a87eb609a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.CNNNetwork::tcn</definition>
+        <argsstring></argsstring>
+        <name>tcn</name>
+        <qualifiedname>src.models.cnn_model.CNNNetwork.tcn</qualifiedname>
+        <initializer>=  <ref refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias" kindref="compound">TCNWithScalarsAsBias</ref>(
+            num_input_scalars=3,
+            num_input_ts=input_dim
+        )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="265" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1ae653849afe0c39a658ebeb0cfbe1adc5" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.CNNNetwork::model</definition>
+        <argsstring></argsstring>
+        <name>model</name>
+        <qualifiedname>src.models.cnn_model.CNNNetwork.model</qualifiedname>
+        <initializer>=  <ref refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor" kindref="compound">LossPredictor</ref>(self.tcn)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="269" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="269" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1a9082ef649d9cc32ae3291f6141707de2" compoundref="cnn__model_8py" startline="271" endline="278">src.models.cnn_model.CNNNetwork.forward</referencedby>
+        <referencedby refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1a7dd561364d8c5009fd360aa6e28be1ce" compoundref="scaler__model_8py" startline="40" endline="42">src.models.scaler_model.ScalerNetwork.forward</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1a0f0fa278a2ff3da9ba52ec7e25b5b1c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.CNNNetwork.__init__</definition>
+        <argsstring>(self, input_dim=1, hidden_dim=32, output_dim=1, stats=None)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.cnn_model.CNNNetwork.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>input_dim</type>
+          <defname>input_dim</defname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>hidden_dim</type>
+          <defname>hidden_dim</defname>
+          <defval>32</defval>
+        </param>
+        <param>
+          <type>output_dim</type>
+          <defname>output_dim</defname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>stats</type>
+          <defname>stats</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="254" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="254" bodyend="270"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1a0f0fa278a2ff3da9ba52ec7e25b5b1c4" compoundref="cnn__model_8py" startline="254" endline="270">src.models.cnn_model.CNNNetwork.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1a0f0fa278a2ff3da9ba52ec7e25b5b1c4" compoundref="cnn__model_8py" startline="254" endline="270">src.models.cnn_model.CNNNetwork.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1a9082ef649d9cc32ae3291f6141707de2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.CNNNetwork.forward</definition>
+        <argsstring>(self, b_seq, scalars)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.cnn_model.CNNNetwork.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>b_seq</type>
+          <defname>b_seq</defname>
+        </param>
+        <param>
+          <type>scalars</type>
+          <defname>scalars</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="271" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="271" bodyend="278"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1ae653849afe0c39a658ebeb0cfbe1adc5" compoundref="cnn__model_8py" startline="269">src.models.cnn_model.CNNNetwork.model</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.CNNNetwork</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.CNNNetwork</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="253" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="253" bodyend="278"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1a0f0fa278a2ff3da9ba52ec7e25b5b1c4" prot="public" virt="non-virtual"><scope>src::models::cnn_model::CNNNetwork</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1a9082ef649d9cc32ae3291f6141707de2" prot="public" virt="non-virtual"><scope>src::models::cnn_model::CNNNetwork</scope><name>forward</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1ae653849afe0c39a658ebeb0cfbe1adc5" prot="public" virt="non-virtual"><scope>src::models::cnn_model::CNNNetwork</scope><name>model</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1ad274760febb1e62cc34bc77a87eb609a" prot="public" virt="non-virtual"><scope>src::models::cnn_model::CNNNetwork</scope><name>tcn</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

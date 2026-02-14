@@ -1,0 +1,316 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network" kind="class" language="Python" prot="public">
+    <compoundname>src::models::sequence_model::SequenceToScalerNetwork</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1ab88766e54ae092df9c5cde262599607f" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::hidden_size</definition>
+        <argsstring></argsstring>
+        <name>hidden_size</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.hidden_size</qualifiedname>
+        <initializer>=  hidden_dim</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="16" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a0a4501cfe22ba0478b3e020f1f0bc62a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::lstm</definition>
+        <argsstring></argsstring>
+        <name>lstm</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.lstm</qualifiedname>
+        <initializer>=  nn.LSTM(1, # Fixed to 1 for B-field
+                            hidden_dim,
+                            num_layers=num_layers,
+                            batch_first=True)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="27" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="27" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a018ef8bab5edc89d615350c9b05f3816" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::fc1</definition>
+        <argsstring></argsstring>
+        <name>fc1</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.fc1</qualifiedname>
+        <initializer>=  nn.Linear(hidden_dim+2, 128)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="34" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="34" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a55404c9d459633a2b4c201619fe01243" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::fc2</definition>
+        <argsstring></argsstring>
+        <name>fc2</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.fc2</qualifiedname>
+        <initializer>=  nn.Linear(128, 196)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="35" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="35" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a52d676aebd29df747a9493d23296c35e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::fc3</definition>
+        <argsstring></argsstring>
+        <name>fc3</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.fc3</qualifiedname>
+        <initializer>=  nn.Linear(196, 128)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="36" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="36" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a3c50a795050f23cd8cdcaf8ad3150567" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::fc4</definition>
+        <argsstring></argsstring>
+        <name>fc4</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.fc4</qualifiedname>
+        <initializer>=  nn.Linear(128, 96)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="37" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="37" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a669301bc0a9f176a8e50f3795c3da919" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::fc5</definition>
+        <argsstring></argsstring>
+        <name>fc5</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.fc5</qualifiedname>
+        <initializer>=  nn.Linear(96, 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="38" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="38" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1ab752cc3abd5ad12bb7eb4692dc00d22d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::fc6</definition>
+        <argsstring></argsstring>
+        <name>fc6</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.fc6</qualifiedname>
+        <initializer>=  nn.Linear(32, 32)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="39" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="39" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a15a44bb5843de572a733f09a78062dac" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::fc7</definition>
+        <argsstring></argsstring>
+        <name>fc7</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.fc7</qualifiedname>
+        <initializer>=  nn.Linear(32, 16)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="40" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="40" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aad7cce47030693d268682f918e2e2c85" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::fc8</definition>
+        <argsstring></argsstring>
+        <name>fc8</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.fc8</qualifiedname>
+        <initializer>=  nn.Linear(16, output_dim)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="41" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="41" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a56865212cc7f3c0acf8b3b42561eda42" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork::elu</definition>
+        <argsstring></argsstring>
+        <name>elu</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.elu</qualifiedname>
+        <initializer>=  nn.ELU()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="44" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="44" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a7018cf179decde7211f8f01374c6bd87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork.__init__</definition>
+        <argsstring>(self, input_dim=1, hidden_dim=30, output_dim=1, num_layers=3)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>input_dim</type>
+          <defname>input_dim</defname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>hidden_dim</type>
+          <defname>hidden_dim</defname>
+          <defval>30</defval>
+        </param>
+        <param>
+          <type>output_dim</type>
+          <defname>output_dim</defname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>num_layers</type>
+          <defname>num_layers</defname>
+          <defval>3</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="9" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="13" bodyend="46"/>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a7018cf179decde7211f8f01374c6bd87" compoundref="sequence__model_8py" startline="13" endline="46">src.models.sequence_model.SequenceToScalerNetwork.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a7018cf179decde7211f8f01374c6bd87" compoundref="sequence__model_8py" startline="13" endline="46">src.models.sequence_model.SequenceToScalerNetwork.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.sequence_model.SequenceToScalerNetwork.forward</definition>
+        <argsstring>(self, b_seq, scalars)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.sequence_model.SequenceToScalerNetwork.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>b_seq</type>
+          <defname>b_seq</defname>
+        </param>
+        <param>
+          <type>scalars</type>
+          <defname>scalars</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Unified Interface Wrapper.
+
+Args:
+    b_seq (Tensor): (Batch, Seq, 1)
+    scalars (Tensor): (Batch, 3) -&gt; Freq, Temp, Hdc
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="47" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="47" bodyend="82"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1ab9d159a6db4ae809a48e6c69fdf6fd96" compoundref="cnn__model_8py" startline="18">src.models.cnn_model.Biased_Elu.elu</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a56865212cc7f3c0acf8b3b42561eda42" compoundref="sequence__model_8py" startline="44">src.models.sequence_model.SequenceToScalerNetwork.elu</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a018ef8bab5edc89d615350c9b05f3816" compoundref="sequence__model_8py" startline="34">src.models.sequence_model.SequenceToScalerNetwork.fc1</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a55404c9d459633a2b4c201619fe01243" compoundref="sequence__model_8py" startline="35">src.models.sequence_model.SequenceToScalerNetwork.fc2</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a52d676aebd29df747a9493d23296c35e" compoundref="sequence__model_8py" startline="36">src.models.sequence_model.SequenceToScalerNetwork.fc3</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a3c50a795050f23cd8cdcaf8ad3150567" compoundref="sequence__model_8py" startline="37">src.models.sequence_model.SequenceToScalerNetwork.fc4</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a669301bc0a9f176a8e50f3795c3da919" compoundref="sequence__model_8py" startline="38">src.models.sequence_model.SequenceToScalerNetwork.fc5</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1ab752cc3abd5ad12bb7eb4692dc00d22d" compoundref="sequence__model_8py" startline="39">src.models.sequence_model.SequenceToScalerNetwork.fc6</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a15a44bb5843de572a733f09a78062dac" compoundref="sequence__model_8py" startline="40">src.models.sequence_model.SequenceToScalerNetwork.fc7</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aad7cce47030693d268682f918e2e2c85" compoundref="sequence__model_8py" startline="41">src.models.sequence_model.SequenceToScalerNetwork.fc8</references>
+        <references refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a0a4501cfe22ba0478b3e020f1f0bc62a" compoundref="sequence__model_8py" startline="27">src.models.sequence_model.SequenceToScalerNetwork.lstm</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Bristol&apos;s LSTM Seq2One Architecture.
+</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.sequence_model.SequenceToScalerNetwork</label>
+        <link refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.sequence_model.SequenceToScalerNetwork</label>
+        <link refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="5" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" bodystart="5" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a7018cf179decde7211f8f01374c6bd87" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a56865212cc7f3c0acf8b3b42561eda42" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>elu</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a018ef8bab5edc89d615350c9b05f3816" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>fc1</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a55404c9d459633a2b4c201619fe01243" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>fc2</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a52d676aebd29df747a9493d23296c35e" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>fc3</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a3c50a795050f23cd8cdcaf8ad3150567" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>fc4</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a669301bc0a9f176a8e50f3795c3da919" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>fc5</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1ab752cc3abd5ad12bb7eb4692dc00d22d" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>fc6</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a15a44bb5843de572a733f09a78062dac" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>fc7</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aad7cce47030693d268682f918e2e2c85" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>fc8</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>forward</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1ab88766e54ae092df9c5cde262599607f" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>hidden_size</name></member>
+      <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a0a4501cfe22ba0478b3e020f1f0bc62a" prot="public" virt="non-virtual"><scope>src::models::sequence_model::SequenceToScalerNetwork</scope><name>lstm</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

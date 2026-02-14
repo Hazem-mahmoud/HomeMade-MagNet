@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1scaler__model_1_1_scaler_network" kind="class" language="Python" prot="public">
+    <compoundname>src::models::scaler_model::ScalerNetwork</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ad0e0ef26c530ebc22eeb97a54c08900d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.scaler_model.ScalerNetwork::model</definition>
+        <argsstring></argsstring>
+        <name>model</name>
+        <qualifiedname>src.models.scaler_model.ScalerNetwork.model</qualifiedname>
+        <initializer>=  nn.Sequential(*layers)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py" line="38" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py" bodystart="38" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1a7dd561364d8c5009fd360aa6e28be1ce" compoundref="scaler__model_8py" startline="40" endline="42">src.models.scaler_model.ScalerNetwork.forward</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ab6a59b3ed09285fe7d392e80dd380d79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.scaler_model.ScalerNetwork.__init__</definition>
+        <argsstring>(self, input_dim=3, hidden_dim=64, output_dim=1, num_layers=3)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.scaler_model.ScalerNetwork.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>input_dim</type>
+          <defname>input_dim</defname>
+          <defval>3</defval>
+        </param>
+        <param>
+          <type>hidden_dim</type>
+          <defname>hidden_dim</defname>
+          <defval>64</defval>
+        </param>
+        <param>
+          <type>output_dim</type>
+          <defname>output_dim</defname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>num_layers</type>
+          <defname>num_layers</defname>
+          <defval>3</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Args:
+    input_dim (int): Number of input features (default 3: Freq, Temp, Hdc).
+    hidden_dim (int): Number of neurons in hidden layers.
+    output_dim (int): Number of output features (default 1: Power Loss).
+    num_layers (int): Number of hidden layers.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py" line="12" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py" bodystart="12" bodyend="39"/>
+        <references refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ab6a59b3ed09285fe7d392e80dd380d79" compoundref="scaler__model_8py" startline="12" endline="39">src.models.scaler_model.ScalerNetwork.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ab6a59b3ed09285fe7d392e80dd380d79" compoundref="scaler__model_8py" startline="12" endline="39">src.models.scaler_model.ScalerNetwork.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1a7dd561364d8c5009fd360aa6e28be1ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.scaler_model.ScalerNetwork.forward</definition>
+        <argsstring>(self, x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.scaler_model.ScalerNetwork.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>x</type>
+          <defname>x</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py" line="40" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py" bodystart="40" bodyend="42"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1ae653849afe0c39a658ebeb0cfbe1adc5" compoundref="cnn__model_8py" startline="269">src.models.cnn_model.CNNNetwork.model</references>
+        <references refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ad0e0ef26c530ebc22eeb97a54c08900d" compoundref="scaler__model_8py" startline="38">src.models.scaler_model.ScalerNetwork.model</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.scaler_model.ScalerNetwork</label>
+        <link refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.scaler_model.ScalerNetwork</label>
+        <link refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py" line="11" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py" bodystart="11" bodyend="42"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ab6a59b3ed09285fe7d392e80dd380d79" prot="public" virt="non-virtual"><scope>src::models::scaler_model::ScalerNetwork</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1a7dd561364d8c5009fd360aa6e28be1ce" prot="public" virt="non-virtual"><scope>src::models::scaler_model::ScalerNetwork</scope><name>forward</name></member>
+      <member refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ad0e0ef26c530ebc22eeb97a54c08900d" prot="public" virt="non-virtual"><scope>src::models::scaler_model::ScalerNetwork</scope><name>model</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1training_1_1evaluate" kind="namespace" language="Python">
+    <compoundname>src::training::evaluate</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesrc_1_1training_1_1evaluate_1a894a78b4bcd025081ccbfa5616c1401a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.training.evaluate.evaluate_model</definition>
+        <argsstring>(model, test_loader, device=&apos;cpu&apos;)</argsstring>
+        <name>evaluate_model</name>
+        <qualifiedname>src.training.evaluate.evaluate_model</qualifiedname>
+        <param>
+          <type>model</type>
+          <defname>model</defname>
+        </param>
+        <param>
+          <type>test_loader</type>
+          <defname>test_loader</defname>
+        </param>
+        <param>
+          <type>device</type>
+          <defname>device</defname>
+          <defval>&apos;cpu&apos;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Evaluates the model and returns predictions and metrics.
+
+Args:
+    model (nn.Module): Trained model.
+    test_loader (DataLoader): Test data.
+    device (str): Device.
+    
+Returns:
+    metrics (dict): MSE, MAE, Relative Error.
+    predictions (list): List of pred tensors.
+    targets (list): List of target tensors.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/evaluate.py" line="11" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/evaluate.py" bodystart="11" bodyend="71"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Evaluation Module.
+
+This module provides functions to evaluate model performance on test datasets.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/evaluate.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

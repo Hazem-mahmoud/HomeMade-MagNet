@@ -1,0 +1,145 @@
+\doxysection{src.\+training.\+train Namespace Reference}
+\hypertarget{namespacesrc_1_1training_1_1train}{}\label{namespacesrc_1_1training_1_1train}\index{src.training.train@{src.training.train}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1training_1_1train_a8ae500222173487c67172ff4a32e7c15}{train\+\_\+model}} (model, train\+\_\+loader, val\+\_\+loader, config, device=\textquotesingle{}cpu\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Training Loop Module.
+
+This module contains the logic for training the neural networks.
+It includes the training loop, validation step, loss calculation, and checkpointing.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacesrc_1_1training_1_1train_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacesrc_1_1training_1_1train_a8ae500222173487c67172ff4a32e7c15}\index{src.training.train@{src.training.train}!train\_model@{train\_model}}
+\index{train\_model@{train\_model}!src.training.train@{src.training.train}}
+\doxysubsubsection{\texorpdfstring{train\_model()}{train\_model()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1training_1_1train_a8ae500222173487c67172ff4a32e7c15} 
+src.\+training.\+train.\+train\+\_\+model (\begin{DoxyParamCaption}\item[{}]{model}{, }\item[{}]{train\+\_\+loader}{, }\item[{}]{val\+\_\+loader}{, }\item[{}]{config}{, }\item[{}]{device}{ = {\ttfamily \textquotesingle{}cpu\textquotesingle{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generic training loop.
+
+Args:
+    model (nn.Module): The model to train.
+    train_loader (DataLoader): Training data.
+    val_loader (DataLoader): Validation data.
+    config (dict): Configuration dictionary (lr, epochs, save_dir).
+    device (str): 'cpu' or 'cuda'.
+    
+Returns:
+    model (nn.Module): Trained model (best weights).
+    history (dict): Training history (loss).
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{train_8py_source_l00015}{15}} of file \doxymbox{\hyperlink{train_8py_source}{train.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00015\ \textcolor{keyword}{def\ }train\_model(model,\ train\_loader,\ val\_loader,\ config,\ device='cpu'): }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{\ \ \ \ Generic\ training\ loop. }}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \ Args: }}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\ (nn.Module):\ The\ model\ to\ train. }}
+\DoxyCodeLine{00021\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ train\_loader\ (DataLoader):\ Training\ data. }}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ val\_loader\ (DataLoader):\ Validation\ data. }}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ config\ (dict):\ Configuration\ dictionary\ (lr,\ epochs,\ save\_dir). }}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ device\ (str):\ 'cpu'\ or\ 'cuda'. }}
+\DoxyCodeLine{00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00026\ \textcolor{stringliteral}{\ \ \ \ Returns: }}
+\DoxyCodeLine{00027\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\ (nn.Module):\ Trained\ model\ (best\ weights). }}
+\DoxyCodeLine{00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ history\ (dict):\ Training\ history\ (loss). }}
+\DoxyCodeLine{00029\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00030\ \ \ \ \ model\ =\ model.to(device) }
+\DoxyCodeLine{00031\ \ \ \ \  }
+\DoxyCodeLine{00032\ \ \ \ \ criterion\ =\ nn.MSELoss() }
+\DoxyCodeLine{00033\ \ \ \ \ optimizer\ =\ optim.Adam(model.parameters(),\ lr=config.get(\textcolor{stringliteral}{'learning\_rate'},\ 0.001)) }
+\DoxyCodeLine{00034\ \ \ \ \  }
+\DoxyCodeLine{00035\ \ \ \ \ num\_epochs\ =\ config.get(\textcolor{stringliteral}{'epochs'},\ 100) }
+\DoxyCodeLine{00036\ \ \ \ \ save\_dir\ =\ config.get(\textcolor{stringliteral}{'save\_dir'},\ \textcolor{stringliteral}{'checkpoints'}) }
+\DoxyCodeLine{00037\ \ \ \ \ os.makedirs(save\_dir,\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00038\ \ \ \ \  }
+\DoxyCodeLine{00039\ \ \ \ \ best\_loss\ =\ float(\textcolor{stringliteral}{'inf'}) }
+\DoxyCodeLine{00040\ \ \ \ \ best\_model\_wts\ =\ copy.deepcopy(model.state\_dict()) }
+\DoxyCodeLine{00041\ \ \ \ \  }
+\DoxyCodeLine{00042\ \ \ \ \ history\ =\ \{\textcolor{stringliteral}{'train\_loss'}:\ [],\ \textcolor{stringliteral}{'val\_loss'}:\ []\} }
+\DoxyCodeLine{00043\ \ \ \ \  }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{for}\ epoch\ \textcolor{keywordflow}{in}\ range(num\_epochs): }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Training\ Phase }}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ model.train() }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ running\_loss\ =\ 0.0 }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Use\ tqdm\ for\ progress\ bar\ if\ interactive }}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ pbar\ =\ tqdm(train\_loader,\ desc=f\textcolor{stringliteral}{"{}Epoch\ \{epoch+1\}/\{num\_epochs\}"{}}) }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ batch\ \textcolor{keywordflow}{in}\ pbar: }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(batch)\ ==\ 3: }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ scalars,\ targets\ =\ batch }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device) }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scalars\ =\ scalars.to(device) }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device) }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs,\ scalars) }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ targets\ =\ batch }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device) }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device) }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs) }
+\DoxyCodeLine{00064\  }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ optimizer.zero\_grad() }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ loss\ =\ criterion(outputs,\ targets) }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ loss.backward() }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ optimizer.step() }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ running\_loss\ +=\ loss.item()\ *\ inputs.size(0) }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ pbar.set\_postfix(\{\textcolor{stringliteral}{'loss'}:\ loss.item()\}) }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ epoch\_loss\ =\ running\_loss\ /\ len(train\_loader.dataset) }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ history[\textcolor{stringliteral}{'train\_loss'}].append(epoch\_loss) }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Validation\ Phase }}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ model.eval() }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ val\_loss\ =\ 0.0 }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ torch.no\_grad(): }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ batch\ \textcolor{keywordflow}{in}\ val\_loader: }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(batch)\ ==\ 3: }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ scalars,\ targets\ =\ batch }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device) }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scalars\ =\ scalars.to(device) }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device) }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs,\ scalars) }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ targets\ =\ batch }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device) }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device) }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs) }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loss\ =\ criterion(outputs,\ targets) }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\_loss\ +=\ loss.item()\ *\ inputs.size(0) }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ epoch\_val\_loss\ =\ val\_loss\ /\ len(val\_loader.dataset) }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ history[\textcolor{stringliteral}{'val\_loss'}].append(epoch\_val\_loss) }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Epoch\ \{epoch+1\}/\{num\_epochs\}\ -\/\ Train\ Loss:\ \{epoch\_loss:.4f\}\ -\/\ Val\ Loss:\ \{epoch\_val\_loss:.4f\}"{}}) }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Deep\ Copy\ Best\ Model }}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ epoch\_val\_loss\ <\ best\_loss: }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ best\_loss\ =\ epoch\_val\_loss }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ best\_model\_wts\ =\ copy.deepcopy(model.state\_dict()) }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ torch.save(model.state\_dict(),\ os.path.join(save\_dir,\ \textcolor{stringliteral}{'best\_model.pth'})) }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{\#\ Load\ best\ model\ weights }}
+\DoxyCodeLine{00111\ \ \ \ \ model.load\_state\_dict(best\_model\_wts) }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{return}\ model,\ history }
+
+\end{DoxyCode}

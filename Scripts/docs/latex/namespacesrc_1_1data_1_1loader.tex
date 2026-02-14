@@ -1,0 +1,436 @@
+\doxysection{src.\+data.\+loader Namespace Reference}
+\hypertarget{namespacesrc_1_1data_1_1loader}{}\label{namespacesrc_1_1data_1_1loader}\index{src.data.loader@{src.data.loader}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a089d5bb344a1115ae3affe163b854505}{load\+\_\+experiment}} (\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}{file\+\_\+path}}, experiment\+\_\+id)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a94d4cb0c1311c48bcff1d499f8274b0f}{get\+\_\+dataset\+\_\+info}} (\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}{file\+\_\+path}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a589e7bca72e24e7bbb8441818124155b}{load\+\_\+full\+\_\+dataset}} (\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}{file\+\_\+path}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ae9ae4bc23fcdfe0679078ba5a22dc101}{TEST\+\_\+\+FILE}} = \textquotesingle{}../\+../\+3C90\+\_\+\+TX-\/25-\/15-\/10\+\_\+\+Data1\+\_\+\+Cycle.\+mat\textquotesingle{}
+\item 
+int \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_af76ba16c08d0320cce2e0ba9406728be}{TEST\+\_\+\+ID}} = 3859
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a1ece502f8126cab8f84f4901a8acc7a9}{script\+\_\+dir}} = os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+))
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}{file\+\_\+path}} = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a1ece502f8126cab8f84f4901a8acc7a9}{script\+\_\+dir}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ae9ae4bc23fcdfe0679078ba5a22dc101}{TEST\+\_\+\+FILE}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{single\+\_\+data}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a089d5bb344a1115ae3affe163b854505}{load\+\_\+experiment}}(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}{file\+\_\+path}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_af76ba16c08d0320cce2e0ba9406728be}{TEST\+\_\+\+ID}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a9e57c5da1076c1d344535721578bcf4c}{v\+\_\+shape}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{single\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+.shape
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a74c5d45e17a54217e72fcfd83162909d}{i\+\_\+shape}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{single\+\_\+data}}\+[\textquotesingle{}current\textquotesingle{}]\+.shape
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a9d69c46c24ed007c2e9c4e2ef6c8d918}{freq}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{single\+\_\+data}}\+[\textquotesingle{}frequency\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a617fc2f85a5e702d2209071c766f67e4}{full\+\_\+data}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a589e7bca72e24e7bbb8441818124155b}{load\+\_\+full\+\_\+dataset}}(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}{file\+\_\+path}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ada03b7936448e5da21906f752545870b}{full\+\_\+v\+\_\+shape}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a617fc2f85a5e702d2209071c766f67e4}{full\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+.shape
+\item 
+int \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a9dc235e7d79cf928cdf660e661983c4a}{idx}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_af76ba16c08d0320cce2e0ba9406728be}{TEST\+\_\+\+ID}} -\/ 1
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a209783d013259d2db490314db9d92272}{full\+\_\+slice\+\_\+v}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a617fc2f85a5e702d2209071c766f67e4}{full\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a9dc235e7d79cf928cdf660e661983c4a}{idx}}, :\+]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a037745ef9df930e15469afb3a1127c6d}{single\+\_\+slice\+\_\+v}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{single\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a99db6aa9c7ee56850a960f818c3c3d77}{diff}} = np.\+max(np.\+abs(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a209783d013259d2db490314db9d92272}{full\+\_\+slice\+\_\+v}} -\/ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a037745ef9df930e15469afb3a1127c6d}{single\+\_\+slice\+\_\+v}}))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Data Loading Module.
+
+This module is responsible for loading experimental data from MATLAB (.mat) files.
+It handles both legacy (SciPy) and v7.3 (HDF5/h5py) formats.
+
+Functions:
+- load_experiment(file_path, experiment_id): Loads data for a single experiment.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacesrc_1_1data_1_1loader_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacesrc_1_1data_1_1loader_a94d4cb0c1311c48bcff1d499f8274b0f}\index{src.data.loader@{src.data.loader}!get\_dataset\_info@{get\_dataset\_info}}
+\index{get\_dataset\_info@{get\_dataset\_info}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{get\_dataset\_info()}{get\_dataset\_info()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a94d4cb0c1311c48bcff1d499f8274b0f} 
+src.\+data.\+loader.\+get\+\_\+dataset\+\_\+info (\begin{DoxyParamCaption}\item[{}]{file\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Retrieves metadata about the dataset without loading full data.
+
+Returns:
+    num_experiments (int)
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00099}{99}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00099\ \textcolor{keyword}{def\ }get\_dataset\_info(file\_path): }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00101\ \textcolor{stringliteral}{\ \ \ \ Retrieves\ metadata\ about\ the\ dataset\ without\ loading\ full\ data. }}
+\DoxyCodeLine{00102\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00103\ \textcolor{stringliteral}{\ \ \ \ Returns: }}
+\DoxyCodeLine{00104\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ num\_experiments\ (int) }}
+\DoxyCodeLine{00105\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(file\_path): }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(f\textcolor{stringliteral}{"{}File\ not\ found:\ \{file\_path\}"{}}) }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ scipy }}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ mat\ =\ scipy.io.loadmat(file\_path,\ squeeze\_me=\textcolor{keyword}{True},\ struct\_as\_record=\textcolor{keyword}{False}) }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ shape\ might\ be\ (Experiments,\ samples)\ or\ transposed. }}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Based\ on\ prev\ code:\ Data.Voltage\ was\ accessed\ as\ [idx,\ :]\ -\/>\ (N\_exp,\ N\_samples) }}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mat[\textcolor{stringliteral}{'Data'}].Voltage.shape[0] }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordflow}{except}\ NotImplementedError: }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ h5py.File(file\_path,\ \textcolor{stringliteral}{'r'})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ h5py:\ Voltage\ shape\ (Samples,\ Experiments) }}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ f[\textcolor{stringliteral}{'Data'}][\textcolor{stringliteral}{'Voltage'}].shape[1] }
+\DoxyCodeLine{00119\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacesrc_1_1data_1_1loader_a089d5bb344a1115ae3affe163b854505}\index{src.data.loader@{src.data.loader}!load\_experiment@{load\_experiment}}
+\index{load\_experiment@{load\_experiment}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{load\_experiment()}{load\_experiment()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a089d5bb344a1115ae3affe163b854505} 
+src.\+data.\+loader.\+load\+\_\+experiment (\begin{DoxyParamCaption}\item[{}]{file\+\_\+path}{, }\item[{}]{experiment\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Loads data for a specific experiment ID from a .mat file.
+
+Args:
+    file_path (str): Path to the .mat file.
+    experiment_id (int): 1-based experiment index (as in MATLAB).
+    
+Returns:
+    dict: Dictionary containing experimental data (Voltage, Current, Metadata).
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00016}{16}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00016\ \textcolor{keyword}{def\ }load\_experiment(file\_path,\ experiment\_id): }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ Loads\ data\ for\ a\ specific\ experiment\ ID\ from\ a\ .mat\ file. }}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{\ \ \ \ Args: }}
+\DoxyCodeLine{00021\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ file\_path\ (str):\ Path\ to\ the\ .mat\ file. }}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ experiment\_id\ (int):\ 1-\/based\ experiment\ index\ (as\ in\ MATLAB). }}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ Returns: }}
+\DoxyCodeLine{00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ dict:\ Dictionary\ containing\ experimental\ data\ (Voltage,\ Current,\ Metadata). }}
+\DoxyCodeLine{00026\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00027\ \ \ \ \ idx\ =\ experiment\_id\ -\/\ 1\ \ \textcolor{comment}{\#\ Convert\ to\ 0-\/based\ index }}
+\DoxyCodeLine{00028\ \ \ \ \  }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(file\_path): }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(f\textcolor{stringliteral}{"{}File\ not\ found:\ \{file\_path\}"{}}) }
+\DoxyCodeLine{00031\  }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ loading\ with\ scipy\ (for\ v7\ and\ earlier) }}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ mat\ =\ scipy.io.loadmat(file\_path,\ squeeze\_me=\textcolor{keyword}{True},\ struct\_as\_record=\textcolor{keyword}{False}) }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ Data\ =\ mat[\textcolor{stringliteral}{'Data'}] }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_val(obj,\ idx): }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.ndim(obj)\ >\ 0: }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj[idx] }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj }
+\DoxyCodeLine{00041\  }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ data\_dict\ =\ \{ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'voltage'}:\ Data.Voltage[idx,\ :], }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'current'}:\ Data.Current[idx,\ :], }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'primary\_turns'}:\ Data.Primary\_Turns, }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'secondary\_turns'}:\ Data.Secondary\_Turns, }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'effective\_area'}:\ Data.Effective\_Area, }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'effective\_length'}:\ Data.Effective\_Length, }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'sampling\_time'}:\ get\_val(Data.Sampling\_Time,\ idx), }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'hdc'}:\ get\_val(Data.Hdc\_command,\ idx), }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'temperature'}:\ get\_val(Data.Temperature\_command,\ idx), }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'duty\_p'}:\ get\_val(Data.DutyP\_command,\ idx), }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'frequency'}:\ get\_val(Data.Frequency\_command,\ idx), }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'flux\_cmd'}:\ get\_val(Data.Flux\_command,\ idx) }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_dict }
+\DoxyCodeLine{00057\  }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{except}\ NotImplementedError: }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback\ to\ h5py\ for\ v7.3\ files }}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ h5py.File(file\_path,\ \textcolor{stringliteral}{'r'})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ Data\ =\ f[\textcolor{stringliteral}{'Data'}] }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ to\ access\ h5py\ data }}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Arrays\ are\ transposed\ in\ h5py\ relative\ to\ MATLAB }}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ MATLAB:\ Voltage(ExperimentID,\ :)\ -\/>\ h5py:\ Voltage[Samples,\ ExperimentID] }}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ want\ all\ samples\ for\ the\ specific\ experiment\ column }}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ v\_sec\ =\ Data[\textcolor{stringliteral}{'Voltage'}][:,\ idx] }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ i\_prim\ =\ Data[\textcolor{stringliteral}{'Current'}][:,\ idx] }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_scalar(key): }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ np.array(Data[key]) }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ val.size\ ==\ 1: }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ val.item() }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ val }
+\DoxyCodeLine{00076\  }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_indexed(key,\ idx): }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ np.array(Data[key]).flatten() }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(val)\ >\ idx: }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ val[idx] }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ val.item() }
+\DoxyCodeLine{00082\  }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ data\_dict\ =\ \{ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'voltage'}:\ v\_sec, }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'current'}:\ i\_prim, }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'primary\_turns'}:\ get\_scalar(\textcolor{stringliteral}{'Primary\_Turns'}), }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'secondary\_turns'}:\ get\_scalar(\textcolor{stringliteral}{'Secondary\_Turns'}), }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'effective\_area'}:\ get\_scalar(\textcolor{stringliteral}{'Effective\_Area'}), }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'effective\_length'}:\ get\_scalar(\textcolor{stringliteral}{'Effective\_Length'}), }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'sampling\_time'}:\ get\_indexed(\textcolor{stringliteral}{'Sampling\_Time'},\ idx), }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'hdc'}:\ get\_indexed(\textcolor{stringliteral}{'Hdc\_command'},\ idx), }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'temperature'}:\ get\_indexed(\textcolor{stringliteral}{'Temperature\_command'},\ idx), }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'duty\_p'}:\ get\_indexed(\textcolor{stringliteral}{'DutyP\_command'},\ idx), }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'frequency'}:\ get\_indexed(\textcolor{stringliteral}{'Frequency\_command'},\ idx), }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'flux\_cmd'}:\ get\_indexed(\textcolor{stringliteral}{'Flux\_command'},\ idx) }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_dict }
+\DoxyCodeLine{00098\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacesrc_1_1data_1_1loader_a589e7bca72e24e7bbb8441818124155b}\index{src.data.loader@{src.data.loader}!load\_full\_dataset@{load\_full\_dataset}}
+\index{load\_full\_dataset@{load\_full\_dataset}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{load\_full\_dataset()}{load\_full\_dataset()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a589e7bca72e24e7bbb8441818124155b} 
+src.\+data.\+loader.\+load\+\_\+full\+\_\+dataset (\begin{DoxyParamCaption}\item[{}]{file\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Loads the entire dataset into memory.
+Optimized for bulk loading (reads full arrays).
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00120}{120}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00120\ \textcolor{keyword}{def\ }load\_full\_dataset(file\_path): }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00122\ \textcolor{stringliteral}{\ \ \ \ Loads\ the\ entire\ dataset\ into\ memory. }}
+\DoxyCodeLine{00123\ \textcolor{stringliteral}{\ \ \ \ Optimized\ for\ bulk\ loading\ (reads\ full\ arrays). }}
+\DoxyCodeLine{00124\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(file\_path): }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(f\textcolor{stringliteral}{"{}File\ not\ found:\ \{file\_path\}"{}}) }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ SciPy }}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ mat\ =\ scipy.io.loadmat(file\_path,\ squeeze\_me=\textcolor{keyword}{True},\ struct\_as\_record=\textcolor{keyword}{False}) }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ Data\ =\ mat[\textcolor{stringliteral}{'Data'}] }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{ }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'voltage'}:\ Data.Voltage,\ \ \ \textcolor{comment}{\#\ (N\_exp,\ N\_samples) }}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'current'}:\ Data.Current, }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'freq'}:\ Data.Frequency\_command, }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'temp'}:\ Data.Temperature\_command, }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'hdc'}:\ Data.Hdc\_command, }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'duty'}:\ Data.DutyP\_command, }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Add\ other\ fields\ as\ needed }}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'meta'}:\ \{ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_prim'}:\ Data.Primary\_Turns, }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_sec'}:\ Data.Secondary\_Turns, }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Ae'}:\ Data.Effective\_Area, }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Le'}:\ Data.Effective\_Length, }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'dt'}:\ Data.Sampling\_Time }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordflow}{except}\ NotImplementedError: }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ h5py }}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ h5py.File(file\_path,\ \textcolor{stringliteral}{'r'})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ Data\ =\ f[\textcolor{stringliteral}{'Data'}] }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Read\ all\ at\ once.\ Transpose\ to\ (N\_exp,\ N\_samples) }}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ h5py\ stores\ as\ (samples,\ experiments). }}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ T\ operation\ in\ numpy\ is\ cheap\ (view),\ but\ reading\ might\ be\ slow\ if\ chunked. }}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ reading\ as\ [:]\ reads\ into\ memory. }}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Reading\ full\ arrays\ from\ HDF5...\ this\ may\ take\ a\ moment."{}}) }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ v\_all\ =\ np.array(Data[\textcolor{stringliteral}{'Voltage'}]).T }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ i\_all\ =\ np.array(Data[\textcolor{stringliteral}{'Current'}]).T }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 1D\ arrays }}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_arr(key): }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ np.array(Data[key]).flatten() }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ data\_dict\ =\ \{ }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'voltage'}:\ v\_all, }
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'current'}:\ i\_all, }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'freq'}:\ get\_arr(\textcolor{stringliteral}{'Frequency\_command'}), }
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'temp'}:\ get\_arr(\textcolor{stringliteral}{'Temperature\_command'}), }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'hdc'}:\ get\_arr(\textcolor{stringliteral}{'Hdc\_command'}), }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'duty'}:\ get\_arr(\textcolor{stringliteral}{'DutyP\_command'}), }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'meta'}:\ \{ }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_prim'}:\ np.array(Data[\textcolor{stringliteral}{'Primary\_Turns'}]).item(), }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_sec'}:\ np.array(Data[\textcolor{stringliteral}{'Secondary\_Turns'}]).item(), }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Ae'}:\ np.array(Data[\textcolor{stringliteral}{'Effective\_Area'}]).item(), }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Le'}:\ np.array(Data[\textcolor{stringliteral}{'Effective\_Length'}]).item(), }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Sampling\ time\ might\ be\ an\ array\ or\ scalar?\  }}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Assuming\ scalar\ for\ uniform\ sampling\ usually,\ or\ array. }}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'dt'}:\ np.array(Data[\textcolor{stringliteral}{'Sampling\_Time'}]).flatten() }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_dict }
+\DoxyCodeLine{00185\  }
+\DoxyCodeLine{00186\ \textcolor{comment}{\#\ ========================================== }}
+\DoxyCodeLine{00187\ \textcolor{comment}{\#\ VALIDATION\ SCRIPT\ (Append\ to\ end\ of\ file) }}
+\DoxyCodeLine{00188\ \textcolor{comment}{\#\ ========================================== }}
+\DoxyCodeLine{00189\  }
+
+\end{DoxyCode}
+
+
+\label{doc-var-members}
+\Hypertarget{namespacesrc_1_1data_1_1loader_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacesrc_1_1data_1_1loader_a99db6aa9c7ee56850a960f818c3c3d77}\index{src.data.loader@{src.data.loader}!diff@{diff}}
+\index{diff@{diff}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{diff}{diff}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a99db6aa9c7ee56850a960f818c3c3d77} 
+src.\+data.\+loader.\+diff = np.\+max(np.\+abs(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a209783d013259d2db490314db9d92272}{full\+\_\+slice\+\_\+v}} -\/ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a037745ef9df930e15469afb3a1127c6d}{single\+\_\+slice\+\_\+v}}))}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00261}{261}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}\index{src.data.loader@{src.data.loader}!file\_path@{file\_path}}
+\index{file\_path@{file\_path}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{file\_path}{file\_path}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149} 
+src.\+data.\+loader.\+file\+\_\+path = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a1ece502f8126cab8f84f4901a8acc7a9}{script\+\_\+dir}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ae9ae4bc23fcdfe0679078ba5a22dc101}{TEST\+\_\+\+FILE}})}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00200}{200}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_a9d69c46c24ed007c2e9c4e2ef6c8d918}\index{src.data.loader@{src.data.loader}!freq@{freq}}
+\index{freq@{freq}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{freq}{freq}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a9d69c46c24ed007c2e9c4e2ef6c8d918} 
+src.\+data.\+loader.\+freq = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{single\+\_\+data}}\+[\textquotesingle{}frequency\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00216}{216}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_a617fc2f85a5e702d2209071c766f67e4}\index{src.data.loader@{src.data.loader}!full\_data@{full\_data}}
+\index{full\_data@{full\_data}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{full\_data}{full\_data}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a617fc2f85a5e702d2209071c766f67e4} 
+src.\+data.\+loader.\+full\+\_\+data = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a589e7bca72e24e7bbb8441818124155b}{load\+\_\+full\+\_\+dataset}}(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}{file\+\_\+path}})}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00232}{232}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_a209783d013259d2db490314db9d92272}\index{src.data.loader@{src.data.loader}!full\_slice\_v@{full\_slice\_v}}
+\index{full\_slice\_v@{full\_slice\_v}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{full\_slice\_v}{full\_slice\_v}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a209783d013259d2db490314db9d92272} 
+src.\+data.\+loader.\+full\+\_\+slice\+\_\+v = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a617fc2f85a5e702d2209071c766f67e4}{full\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a9dc235e7d79cf928cdf660e661983c4a}{idx}}, :\+]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00255}{255}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_ada03b7936448e5da21906f752545870b}\index{src.data.loader@{src.data.loader}!full\_v\_shape@{full\_v\_shape}}
+\index{full\_v\_shape@{full\_v\_shape}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{full\_v\_shape}{full\_v\_shape}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_ada03b7936448e5da21906f752545870b} 
+src.\+data.\+loader.\+full\+\_\+v\+\_\+shape = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a617fc2f85a5e702d2209071c766f67e4}{full\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+.shape}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00234}{234}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_a74c5d45e17a54217e72fcfd83162909d}\index{src.data.loader@{src.data.loader}!i\_shape@{i\_shape}}
+\index{i\_shape@{i\_shape}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{i\_shape}{i\_shape}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a74c5d45e17a54217e72fcfd83162909d} 
+src.\+data.\+loader.\+i\+\_\+shape = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{single\+\_\+data}}\+[\textquotesingle{}current\textquotesingle{}]\+.shape}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00215}{215}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_a9dc235e7d79cf928cdf660e661983c4a}\index{src.data.loader@{src.data.loader}!idx@{idx}}
+\index{idx@{idx}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{idx}{idx}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a9dc235e7d79cf928cdf660e661983c4a} 
+int src.\+data.\+loader.\+idx = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_af76ba16c08d0320cce2e0ba9406728be}{TEST\+\_\+\+ID}} -\/ 1}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00252}{252}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_a1ece502f8126cab8f84f4901a8acc7a9}\index{src.data.loader@{src.data.loader}!script\_dir@{script\_dir}}
+\index{script\_dir@{script\_dir}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{script\_dir}{script\_dir}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a1ece502f8126cab8f84f4901a8acc7a9} 
+src.\+data.\+loader.\+script\+\_\+dir = os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+))}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00199}{199}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}\index{src.data.loader@{src.data.loader}!single\_data@{single\_data}}
+\index{single\_data@{single\_data}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{single\_data}{single\_data}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082} 
+src.\+data.\+loader.\+single\+\_\+data = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a089d5bb344a1115ae3affe163b854505}{load\+\_\+experiment}}(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_ad26b5a98ba19053b925ab9413604d149}{file\+\_\+path}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_af76ba16c08d0320cce2e0ba9406728be}{TEST\+\_\+\+ID}})}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00212}{212}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_a037745ef9df930e15469afb3a1127c6d}\index{src.data.loader@{src.data.loader}!single\_slice\_v@{single\_slice\_v}}
+\index{single\_slice\_v@{single\_slice\_v}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{single\_slice\_v}{single\_slice\_v}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a037745ef9df930e15469afb3a1127c6d} 
+src.\+data.\+loader.\+single\+\_\+slice\+\_\+v = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{single\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00258}{258}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_ae9ae4bc23fcdfe0679078ba5a22dc101}\index{src.data.loader@{src.data.loader}!TEST\_FILE@{TEST\_FILE}}
+\index{TEST\_FILE@{TEST\_FILE}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{TEST\_FILE}{TEST\_FILE}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_ae9ae4bc23fcdfe0679078ba5a22dc101} 
+str src.\+data.\+loader.\+TEST\+\_\+\+FILE = \textquotesingle{}../\+../\+3C90\+\_\+\+TX-\/25-\/15-\/10\+\_\+\+Data1\+\_\+\+Cycle.\+mat\textquotesingle{}}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00195}{195}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_af76ba16c08d0320cce2e0ba9406728be}\index{src.data.loader@{src.data.loader}!TEST\_ID@{TEST\_ID}}
+\index{TEST\_ID@{TEST\_ID}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{TEST\_ID}{TEST\_ID}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_af76ba16c08d0320cce2e0ba9406728be} 
+int src.\+data.\+loader.\+TEST\+\_\+\+ID = 3859}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00196}{196}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1loader_a9e57c5da1076c1d344535721578bcf4c}\index{src.data.loader@{src.data.loader}!v\_shape@{v\_shape}}
+\index{v\_shape@{v\_shape}!src.data.loader@{src.data.loader}}
+\doxysubsubsection{\texorpdfstring{v\_shape}{v\_shape}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1loader_a9e57c5da1076c1d344535721578bcf4c} 
+src.\+data.\+loader.\+v\+\_\+shape = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1loader_a6c5499f680602c400cc36ade3db03082}{single\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+.shape}
+
+
+
+Definition at line \doxymbox{\hyperlink{loader_8py_source_l00214}{214}} of file \doxymbox{\hyperlink{loader_8py_source}{loader.\+py}}.
+

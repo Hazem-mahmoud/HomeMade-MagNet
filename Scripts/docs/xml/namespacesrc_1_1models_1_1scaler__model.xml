@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1models_1_1scaler__model" kind="namespace" language="Python">
+    <compoundname>src::models::scaler_model</compoundname>
+    <innerclass refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network" prot="public">src::models::scaler_model::ScalerNetwork</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Scaler-to-Scaler Model.
+
+This module implements a standard Multi-Layer Perceptron (MLP) for predicting
+scalar outputs (e.g., Power Loss) from scalar inputs (Frequency, Temperature, Hdc).
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler_model.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

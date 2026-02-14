@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1models_1_1sequence__model" kind="namespace" language="Python">
+    <compoundname>src::models::sequence_model</compoundname>
+    <innerclass refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network" prot="public">src::models::sequence_model::SequenceToScalerNetwork</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/sequence_model.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

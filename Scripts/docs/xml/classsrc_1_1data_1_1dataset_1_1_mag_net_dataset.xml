@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset" kind="class" language="Python" prot="public">
+    <compoundname>src::data::dataset::MagNetDataset</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Dataset</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a5e105d56d2907dcdac42db6516772e67" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>str src.data.dataset.MagNetDataset::mode</definition>
+        <argsstring></argsstring>
+        <name>mode</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.mode</qualifiedname>
+        <initializer>=  mode</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="35" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="35" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ad0203e1f10d4bd9a83098fca141f6a62" compoundref="dataset_8py" startline="109" endline="186">src.data.dataset.MagNetDataset.__getitem__</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1af0ece58b5e62a068cddd1f41527663b4" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.data.dataset.MagNetDataset::partition</definition>
+        <argsstring></argsstring>
+        <name>partition</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.partition</qualifiedname>
+        <initializer>=  partition</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="36" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1abb6bcdf797bb300b13ffaed914788764" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.data.dataset.MagNetDataset::transform</definition>
+        <argsstring></argsstring>
+        <name>transform</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.transform</qualifiedname>
+        <initializer>=  transform</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="37" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1aaef94aee1bc7ad2bbbf8b843b8b2ef76" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.data.dataset.MagNetDataset::stats</definition>
+        <argsstring></argsstring>
+        <name>stats</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.stats</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1a4bff0b7a0c8070a26001c86ed09d6b93" kindref="member">preprocessing.process_magnet_dataset</ref>(
+            voltage, current, freq, props, dt,
+            model_type=<ref refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a5e105d56d2907dcdac42db6516772e67" kindref="member">mode</ref>,
+            config_path=config_path,
+            extra_features=extra
+        )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="80" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a1eab846f82fac59ba544f15fd132cff5" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.data.dataset.MagNetDataset::inputs</definition>
+        <argsstring></argsstring>
+        <name>inputs</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.inputs</qualifiedname>
+        <initializer>=  data_split[<ref refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1af0ece58b5e62a068cddd1f41527663b4" kindref="member">partition</ref>][&apos;inputs&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="91" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="91" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ad0203e1f10d4bd9a83098fca141f6a62" compoundref="dataset_8py" startline="109" endline="186">src.data.dataset.MagNetDataset.__getitem__</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ada89f591c31ce7592470e74ed08896b5" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.data.dataset.MagNetDataset::targets</definition>
+        <argsstring></argsstring>
+        <name>targets</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.targets</qualifiedname>
+        <initializer>=  data_split[<ref refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1af0ece58b5e62a068cddd1f41527663b4" kindref="member">partition</ref>][&apos;targets&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="92" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="92" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ad0203e1f10d4bd9a83098fca141f6a62" compoundref="dataset_8py" startline="109" endline="186">src.data.dataset.MagNetDataset.__getitem__</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1adfd47e984373ede56a3711188d1fb7e7" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.data.dataset.MagNetDataset::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.length</qualifiedname>
+        <initializer>=  len(self.inputs[any_key]) if self.inputs else len(self.targets[any_key])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="104" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="104" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a94d4c1bb45894416b37e6291c3fdd84a" compoundref="dataset_8py" startline="106" endline="108">src.data.dataset.MagNetDataset.__len__</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a1fdd0e1f023e48a5812ce707de2df13d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.dataset.MagNetDataset.__init__</definition>
+        <argsstring>(self, file_path, mode=&apos;scaler&apos;, partition=&apos;train&apos;, transform=None, config_path=None)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>file_path</type>
+          <defname>file_path</defname>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a5e105d56d2907dcdac42db6516772e67" kindref="member">mode</ref></type>
+          <defname>mode</defname>
+          <defval>&apos;scaler&apos;</defval>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1af0ece58b5e62a068cddd1f41527663b4" kindref="member">partition</ref></type>
+          <defname>partition</defname>
+          <defval>&apos;train&apos;</defval>
+        </param>
+        <param>
+          <type><ref refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1abb6bcdf797bb300b13ffaed914788764" kindref="member">transform</ref></type>
+          <defname>transform</defname>
+          <defval>None</defval>
+        </param>
+        <param>
+          <type>config_path</type>
+          <defname>config_path</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Args:
+    file_path (str): Path to .mat file.
+    mode (str): &apos;scaler&apos;, &apos;sequence&apos;, &apos;seq2seq&apos;.
+    partition (str): &apos;train&apos; or &apos;test&apos;.
+    transform (callable, optional): Optional transform to be applied.
+    config_path (str): Path to config.yaml (optional).
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="26" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="26" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a94d4c1bb45894416b37e6291c3fdd84a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.dataset.MagNetDataset.__len__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__len__</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.__len__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="106" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="106" bodyend="108"/>
+        <references refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1adfd47e984373ede56a3711188d1fb7e7" compoundref="dataset_8py" startline="104">src.data.dataset.MagNetDataset.length</references>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ad0203e1f10d4bd9a83098fca141f6a62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.dataset.MagNetDataset.__getitem__</definition>
+        <argsstring>(self, idx)</argsstring>
+        <name>__getitem__</name>
+        <qualifiedname>src.data.dataset.MagNetDataset.__getitem__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>idx</type>
+          <defname>idx</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="109" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="109" bodyend="186"/>
+        <references refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a1eab846f82fac59ba544f15fd132cff5" compoundref="dataset_8py" startline="91">src.data.dataset.MagNetDataset.inputs</references>
+        <references refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a5e105d56d2907dcdac42db6516772e67" compoundref="dataset_8py" startline="35">src.data.dataset.MagNetDataset.mode</references>
+        <references refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ada89f591c31ce7592470e74ed08896b5" compoundref="dataset_8py" startline="92">src.data.dataset.MagNetDataset.targets</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Dataset</label>
+      </node>
+      <node id="1">
+        <label>src.data.dataset.MagNetDataset</label>
+        <link refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Dataset</label>
+      </node>
+      <node id="1">
+        <label>src.data.dataset.MagNetDataset</label>
+        <link refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="25" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="25" bodyend="186"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ad0203e1f10d4bd9a83098fca141f6a62" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>__getitem__</name></member>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a1fdd0e1f023e48a5812ce707de2df13d" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a94d4c1bb45894416b37e6291c3fdd84a" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>__len__</name></member>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a1eab846f82fac59ba544f15fd132cff5" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>inputs</name></member>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1adfd47e984373ede56a3711188d1fb7e7" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>length</name></member>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a5e105d56d2907dcdac42db6516772e67" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>mode</name></member>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1af0ece58b5e62a068cddd1f41527663b4" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>partition</name></member>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1aaef94aee1bc7ad2bbbf8b843b8b2ef76" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>stats</name></member>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ada89f591c31ce7592470e74ed08896b5" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>targets</name></member>
+      <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1abb6bcdf797bb300b13ffaed914788764" prot="public" virt="non-virtual"><scope>src::data::dataset::MagNetDataset</scope><name>transform</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

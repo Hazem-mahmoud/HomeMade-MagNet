@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1training" kind="namespace" language="Python">
+    <compoundname>src::training</compoundname>
+    <innernamespace refid="namespacesrc_1_1training_1_1evaluate">src::training::evaluate</innernamespace>
+    <innernamespace refid="namespacesrc_1_1training_1_1train">src::training::train</innernamespace>
+    <innernamespace refid="namespacesrc_1_1training_1_1transfer">src::training::transfer</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Training and Evaluation Module.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/__init__.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

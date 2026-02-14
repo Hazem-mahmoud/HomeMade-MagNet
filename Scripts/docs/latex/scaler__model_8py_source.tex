@@ -1,0 +1,47 @@
+\doxysection{scaler\+\_\+model.\+py}
+\hypertarget{scaler__model_8py_source}{}\label{scaler__model_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler\_model.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/scaler\_model.py}}
+\doxymbox{\hyperlink{scaler__model_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1models_1_1scaler__model}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00002}00002\ \textcolor{stringliteral}{Scaler-\/to-\/Scaler\ Model.}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00004}00004\ \textcolor{stringliteral}{This\ module\ implements\ a\ standard\ Multi-\/Layer\ Perceptron\ (MLP)\ for\ predicting}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00005}00005\ \textcolor{stringliteral}{scalar\ outputs\ (e.g.,\ Power\ Loss)\ from\ scalar\ inputs\ (Frequency,\ Temperature,\ Hdc).}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00008}00008\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00009}00009\ \textcolor{keyword}{import}\ torch.nn\ \textcolor{keyword}{as}\ nn}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00011}\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network}{00011}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network}{ScalerNetwork}}(nn.Module):}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00012}\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ab6a59b3ed09285fe7d392e80dd380d79}{00012}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ab6a59b3ed09285fe7d392e80dd380d79}{\_\_init\_\_}}(self,\ input\_dim=3,\ hidden\_dim=64,\ output\_dim=1,\ num\_layers=3):}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00014}00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00015}00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ input\_dim\ (int):\ Number\ of\ input\ features\ (default\ 3:\ Freq,\ Temp,\ Hdc).}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00016}00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ hidden\_dim\ (int):\ Number\ of\ neurons\ in\ hidden\ layers.}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ output\_dim\ (int):\ Number\ of\ output\ features\ (default\ 1:\ Power\ Loss).}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ num\_layers\ (int):\ Number\ of\ hidden\ layers.}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ super(ScalerNetwork,\ self).\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ab6a59b3ed09285fe7d392e80dd380d79}{\_\_init\_\_}}()}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ layers\ =\ []}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input\ Layer}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ layers.append(nn.Linear(input\_dim,\ hidden\_dim))}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ layers.append(nn.ReLU())}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ layers.append(nn.BatchNorm1d(hidden\_dim))}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Hidden\ Layers}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ \_\ \textcolor{keywordflow}{in}\ range(num\_layers\ -\/\ 1):}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ layers.append(nn.Linear(hidden\_dim,\ hidden\_dim))}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ layers.append(nn.ReLU())}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ layers.append(nn.BatchNorm1d(hidden\_dim))}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Output\ Layer}}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ layers.append(nn.Linear(hidden\_dim,\ output\_dim))}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00038}\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ad0e0ef26c530ebc22eeb97a54c08900d}{00038}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ad0e0ef26c530ebc22eeb97a54c08900d}{model}}\ =\ nn.Sequential(*layers)}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00040}\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_a7dd561364d8c5009fd360aa6e28be1ce}{00040}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_a7dd561364d8c5009fd360aa6e28be1ce}{forward}}(self,\ x):}
+\DoxyCodeLine{\Hypertarget{scaler__model_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1scaler__model_1_1_scaler_network_ad0e0ef26c530ebc22eeb97a54c08900d}{model}}(x)}
+
+\end{DoxyCode}

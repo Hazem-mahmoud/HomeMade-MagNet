@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.16.1" xml:lang="en-US">
+  <compound refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu" kind="class"><name>src::models::cnn_model::Biased_Elu</name>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1ab9d159a6db4ae809a48e6c69fdf6fd96" kind="variable"><name>elu</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1a374f4fc125b4dafe5ef78939225b2f88" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1aa543cb9bfdbd3c5ec2e9df76430b8d10" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network" kind="class"><name>src::models::cnn_model::CNNNetwork</name>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1ad274760febb1e62cc34bc77a87eb609a" kind="variable"><name>tcn</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1ae653849afe0c39a658ebeb0cfbe1adc5" kind="variable"><name>model</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1a0f0fa278a2ff3da9ba52ec7e25b5b1c4" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network_1a9082ef649d9cc32ae3291f6141707de2" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1cnn__model_1_1_generalized_cosinus_unit" kind="class"><name>src::models::cnn_model::GeneralizedCosinusUnit</name>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_generalized_cosinus_unit_1a3c1f7a551f77ae0d3368b0142c54eb12" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor" kind="class"><name>src::models::cnn_model::LossPredictor</name>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1add606cfb853d459d15184d437917c14e" kind="variable"><name>h_predictor</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1acfb7073878021554e0cfa61718f47021" kind="variable"><name>post_processor</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1ab83a6d7828fd3891f0f0eb405cea5b59" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_1aa98ee38170a9382bb57567943e4fade5" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset" kind="class"><name>src::data::dataset::MagNetDataset</name>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a5e105d56d2907dcdac42db6516772e67" kind="variable"><name>mode</name></member>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1af0ece58b5e62a068cddd1f41527663b4" kind="variable"><name>partition</name></member>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1abb6bcdf797bb300b13ffaed914788764" kind="variable"><name>transform</name></member>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1aaef94aee1bc7ad2bbbf8b843b8b2ef76" kind="variable"><name>stats</name></member>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a1eab846f82fac59ba544f15fd132cff5" kind="variable"><name>inputs</name></member>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ada89f591c31ce7592470e74ed08896b5" kind="variable"><name>targets</name></member>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1adfd47e984373ede56a3711188d1fb7e7" kind="variable"><name>length</name></member>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a1fdd0e1f023e48a5812ce707de2df13d" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1a94d4c1bb45894416b37e6291c3fdd84a" kind="function"><name>__len__</name></member>
+    <member refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_1ad0203e1f10d4bd9a83098fca141f6a62" kind="function"><name>__getitem__</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding" kind="class"><name>src::models::transformer_model::PositionalEncoding</name>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1adc9404435d2aff36572de4adcfbbb759" kind="variable"><name>dropout</name></member>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a9bec562f3cfbfb7ec59d2faf8b9fd450" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a51a0de3ad593a089d39da0939ec33a22" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network" kind="class"><name>src::models::scaler_model::ScalerNetwork</name>
+    <member refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ad0e0ef26c530ebc22eeb97a54c08900d" kind="variable"><name>model</name></member>
+    <member refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1ab6a59b3ed09285fe7d392e80dd380d79" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1scaler__model_1_1_scaler_network_1a7dd561364d8c5009fd360aa6e28be1ce" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network" kind="class"><name>src::models::seq2seq_model::Seq2SeqNetwork</name>
+    <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1a53eddec3eef86c291241bb531c957f2e" kind="variable"><name>encoder</name></member>
+    <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1a819de8b5d0836b8cd1c637cab0889c53" kind="variable"><name>decoder</name></member>
+    <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1aa63949aad263348f49886d5af02b4ba5" kind="variable"><name>head</name></member>
+    <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1adacbc2e4ec18549ffb30185327209262" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1ae7109982709f309938316bf98440354f" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network" kind="class"><name>src::models::sequence_model::SequenceToScalerNetwork</name>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1ab88766e54ae092df9c5cde262599607f" kind="variable"><name>hidden_size</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a0a4501cfe22ba0478b3e020f1f0bc62a" kind="variable"><name>lstm</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a018ef8bab5edc89d615350c9b05f3816" kind="variable"><name>fc1</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a55404c9d459633a2b4c201619fe01243" kind="variable"><name>fc2</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a52d676aebd29df747a9493d23296c35e" kind="variable"><name>fc3</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a3c50a795050f23cd8cdcaf8ad3150567" kind="variable"><name>fc4</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a669301bc0a9f176a8e50f3795c3da919" kind="variable"><name>fc5</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1ab752cc3abd5ad12bb7eb4692dc00d22d" kind="variable"><name>fc6</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a15a44bb5843de572a733f09a78062dac" kind="variable"><name>fc7</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aad7cce47030693d268682f918e2e2c85" kind="variable"><name>fc8</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a56865212cc7f3c0acf8b3b42561eda42" kind="variable"><name>elu</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1a7018cf179decde7211f8f01374c6bd87" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1cnn__model_1_1_sinus_act" kind="class"><name>src::models::cnn_model::SinusAct</name>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_sinus_act_1a0c6e1c60a389bb8b1e6c4118b201ec39" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias" kind="class"><name>src::models::cnn_model::TCNWithScalarsAsBias</name>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a66ec7ecf8c1baa9d2141163dc252907d" kind="variable"><name>num_input_ts</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a57181b2e0b404a5b7401db5ecfb0892b" kind="variable"><name>num_input_scalar</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1aafc0e134fc543f59048fdda9b7f32eec" kind="variable"><name>ts_branch</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a3656b584a4a02a421e5e1e87931f8fd8" kind="variable"><name>upper_tcn</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a3a0143ea0c4eb0109828f50c58c62164" kind="variable"><name>scalar_branch</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1a24ad8a51da91c591d2d7ac1c49e1e116" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias_1ac1b77571f9ee1b73882fca73c1ad15b3" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block" kind="class"><name>src::models::cnn_model::TemporalBlock</name>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a8e63c6e2dea5e93b1a02fd0c86b39948" kind="variable"><name>conv1</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a449eb3696c5c4602db9f37e254043a8f" kind="variable"><name>relu1</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a5603a9061111e886e1766efe3ff18975" kind="variable"><name>dropout1</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a2a3a91a16553188fc898140d8607564b" kind="variable"><name>relu2</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a74bc8d2c5af9a84704d00f2205f35e09" kind="variable"><name>conv2</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a90d585b3ca17833234ecdda4aeff6e51" kind="variable"><name>dropout2</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1ab174667fb87d5c0192298e4c0fac1448" kind="variable"><name>net</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a6d75e765ac525ca9d8977bf5f3ee16b6" kind="variable"><name>relu</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a42784276c3430d51108d583578f7eb59" kind="variable"><name>residual</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1acb73d7834bf9141c3a78298ac135f362" kind="variable"><name>downsample</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1aa1181685a7df3e437076db5958db6b1f" kind="variable"><name>double_layered</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1abf57d3c1e9da461f00a6d4f73e76ae33" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1a358baddb5ef877814dc4372194cc08d6" kind="function"><name>init_weights</name></member>
+    <member refid="classsrc_1_1models_1_1cnn__model_1_1_temporal_block_1af4aba8b5c4ca9a33d43c27e380cf2236" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network" kind="class"><name>src::models::transformer_model::TransformerNetwork</name>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a1d5f0e15438cd9cbc513ec33b551df2c" kind="variable"><name>proj_B</name></member>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a689d2bd691d5160b5c6f7fa9c1961161" kind="variable"><name>positional_encoding_layer</name></member>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1aea40a2129ffd02f4a12418ba24670037" kind="variable"><name>encoder</name></member>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a4785766fb29a657e28d6aa0c645cffed" kind="variable"><name>proj_fusion</name></member>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a7d529f2c456e9ac3906ad019c9aa9912" kind="variable"><name>regressor</name></member>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a0e58e9c4308d8256c1dc05b10bcfe667" kind="function"><name>__init__</name></member>
+    <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" kind="function"><name>forward</name></member>
+  </compound>
+  <compound refid="namespacemain" kind="namespace"><name>main</name>
+    <member refid="namespacemain_1a7896926bd887efec19288eae30c4ed85" kind="function"><name>load_config</name></member>
+    <member refid="namespacemain_1a3140e9a5b6a71ffbf498198cfc471b88" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespacenn" kind="namespace"><name>nn</name>
+  </compound>
+  <compound refid="namespacesrc" kind="namespace"><name>src</name>
+  </compound>
+  <compound refid="namespacesrc_1_1data" kind="namespace"><name>src::data</name>
+  </compound>
+  <compound refid="namespacesrc_1_1data_1_1dataset" kind="namespace"><name>src::data::dataset</name>
+    <member refid="namespacesrc_1_1data_1_1dataset_1a762a3ddc6045817f8eddb4b2c8d44bd4" kind="function"><name>test_dataset</name></member>
+  </compound>
+  <compound refid="namespacesrc_1_1data_1_1loader" kind="namespace"><name>src::data::loader</name>
+    <member refid="namespacesrc_1_1data_1_1loader_1ae9ae4bc23fcdfe0679078ba5a22dc101" kind="variable"><name>TEST_FILE</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1af76ba16c08d0320cce2e0ba9406728be" kind="variable"><name>TEST_ID</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a1ece502f8126cab8f84f4901a8acc7a9" kind="variable"><name>script_dir</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1ad26b5a98ba19053b925ab9413604d149" kind="variable"><name>file_path</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a6c5499f680602c400cc36ade3db03082" kind="variable"><name>single_data</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a9e57c5da1076c1d344535721578bcf4c" kind="variable"><name>v_shape</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a74c5d45e17a54217e72fcfd83162909d" kind="variable"><name>i_shape</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a9d69c46c24ed007c2e9c4e2ef6c8d918" kind="variable"><name>freq</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a617fc2f85a5e702d2209071c766f67e4" kind="variable"><name>full_data</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1ada03b7936448e5da21906f752545870b" kind="variable"><name>full_v_shape</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a9dc235e7d79cf928cdf660e661983c4a" kind="variable"><name>idx</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a209783d013259d2db490314db9d92272" kind="variable"><name>full_slice_v</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a037745ef9df930e15469afb3a1127c6d" kind="variable"><name>single_slice_v</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a99db6aa9c7ee56850a960f818c3c3d77" kind="variable"><name>diff</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a089d5bb344a1115ae3affe163b854505" kind="function"><name>load_experiment</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a94d4cb0c1311c48bcff1d499f8274b0f" kind="function"><name>get_dataset_info</name></member>
+    <member refid="namespacesrc_1_1data_1_1loader_1a589e7bca72e24e7bbb8441818124155b" kind="function"><name>load_full_dataset</name></member>
+  </compound>
+  <compound refid="namespacesrc_1_1data_1_1preprocessing" kind="namespace"><name>src::data::preprocessing</name>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a81201b1b9a13c8ef613c965fee0dc9c5" kind="variable"><name>MAT_FILE_NAME</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a7d9ce20603261ba0b7428718203dec34" kind="variable"><name>current_dir</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a6711af53a5bd2546d0e6beffffbf2f66" kind="variable"><name>data_dir</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a9aa710813cf9cccdd625eab33f3ca563" kind="variable"><name>possible_path_1</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1ab18c1f18f4a69d9fd6c3aec8ed65085c" kind="variable"><name>possible_path_2</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1ad38589b31bd58842a55947800239789b" kind="variable"><name>mat_file_path</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" kind="variable"><name>full_data</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a6b69238e4448b5ea0c2cbbf35979c47f" kind="variable"><name>volts</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a8c26c60bf5709d787cd66fb117a302d9" kind="variable"><name>amps</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1af26152f3250702a4b01931111019e0c5" kind="variable"><name>freqs</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a4076127d8e1f49c16b511e5a213cbd71" kind="variable"><name>props</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1af75908b8c578c01dd6a9fad9a4ef3330" kind="variable"><name>dt</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a8dd6c815fe028469eda1f8a4ea6ddb3f" kind="variable"><name>config_path</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1af6fd653a447aa3cbe0e79fb5e8f3e19c" kind="variable"><name>split_data</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1ae9905abbeb5ce720df53d10f8a2adad1" kind="variable"><name>stats</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a546ef5b271eed66755f8f8595c686a4a" kind="variable"><name>model_type</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a104b47e39b20fcf96ba506c04ab10323" kind="variable"><name>inputs</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a2f8ed3af33832e2be099a7ab6210c919" kind="variable"><name>targets</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1af52e06ab0bf85fb402ea9e26bfa33375" kind="variable"><name>N_train</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1aac8cec33c147b1eb880b9d483ab4fa9a" kind="variable"><name>idx</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1ac80408f309e7a21705098af0d10522eb" kind="variable"><name>raw_v</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a6ba3896be6c71afcf461900cac1b2a11" kind="variable"><name>raw_i</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a713428b99171b0c68757c056b092e1ea" kind="variable"><name>B_norm</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a43df187d3d218aa26b00bf2aba674580" kind="variable"><name>H_norm</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a376e5f4d2451407dda1a6dac62031072" kind="variable"><name>B_raw</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1ac0b8b7e99f204297407afffe99987a00" kind="variable"><name>H_raw</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a434d34720d1a32069f3b54b918165c66" kind="variable"><name>fig</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1ab4360bdf792033574f76644feaf8f60c" kind="variable"><name>axes</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1aa153a91dd0990baac28ae7f4f68c1688" kind="variable"><name>figsize</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a15f9ffafb007492caaa7769ed638117d" kind="variable"><name>ax</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a9fe1578120f646f0edc1518f37bc5c58" kind="variable"><name>label</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1af33201b48098689fcd6c06c9d3110501" kind="variable"><name>color</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1aef56d257937ab4e2a7ae70154e50bb44" kind="variable"><name>txt</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a6fb2610fc598ace2f756a8c3463a8ad0" kind="variable"><name>transform</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a26bc645e7092a58d5c7896f23d9cafd1" kind="variable"><name>transAxes</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a1874e79ffb69245ac9cc62eface5af43" kind="variable"><name>verticalalignment</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a32d2404c107da962891d072caab44cc9" kind="variable"><name>bbox</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1ac7809073c7e93974cd000ea8e1b50566" kind="variable"><name>ha</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1ad7274507e2fa183880a7e9e36b8280e0" kind="variable"><name>save_path</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a792ff15e476f8dcf1db97b3bb0fc0050" kind="function"><name>normalize_data</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a84f013aee5c17ec66380873ecbf8445f" kind="function"><name>prepare_dataset</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a798bccc182e36d11e0da2dce4c6dc31f" kind="function"><name>calculate_flux_density</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a370875391e05027c2ae9687c9e770f23" kind="function"><name>calculate_magnetizing_force</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a3b6e1a1fc4cd9191d7f6963330cd6b4f" kind="function"><name>calculate_volumetric_loss</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a3cfbef7569b765019480a5000aca2586" kind="function"><name>load_config</name></member>
+    <member refid="namespacesrc_1_1data_1_1preprocessing_1a4bff0b7a0c8070a26001c86ed09d6b93" kind="function"><name>process_magnet_dataset</name></member>
+  </compound>
+  <compound refid="namespacesrc_1_1models" kind="namespace"><name>src::models</name>
+  </compound>
+  <compound refid="namespacesrc_1_1models_1_1cnn__model" kind="namespace"><name>src::models::cnn_model</name>
+    <member refid="namespacesrc_1_1models_1_1cnn__model_1a31a1f24cc9add4b674ba45c71a7c9de3" kind="variable"><name>ACTIVATION_FUNCS</name></member>
+  </compound>
+  <compound refid="namespacesrc_1_1models_1_1scaler__model" kind="namespace"><name>src::models::scaler_model</name>
+  </compound>
+  <compound refid="namespacesrc_1_1models_1_1seq2seq__model" kind="namespace"><name>src::models::seq2seq_model</name>
+  </compound>
+  <compound refid="namespacesrc_1_1models_1_1sequence__model" kind="namespace"><name>src::models::sequence_model</name>
+  </compound>
+  <compound refid="namespacesrc_1_1models_1_1transformer__model" kind="namespace"><name>src::models::transformer_model</name>
+  </compound>
+  <compound refid="namespacesrc_1_1training" kind="namespace"><name>src::training</name>
+  </compound>
+  <compound refid="namespacesrc_1_1training_1_1evaluate" kind="namespace"><name>src::training::evaluate</name>
+    <member refid="namespacesrc_1_1training_1_1evaluate_1a894a78b4bcd025081ccbfa5616c1401a" kind="function"><name>evaluate_model</name></member>
+  </compound>
+  <compound refid="namespacesrc_1_1training_1_1train" kind="namespace"><name>src::training::train</name>
+    <member refid="namespacesrc_1_1training_1_1train_1a8ae500222173487c67172ff4a32e7c15" kind="function"><name>train_model</name></member>
+  </compound>
+  <compound refid="namespacesrc_1_1training_1_1transfer" kind="namespace"><name>src::training::transfer</name>
+    <member refid="namespacesrc_1_1training_1_1transfer_1ae8ee342298921bd5f541ad9e468f5804" kind="function"><name>load_pretrained</name></member>
+    <member refid="namespacesrc_1_1training_1_1transfer_1a4849ec1d1bc34f5770bc611339bd3b74" kind="function"><name>freeze_layers</name></member>
+    <member refid="namespacesrc_1_1training_1_1transfer_1ab228873c4c7ebc23240470e0be372b97" kind="function"><name>fine_tune</name></member>
+  </compound>
+  <compound refid="namespacesrc_1_1utils" kind="namespace"><name>src::utils</name>
+  </compound>
+  <compound refid="namespacesrc_1_1utils_1_1visualization" kind="namespace"><name>src::utils::visualization</name>
+    <member refid="namespacesrc_1_1utils_1_1visualization_1a1f8a76623215976799986570af4d723f" kind="function"><name>plot_loss_curve</name></member>
+    <member refid="namespacesrc_1_1utils_1_1visualization_1a9600ff5011cb5c64d0acc73608a1d9d8" kind="function"><name>plot_prediction_scatter</name></member>
+    <member refid="namespacesrc_1_1utils_1_1visualization_1aca85b5a75300044725bde9ca69d1c719" kind="function"><name>plot_bh_loop</name></member>
+  </compound>
+  <compound refid="main_8py" kind="file"><name>main.py</name>
+  </compound>
+  <compound refid="____init_____8py" kind="file"><name>__init__.py</name>
+  </compound>
+  <compound refid="data_2____init_____8py" kind="file"><name>__init__.py</name>
+  </compound>
+  <compound refid="models_2____init_____8py" kind="file"><name>__init__.py</name>
+  </compound>
+  <compound refid="training_2____init_____8py" kind="file"><name>__init__.py</name>
+  </compound>
+  <compound refid="utils_2____init_____8py" kind="file"><name>__init__.py</name>
+  </compound>
+  <compound refid="dataset_8py" kind="file"><name>dataset.py</name>
+  </compound>
+  <compound refid="loader_8py" kind="file"><name>loader.py</name>
+  </compound>
+  <compound refid="preprocessing_8py" kind="file"><name>preprocessing.py</name>
+  </compound>
+  <compound refid="cnn__model_8py" kind="file"><name>cnn_model.py</name>
+  </compound>
+  <compound refid="scaler__model_8py" kind="file"><name>scaler_model.py</name>
+  </compound>
+  <compound refid="seq2seq__model_8py" kind="file"><name>seq2seq_model.py</name>
+  </compound>
+  <compound refid="sequence__model_8py" kind="file"><name>sequence_model.py</name>
+  </compound>
+  <compound refid="transformer__model_8py" kind="file"><name>transformer_model.py</name>
+  </compound>
+  <compound refid="evaluate_8py" kind="file"><name>evaluate.py</name>
+  </compound>
+  <compound refid="train_8py" kind="file"><name>train.py</name>
+  </compound>
+  <compound refid="transfer_8py" kind="file"><name>transfer.py</name>
+  </compound>
+  <compound refid="visualization_8py" kind="file"><name>visualization.py</name>
+  </compound>
+  <compound refid="dir_c1be8d27e7f84178e95f152701110b19" kind="dir"><name>D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data</name>
+  </compound>
+  <compound refid="dir_bdeba5f06b852fec80257c0bf4c3c36e" kind="dir"><name>D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models</name>
+  </compound>
+  <compound refid="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir"><name>D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src</name>
+  </compound>
+  <compound refid="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7" kind="dir"><name>D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training</name>
+  </compound>
+  <compound refid="dir_313caf1132e152dd9b58bea13a4052ca" kind="dir"><name>D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/utils</name>
+  </compound>
+</doxygenindex>

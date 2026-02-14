@@ -1,0 +1,372 @@
+\doxysection{src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network Class Reference}
+\hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network}{}\label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+
+
+Inheritance diagram for src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a7018cf179decde7211f8f01374c6bd87}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, input\+\_\+dim=1, hidden\+\_\+dim=30, output\+\_\+dim=1, num\+\_\+layers=3)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aee08c0acde1f95cae4c67c7b1fcbf4ac}{forward}} (self, b\+\_\+seq, scalars)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab88766e54ae092df9c5cde262599607f}{hidden\+\_\+size}} = hidden\+\_\+dim
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a0a4501cfe22ba0478b3e020f1f0bc62a}{lstm}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a018ef8bab5edc89d615350c9b05f3816}{fc1}} = nn.\+Linear(hidden\+\_\+dim+2, 128)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a55404c9d459633a2b4c201619fe01243}{fc2}} = nn.\+Linear(128, 196)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a52d676aebd29df747a9493d23296c35e}{fc3}} = nn.\+Linear(196, 128)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a3c50a795050f23cd8cdcaf8ad3150567}{fc4}} = nn.\+Linear(128, 96)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a669301bc0a9f176a8e50f3795c3da919}{fc5}} = nn.\+Linear(96, 32)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab752cc3abd5ad12bb7eb4692dc00d22d}{fc6}} = nn.\+Linear(32, 32)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a15a44bb5843de572a733f09a78062dac}{fc7}} = nn.\+Linear(32, 16)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aad7cce47030693d268682f918e2e2c85}{fc8}} = nn.\+Linear(16, output\+\_\+dim)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42}{elu}} = nn.\+ELU()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Bristol's LSTM Seq2One Architecture.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00005}{5}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a7018cf179decde7211f8f01374c6bd87}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a7018cf179decde7211f8f01374c6bd87} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{input\+\_\+dim}{ = {\ttfamily 1}, }\item[{}]{hidden\+\_\+dim}{ = {\ttfamily 30}, }\item[{}]{output\+\_\+dim}{ = {\ttfamily 1}, }\item[{}]{num\+\_\+layers}{ = {\ttfamily 3}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00009}{9}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=3): }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ super(SequenceToScalerNetwork,\ self).\_\_init\_\_() }
+\DoxyCodeLine{00015\  }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ self.hidden\_size\ =\ hidden\_dim }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Bristol\ uses\ input\_size=1\ but\ constructs\ a\ tensor\ of\ size\ 3\ (B,\ F,\ T)\ inside,\ NOT\ quite. }}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Bristol's\ code\ actually\ expected\ input\ of\ size\ 3\ (B,\ Freq,\ Temp)\ from\ the\ start? }}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ "{}inputs\ =\ torch.zeros(64,\ waveStep,\ 3)"{}\ -\/>\ Yes. }}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ But\ their\ LSTM\ init\ says\ input\_size=1?\  }}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ "{}self.lstm\ =\ nn.LSTM(input\_size,\ ..."{}\ -\/>\ If\ they\ used\ input\_size=1,\ they\ only\ fed\ B? }}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Let's\ check\ their\ forward:\ "{}out,\ \_\ =\ self.lstm(in\_b)"{}\ -\/>\ in\_b\ is\ x[:,:,0:1].\  }}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ SO\ LSTM\ ONLY\ SEES\ B-\/Field! }}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ LSTM\ layer\ (Processing\ B-\/Field\ Only) }}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ self.lstm\ =\ nn.LSTM(1,\ \textcolor{comment}{\#\ Fixed\ to\ 1\ for\ B-\/field }}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hidden\_dim, }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=num\_layers, }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ batch\_first=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00031\  }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fully\ connected\ layer }}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input\ to\ FC\ is:\ LSTM\_Out\ +\ Freq\ +\ Temp\ =\ hidden\_dim\ +\ 2 }}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ self.fc1\ =\ nn.Linear(hidden\_dim+2,\ 128) }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ self.fc2\ =\ nn.Linear(128,\ 196) }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ self.fc3\ =\ nn.Linear(196,\ 128) }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ self.fc4\ =\ nn.Linear(128,\ 96) }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ self.fc5\ =\ nn.Linear(96,\ 32) }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ self.fc6\ =\ nn.Linear(32,\ 32) }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ self.fc7\ =\ nn.Linear(32,\ 16) }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ self.fc8\ =\ nn.Linear(16,\ output\_dim) }
+\DoxyCodeLine{00042\  }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Activation\ function }}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ self.elu\ =\ nn.ELU() }
+\DoxyCodeLine{00045\  }
+\DoxyCodeLine{00046\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{sequence__model_8py_source_l00013}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00013}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a7018cf179decde7211f8f01374c6bd87_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a7018cf179decde7211f8f01374c6bd87_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aee08c0acde1f95cae4c67c7b1fcbf4ac}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!forward@{forward}}
+\index{forward@{forward}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aee08c0acde1f95cae4c67c7b1fcbf4ac} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+forward (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{b\+\_\+seq}{, }\item[{}]{scalars}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Unified Interface Wrapper.
+
+Args:
+    b_seq (Tensor): (Batch, Seq, 1)
+    scalars (Tensor): (Batch, 3) -> Freq, Temp, Hdc
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{47}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{def\ }forward(self,\ b\_seq,\ scalars): }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00049\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Unified\ Interface\ Wrapper. }}
+\DoxyCodeLine{00050\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00051\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args: }}
+\DoxyCodeLine{00052\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ b\_seq\ (Tensor):\ (Batch,\ Seq,\ 1) }}
+\DoxyCodeLine{00053\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ scalars\ (Tensor):\ (Batch,\ 3)\ -\/>\ Freq,\ Temp,\ Hdc }}
+\DoxyCodeLine{00054\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Unpack\ scalars }}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ Freq\ =\ scalars[:,\ 0].unsqueeze(1)\ \textcolor{comment}{\#\ (bs,\ 1) }}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ Temp\ =\ scalars[:,\ 1].unsqueeze(1)\ \textcolor{comment}{\#\ (bs,\ 1) }}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Bristol's\ logic: }}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 1.\ Feed\ only\ B-\/field\ (b\_seq)\ into\ LSTM }}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ out:\ (Batch,\ Seq,\ Hidden) }}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ out,\ \_\ =\ self.lstm(b\_seq) }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 2.\ Take\ last\ output }}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ out\ =\ out[:,\ -\/1,\ :]\ \ \textcolor{comment}{\#\ (Batch,\ Hidden) }}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 3.\ Concatenate\ Freq\ and\ Temp\ to\ the\ features }}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ out\ =\ torch.cat([out,\ Freq,\ Temp],\ dim=1)\ \textcolor{comment}{\#\ (Batch,\ Hidden\ +\ 2) }}
+\DoxyCodeLine{00070\  }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 4.\ Deep\ MLP }}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ out\ =\ self.fc1(out)\  }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ out\ =\ self.elu(self.fc2(out)) }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ out\ =\ self.elu(self.fc3(out)) }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ out\ =\ self.elu(self.fc4(out)) }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ out\ =\ self.elu(self.fc5(out)) }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ out\ =\ self.elu(self.fc6(out)) }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ out\ =\ self.fc7(out) }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ out\ =\ self.fc8(out) }
+\DoxyCodeLine{00080\  }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00018}{src.\+models.\+cnn\+\_\+model.\+Biased\+\_\+\+Elu.\+elu}}, \doxymbox{\hyperlink{sequence__model_8py_source_l00044}{elu}}, \doxymbox{\hyperlink{sequence__model_8py_source_l00034}{fc1}}, \doxymbox{\hyperlink{sequence__model_8py_source_l00035}{fc2}}, \doxymbox{\hyperlink{sequence__model_8py_source_l00036}{fc3}}, \doxymbox{\hyperlink{sequence__model_8py_source_l00037}{fc4}}, \doxymbox{\hyperlink{sequence__model_8py_source_l00038}{fc5}}, \doxymbox{\hyperlink{sequence__model_8py_source_l00039}{fc6}}, \doxymbox{\hyperlink{sequence__model_8py_source_l00040}{fc7}}, \doxymbox{\hyperlink{sequence__model_8py_source_l00041}{fc8}}, and \doxymbox{\hyperlink{sequence__model_8py_source_l00027}{lstm}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!elu@{elu}}
+\index{elu@{elu}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{elu}{elu}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a56865212cc7f3c0acf8b3b42561eda42} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+elu = nn.\+ELU()}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00044}{44}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a018ef8bab5edc89d615350c9b05f3816}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!fc1@{fc1}}
+\index{fc1@{fc1}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{fc1}{fc1}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a018ef8bab5edc89d615350c9b05f3816} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+fc1 = nn.\+Linear(hidden\+\_\+dim+2, 128)}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00034}{34}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a55404c9d459633a2b4c201619fe01243}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!fc2@{fc2}}
+\index{fc2@{fc2}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{fc2}{fc2}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a55404c9d459633a2b4c201619fe01243} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+fc2 = nn.\+Linear(128, 196)}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00035}{35}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a52d676aebd29df747a9493d23296c35e}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!fc3@{fc3}}
+\index{fc3@{fc3}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{fc3}{fc3}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a52d676aebd29df747a9493d23296c35e} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+fc3 = nn.\+Linear(196, 128)}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00036}{36}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a3c50a795050f23cd8cdcaf8ad3150567}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!fc4@{fc4}}
+\index{fc4@{fc4}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{fc4}{fc4}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a3c50a795050f23cd8cdcaf8ad3150567} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+fc4 = nn.\+Linear(128, 96)}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00037}{37}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a669301bc0a9f176a8e50f3795c3da919}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!fc5@{fc5}}
+\index{fc5@{fc5}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{fc5}{fc5}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a669301bc0a9f176a8e50f3795c3da919} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+fc5 = nn.\+Linear(96, 32)}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00038}{38}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab752cc3abd5ad12bb7eb4692dc00d22d}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!fc6@{fc6}}
+\index{fc6@{fc6}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{fc6}{fc6}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab752cc3abd5ad12bb7eb4692dc00d22d} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+fc6 = nn.\+Linear(32, 32)}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00039}{39}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a15a44bb5843de572a733f09a78062dac}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!fc7@{fc7}}
+\index{fc7@{fc7}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{fc7}{fc7}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a15a44bb5843de572a733f09a78062dac} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+fc7 = nn.\+Linear(32, 16)}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00040}{40}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aad7cce47030693d268682f918e2e2c85}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!fc8@{fc8}}
+\index{fc8@{fc8}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{fc8}{fc8}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_aad7cce47030693d268682f918e2e2c85} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+fc8 = nn.\+Linear(16, output\+\_\+dim)}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00041}{41}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab88766e54ae092df9c5cde262599607f}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!hidden\_size@{hidden\_size}}
+\index{hidden\_size@{hidden\_size}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{hidden\_size}{hidden\_size}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_ab88766e54ae092df9c5cde262599607f} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+hidden\+\_\+size = hidden\+\_\+dim}
+
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00016}{16}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+\Hypertarget{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a0a4501cfe22ba0478b3e020f1f0bc62a}\index{src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}!lstm@{lstm}}
+\index{lstm@{lstm}!src.models.sequence\_model.SequenceToScalerNetwork@{src.models.sequence\_model.SequenceToScalerNetwork}}
+\doxysubsubsection{\texorpdfstring{lstm}{lstm}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_a0a4501cfe22ba0478b3e020f1f0bc62a} 
+src.\+models.\+sequence\+\_\+model.\+Sequence\+To\+Scaler\+Network.\+lstm}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ nn.LSTM(1,\ \textcolor{comment}{\#\ Fixed\ to\ 1\ for\ B-\/field}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hidden\_dim,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=num\_layers,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ batch\_first=\textcolor{keyword}{True})}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{sequence__model_8py_source_l00027}{27}} of file \doxymbox{\hyperlink{sequence__model_8py_source}{sequence\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{sequence__model_8py_source_l00047}{forward()}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+models/\+\doxymbox{\hyperlink{sequence__model_8py}{sequence\+\_\+model.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network" kind="class" language="Python" prot="public">
+    <compoundname>src::models::seq2seq_model::Seq2SeqNetwork</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1a53eddec3eef86c291241bb531c957f2e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.seq2seq_model.Seq2SeqNetwork::encoder</definition>
+        <argsstring></argsstring>
+        <name>encoder</name>
+        <qualifiedname>src.models.seq2seq_model.Seq2SeqNetwork.encoder</qualifiedname>
+        <initializer>=  nn.LSTM(
+            input_size=input_dim,
+            hidden_size=hidden_dim,
+            num_layers=num_layers,
+            batch_first=True,
+            dropout=0.1
+        )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" line="23" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" bodystart="23" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1ae7109982709f309938316bf98440354f" compoundref="seq2seq__model_8py" startline="52" endline="71">src.models.seq2seq_model.Seq2SeqNetwork.forward</referencedby>
+        <referencedby refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" compoundref="transformer__model_8py" startline="82" endline="116">src.models.transformer_model.TransformerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1a819de8b5d0836b8cd1c637cab0889c53" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.seq2seq_model.Seq2SeqNetwork::decoder</definition>
+        <argsstring></argsstring>
+        <name>decoder</name>
+        <qualifiedname>src.models.seq2seq_model.Seq2SeqNetwork.decoder</qualifiedname>
+        <initializer>=  nn.LSTM(
+            input_size=hidden_dim, # We might feed <ref refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1a53eddec3eef86c291241bb531c957f2e" kindref="member">encoder</ref> outputs or similar
+            hidden_size=hidden_dim,
+            num_layers=num_layers,
+            batch_first=True,
+            dropout=0.1
+        )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" line="42" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1aa63949aad263348f49886d5af02b4ba5" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.seq2seq_model.Seq2SeqNetwork::head</definition>
+        <argsstring></argsstring>
+        <name>head</name>
+        <qualifiedname>src.models.seq2seq_model.Seq2SeqNetwork.head</qualifiedname>
+        <initializer>=  nn.Linear(hidden_dim, output_dim)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" line="50" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" bodystart="50" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1ae7109982709f309938316bf98440354f" compoundref="seq2seq__model_8py" startline="52" endline="71">src.models.seq2seq_model.Seq2SeqNetwork.forward</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1adacbc2e4ec18549ffb30185327209262" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.seq2seq_model.Seq2SeqNetwork.__init__</definition>
+        <argsstring>(self, input_dim=1, hidden_dim=128, output_dim=1, num_layers=2)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.seq2seq_model.Seq2SeqNetwork.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>input_dim</type>
+          <defname>input_dim</defname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>hidden_dim</type>
+          <defname>hidden_dim</defname>
+          <defval>128</defval>
+        </param>
+        <param>
+          <type>output_dim</type>
+          <defname>output_dim</defname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>num_layers</type>
+          <defname>num_layers</defname>
+          <defval>2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Args:
+    input_dim (int): Input feature size.
+    hidden_dim (int): Hidden size.
+    output_dim (int): Output feature size.
+    num_layers (int): Depth of LSTM.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" line="12" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" bodystart="12" bodyend="51"/>
+        <references refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1adacbc2e4ec18549ffb30185327209262" compoundref="seq2seq__model_8py" startline="12" endline="51">src.models.seq2seq_model.Seq2SeqNetwork.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1adacbc2e4ec18549ffb30185327209262" compoundref="seq2seq__model_8py" startline="12" endline="51">src.models.seq2seq_model.Seq2SeqNetwork.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1ae7109982709f309938316bf98440354f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.seq2seq_model.Seq2SeqNetwork.forward</definition>
+        <argsstring>(self, x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.seq2seq_model.Seq2SeqNetwork.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>x</type>
+          <defname>x</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" line="52" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" bodystart="52" bodyend="71"/>
+        <references refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1a53eddec3eef86c291241bb531c957f2e" compoundref="seq2seq__model_8py" startline="23">src.models.seq2seq_model.Seq2SeqNetwork.encoder</references>
+        <references refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1aa63949aad263348f49886d5af02b4ba5" compoundref="seq2seq__model_8py" startline="50">src.models.seq2seq_model.Seq2SeqNetwork.head</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.seq2seq_model.Seq2SeqNetwork</label>
+        <link refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.seq2seq_model.Seq2SeqNetwork</label>
+        <link refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" line="11" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq_model.py" bodystart="11" bodyend="71"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1adacbc2e4ec18549ffb30185327209262" prot="public" virt="non-virtual"><scope>src::models::seq2seq_model::Seq2SeqNetwork</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1a819de8b5d0836b8cd1c637cab0889c53" prot="public" virt="non-virtual"><scope>src::models::seq2seq_model::Seq2SeqNetwork</scope><name>decoder</name></member>
+      <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1a53eddec3eef86c291241bb531c957f2e" prot="public" virt="non-virtual"><scope>src::models::seq2seq_model::Seq2SeqNetwork</scope><name>encoder</name></member>
+      <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1ae7109982709f309938316bf98440354f" prot="public" virt="non-virtual"><scope>src::models::seq2seq_model::Seq2SeqNetwork</scope><name>forward</name></member>
+      <member refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1aa63949aad263348f49886d5af02b4ba5" prot="public" virt="non-virtual"><scope>src::models::seq2seq_model::Seq2SeqNetwork</scope><name>head</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

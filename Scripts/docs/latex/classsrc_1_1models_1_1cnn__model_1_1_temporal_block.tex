@@ -1,0 +1,416 @@
+\doxysection{src.\+models.\+cnn\+\_\+model.\+Temporal\+Block Class Reference}
+\hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block}{}\label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+
+
+Inheritance diagram for src.\+models.\+cnn\+\_\+model.\+Temporal\+Block:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classsrc_1_1models_1_1cnn__model_1_1_temporal_block__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+models.\+cnn\+\_\+model.\+Temporal\+Block:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classsrc_1_1models_1_1cnn__model_1_1_temporal_block__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_abf57d3c1e9da461f00a6d4f73e76ae33}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, n\+\_\+inputs, n\+\_\+outputs, kernel\+\_\+size, stride, dilation, \doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a42784276c3430d51108d583578f7eb59}{residual}}=True, \doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_aa1181685a7df3e437076db5958db6b1f}{double\+\_\+layered}}=True, dropout=0.\+0, act\+\_\+func=None)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a358baddb5ef877814dc4372194cc08d6}{init\+\_\+weights}} (self)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_af4aba8b5c4ca9a33d43c27e380cf2236}{forward}} (self, x)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a8e63c6e2dea5e93b1a02fd0c86b39948}{conv1}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a449eb3696c5c4602db9f37e254043a8f}{relu1}} = ACTIVATION\+\_\+\+FUNCS.\+get(act\+\_\+func, nn.\+Identity)()
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a5603a9061111e886e1766efe3ff18975}{dropout1}} = nn.\+Dropout1d(dropout)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a2a3a91a16553188fc898140d8607564b}{relu2}} = nn.\+Identity()
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a74bc8d2c5af9a84704d00f2205f35e09}{conv2}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a90d585b3ca17833234ecdda4aeff6e51}{dropout2}} = nn.\+Dropout1d(dropout)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_ab174667fb87d5c0192298e4c0fac1448}{net}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a6d75e765ac525ca9d8977bf5f3ee16b6}{relu}} = nn.\+Re\+LU()
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a42784276c3430d51108d583578f7eb59}{residual}} = residual
+\item 
+tuple \doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_acb73d7834bf9141c3a78298ac135f362}{downsample}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_aa1181685a7df3e437076db5958db6b1f}{double\+\_\+layered}} = double\+\_\+layered
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00040}{40}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_abf57d3c1e9da461f00a6d4f73e76ae33}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_abf57d3c1e9da461f00a6d4f73e76ae33} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{n\+\_\+inputs}{, }\item[{}]{n\+\_\+outputs}{, }\item[{}]{kernel\+\_\+size}{, }\item[{}]{stride}{, }\item[{}]{dilation}{, }\item[{}]{residual}{ = {\ttfamily True}, }\item[{}]{double\+\_\+layered}{ = {\ttfamily True}, }\item[{}]{dropout}{ = {\ttfamily 0.0}, }\item[{}]{act\+\_\+func}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00041}{41}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00052\ \ \ \ \ ): }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ super(TemporalBlock,\ self).\_\_init\_\_() }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ padding\ =\ ((kernel\_size\ -\/\ 1)\ //\ 2)\ *\ dilation }
+\DoxyCodeLine{00055\  }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ self.conv1\ =\ weight\_norm( }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv1d( }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_inputs, }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_outputs, }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kernel\_size, }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stride=stride, }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ padding=padding, }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dilation=dilation, }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ padding\_mode=\textcolor{stringliteral}{"{}circular"{}}, }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ self.relu1\ =\ ACTIVATION\_FUNCS.get(act\_func,\ nn.Identity)() }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ self.dropout1\ =\ nn.Dropout1d(dropout) }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ double\_layered: }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ self.relu2\ =\ nn.Identity() }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ self.conv2\ =\ weight\_norm( }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv1d( }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_inputs, }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_outputs, }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kernel\_size, }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stride=stride, }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ padding=padding, }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dilation=dilation, }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ padding\_mode=\textcolor{stringliteral}{"{}circular"{}}, }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ self.dropout2\ =\ nn.Dropout1d(dropout) }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ self.net\ =\ nn.Sequential( }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.conv1, }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.relu1, }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.dropout1, }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.conv2, }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.relu2, }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.dropout2, }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ self.net\ =\ nn.Sequential(self.conv1,\ self.relu1,\ self.dropout1) }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ self.relu\ =\ nn.ReLU() }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ self.residual\ =\ residual }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ residual: }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ self.downsample\ =\ ( }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv1d(n\_inputs,\ n\_outputs,\ 1)\ \textcolor{keywordflow}{if}\ n\_inputs\ !=\ n\_outputs\ \textcolor{keywordflow}{else}\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ self.downsample\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ self.double\_layered\ =\ double\_layered }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ self.init\_weights() }
+\DoxyCodeLine{00103\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00052}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00052}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_abf57d3c1e9da461f00a6d4f73e76ae33_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_abf57d3c1e9da461f00a6d4f73e76ae33_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_af4aba8b5c4ca9a33d43c27e380cf2236}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!forward@{forward}}
+\index{forward@{forward}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_af4aba8b5c4ca9a33d43c27e380cf2236} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+forward (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00111}{111}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{def\ }forward(self,\ x): }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ out\ =\ self.net(x) }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.residual: }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ res\ =\ x\ \textcolor{keywordflow}{if}\ self.downsample\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}\ \textcolor{keywordflow}{else}\ self.downsample(x) }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ torch.clip( }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ +\ res,\ -\/10,\ 10 }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ self.relu(y) }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ out }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ y }
+\DoxyCodeLine{00122\  }
+\DoxyCodeLine{00123\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00096}{downsample}}, \doxymbox{\hyperlink{cnn__model_8py_source_l00083}{net}}, \doxymbox{\hyperlink{cnn__model_8py_source_l00093}{relu}}, and \doxymbox{\hyperlink{cnn__model_8py_source_l00094}{residual}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a358baddb5ef877814dc4372194cc08d6}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!init\_weights@{init\_weights}}
+\index{init\_weights@{init\_weights}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{init\_weights()}{init\_weights()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a358baddb5ef877814dc4372194cc08d6} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+init\+\_\+weights (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00104}{104}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{def\ }init\_weights(self): }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ self.conv1.weight.data.normal\_(0,\ 0.01) }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.double\_layered: }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ self.conv2.weight.data.normal\_(0,\ 0.01) }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.downsample\ \textcolor{keywordflow}{is}\ \textcolor{keywordflow}{not}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ self.downsample.weight.data.normal\_(0,\ 0.01) }
+\DoxyCodeLine{00110\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00056}{conv1}}, \doxymbox{\hyperlink{cnn__model_8py_source_l00071}{conv2}}, \doxymbox{\hyperlink{cnn__model_8py_source_l00101}{double\+\_\+layered}}, and \doxymbox{\hyperlink{cnn__model_8py_source_l00096}{downsample}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a8e63c6e2dea5e93b1a02fd0c86b39948}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!conv1@{conv1}}
+\index{conv1@{conv1}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{conv1}{conv1}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a8e63c6e2dea5e93b1a02fd0c86b39948} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+conv1}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ weight\_norm(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Conv1d(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_inputs,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_outputs,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kernel\_size,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stride=stride,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ padding=padding,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dilation=dilation,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ padding\_mode=\textcolor{stringliteral}{"{}circular"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00056}{56}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00104}{init\+\_\+weights()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a74bc8d2c5af9a84704d00f2205f35e09}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!conv2@{conv2}}
+\index{conv2@{conv2}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{conv2}{conv2}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a74bc8d2c5af9a84704d00f2205f35e09} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+conv2}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ weight\_norm(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv1d(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_inputs,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_outputs,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ kernel\_size,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ stride=stride,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ padding=padding,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dilation=dilation,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ padding\_mode=\textcolor{stringliteral}{"{}circular"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00071}{71}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00104}{init\+\_\+weights()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_aa1181685a7df3e437076db5958db6b1f}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!double\_layered@{double\_layered}}
+\index{double\_layered@{double\_layered}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{double\_layered}{double\_layered}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_aa1181685a7df3e437076db5958db6b1f} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+double\+\_\+layered = double\+\_\+layered}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00101}{101}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00104}{init\+\_\+weights()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_acb73d7834bf9141c3a78298ac135f362}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!downsample@{downsample}}
+\index{downsample@{downsample}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{downsample}{downsample}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_acb73d7834bf9141c3a78298ac135f362} 
+tuple src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+downsample}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ (}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nn.Conv1d(n\_inputs,\ n\_outputs,\ 1)\ \textcolor{keywordflow}{if}\ n\_inputs\ !=\ n\_outputs\ \textcolor{keywordflow}{else}\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00096}{96}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00111}{forward()}}, and \doxymbox{\hyperlink{cnn__model_8py_source_l00104}{init\+\_\+weights()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a5603a9061111e886e1766efe3ff18975}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!dropout1@{dropout1}}
+\index{dropout1@{dropout1}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{dropout1}{dropout1}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a5603a9061111e886e1766efe3ff18975} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+dropout1 = nn.\+Dropout1d(dropout)}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00068}{68}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a90d585b3ca17833234ecdda4aeff6e51}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!dropout2@{dropout2}}
+\index{dropout2@{dropout2}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{dropout2}{dropout2}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a90d585b3ca17833234ecdda4aeff6e51} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+dropout2 = nn.\+Dropout1d(dropout)}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00082}{82}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_ab174667fb87d5c0192298e4c0fac1448}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!net@{net}}
+\index{net@{net}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{net}{net}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_ab174667fb87d5c0192298e4c0fac1448} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+net}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ nn.Sequential(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.conv1,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.relu1,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.dropout1,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.conv2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.relu2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ self.dropout2,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00083}{83}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00111}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a6d75e765ac525ca9d8977bf5f3ee16b6}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!relu@{relu}}
+\index{relu@{relu}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{relu}{relu}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a6d75e765ac525ca9d8977bf5f3ee16b6} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+relu = nn.\+Re\+LU()}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00093}{93}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00111}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a449eb3696c5c4602db9f37e254043a8f}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!relu1@{relu1}}
+\index{relu1@{relu1}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{relu1}{relu1}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a449eb3696c5c4602db9f37e254043a8f} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+relu1 = ACTIVATION\+\_\+\+FUNCS.\+get(act\+\_\+func, nn.\+Identity)()}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00067}{67}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a2a3a91a16553188fc898140d8607564b}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!relu2@{relu2}}
+\index{relu2@{relu2}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{relu2}{relu2}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a2a3a91a16553188fc898140d8607564b} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+relu2 = nn.\+Identity()}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00070}{70}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a42784276c3430d51108d583578f7eb59}\index{src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}!residual@{residual}}
+\index{residual@{residual}!src.models.cnn\_model.TemporalBlock@{src.models.cnn\_model.TemporalBlock}}
+\doxysubsubsection{\texorpdfstring{residual}{residual}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_temporal_block_a42784276c3430d51108d583578f7eb59} 
+src.\+models.\+cnn\+\_\+model.\+Temporal\+Block.\+residual = residual}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00094}{94}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00111}{forward()}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+models/\+\doxymbox{\hyperlink{cnn__model_8py}{cnn\+\_\+model.\+py}}\end{DoxyCompactItemize}

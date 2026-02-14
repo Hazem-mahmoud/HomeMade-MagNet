@@ -1,0 +1,121 @@
+\doxysection{transformer\+\_\+model.\+py}
+\hypertarget{transformer__model_8py_source}{}\label{transformer__model_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer\_model.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer\_model.py}}
+\doxymbox{\hyperlink{transformer__model_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1models_1_1transformer__model}{00001}}\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00002}00002\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00003}00003\ \textcolor{keyword}{import}\ torch.nn\ \textcolor{keyword}{as}\ nn}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00004}00004\ \textcolor{keyword}{import}\ math}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00006}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding}{00006}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding}{PositionalEncoding}}(nn.Module):}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00007}00007\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00008}00008\ \textcolor{stringliteral}{\ \ \ \ Injects\ some\ information\ about\ the\ relative\ or\ absolute\ position\ of\ the\ tokens\ in\ the\ sequence.}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00009}00009\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00010}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a9bec562f3cfbfb7ec59d2faf8b9fd450}{00010}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a9bec562f3cfbfb7ec59d2faf8b9fd450}{\_\_init\_\_}}(self,\ d\_model:\ int,\ dropout:\ float\ =\ 0.1,\ max\_len:\ int\ =\ 5000):}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00011}00011\ \ \ \ \ \ \ \ \ super().\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a9bec562f3cfbfb7ec59d2faf8b9fd450}{\_\_init\_\_}}()}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00012}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_adc9404435d2aff36572de4adcfbbb759}{00012}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_adc9404435d2aff36572de4adcfbbb759}{dropout}}\ =\ nn.Dropout(p=dropout)}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00014}00014\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Compute\ the\ positional\ encodings\ once\ in\ log\ space.}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00015}00015\ \ \ \ \ \ \ \ \ position\ =\ torch.arange(max\_len).unsqueeze(1)\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00016}00016\ \ \ \ \ \ \ \ \ div\_term\ =\ torch.exp(torch.arange(0,\ d\_model,\ 2)\ *\ (-\/math.log(10000.0)\ /\ d\_model))}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00017}00017\ \ \ \ \ \ \ \ \ pe\ =\ torch.zeros(max\_len,\ d\_model)}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ pe[:,\ 0::2]\ =\ torch.sin(position\ *\ div\_term)}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00019}00019\ \ \ \ \ \ \ \ \ pe[:,\ 1::2]\ =\ torch.cos(position\ *\ div\_term)}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ self.register\_buffer(\textcolor{stringliteral}{'pe'},\ pe)}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00022}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a51a0de3ad593a089d39da0939ec33a22}{00022}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_a51a0de3ad593a089d39da0939ec33a22}{forward}}(self,\ x):}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00024}00024\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00025}00025\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ x:\ Tensor,\ shape\ [batch\_size,\ seq\_len,\ embedding\_dim]}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00026}00026\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ x\ =\ x\ +\ self.pe[:x.size(1)]}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_adc9404435d2aff36572de4adcfbbb759}{dropout}}(x)}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00030}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network}{00030}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network}{TransformerNetwork}}(nn.Module):}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00031}00031\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00032}00032\ \textcolor{stringliteral}{\ \ \ \ Fuzhou's\ Transformer-\/based\ architecture.}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00033}00033\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00034}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a0e58e9c4308d8256c1dc05b10bcfe667}{00034}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a0e58e9c4308d8256c1dc05b10bcfe667}{\_\_init\_\_}}(self,\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ B\_in\_channel=1024,\ \textcolor{comment}{\#\ Default\ sequence\ length}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ dim\_hidden=24,\ \ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ dim\_proj\_fusion=40,}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ n\_encoder\_layers=1,}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ n\_heads=4,}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ dropout\_encoder=0.0,}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ dropout\_pos\_enc=0.0,}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ dim\_feedforward\_encoder=40,}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ ):\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ super().\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a0e58e9c4308d8256c1dc05b10bcfe667}{\_\_init\_\_}}()\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Projection\ for\ B-\/field\ input:\ maps\ scalar\ input\ to\ hidden\ dimension}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00047}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a1d5f0e15438cd9cbc513ec33b551df2c}{00047}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a1d5f0e15438cd9cbc513ec33b551df2c}{proj\_B}}\ =\ nn.Sequential(}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(1,\ dim\_hidden),}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(),}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_hidden,\ dim\_hidden))}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00052}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a689d2bd691d5160b5c6f7fa9c1961161}{00052}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a689d2bd691d5160b5c6f7fa9c1961161}{positional\_encoding\_layer}}\ =\ \doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding}{PositionalEncoding}}(d\_model=dim\_hidden,\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dropout=dropout\_pos\_enc,\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ max\_len=B\_in\_channel)}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Transformer\ Encoder\ Layer\ definition}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ encoder\_layer\ =\ nn.TransformerEncoderLayer(}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ d\_model=dim\_hidden,\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ nhead=n\_heads,}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ dim\_feedforward=dim\_feedforward\_encoder,}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ dropout=dropout\_encoder,}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ activation=\textcolor{stringliteral}{"{}relu"{}},}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ batch\_first=\textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ )\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00066}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_aea40a2129ffd02f4a12418ba24670037}{00066}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_aea40a2129ffd02f4a12418ba24670037}{encoder}}\ =\ nn.TransformerEncoder(encoder\_layer=encoder\_layer,\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=n\_encoder\_layers,\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ norm=\textcolor{keywordtype}{None})}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fusion\ Layer:\ Combines\ Transformer\ output\ (B-\/field\ features)\ with\ Temp\ and\ Freq}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00071}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a4785766fb29a657e28d6aa0c645cffed}{00071}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a4785766fb29a657e28d6aa0c645cffed}{proj\_fusion}}\ =\ nn.Sequential(}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_hidden+2,\ dim\_proj\_fusion),}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(),}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_proj\_fusion,\ dim\_proj\_fusion),}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(),}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(dim\_proj\_fusion,\ 1))}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Final\ Regressor\ to\ predict\ Power\ Loss\ from\ fused\ features}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00079}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a7d529f2c456e9ac3906ad019c9aa9912}{00079}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a7d529f2c456e9ac3906ad019c9aa9912}{regressor}}\ =\ nn.Sequential(}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(B\_in\_channel,\ 1))}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00082}\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_ab547eea976cd7f9e58fba2d6f9abfd37}{00082}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_ab547eea976cd7f9e58fba2d6f9abfd37}{forward}}(self,\ b\_seq,\ scalars):}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00084}00084\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Unified\ Interface\ Wrapper.}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00085}00085\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00086}00086\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00087}00087\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ b\_seq\ (Tensor):\ Input\ B-\/field\ curve,\ shape\ (batch\_size,\ seq\_len,\ 1).}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00088}00088\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ scalars\ (Tensor):\ Shape\ (batch\_size,\ 3)\ -\/>\ Freq,\ Temp,\ Hdc.}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00089}00089\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Unpack\ scalars}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Dataset\ returns:\ Freq,\ Temp,\ Hdc}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00092}00092\ \ \ \ \ \ \ \ \ Freq\ =\ scalars[:,\ 0].unsqueeze(1)\ \textcolor{comment}{\#\ (bs,\ 1)}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ Temp\ =\ scalars[:,\ 1].unsqueeze(1)\ \textcolor{comment}{\#\ (bs,\ 1)}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ B\_curve\ =\ b\_seq}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ batch\_size,\ len\_seq,\ feat\_dim\ =\ B\_curve.shape}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fuzhou\ Logic}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00100}00100\ \ \ \ \ \ \ \ \ B\_curve\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a1d5f0e15438cd9cbc513ec33b551df2c}{proj\_B}}(B\_curve)\ \textcolor{comment}{\#\ (bs,1024,1)-\/>(bs,1024,24)}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Add\ Positional\ Encoding}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ B\_curve\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a689d2bd691d5160b5c6f7fa9c1961161}{positional\_encoding\_layer}}(B\_curve)}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00104}00104\ \ \ \ \ \ \ \ \ B\_curve\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_aea40a2129ffd02f4a12418ba24670037}{encoder}}(B\_curve)\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00106}00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Repeat\ Temp\ and\ Freq\ to\ match\ sequence\ length\ for\ concatenation}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ Temp\_rep\ =\ Temp.unsqueeze(1).repeat(1,\ len\_seq,\ 1)\ \textcolor{comment}{\#\ (bs,1)-\/>(bs,1024,1)}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ Freq\_rep\ =\ Freq.unsqueeze(1).repeat(1,\ len\_seq,\ 1)\ \textcolor{comment}{\#\ (bs,1)-\/>(bs,1024,1)}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fuse\ B-\/field\ features\ with\ Temp\ and\ Freq}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ feat\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a4785766fb29a657e28d6aa0c645cffed}{proj\_fusion}}(torch.cat([B\_curve,\ Temp\_rep,\ Freq\_rep],\ dim=2))\ \textcolor{comment}{\#\ (bs,1024,26)-\/>(bs,1024,1)}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ feat\ =\ feat.reshape(batch\_size,\ -\/1)\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ P\_pred\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1transformer__model_1_1_transformer_network_a7d529f2c456e9ac3906ad019c9aa9912}{regressor}}(feat)\ \textcolor{comment}{\#\ (bs,1)}}
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{transformer__model_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ P\_pred}
+
+\end{DoxyCode}

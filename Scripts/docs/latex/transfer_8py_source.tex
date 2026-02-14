@@ -1,0 +1,79 @@
+\doxysection{transfer.\+py}
+\hypertarget{transfer_8py_source}{}\label{transfer_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/transfer.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/transfer.py}}
+\doxymbox{\hyperlink{transfer_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00002}00002\ \textcolor{stringliteral}{Transfer\ Learning\ Module.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00004}00004\ \textcolor{stringliteral}{This\ module\ aids\ in\ adapting\ pre-\/trained\ models\ to\ new\ datasets\ or\ materials.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00005}00005\ \textcolor{stringliteral}{It\ provides\ utilities\ for\ freezing\ layers,\ replacing\ heads,\ and\ fine-\/tuning.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00008}00008\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00009}00009\ \textcolor{keyword}{import}\ torch.nn\ \textcolor{keyword}{as}\ nn}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00010}00010\ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00012}\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer_ae8ee342298921bd5f541ad9e468f5804}{00012}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer_ae8ee342298921bd5f541ad9e468f5804}{load\_pretrained}}(model,\ checkpoint\_path,\ device='cpu'):}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00013}00013\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00014}00014\ \textcolor{stringliteral}{\ \ \ \ Loads\ model\ weights\ from\ a\ checkpoint.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00015}00015\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00016}00016\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(checkpoint\_path):}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00017}00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(f\textcolor{stringliteral}{"{}Checkpoint\ not\ found:\ \{checkpoint\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00018}00018\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00019}00019\ \ \ \ \ state\_dict\ =\ torch.load(checkpoint\_path,\ map\_location=device)}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00020}00020\ \ \ \ \ model.load\_state\_dict(state\_dict)}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00021}00021\ \ \ \ \ model.to(device)}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00022}00022\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loaded\ weights\ from\ \{checkpoint\_path\}"{}})}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00023}00023\ \ \ \ \ \textcolor{keywordflow}{return}\ model}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00025}\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer_a4849ec1d1bc34f5770bc611339bd3b74}{00025}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer_a4849ec1d1bc34f5770bc611339bd3b74}{freeze\_layers}}(model,\ layers\_to\_freeze=None):}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00026}00026\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00027}00027\ \textcolor{stringliteral}{\ \ \ \ Freezes\ parameters\ in\ the\ model.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00028}00028\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00029}00029\ \textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00030}00030\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\ (nn.Module):\ The\ model.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00031}00031\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ layers\_to\_freeze\ (list\ of\ str,\ optional):\ Names\ of\ modules\ to\ freeze.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00032}00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ If\ None,\ freeze\ all\ except\ the\ last\ layer\ (Head).}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00033}00033\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{if}\ layers\_to\_freeze\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}:}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Default\ strategy:\ Freeze\ feature\ extractor,\ keep\ head\ trainable.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ This\ assumes\ model\ has\ a\ .head\ attribute\ or\ similar\ structure.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ If\ standard\ sequential,\ we\ might\ freeze\ all\ but\ last.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ param\ \textcolor{keywordflow}{in}\ model.named\_parameters():}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ param.requires\_grad\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Unfreeze\ head}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ hasattr(model,\ \textcolor{stringliteral}{'head'}):}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ param\ \textcolor{keywordflow}{in}\ model.head.parameters():}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ param.requires\_grad\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Frozen\ all\ layers\ except\ 'head'."{}})}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ hasattr(model,\ \textcolor{stringliteral}{'fc'}):\ \textcolor{comment}{\#\ ResNet\ style}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ param\ \textcolor{keywordflow}{in}\ model.fc.parameters():}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ param.requires\_grad\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ to\ unfreeze\ last\ layer\ of\ 'model'\ sequential\ if\ exists}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback:\ User\ must\ specify.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Warning:\ Could\ not\ identify\ head.\ All\ layers\ frozen."{}})}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Freeze\ specific\ layers}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ param\ \textcolor{keywordflow}{in}\ model.named\_parameters():}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ layer\_name\ \textcolor{keywordflow}{in}\ layers\_to\_freeze:}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ layer\_name\ \textcolor{keywordflow}{in}\ name:}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ param.requires\_grad\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Frozen\ layers\ containing:\ \{layers\_to\_freeze\}"{}})}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00062}\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer_ab228873c4c7ebc23240470e0be372b97}{00062}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer_ab228873c4c7ebc23240470e0be372b97}{fine\_tune}}(model,\ train\_loader,\ val\_loader,\ config,\ device='cpu'):}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00063}00063\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00064}00064\ \textcolor{stringliteral}{\ \ \ \ Wrapper\ for\ training\ loop\ specifically\ for\ fine-\/tuning.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00065}00065\ \textcolor{stringliteral}{\ \ \ \ Usually\ uses\ lower\ learning\ rate.}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00066}00066\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00067}00067\ \ \ \ \ \textcolor{comment}{\#\ Reduce\ LR\ for\ fine-\/tuning}}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'learning\_rate'}\ \textcolor{keywordflow}{in}\ config:}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ config[\textcolor{stringliteral}{'learning\_rate'}]\ /=\ 10.0}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00071}00071\ \ \ \ \ print(\textcolor{stringliteral}{"{}Starting\ Fine-\/tuning\ (LR\ reduced)..."{}})}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00072}00072\ \ \ \ \ \textcolor{keyword}{from}\ \doxymbox{\hyperlink{namespacesrc_1_1training_1_1train}{src.training.train}}\ \textcolor{keyword}{import}\ train\_model}
+\DoxyCodeLine{\Hypertarget{transfer_8py_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{return}\ train\_model(model,\ train\_loader,\ val\_loader,\ config,\ device)}
+
+\end{DoxyCode}

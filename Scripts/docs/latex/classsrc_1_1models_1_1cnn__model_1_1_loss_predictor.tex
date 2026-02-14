@@ -1,0 +1,209 @@
+\doxysection{src.\+models.\+cnn\+\_\+model.\+Loss\+Predictor Class Reference}
+\hypertarget{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor}{}\label{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor}\index{src.models.cnn\_model.LossPredictor@{src.models.cnn\_model.LossPredictor}}
+
+
+Inheritance diagram for src.\+models.\+cnn\+\_\+model.\+Loss\+Predictor:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+models.\+cnn\+\_\+model.\+Loss\+Predictor:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_ab83a6d7828fd3891f0f0eb405cea5b59}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_add606cfb853d459d15184d437917c14e}{h\+\_\+predictor}})
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_aa98ee38170a9382bb57567943e4fade5}{forward}} (self, x\+\_\+ts, x\+\_\+scalars, stats)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_add606cfb853d459d15184d437917c14e}{h\+\_\+predictor}} = h\+\_\+predictor
+\item 
+\doxymbox{\hyperlink{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_acfb7073878021554e0cfa61718f47021}{post\+\_\+processor}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00200}{200}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_ab83a6d7828fd3891f0f0eb405cea5b59}\index{src.models.cnn\_model.LossPredictor@{src.models.cnn\_model.LossPredictor}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.models.cnn\_model.LossPredictor@{src.models.cnn\_model.LossPredictor}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_ab83a6d7828fd3891f0f0eb405cea5b59} 
+src.\+models.\+cnn\+\_\+model.\+Loss\+Predictor.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{h\+\_\+predictor}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00201}{201}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ h\_predictor): }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ super().\_\_init\_\_() }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ self.h\_predictor\ =\ h\_predictor }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ self.post\_processor\ =\ nn.Sequential( }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(self.h\_predictor.num\_input\_scalar,\ 8), }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(), }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(8,\ 1), }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh() }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00210\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00201}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00201}{\+\_\+\+\_\+init\+\_\+\+\_\+()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_ab83a6d7828fd3891f0f0eb405cea5b59_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_ab83a6d7828fd3891f0f0eb405cea5b59_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_aa98ee38170a9382bb57567943e4fade5}\index{src.models.cnn\_model.LossPredictor@{src.models.cnn\_model.LossPredictor}!forward@{forward}}
+\index{forward@{forward}!src.models.cnn\_model.LossPredictor@{src.models.cnn\_model.LossPredictor}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_aa98ee38170a9382bb57567943e4fade5} 
+src.\+models.\+cnn\+\_\+model.\+Loss\+Predictor.\+forward (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{x\+\_\+ts}{, }\item[{}]{x\+\_\+scalars}{, }\item[{}]{stats}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00211}{211}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keyword}{def\ }forward(self,\ x\_ts,\ x\_scalars,\ stats): }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 1.\ Predict\ H-\/field\ (Normalized) }}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ h\_pred\ =\ self.h\_predictor(x\_ts,\ x\_scalars).permute(2,\ 0,\ 1)\ \textcolor{comment}{\#\ (Seq,\ Batch,\ 1) }}
+\DoxyCodeLine{00214\  }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 2.\ De-\/normalize\ Physical\ Quantities\ for\ the\ Shoelace\ Formula }}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ need\ real\ units:\ B\ in\ Tesla,\ H\ in\ A/m,\ Freq\ in\ Hz }}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Recover\ Frequency\ (Hz) }}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ x\_scalars[:,\ 0]\ is\ Standardized\ Freq:\ (F\ -\/\ mu)\ /\ sigma }}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ f\_norm\ =\ x\_scalars[:,\ 0] }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ freq\_hz\ =\ (f\_norm\ *\ stats[\textcolor{stringliteral}{'freq\_std'}])\ +\ stats[\textcolor{stringliteral}{'freq\_mean'}] }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ freq\_hz\ =\ torch.abs(freq\_hz)\ \textcolor{comment}{\#\ Ensure\ positive }}
+\DoxyCodeLine{00223\  }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Recover\ B\ (Tesla) }}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Scaled\ B\ and\ H\ (using\ learnable/fixed\ limits\ to\ ensure\ valid\ range) }}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Note:\ Paderborn\ hardcoded\ these\ offsets\ (+5)\ to\ ensure\ positivity\ for\ log. }}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ b\_lim\ =\ 0.5\ \ \ \textcolor{comment}{\#\ Approx\ max\ Tesla }}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ h\_lim\ =\ 100.0\ \textcolor{comment}{\#\ Approx\ max\ A/m }}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ x\_ts\ is\ (Batch,\ Channels,\ Seq)\ =\ (Batch,\ 1,\ Seq) }}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ want\ (Seq,\ Batch,\ 1) }}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ scaled\_b\ =\ x\_ts.permute(2,\ 0,\ 1)\ *\ b\_lim }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ scaled\_h\ =\ h\_pred\ *\ h\_lim }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Shoelace }}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ term1\ =\ scaled\_b }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ term2\ =\ torch.roll(scaled\_h,\ 1,\ dims=0)\ -\/\ torch.roll(scaled\_h,\ -\/1,\ dims=0) }
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ area\ =\ 0.5\ *\ torch.sum(term1\ *\ term2,\ dim=0)\ \textcolor{comment}{\#\ (Batch,\ 1) }}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 4.\ Compute\ Power\ Loss:\ Pv\ =\ Freq\ *\ Area\ *\ (Correction\ Factor) }}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Correction\ factor\ allows\ network\ to\ adjust\ for\ non-\/ideal\ shapes }}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ correction\ =\ 1.0\ +\ 0.1\ *\ self.post\_processor(x\_scalars) }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ ploss\_pred\ =\ freq\_hz.unsqueeze(1)\ *\ torch.abs(area)\ *\ correction }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Return\ Log(Pv)\ to\ match\ Log-\/Loss\ Target }}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ torch.log(ploss\_pred\ +\ 1e-\/6) }
+\DoxyCodeLine{00248\  }
+\DoxyCodeLine{00249\ \textcolor{comment}{\#\ ========================================== }}
+\DoxyCodeLine{00250\ \textcolor{comment}{\#\ Validated\ Model\ Wrapper }}
+\DoxyCodeLine{00251\ \textcolor{comment}{\#\ ========================================== }}
+\DoxyCodeLine{00252\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{cnn__model_8py_source_l00203}{h\+\_\+predictor}}, and \doxymbox{\hyperlink{cnn__model_8py_source_l00204}{post\+\_\+processor}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_add606cfb853d459d15184d437917c14e}\index{src.models.cnn\_model.LossPredictor@{src.models.cnn\_model.LossPredictor}!h\_predictor@{h\_predictor}}
+\index{h\_predictor@{h\_predictor}!src.models.cnn\_model.LossPredictor@{src.models.cnn\_model.LossPredictor}}
+\doxysubsubsection{\texorpdfstring{h\_predictor}{h\_predictor}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_add606cfb853d459d15184d437917c14e} 
+src.\+models.\+cnn\+\_\+model.\+Loss\+Predictor.\+h\+\_\+predictor = h\+\_\+predictor}
+
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00203}{203}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00211}{forward()}}.
+
+\Hypertarget{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_acfb7073878021554e0cfa61718f47021}\index{src.models.cnn\_model.LossPredictor@{src.models.cnn\_model.LossPredictor}!post\_processor@{post\_processor}}
+\index{post\_processor@{post\_processor}!src.models.cnn\_model.LossPredictor@{src.models.cnn\_model.LossPredictor}}
+\doxysubsubsection{\texorpdfstring{post\_processor}{post\_processor}}
+{\footnotesize\ttfamily \label{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor_acfb7073878021554e0cfa61718f47021} 
+src.\+models.\+cnn\+\_\+model.\+Loss\+Predictor.\+post\+\_\+processor}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ nn.Sequential(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(self.h\_predictor.num\_input\_scalar,\ 8),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh(),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Linear(8,\ 1),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ nn.Tanh()}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{cnn__model_8py_source_l00204}{204}} of file \doxymbox{\hyperlink{cnn__model_8py_source}{cnn\+\_\+model.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cnn__model_8py_source_l00211}{forward()}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+models/\+\doxymbox{\hyperlink{cnn__model_8py}{cnn\+\_\+model.\+py}}\end{DoxyCompactItemize}

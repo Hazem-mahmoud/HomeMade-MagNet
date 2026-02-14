@@ -1,0 +1,140 @@
+\doxysection{src.\+training.\+transfer Namespace Reference}
+\hypertarget{namespacesrc_1_1training_1_1transfer}{}\label{namespacesrc_1_1training_1_1transfer}\index{src.training.transfer@{src.training.transfer}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer_ae8ee342298921bd5f541ad9e468f5804}{load\+\_\+pretrained}} (model, checkpoint\+\_\+path, device=\textquotesingle{}cpu\textquotesingle{})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer_a4849ec1d1bc34f5770bc611339bd3b74}{freeze\+\_\+layers}} (model, layers\+\_\+to\+\_\+freeze=None)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1training_1_1transfer_ab228873c4c7ebc23240470e0be372b97}{fine\+\_\+tune}} (model, train\+\_\+loader, val\+\_\+loader, config, device=\textquotesingle{}cpu\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Transfer Learning Module.
+
+This module aids in adapting pre-trained models to new datasets or materials.
+It provides utilities for freezing layers, replacing heads, and fine-tuning.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacesrc_1_1training_1_1transfer_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacesrc_1_1training_1_1transfer_ab228873c4c7ebc23240470e0be372b97}\index{src.training.transfer@{src.training.transfer}!fine\_tune@{fine\_tune}}
+\index{fine\_tune@{fine\_tune}!src.training.transfer@{src.training.transfer}}
+\doxysubsubsection{\texorpdfstring{fine\_tune()}{fine\_tune()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1training_1_1transfer_ab228873c4c7ebc23240470e0be372b97} 
+src.\+training.\+transfer.\+fine\+\_\+tune (\begin{DoxyParamCaption}\item[{}]{model}{, }\item[{}]{train\+\_\+loader}{, }\item[{}]{val\+\_\+loader}{, }\item[{}]{config}{, }\item[{}]{device}{ = {\ttfamily \textquotesingle{}cpu\textquotesingle{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Wrapper for training loop specifically for fine-tuning.
+Usually uses lower learning rate.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{transfer_8py_source_l00062}{62}} of file \doxymbox{\hyperlink{transfer_8py_source}{transfer.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00062\ \textcolor{keyword}{def\ }fine\_tune(model,\ train\_loader,\ val\_loader,\ config,\ device='cpu'): }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00064\ \textcolor{stringliteral}{\ \ \ \ Wrapper\ for\ training\ loop\ specifically\ for\ fine-\/tuning. }}
+\DoxyCodeLine{00065\ \textcolor{stringliteral}{\ \ \ \ Usually\ uses\ lower\ learning\ rate. }}
+\DoxyCodeLine{00066\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{\#\ Reduce\ LR\ for\ fine-\/tuning }}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'learning\_rate'}\ \textcolor{keywordflow}{in}\ config: }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ config[\textcolor{stringliteral}{'learning\_rate'}]\ /=\ 10.0 }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00071\ \ \ \ \ print(\textcolor{stringliteral}{"{}Starting\ Fine-\/tuning\ (LR\ reduced)..."{}}) }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{from}\ \doxymbox{\hyperlink{namespacesrc_1_1training_1_1train}{src.training.train}}\ \textcolor{keyword}{import}\ train\_model }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{return}\ train\_model(model,\ train\_loader,\ val\_loader,\ config,\ device) }
+
+\end{DoxyCode}
+\Hypertarget{namespacesrc_1_1training_1_1transfer_a4849ec1d1bc34f5770bc611339bd3b74}\index{src.training.transfer@{src.training.transfer}!freeze\_layers@{freeze\_layers}}
+\index{freeze\_layers@{freeze\_layers}!src.training.transfer@{src.training.transfer}}
+\doxysubsubsection{\texorpdfstring{freeze\_layers()}{freeze\_layers()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1training_1_1transfer_a4849ec1d1bc34f5770bc611339bd3b74} 
+src.\+training.\+transfer.\+freeze\+\_\+layers (\begin{DoxyParamCaption}\item[{}]{model}{, }\item[{}]{layers\+\_\+to\+\_\+freeze}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Freezes parameters in the model.
+
+Args:
+    model (nn.Module): The model.
+    layers_to_freeze (list of str, optional): Names of modules to freeze.
+                                              If None, freeze all except the last layer (Head).
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{transfer_8py_source_l00025}{25}} of file \doxymbox{\hyperlink{transfer_8py_source}{transfer.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00025\ \textcolor{keyword}{def\ }freeze\_layers(model,\ layers\_to\_freeze=None): }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00027\ \textcolor{stringliteral}{\ \ \ \ Freezes\ parameters\ in\ the\ model. }}
+\DoxyCodeLine{00028\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00029\ \textcolor{stringliteral}{\ \ \ \ Args: }}
+\DoxyCodeLine{00030\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\ (nn.Module):\ The\ model. }}
+\DoxyCodeLine{00031\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ layers\_to\_freeze\ (list\ of\ str,\ optional):\ Names\ of\ modules\ to\ freeze. }}
+\DoxyCodeLine{00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ If\ None,\ freeze\ all\ except\ the\ last\ layer\ (Head). }}
+\DoxyCodeLine{00033\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{if}\ layers\_to\_freeze\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Default\ strategy:\ Freeze\ feature\ extractor,\ keep\ head\ trainable. }}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ This\ assumes\ model\ has\ a\ .head\ attribute\ or\ similar\ structure. }}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ If\ standard\ sequential,\ we\ might\ freeze\ all\ but\ last. }}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ param\ \textcolor{keywordflow}{in}\ model.named\_parameters(): }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ param.requires\_grad\ =\ \textcolor{keyword}{False} }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Unfreeze\ head }}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ hasattr(model,\ \textcolor{stringliteral}{'head'}): }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ param\ \textcolor{keywordflow}{in}\ model.head.parameters(): }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ param.requires\_grad\ =\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Frozen\ all\ layers\ except\ 'head'."{}}) }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ hasattr(model,\ \textcolor{stringliteral}{'fc'}):\ \textcolor{comment}{\#\ ResNet\ style }}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ param\ \textcolor{keywordflow}{in}\ model.fc.parameters(): }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ param.requires\_grad\ =\ \textcolor{keyword}{True} }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ to\ unfreeze\ last\ layer\ of\ 'model'\ sequential\ if\ exists }}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback:\ User\ must\ specify. }}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Warning:\ Could\ not\ identify\ head.\ All\ layers\ frozen."{}}) }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Freeze\ specific\ layers }}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ param\ \textcolor{keywordflow}{in}\ model.named\_parameters(): }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ layer\_name\ \textcolor{keywordflow}{in}\ layers\_to\_freeze: }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ layer\_name\ \textcolor{keywordflow}{in}\ name: }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ param.requires\_grad\ =\ \textcolor{keyword}{False} }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Frozen\ layers\ containing:\ \{layers\_to\_freeze\}"{}}) }
+\DoxyCodeLine{00061\  }
+
+\end{DoxyCode}
+\Hypertarget{namespacesrc_1_1training_1_1transfer_ae8ee342298921bd5f541ad9e468f5804}\index{src.training.transfer@{src.training.transfer}!load\_pretrained@{load\_pretrained}}
+\index{load\_pretrained@{load\_pretrained}!src.training.transfer@{src.training.transfer}}
+\doxysubsubsection{\texorpdfstring{load\_pretrained()}{load\_pretrained()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1training_1_1transfer_ae8ee342298921bd5f541ad9e468f5804} 
+src.\+training.\+transfer.\+load\+\_\+pretrained (\begin{DoxyParamCaption}\item[{}]{model}{, }\item[{}]{checkpoint\+\_\+path}{, }\item[{}]{device}{ = {\ttfamily \textquotesingle{}cpu\textquotesingle{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Loads model weights from a checkpoint.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{transfer_8py_source_l00012}{12}} of file \doxymbox{\hyperlink{transfer_8py_source}{transfer.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00012\ \textcolor{keyword}{def\ }load\_pretrained(model,\ checkpoint\_path,\ device='cpu'): }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \ Loads\ model\ weights\ from\ a\ checkpoint. }}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(checkpoint\_path): }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ FileNotFoundError(f\textcolor{stringliteral}{"{}Checkpoint\ not\ found:\ \{checkpoint\_path\}"{}}) }
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00019\ \ \ \ \ state\_dict\ =\ torch.load(checkpoint\_path,\ map\_location=device) }
+\DoxyCodeLine{00020\ \ \ \ \ model.load\_state\_dict(state\_dict) }
+\DoxyCodeLine{00021\ \ \ \ \ model.to(device) }
+\DoxyCodeLine{00022\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loaded\ weights\ from\ \{checkpoint\_path\}"{}}) }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordflow}{return}\ model }
+\DoxyCodeLine{00024\  }
+
+\end{DoxyCode}

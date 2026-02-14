@@ -1,0 +1,76 @@
+\doxysection{evaluate.\+py}
+\hypertarget{evaluate_8py_source}{}\label{evaluate_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/evaluate.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/evaluate.py}}
+\doxymbox{\hyperlink{evaluate_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1training_1_1evaluate}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00002}00002\ \textcolor{stringliteral}{Evaluation\ Module.}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00004}00004\ \textcolor{stringliteral}{This\ module\ provides\ functions\ to\ evaluate\ model\ performance\ on\ test\ datasets.}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00005}00005\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00007}00007\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00008}00008\ \textcolor{keyword}{import}\ torch.nn\ \textcolor{keyword}{as}\ nn}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00009}00009\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00011}\doxymbox{\hyperlink{namespacesrc_1_1training_1_1evaluate_a894a78b4bcd025081ccbfa5616c1401a}{00011}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1training_1_1evaluate_a894a78b4bcd025081ccbfa5616c1401a}{evaluate\_model}}(model,\ test\_loader,\ device='cpu'):}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00012}00012\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00013}00013\ \textcolor{stringliteral}{\ \ \ \ Evaluates\ the\ model\ and\ returns\ predictions\ and\ metrics.}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00014}00014\ \textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00015}00015\ \textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00016}00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\ (nn.Module):\ Trained\ model.}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ test\_loader\ (DataLoader):\ Test\ data.}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ device\ (str):\ Device.}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00020}00020\ \textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00021}00021\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ metrics\ (dict):\ MSE,\ MAE,\ Relative\ Error.}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00022}00022\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ predictions\ (list):\ List\ of\ pred\ tensors.}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00023}00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ targets\ (list):\ List\ of\ target\ tensors.}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00024}00024\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00025}00025\ \ \ \ \ model.eval()}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00026}00026\ \ \ \ \ model.to(device)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00027}00027\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00028}00028\ \ \ \ \ preds\ =\ []}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00029}00029\ \ \ \ \ actuals\ =\ []}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00030}00030\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00031}00031\ \ \ \ \ criterion\_mse\ =\ nn.MSELoss()}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00032}00032\ \ \ \ \ criterion\_mae\ =\ nn.L1Loss()}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00033}00033\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00034}00034\ \ \ \ \ total\_mse\ =\ 0.0}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00035}00035\ \ \ \ \ total\_mae\ =\ 0.0}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00036}00036\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00037}00037\ \ \ \ \ \textcolor{keyword}{with}\ torch.no\_grad():}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ batch\ \textcolor{keywordflow}{in}\ test\_loader:}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(batch)\ ==\ 3:}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ scalars,\ targets\ =\ batch}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scalars\ =\ scalars.to(device)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs,\ scalars)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ targets\ =\ batch}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ mse\ =\ criterion\_mse(outputs,\ targets)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ mae\ =\ criterion\_mae(outputs,\ targets)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ total\_mse\ +=\ mse.item()\ *\ inputs.size(0)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ total\_mae\ +=\ mae.item()\ *\ inputs.size(0)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ preds.append(outputs.cpu().numpy())}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ actuals.append(targets.cpu().numpy())}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00060}00060\ \ \ \ \ num\_samples\ =\ len(test\_loader.dataset)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00061}00061\ \ \ \ \ avg\_mse\ =\ total\_mse\ /\ num\_samples}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00062}00062\ \ \ \ \ avg\_mae\ =\ total\_mae\ /\ num\_samples}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00063}00063\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00064}00064\ \ \ \ \ metrics\ =\ \{}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'mse'}:\ avg\_mse,}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'mae'}:\ avg\_mae,}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'rmse'}:\ np.sqrt(avg\_mse)}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00068}00068\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00069}00069\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{evaluate_8py_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{return}\ metrics,\ np.concatenate(preds),\ np.concatenate(actuals)}
+
+\end{DoxyCode}

@@ -1,0 +1,105 @@
+\doxysection{src.\+training.\+evaluate Namespace Reference}
+\hypertarget{namespacesrc_1_1training_1_1evaluate}{}\label{namespacesrc_1_1training_1_1evaluate}\index{src.training.evaluate@{src.training.evaluate}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1training_1_1evaluate_a894a78b4bcd025081ccbfa5616c1401a}{evaluate\+\_\+model}} (model, test\+\_\+loader, device=\textquotesingle{}cpu\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Evaluation Module.
+
+This module provides functions to evaluate model performance on test datasets.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacesrc_1_1training_1_1evaluate_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacesrc_1_1training_1_1evaluate_a894a78b4bcd025081ccbfa5616c1401a}\index{src.training.evaluate@{src.training.evaluate}!evaluate\_model@{evaluate\_model}}
+\index{evaluate\_model@{evaluate\_model}!src.training.evaluate@{src.training.evaluate}}
+\doxysubsubsection{\texorpdfstring{evaluate\_model()}{evaluate\_model()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1training_1_1evaluate_a894a78b4bcd025081ccbfa5616c1401a} 
+src.\+training.\+evaluate.\+evaluate\+\_\+model (\begin{DoxyParamCaption}\item[{}]{model}{, }\item[{}]{test\+\_\+loader}{, }\item[{}]{device}{ = {\ttfamily \textquotesingle{}cpu\textquotesingle{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Evaluates the model and returns predictions and metrics.
+
+Args:
+    model (nn.Module): Trained model.
+    test_loader (DataLoader): Test data.
+    device (str): Device.
+    
+Returns:
+    metrics (dict): MSE, MAE, Relative Error.
+    predictions (list): List of pred tensors.
+    targets (list): List of target tensors.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{evaluate_8py_source_l00011}{11}} of file \doxymbox{\hyperlink{evaluate_8py_source}{evaluate.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00011\ \textcolor{keyword}{def\ }evaluate\_model(model,\ test\_loader,\ device='cpu'): }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ Evaluates\ the\ model\ and\ returns\ predictions\ and\ metrics. }}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ Args: }}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\ (nn.Module):\ Trained\ model. }}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ test\_loader\ (DataLoader):\ Test\ data. }}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ device\ (str):\ Device. }}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{\ \ \ \ Returns: }}
+\DoxyCodeLine{00021\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ metrics\ (dict):\ MSE,\ MAE,\ Relative\ Error. }}
+\DoxyCodeLine{00022\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ predictions\ (list):\ List\ of\ pred\ tensors. }}
+\DoxyCodeLine{00023\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ targets\ (list):\ List\ of\ target\ tensors. }}
+\DoxyCodeLine{00024\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00025\ \ \ \ \ model.eval() }
+\DoxyCodeLine{00026\ \ \ \ \ model.to(device) }
+\DoxyCodeLine{00027\ \ \ \ \  }
+\DoxyCodeLine{00028\ \ \ \ \ preds\ =\ [] }
+\DoxyCodeLine{00029\ \ \ \ \ actuals\ =\ [] }
+\DoxyCodeLine{00030\ \ \ \ \  }
+\DoxyCodeLine{00031\ \ \ \ \ criterion\_mse\ =\ nn.MSELoss() }
+\DoxyCodeLine{00032\ \ \ \ \ criterion\_mae\ =\ nn.L1Loss() }
+\DoxyCodeLine{00033\ \ \ \ \  }
+\DoxyCodeLine{00034\ \ \ \ \ total\_mse\ =\ 0.0 }
+\DoxyCodeLine{00035\ \ \ \ \ total\_mae\ =\ 0.0 }
+\DoxyCodeLine{00036\ \ \ \ \  }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{with}\ torch.no\_grad(): }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ batch\ \textcolor{keywordflow}{in}\ test\_loader: }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ len(batch)\ ==\ 3: }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ scalars,\ targets\ =\ batch }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device) }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ scalars\ =\ scalars.to(device) }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device) }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs,\ scalars) }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs,\ targets\ =\ batch }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inputs\ =\ inputs.to(device) }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targets\ =\ targets.to(device) }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ outputs\ =\ model(inputs) }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ mse\ =\ criterion\_mse(outputs,\ targets) }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ mae\ =\ criterion\_mae(outputs,\ targets) }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ total\_mse\ +=\ mse.item()\ *\ inputs.size(0) }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ total\_mae\ +=\ mae.item()\ *\ inputs.size(0) }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ preds.append(outputs.cpu().numpy()) }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ actuals.append(targets.cpu().numpy()) }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00060\ \ \ \ \ num\_samples\ =\ len(test\_loader.dataset) }
+\DoxyCodeLine{00061\ \ \ \ \ avg\_mse\ =\ total\_mse\ /\ num\_samples }
+\DoxyCodeLine{00062\ \ \ \ \ avg\_mae\ =\ total\_mae\ /\ num\_samples }
+\DoxyCodeLine{00063\ \ \ \ \  }
+\DoxyCodeLine{00064\ \ \ \ \ metrics\ =\ \{ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'mse'}:\ avg\_mse, }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'mae'}:\ avg\_mae, }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'rmse'}:\ np.sqrt(avg\_mse) }
+\DoxyCodeLine{00068\ \ \ \ \ \} }
+\DoxyCodeLine{00069\ \ \ \ \  }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{return}\ metrics,\ np.concatenate(preds),\ np.concatenate(actuals) }
+
+\end{DoxyCode}

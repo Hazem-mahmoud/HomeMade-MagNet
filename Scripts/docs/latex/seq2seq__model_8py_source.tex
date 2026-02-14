@@ -1,0 +1,76 @@
+\doxysection{seq2seq\+\_\+model.\+py}
+\hypertarget{seq2seq__model_8py_source}{}\label{seq2seq__model_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq\_model.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/seq2seq\_model.py}}
+\doxymbox{\hyperlink{seq2seq__model_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1models_1_1seq2seq__model}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00002}00002\ \textcolor{stringliteral}{Sequence-\/to-\/Sequence\ Model.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00004}00004\ \textcolor{stringliteral}{This\ module\ implements\ Encoder-\/Decoder\ architectures\ for\ mapping\ input\ waveforms\ }}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00005}00005\ \textcolor{stringliteral}{(Excitation,\ e.g.,\ H)\ to\ output\ waveforms\ (Response,\ e.g.,\ B).}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00006}00006\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00008}00008\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00009}00009\ \textcolor{keyword}{import}\ torch.nn\ \textcolor{keyword}{as}\ nn}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00011}\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network}{00011}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network}{Seq2SeqNetwork}}(nn.Module):}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00012}\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_adacbc2e4ec18549ffb30185327209262}{00012}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_adacbc2e4ec18549ffb30185327209262}{\_\_init\_\_}}(self,\ input\_dim=1,\ hidden\_dim=128,\ output\_dim=1,\ num\_layers=2):}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00014}00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00015}00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ input\_dim\ (int):\ Input\ feature\ size.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00016}00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ hidden\_dim\ (int):\ Hidden\ size.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00017}00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ output\_dim\ (int):\ Output\ feature\ size.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00018}00018\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ num\_layers\ (int):\ Depth\ of\ LSTM.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00019}00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00020}00020\ \ \ \ \ \ \ \ \ super(Seq2SeqNetwork,\ self).\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_adacbc2e4ec18549ffb30185327209262}{\_\_init\_\_}}()}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00021}00021\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00022}00022\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Encoder}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00023}\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_a53eddec3eef86c291241bb531c957f2e}{00023}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_a53eddec3eef86c291241bb531c957f2e}{encoder}}\ =\ nn.LSTM(}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ input\_size=input\_dim,}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ hidden\_size=hidden\_dim,}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=num\_layers,}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ batch\_first=\textcolor{keyword}{True},}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ dropout=0.1}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00029}00029\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00030}00030\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00031}00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Decoder}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00032}00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input\ to\ decoder\ is\ previous\ output\ (or\ ground\ truth\ in\ training).}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00033}00033\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ model\ this\ as\ mapping\ Hidden\ State\ -\/>\ Sequence.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00034}00034\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Simple\ Approach:\ Use\ LSTM\ to\ map\ (Batch,\ Seq,\ Hidden)\ -\/>\ (Batch,\ Seq,\ Out).}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ But\ standard\ Seq2Seq\ uses\ an\ Decoder\ LSTM.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00037}00037\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Here\ we\ implement\ a\ simple\ LSTM-\/based\ mapping\ (Many-\/to-\/Many).}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Since\ input\ and\ output\ length\ are\ same\ for\ hysteresis\ loops.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ This\ acts\ like\ a\ Bi-\/Directional\ LSTM\ or\ just\ a\ mapped\ LSTM.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00042}\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_a819de8b5d0836b8cd1c637cab0889c53}{00042}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_a819de8b5d0836b8cd1c637cab0889c53}{decoder}}\ =\ nn.LSTM(}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ input\_size=hidden\_dim,\ \textcolor{comment}{\#\ We\ might\ feed\ encoder\ outputs\ or\ similar}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ hidden\_size=hidden\_dim,}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ num\_layers=num\_layers,}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ batch\_first=\textcolor{keyword}{True},}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ dropout=0.1}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00050}\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_aa63949aad263348f49886d5af02b4ba5}{00050}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_aa63949aad263348f49886d5af02b4ba5}{head}}\ =\ nn.Linear(hidden\_dim,\ output\_dim)}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00052}\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_ae7109982709f309938316bf98440354f}{00052}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_ae7109982709f309938316bf98440354f}{forward}}(self,\ x):}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ x:\ (Batch,\ Seq,\ Input)}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Encoder}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ want\ to\ map\ Sequence\ -\/>\ Sequence.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ If\ lengths\ are\ same\ and\ it's\ 1:1\ mapping\ (like\ filtering),\ }}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ a\ single\ LSTM\ (Encoder)\ +\ Linear\ Head\ per\ step\ is\ sufficient.}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ output:\ (Batch,\ Seq,\ Hidden)}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ enc\_out,\ \_\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_a53eddec3eef86c291241bb531c957f2e}{encoder}}(x)}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Decode/Map}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ dec\_out,\ \_\ =\ self.decoder(enc\_out)\ \#\ Optional:\ Deepen\ model}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Project\ to\ output}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ out:\ (Batch,\ Seq,\ Output)}}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ out\ =\ self.\doxymbox{\hyperlink{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_aa63949aad263348f49886d5af02b4ba5}{head}}(enc\_out)}
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{seq2seq__model_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ out}
+
+\end{DoxyCode}

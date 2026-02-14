@@ -1,0 +1,232 @@
+\doxysection{dataset.\+py}
+\hypertarget{dataset_8py_source}{}\label{dataset_8py_source}\index{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py@{D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py}}
+\doxymbox{\hyperlink{dataset_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00001}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1dataset}{00001}}\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00002}00002\ \textcolor{stringliteral}{MagNet\ Dataset\ Module.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00003}00003\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00004}00004\ \textcolor{stringliteral}{This\ module\ provides\ a\ PyTorch\ Dataset\ wrapper\ for\ the\ MagNet\ data.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00005}00005\ \textcolor{stringliteral}{It\ handles:}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00006}00006\ \textcolor{stringliteral}{1.\ Loading\ the\ full\ dataset\ into\ memory.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00007}00007\ \textcolor{stringliteral}{2.\ Computing\ derived\ quantities\ (B,\ H,\ Power\ Loss).}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00008}00008\ \textcolor{stringliteral}{3.\ Normalizing\ features.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00009}00009\ \textcolor{stringliteral}{4.\ Serving\ data\ based\ on\ the\ requested\ mode\ ('scaler',\ 'sequence',\ 'seq2seq').}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00010}00010\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00011}00011\ \textcolor{stringliteral}{Classes:}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00012}00012\ \textcolor{stringliteral}{-\/\ MagNetDataset(Dataset)}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00013}00013\ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00015}00015\ \textcolor{keyword}{import}\ torch}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00016}00016\ \textcolor{keyword}{from}\ torch.utils.data\ \textcolor{keyword}{import}\ Dataset}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00017}00017\ \textcolor{keyword}{import}\ numpy\ \textcolor{keyword}{as}\ np}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00018}00018\ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00019}00019\ \ \ \ \ \textcolor{keyword}{from}\ .\ \textcolor{keyword}{import}\ loader}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00020}00020\ \ \ \ \ \textcolor{keyword}{from}\ .\ \textcolor{keyword}{import}\ preprocessing}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00021}00021\ \textcolor{keywordflow}{except}\ ImportError:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{import}\ loader}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{import}\ preprocessing}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00025}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset}{00025}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset}{MagNetDataset}}(Dataset):}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00026}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1fdd0e1f023e48a5812ce707de2df13d}{00026}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1fdd0e1f023e48a5812ce707de2df13d}{\_\_init\_\_}}(self,\ file\_path,\ mode='scaler',\ partition='train',\ transform=None,\ config\_path=None):}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00028}00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00029}00029\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ file\_path\ (str):\ Path\ to\ .mat\ file.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00030}00030\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ mode\ (str):\ 'scaler',\ 'sequence',\ 'seq2seq'.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00031}00031\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ partition\ (str):\ 'train'\ or\ 'test'.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00032}00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ transform\ (callable,\ optional):\ Optional\ transform\ to\ be\ applied.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00033}00033\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ config\_path\ (str):\ Path\ to\ config.yaml\ (optional).}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00034}00034\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00035}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a5e105d56d2907dcdac42db6516772e67}{00035}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a5e105d56d2907dcdac42db6516772e67}{mode}}\ =\ mode}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00036}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4}{00036}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4}{partition}}\ =\ partition}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00037}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_abb6bcdf797bb300b13ffaed914788764}{00037}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_abb6bcdf797bb300b13ffaed914788764}{transform}}\ =\ transform}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00038}00038\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Load\ raw\ data}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00040}00040\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loading\ dataset\ from\ \{file\_path\}\ for\ partition\ '\{partition\}'..."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00041}00041\ \ \ \ \ \ \ \ \ raw\_data\ =\ loader.load\_full\_dataset(file\_path)}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00042}00042\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extract\ Standard\ Args}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00044}00044\ \ \ \ \ \ \ \ \ voltage\ =\ raw\_data[\textcolor{stringliteral}{'voltage'}].astype(np.float32)}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00045}00045\ \ \ \ \ \ \ \ \ current\ =\ raw\_data[\textcolor{stringliteral}{'current'}].astype(np.float32)}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00046}00046\ \ \ \ \ \ \ \ \ freq\ =\ raw\_data[\textcolor{stringliteral}{'freq'}].astype(np.float32)}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00047}00047\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00048}00048\ \ \ \ \ \ \ \ \ props\ =\ \{}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_prim'}:\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'N\_prim'}],}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_sec'}:\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'N\_sec'}],}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Ae'}:\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'Ae'}],}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Le'}:\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'Le'}]}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00053}00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00054}00054\ \ \ \ \ \ \ \ \ dt\ =\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'dt'}]}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(dt,\ (list,\ np.ndarray))\ \textcolor{keywordflow}{and}\ len(dt)\ >\ 1:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ dt\ =\ dt[0]}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extra\ Features}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00059}00059\ \ \ \ \ \ \ \ \ extra\ =\ \{}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Temperature'}:\ raw\_data[\textcolor{stringliteral}{'temp'}].astype(np.float32),}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Hdc'}:\ raw\_data[\textcolor{stringliteral}{'hdc'}].astype(np.float32),}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Duty'}:\ raw\_data[\textcolor{stringliteral}{'duty'}].astype(np.float32)}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00063}00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00064}00064\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Use\ Central\ Preprocessing}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00066}00066\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Running\ centralized\ preprocessing..."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00067}00067\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Determine\ config\ path\ if\ not\ provided}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ config\_path:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ to\ find\ it\ relative\ to\ this\ file}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_dir\ =\ os.path.dirname(os.path.abspath(\_\_file\_\_))}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Scripts/src/data\ -\/>\ ...\ -\/>\ Scripts/config/config.yaml}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ config\_path\ =\ os.path.abspath(os.path.join(current\_dir,\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'config'},\ \textcolor{stringliteral}{'config.yaml'}))}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00075}00075\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(config\_path):}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}WARNING:\ Config\ not\ found\ at\ \{config\_path\}.\ Using\ defaults."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ config\_path\ =\ \textcolor{keywordtype}{None}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00080}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_aaef94aee1bc7ad2bbbf8b843b8b2ef76}{00080}}\ \ \ \ \ \ \ \ \ data\_split,\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_aaef94aee1bc7ad2bbbf8b843b8b2ef76}{stats}}\ =\ preprocessing.process\_magnet\_dataset(}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ voltage,\ current,\ freq,\ props,\ dt,}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ model\_type=mode,}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ config\_path=config\_path,}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ extra\_features=extra}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00085}00085\ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00086}00086\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Select\ Partition}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ partition\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ data\_split:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(f\textcolor{stringliteral}{"{}Partition\ '\{partition\}'\ not\ found\ in\ split\ data."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00091}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{00091}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}}\ =\ data\_split[partition][\textcolor{stringliteral}{'inputs'}]}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00092}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{00092}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{targets}}\ =\ data\_split[partition][\textcolor{stringliteral}{'targets'}]}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00093}00093\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Validation\ checks}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{targets}}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}WARNING:\ No\ targets\ found\ in\ processed\ data."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}WARNING:\ No\ inputs\ found\ in\ processed\ data."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Store\ length}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Assuming\ all\ input\ arrays\ are\ same\ length}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00103}00103\ \ \ \ \ \ \ \ \ any\_key\ =\ next(iter(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}}))\ \textcolor{keywordflow}{if}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}}\ \textcolor{keywordflow}{else}\ next(iter(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{targets}}))}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00104}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_adfd47e984373ede56a3711188d1fb7e7}{00104}}\ \ \ \ \ \ \ \ \ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_adfd47e984373ede56a3711188d1fb7e7}{length}}\ =\ len(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}}[any\_key])\ \textcolor{keywordflow}{if}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}}\ \textcolor{keywordflow}{else}\ len(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{targets}}[any\_key])}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00105}00105\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00106}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a94d4c1bb45894416b37e6291c3fdd84a}{00106}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a94d4c1bb45894416b37e6291c3fdd84a}{\_\_len\_\_}}(self):}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_adfd47e984373ede56a3711188d1fb7e7}{length}}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00108}00108\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00109}\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ad0203e1f10d4bd9a83098fca141f6a62}{00109}}\ \ \ \ \ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ad0203e1f10d4bd9a83098fca141f6a62}{\_\_getitem\_\_}}(self,\ idx):}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Retrieve\ normalized\ features\ from\ dictionary}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00111}00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ NOTE:\ Keys\ depend\ on\ config.yaml!\ }}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ must\ align\ code\ here\ with\ what\ we\ expect\ to\ be\ in\ the\ config\ for\ each\ mode.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback\ logic\ is\ needed\ if\ config\ is\ dynamic.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00114}00114\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00115}00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ to\ get\ datum\ safely}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get(dic,\ key):}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ key\ \textcolor{keywordflow}{in}\ dic:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ dic[key][idx]}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ torch.tensor(val,\ dtype=torch.float32)}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Be\ noisy\ if\ missing\ expected\ feature}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ KeyError(f\textcolor{stringliteral}{"{}Feature\ '\{key\}'\ missing\ from\ dataset.\ Check\ config.yaml\ or\ preprocessing."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00124}00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ to\ get\ sequence\ or\ scalar}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00125}00125\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_tens(dic,\ key,\ unsqueeze=False):}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ get(dic,\ key)}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ unsqueeze:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ t.unsqueeze(-\/1)}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ t}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a5e105d56d2907dcdac42db6516772e67}{mode}}\ ==\ \textcolor{stringliteral}{'scaler'}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Config\ MUST\ include\ Frequency,\ Temperature,\ Hdc\ in\ inputs}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Config\ MUST\ include\ Loss\ in\ targets}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input:\ B\_pk,\ Freq,\ Temp,\ Hdc}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ assume\ these\ are\ 1D\ arrays\ (scalers)\ in\ the\ input\ dict}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ get(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'B\_pk'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ f\ =\ get(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'Frequency'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ get(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'Temperature'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ get(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'Hdc'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ x\ =\ torch.stack([b.squeeze(),\ f.squeeze(),\ t.squeeze(),\ h.squeeze()])\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Note:\ normalized\ scalars\ might\ come\ as\ (1,)\ or\ scalar.\ Squeeze\ ensures\ (3,)}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00145}00145\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ get\_tens(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{targets}},\ \textcolor{stringliteral}{'Loss'},\ unsqueeze=\textcolor{keyword}{False})\ \textcolor{comment}{\#\ (1,)}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x,\ y}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a5e105d56d2907dcdac42db6516772e67}{mode}}\ \textcolor{keywordflow}{in}\ [\textcolor{stringliteral}{'sequence'},\ \textcolor{stringliteral}{'cnn'},\ \textcolor{stringliteral}{'transformer'}]:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input:\ B\ (or\ H)}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Target:\ Loss}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ get\_tens(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'B'},\ unsqueeze=\textcolor{keyword}{True})\ \textcolor{comment}{\#\ (Seq,\ 1)}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Scalars:\ Freq,\ Temp,\ Hdc}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ f\ =\ get(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'Frequency'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ get(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'Temperature'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ get(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'Hdc'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ scalars\ =\ torch.stack([f.squeeze(),\ t.squeeze(),\ h.squeeze()])}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ get\_tens(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{targets}},\ \textcolor{stringliteral}{'Loss'},\ unsqueeze=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ b,\ scalars,\ y}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a5e105d56d2907dcdac42db6516772e67}{mode}}\ ==\ \textcolor{stringliteral}{'seq2seq'}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input:\ B}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Target:\ H}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ get\_tens(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'B'},\ unsqueeze=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ get\_tens(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'H'},\ unsqueeze=\textcolor{keyword}{True})\ \textcolor{comment}{\#\ Assuming\ H\ is\ in\ inputs\ or\ targets?}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Usually\ H\ is\ 'target'\ for\ B-\/>H\ prediction?\ Or\ Input?}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ If\ we\ want\ to\ predict\ H,\ it\ should\ be\ in\ targets.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ But\ process\_magnet\_dataset\ puts\ things\ in\ 'inputs'\ or\ 'targets'\ based\ on\ config.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Check\ where\ H\ is.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'H'}\ \textcolor{keywordflow}{in}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{targets}}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ target\ =\ get\_tens(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{targets}},\ \textcolor{stringliteral}{'H'},\ unsqueeze=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ \textcolor{stringliteral}{'H'}\ \textcolor{keywordflow}{in}\ self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ target\ =\ get\_tens(self.\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}},\ \textcolor{stringliteral}{'H'},\ unsqueeze=\textcolor{keyword}{True})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ KeyError(\textcolor{stringliteral}{"{}H\ field\ not\ found\ in\ inputs\ or\ targets\ for\ seq2seq"{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ b,\ target}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00181}00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(f\textcolor{stringliteral}{"{}Unknown\ mode:\ \{self.mode\}"{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00183}00183\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00184}00184\ \textcolor{comment}{\#\ ==========================================}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00185}00185\ \textcolor{comment}{\#\ TEST\ SCRIPT}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00186}00186\ \textcolor{comment}{\#\ ==========================================}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00187}\doxymbox{\hyperlink{namespacesrc_1_1data_1_1dataset_a762a3ddc6045817f8eddb4b2c8d44bd4}{00187}}\ \textcolor{keyword}{def\ }\doxymbox{\hyperlink{namespacesrc_1_1data_1_1dataset_a762a3ddc6045817f8eddb4b2c8d44bd4}{test\_dataset}}():}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00188}00188\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00189}00189\ \textcolor{stringliteral}{\ \ \ \ Validation\ function\ to\ ensure\ the\ dataset\ loads\ and\ computes\ fields\ correctly.}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00190}00190\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00191}00191\ \ \ \ \ \textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00192}00192\ \ \ \ \ print(\textcolor{stringliteral}{"{}Running\ Dataset\ Validation\ Test..."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00193}00193\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00194}00194\ \ \ \ \ current\_dir\ =\ os.path.dirname(os.path.abspath(\_\_file\_\_))}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00195}00195\ \ \ \ \ project\_root\ =\ os.path.abspath(os.path.join(current\_dir,\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'}))\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00196}00196\ \ \ \ \ test\_file\ =\ os.path.join(project\_root,\ \textcolor{stringliteral}{'3C90\_TX-\/25-\/15-\/10\_Data1\_Cycle.mat'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00198}00198\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loading\ \{test\_file\}..."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00199}00199\ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00200}00200\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Train\ Split}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00201}00201\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ Testing\ 'train'\ partition\ (mode='scaler')\ -\/-\/-\/"{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00202}00202\ \ \ \ \ \ \ \ \ ds\_train\ =\ \doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset}{MagNetDataset}}(test\_file,\ mode=\textcolor{stringliteral}{'scaler'},\ partition=\textcolor{stringliteral}{'train'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00203}00203\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Dataset\ Loaded\ Successfully."{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00204}00204\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Num\ Samples:\ \{len(ds\_train)\}"{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00205}00205\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00206}00206\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Item}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00207}00207\ \ \ \ \ \ \ \ \ x,\ y\ =\ ds\_train[0]}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00208}00208\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Sample[0]\ Input\ Shape:\ \{x.shape\},\ Target\ Shape:\ \{y.shape\}"{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00209}00209\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Test\ Split}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00211}00211\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ Testing\ 'test'\ partition\ (mode='cnn')\ -\/-\/-\/"{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00212}00212\ \ \ \ \ \ \ \ \ ds\_test\ =\ \doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset}{MagNetDataset}}(test\_file,\ mode=\textcolor{stringliteral}{'cnn'},\ partition=\textcolor{stringliteral}{'test'})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00213}00213\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Num\ Samples:\ \{len(ds\_test)\}"{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00214}00214\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00215}00215\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Item}}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00216}00216\ \ \ \ \ \ \ \ \ x,\ y\ =\ ds\_test[0]}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00217}00217\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Sample[0]\ Input\ Shape:\ \{x.shape\},\ Target\ Shape:\ \{y.shape\}"{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00218}00218\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00219}00219\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00220}00220\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00221}00221\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Dataset\ validation\ failed:\ \{e\}"{}})}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00222}00222\ \ \ \ \ \ \ \ \ \textcolor{keyword}{import}\ traceback}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00223}00223\ \ \ \ \ \ \ \ \ traceback.print\_exc()}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00225}00225\ \textcolor{keywordflow}{if}\ \_\_name\_\_\ ==\ \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{dataset_8py_source_l00226}00226\ \ \ \ \ \doxymbox{\hyperlink{namespacesrc_1_1data_1_1dataset_a762a3ddc6045817f8eddb4b2c8d44bd4}{test\_dataset}}()}
+
+\end{DoxyCode}

@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1training_1_1transfer" kind="namespace" language="Python">
+    <compoundname>src::training::transfer</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesrc_1_1training_1_1transfer_1ae8ee342298921bd5f541ad9e468f5804" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.training.transfer.load_pretrained</definition>
+        <argsstring>(model, checkpoint_path, device=&apos;cpu&apos;)</argsstring>
+        <name>load_pretrained</name>
+        <qualifiedname>src.training.transfer.load_pretrained</qualifiedname>
+        <param>
+          <type>model</type>
+          <defname>model</defname>
+        </param>
+        <param>
+          <type>checkpoint_path</type>
+          <defname>checkpoint_path</defname>
+        </param>
+        <param>
+          <type>device</type>
+          <defname>device</defname>
+          <defval>&apos;cpu&apos;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Loads model weights from a checkpoint.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/transfer.py" line="12" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/transfer.py" bodystart="12" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1training_1_1transfer_1a4849ec1d1bc34f5770bc611339bd3b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.training.transfer.freeze_layers</definition>
+        <argsstring>(model, layers_to_freeze=None)</argsstring>
+        <name>freeze_layers</name>
+        <qualifiedname>src.training.transfer.freeze_layers</qualifiedname>
+        <param>
+          <type>model</type>
+          <defname>model</defname>
+        </param>
+        <param>
+          <type>layers_to_freeze</type>
+          <defname>layers_to_freeze</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Freezes parameters in the model.
+
+Args:
+    model (nn.Module): The model.
+    layers_to_freeze (list of str, optional): Names of modules to freeze.
+                                              If None, freeze all except the last layer (Head).
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/transfer.py" line="25" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/transfer.py" bodystart="25" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1training_1_1transfer_1ab228873c4c7ebc23240470e0be372b97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.training.transfer.fine_tune</definition>
+        <argsstring>(model, train_loader, val_loader, config, device=&apos;cpu&apos;)</argsstring>
+        <name>fine_tune</name>
+        <qualifiedname>src.training.transfer.fine_tune</qualifiedname>
+        <param>
+          <type>model</type>
+          <defname>model</defname>
+        </param>
+        <param>
+          <type>train_loader</type>
+          <defname>train_loader</defname>
+        </param>
+        <param>
+          <type>val_loader</type>
+          <defname>val_loader</defname>
+        </param>
+        <param>
+          <type>config</type>
+          <defname>config</defname>
+        </param>
+        <param>
+          <type>device</type>
+          <defname>device</defname>
+          <defval>&apos;cpu&apos;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Wrapper for training loop specifically for fine-tuning.
+Usually uses lower learning rate.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/transfer.py" line="62" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/transfer.py" bodystart="62" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Transfer Learning Module.
+
+This module aids in adapting pre-trained models to new datasets or materials.
+It provides utilities for freezing layers, replacing heads, and fine-tuning.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/training/transfer.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

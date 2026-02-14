@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1data_1_1dataset" kind="namespace" language="Python">
+    <compoundname>src::data::dataset</compoundname>
+    <innerclass refid="classsrc_1_1data_1_1dataset_1_1_mag_net_dataset" prot="public">src::data::dataset::MagNetDataset</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1dataset_1a762a3ddc6045817f8eddb4b2c8d44bd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.dataset.test_dataset</definition>
+        <argsstring>()</argsstring>
+        <name>test_dataset</name>
+        <qualifiedname>src.data.dataset.test_dataset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Validation function to ensure the dataset loads and computes fields correctly.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="187" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="187" bodyend="224"/>
+        <references refid="namespacesrc_1_1data_1_1dataset_1a762a3ddc6045817f8eddb4b2c8d44bd4" compoundref="dataset_8py" startline="187" endline="224">src.data.dataset.test_dataset</references>
+        <referencedby refid="namespacesrc_1_1data_1_1dataset_1a762a3ddc6045817f8eddb4b2c8d44bd4" compoundref="dataset_8py" startline="187" endline="224">src.data.dataset.test_dataset</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>MagNet Dataset Module.
+
+This module provides a PyTorch Dataset wrapper for the MagNet data.
+It handles:
+1. Loading the full dataset into memory.
+2. Computing derived quantities (B, H, Power Loss).
+3. Normalizing features.
+4. Serving data based on the requested mode (&apos;scaler&apos;, &apos;sequence&apos;, &apos;seq2seq&apos;).
+
+Classes:
+- MagNetDataset(Dataset)
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

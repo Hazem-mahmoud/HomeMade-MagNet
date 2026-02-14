@@ -1,0 +1,1029 @@
+\doxysection{src.\+data.\+preprocessing Namespace Reference}
+\hypertarget{namespacesrc_1_1data_1_1preprocessing}{}\label{namespacesrc_1_1data_1_1preprocessing}\index{src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050}{normalize\+\_\+data}} (\doxymbox{\hyperlink{namespacesrc_1_1data}{data}}, method=\textquotesingle{}standard\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{stats}}=None)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a84f013aee5c17ec66380873ecbf8445f}{prepare\+\_\+dataset}} (features, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a2f8ed3af33832e2be099a7ab6210c919}{targets}}, test\+\_\+ratio=0.\+2, norm\+\_\+config=None)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}{calculate\+\_\+flux\+\_\+density}} (voltage, sampling\+\_\+time, secondary\+\_\+turns, effective\+\_\+area)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}{calculate\+\_\+magnetizing\+\_\+force}} (current, primary\+\_\+turns, effective\+\_\+length)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3b6e1a1fc4cd9191d7f6963330cd6b4f}{calculate\+\_\+volumetric\+\_\+loss}} (b\+\_\+field, h\+\_\+field, frequency)
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a3cfbef7569b765019480a5000aca2586}{load\+\_\+config}} (\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8dd6c815fe028469eda1f8a4ea6ddb3f}{config\+\_\+path}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4bff0b7a0c8070a26001c86ed09d6b93}{process\+\_\+magnet\+\_\+dataset}} (voltage, current, frequency, mag\+\_\+props, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330}{dt}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a546ef5b271eed66755f8f8595c686a4a}{model\+\_\+type}}=\textquotesingle{}scaler\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8dd6c815fe028469eda1f8a4ea6ddb3f}{config\+\_\+path}}=None, extra\+\_\+features=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}} = \textquotesingle{}3C90\+\_\+\+TX-\/25-\/15-\/10\+\_\+\+Data1\+\_\+\+Cycle.\+mat\textquotesingle{}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}} = os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+))
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}{data\+\_\+dir}} = os.\+path.\+abspath(os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}))
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a9aa710813cf9cccdd625eab33f3ca563}{possible\+\_\+path\+\_\+1}} = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}{data\+\_\+dir}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab18c1f18f4a69d9fd6c3aec8ed65085c}{possible\+\_\+path\+\_\+2}} = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}{data\+\_\+dir}}, \textquotesingle{}Scripts\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ad38589b31bd58842a55947800239789b}{mat\+\_\+file\+\_\+path}} = os.\+path.\+abspath(os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}}))
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}} = load\+\_\+full\+\_\+dataset(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ad38589b31bd58842a55947800239789b}{mat\+\_\+file\+\_\+path}})
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6b69238e4448b5ea0c2cbbf35979c47f}{volts}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8c26c60bf5709d787cd66fb117a302d9}{amps}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}current\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af26152f3250702a4b01931111019e0c5}{freqs}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}freq\textquotesingle{}]\+
+\item 
+dict \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330}{dt}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}meta\textquotesingle{}]\+\+[\textquotesingle{}dt\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8dd6c815fe028469eda1f8a4ea6ddb3f}{config\+\_\+path}} = os.\+path.\+abspath(os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}config\textquotesingle{}, \textquotesingle{}config.\+yaml\textquotesingle{}))
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}{split\+\_\+data}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{stats}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a546ef5b271eed66755f8f8595c686a4a}{model\+\_\+type}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}{split\+\_\+data}}\+[\textquotesingle{}train\textquotesingle{}]\+\+[\textquotesingle{}inputs\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a2f8ed3af33832e2be099a7ab6210c919}{targets}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}{split\+\_\+data}}\+[\textquotesingle{}train\textquotesingle{}]\+\+[\textquotesingle{}targets\textquotesingle{}]\+
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af52e06ab0bf85fb402ea9e26bfa33375}{N\+\_\+train}} = len(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}}\+[\textquotesingle{}B\textquotesingle{}]\+) if \textquotesingle{}B\textquotesingle{} in \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} else len(list(inputs.\+values())\+[0]\+)
+\item 
+int \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}} = 73680
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ac80408f309e7a21705098af0d10522eb}{raw\+\_\+v}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6b69238e4448b5ea0c2cbbf35979c47f}{volts}}\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6ba3896be6c71afcf461900cac1b2a11}{raw\+\_\+i}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8c26c60bf5709d787cd66fb117a302d9}{amps}}\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a713428b99171b0c68757c056b092e1ea}{B\+\_\+norm}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}}\+[\textquotesingle{}B\textquotesingle{}]\+\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+ if \textquotesingle{}B\textquotesingle{} in \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} else None
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a43df187d3d218aa26b00bf2aba674580}{H\+\_\+norm}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}}\+[\textquotesingle{}H\textquotesingle{}]\+\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+ if \textquotesingle{}H\textquotesingle{} in \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} else None
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a376e5f4d2451407dda1a6dac62031072}{B\+\_\+raw}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}{calculate\+\_\+flux\+\_\+density}}(raw\+\_\+v.\+reshape(1, -\/1), \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330}{dt}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}N\+\_\+sec\textquotesingle{}]\+, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}Ae\textquotesingle{}]\+).flatten()
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ac0b8b7e99f204297407afffe99987a00}{H\+\_\+raw}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}{calculate\+\_\+magnetizing\+\_\+force}}(raw\+\_\+i.\+reshape(1, -\/1), \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}N\+\_\+prim\textquotesingle{}]\+, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}Le\textquotesingle{}]\+).flatten()
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a434d34720d1a32069f3b54b918165c66}{fig}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4360bdf792033574f76644feaf8f60c}{axes}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aa153a91dd0990baac28ae7f4f68c1688}{figsize}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a15f9ffafb007492caaa7769ed638117d}{ax}} = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4360bdf792033574f76644feaf8f60c}{axes}}\+[0, 0]\+
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a9fe1578120f646f0edc1518f37bc5c58}{label}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af33201b48098689fcd6c06c9d3110501}{color}}
+\item 
+str \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aef56d257937ab4e2a7ae70154e50bb44}{txt}} = f"{}\+Mean:\+ \{\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{stats}}\+[\textquotesingle{}B\textquotesingle{}]\+.get(\textquotesingle{}mean\textquotesingle{}, 0):\+.\+2e\}\textbackslash{}n\+Std:\+ \{\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{stats}}\+[\textquotesingle{}B\textquotesingle{}]\+.get(\textquotesingle{}std\textquotesingle{}, 1):\+.\+2e\}"{}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6fb2610fc598ace2f756a8c3463a8ad0}{transform}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a26bc645e7092a58d5c7896f23d9cafd1}{trans\+Axes}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a1874e79ffb69245ac9cc62eface5af43}{verticalalignment}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a32d2404c107da962891d072caab44cc9}{bbox}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ac7809073c7e93974cd000ea8e1b50566}{ha}}
+\item 
+\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ad7274507e2fa183880a7e9e36b8280e0}{save\+\_\+path}} = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}normalization\+\_\+check.\+png\textquotesingle{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Data Preprocessing Module.
+
+Generic processing for Time-Series FNN.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}\index{src.data.preprocessing@{src.data.preprocessing}!calculate\_flux\_density@{calculate\_flux\_density}}
+\index{calculate\_flux\_density@{calculate\_flux\_density}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{calculate\_flux\_density()}{calculate\_flux\_density()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f} 
+src.\+data.\+preprocessing.\+calculate\+\_\+flux\+\_\+density (\begin{DoxyParamCaption}\item[{}]{voltage}{, }\item[{}]{sampling\+\_\+time}{, }\item[{}]{secondary\+\_\+turns}{, }\item[{}]{effective\+\_\+area}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates B (Flux Density). \end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00154}{154}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00154\ \textcolor{keyword}{def\ }calculate\_flux\_density(voltage,\ sampling\_time,\ secondary\_turns,\ effective\_area): }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ Calculates\ B\ (Flux\ Density).\ "{}"{}"{}} }
+\DoxyCodeLine{00156\ \ \ \ \ v\_mean\ =\ np.mean(voltage,\ axis=1,\ keepdims=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00157\ \ \ \ \ v\_clean\ =\ voltage\ -\/\ v\_mean }
+\DoxyCodeLine{00158\ \ \ \ \ flux\ =\ cumulative\_trapezoid(v\_clean,\ axis=-\/1,\ initial=0) }
+\DoxyCodeLine{00159\ \ \ \ \  }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{if}\ np.ndim(sampling\_time)\ ==\ 0: }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ flux\ =\ flux\ *\ sampling\_time }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ st\ =\ np.array(sampling\_time).reshape(-\/1,\ 1)\  }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ flux\ =\ flux\ *\ st }
+\DoxyCodeLine{00165\  }
+\DoxyCodeLine{00166\ \ \ \ \ b\ =\ flux\ /\ (secondary\_turns\ *\ effective\_area) }
+\DoxyCodeLine{00167\ \ \ \ \ b\_mean\ =\ np.mean(b,\ axis=1,\ keepdims=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00168\ \ \ \ \ b\ =\ b\ -\/\ b\_mean }
+\DoxyCodeLine{00169\ \ \ \ \  }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordflow}{return}\ b.astype(np.float32) }
+\DoxyCodeLine{00171\  }
+
+\end{DoxyCode}
+
+
+Referenced by \doxymbox{\hyperlink{preprocessing_8py_source_l00198}{process\+\_\+magnet\+\_\+dataset()}}.
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}\index{src.data.preprocessing@{src.data.preprocessing}!calculate\_magnetizing\_force@{calculate\_magnetizing\_force}}
+\index{calculate\_magnetizing\_force@{calculate\_magnetizing\_force}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{calculate\_magnetizing\_force()}{calculate\_magnetizing\_force()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23} 
+src.\+data.\+preprocessing.\+calculate\+\_\+magnetizing\+\_\+force (\begin{DoxyParamCaption}\item[{}]{current}{, }\item[{}]{primary\+\_\+turns}{, }\item[{}]{effective\+\_\+length}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates H (Magnetizing Force). \end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00172}{172}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00172\ \textcolor{keyword}{def\ }calculate\_magnetizing\_force(current,\ primary\_turns,\ effective\_length): }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ Calculates\ H\ (Magnetizing\ Force).\ "{}"{}"{}} }
+\DoxyCodeLine{00174\ \ \ \ \ h\ =\ (primary\_turns\ *\ current)\ /\ effective\_length }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordflow}{return}\ h.astype(np.float32) }
+\DoxyCodeLine{00176\  }
+
+\end{DoxyCode}
+
+
+Referenced by \doxymbox{\hyperlink{preprocessing_8py_source_l00198}{process\+\_\+magnet\+\_\+dataset()}}.
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a3b6e1a1fc4cd9191d7f6963330cd6b4f}\index{src.data.preprocessing@{src.data.preprocessing}!calculate\_volumetric\_loss@{calculate\_volumetric\_loss}}
+\index{calculate\_volumetric\_loss@{calculate\_volumetric\_loss}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{calculate\_volumetric\_loss()}{calculate\_volumetric\_loss()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a3b6e1a1fc4cd9191d7f6963330cd6b4f} 
+src.\+data.\+preprocessing.\+calculate\+\_\+volumetric\+\_\+loss (\begin{DoxyParamCaption}\item[{}]{b\+\_\+field}{, }\item[{}]{h\+\_\+field}{, }\item[{}]{frequency}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates Volumetric Power Loss (Target). \end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00177}{177}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00177\ \textcolor{keyword}{def\ }calculate\_volumetric\_loss(b\_field,\ h\_field,\ frequency): }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}\ Calculates\ Volumetric\ Power\ Loss\ (Target).\ "{}"{}"{}} }
+\DoxyCodeLine{00179\ \ \ \ \ energy\_density\ =\ trapezoid(y=h\_field,\ x=b\_field,\ axis=-\/1) }
+\DoxyCodeLine{00180\ \ \ \ \ energy\_density\ =\ np.abs(energy\_density) }
+\DoxyCodeLine{00181\ \ \ \ \  }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{if}\ np.ndim(frequency)\ >\ 0: }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ freq\ =\ np.array(frequency).squeeze() }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ freq\ =\ frequency }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00187\ \ \ \ \ pv\ =\ energy\_density\ *\ freq }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordflow}{return}\ pv.astype(np.float32) }
+\DoxyCodeLine{00189\  }
+\DoxyCodeLine{00190\  }
+\DoxyCodeLine{00191\ \textcolor{comment}{\#\ -\/-\/-\/\ WRAPPER\ FOR\ FULL\ MagNet\ PIPELINE\ -\/-\/-\/ }}
+\DoxyCodeLine{00192\  }
+
+\end{DoxyCode}
+
+
+Referenced by \doxymbox{\hyperlink{preprocessing_8py_source_l00198}{process\+\_\+magnet\+\_\+dataset()}}.
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesrc_1_1data_1_1preprocessing_a3b6e1a1fc4cd9191d7f6963330cd6b4f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a3cfbef7569b765019480a5000aca2586}\index{src.data.preprocessing@{src.data.preprocessing}!load\_config@{load\_config}}
+\index{load\_config@{load\_config}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{load\_config()}{load\_config()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a3cfbef7569b765019480a5000aca2586} 
+src.\+data.\+preprocessing.\+load\+\_\+config (\begin{DoxyParamCaption}\item[{}]{config\+\_\+path}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00193}{193}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00193\ \textcolor{keyword}{def\ }load\_config(config\_path): }
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keyword}{import}\ yaml }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keyword}{with}\ open(config\_path,\ \textcolor{stringliteral}{'r'})\ \textcolor{keyword}{as}\ f: }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ yaml.safe\_load(f) }
+\DoxyCodeLine{00197\  }
+
+\end{DoxyCode}
+
+
+Referenced by \doxymbox{\hyperlink{preprocessing_8py_source_l00198}{process\+\_\+magnet\+\_\+dataset()}}.
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesrc_1_1data_1_1preprocessing_a3cfbef7569b765019480a5000aca2586_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050}\index{src.data.preprocessing@{src.data.preprocessing}!normalize\_data@{normalize\_data}}
+\index{normalize\_data@{normalize\_data}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{normalize\_data()}{normalize\_data()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050} 
+src.\+data.\+preprocessing.\+normalize\+\_\+data (\begin{DoxyParamCaption}\item[{}]{data}{, }\item[{}]{method}{ = {\ttfamily \textquotesingle{}standard\textquotesingle{}}, }\item[{}]{stats}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Normalizes data using Global Scaling (Statistics computed over ALL data).
+
+Args:
+    data (np.array): Input data.
+    method (str): 'standard' (Z-score), 'minmax', or 'none'.
+    stats (dict, optional): Pre-computed stats.
+    
+Returns:
+    norm_data (np.array): Normalized data.
+    stats (dict): Statistics used.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00009}{9}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00009\ \textcolor{keyword}{def\ }normalize\_data(data,\ method='standard',\ stats=None): }
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{\ \ \ \ Normalizes\ data\ using\ Global\ Scaling\ (Statistics\ computed\ over\ ALL\ data). }}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ Args: }}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ data\ (np.array):\ Input\ data. }}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ method\ (str):\ 'standard'\ (Z-\/score),\ 'minmax',\ or\ 'none'. }}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ stats\ (dict,\ optional):\ Pre-\/computed\ stats. }}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{\ \ \ \ Returns: }}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ norm\_data\ (np.array):\ Normalized\ data. }}
+\DoxyCodeLine{00020\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ stats\ (dict):\ Statistics\ used. }}
+\DoxyCodeLine{00021\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{\#\ Force\ float32 }}
+\DoxyCodeLine{00023\ \ \ \ \ data\ =\ data.astype(np.float32) }
+\DoxyCodeLine{00024\  }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{if}\ method\ ==\ \textcolor{stringliteral}{'none'}: }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data,\ \{\} }
+\DoxyCodeLine{00027\  }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordflow}{if}\ method\ ==\ \textcolor{stringliteral}{'standard'}: }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ stats: }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ mean\ =\ stats[\textcolor{stringliteral}{'mean'}] }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ std\ =\ stats[\textcolor{stringliteral}{'std'}] }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ mean\ =\ np.mean(data,\ axis=\textcolor{keywordtype}{None})\  }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ std\ =\ np.std(data,\ axis=\textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ std\ ==\ 0:\ std\ =\ 1.0 }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ stats\ =\ \{\textcolor{stringliteral}{'mean'}:\ mean,\ \textcolor{stringliteral}{'std'}:\ std\} }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ norm\_data\ =\ (data\ -\/\ mean)\ /\ std }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ norm\_data,\ stats }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{elif}\ method\ ==\ \textcolor{stringliteral}{'minmax'}: }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ stats: }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ min\_val\ =\ stats[\textcolor{stringliteral}{'min'}] }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ max\_val\ =\ stats[\textcolor{stringliteral}{'max'}] }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ min\_val\ =\ np.min(data,\ axis=\textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ max\_val\ =\ np.max(data,\ axis=\textcolor{keywordtype}{None}) }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ stats\ =\ \{\textcolor{stringliteral}{'min'}:\ min\_val,\ \textcolor{stringliteral}{'max'}:\ max\_val\} }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ denom\ =\ max\_val\ -\/\ min\_val }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ denom\ ==\ 0:\ denom\ =\ 1.0 }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ norm\_data\ =\ (data\ -\/\ min\_val)\ /\ denom }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ norm\_data,\ stats }
+\DoxyCodeLine{00055\  }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{elif}\ method\ ==\ \textcolor{stringliteral}{'log10'}: }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Log10\ normalization }}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ norm\_data\ =\ np.log10(np.abs(data)\ +\ 1e-\/6) }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ norm\_data,\ \{\} }
+\DoxyCodeLine{00060\ \ \ \ \  }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(f\textcolor{stringliteral}{"{}Unknown\ method:\ \{method\}"{}}) }
+\DoxyCodeLine{00063\  }
+\DoxyCodeLine{00064\  }
+
+\end{DoxyCode}
+
+
+Referenced by \doxymbox{\hyperlink{preprocessing_8py_source_l00065}{prepare\+\_\+dataset()}}.
+
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesrc_1_1data_1_1preprocessing_a792ff15e476f8dcf1db97b3bb0fc0050_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a84f013aee5c17ec66380873ecbf8445f}\index{src.data.preprocessing@{src.data.preprocessing}!prepare\_dataset@{prepare\_dataset}}
+\index{prepare\_dataset@{prepare\_dataset}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{prepare\_dataset()}{prepare\_dataset()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a84f013aee5c17ec66380873ecbf8445f} 
+src.\+data.\+preprocessing.\+prepare\+\_\+dataset (\begin{DoxyParamCaption}\item[{}]{features}{, }\item[{}]{targets}{, }\item[{}]{test\+\_\+ratio}{ = {\ttfamily 0.2}, }\item[{}]{norm\+\_\+config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generic function to split and normalize ANY set of features and targets.
+
+Args:
+    features (dict): Dictionary mapping FeatureName to data array.
+    targets (dict): Dictionary mapping TargetName to data array.
+    test_ratio (float): Fraction of data to use for testing.
+    norm_config (dict): Dictionary mapping feature/target names to methods.
+                        e.g. {'B': 'standard', 'Loss': 'log10'}.
+                        Defaults to 'standard' for features and 'none' for targets if not specified.
+                        
+Returns:
+    data_split (dict): Contains 'train' and 'test' dictionaries.
+
+                       - `data_split['train']['inputs']['FeatureName']`
+                       - `data_split['train']['targets']['TargetName']`
+
+    stats (dict): The statistics used for normalization for each feature/target.
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00065}{65}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00065\ \textcolor{keyword}{def\ }prepare\_dataset(features,\ targets,\ test\_ratio=0.2,\ norm\_config=None): }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00067\ \textcolor{stringliteral}{\ \ \ \ Generic\ function\ to\ split\ and\ normalize\ ANY\ set\ of\ features\ and\ targets. }}
+\DoxyCodeLine{00068\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00069\ \textcolor{stringliteral}{\ \ \ \ Args: }}
+\DoxyCodeLine{00070\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ features\ (dict):\ Dictionary\ mapping\ FeatureName\ to\ data\ array. }}
+\DoxyCodeLine{00071\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ targets\ (dict):\ Dictionary\ mapping\ TargetName\ to\ data\ array. }}
+\DoxyCodeLine{00072\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ test\_ratio\ (float):\ Fraction\ of\ data\ to\ use\ for\ testing. }}
+\DoxyCodeLine{00073\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ norm\_config\ (dict):\ Dictionary\ mapping\ feature/target\ names\ to\ methods. }}
+\DoxyCodeLine{00074\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.g.\ \{'B':\ 'standard',\ 'Loss':\ 'log10'\}. }}
+\DoxyCodeLine{00075\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Defaults\ to\ 'standard'\ for\ features\ and\ 'none'\ for\ targets\ if\ not\ specified. }}
+\DoxyCodeLine{00076\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }}
+\DoxyCodeLine{00077\ \textcolor{stringliteral}{\ \ \ \ Returns: }}
+\DoxyCodeLine{00078\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ data\_split\ (dict):\ Contains\ 'train'\ and\ 'test'\ dictionaries. }}
+\DoxyCodeLine{00079\ \textcolor{stringliteral}{ }}
+\DoxyCodeLine{00080\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ \`{}data\_split['train']['inputs']['FeatureName']\`{} }}
+\DoxyCodeLine{00081\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ \`{}data\_split['train']['targets']['TargetName']\`{} }}
+\DoxyCodeLine{00082\ \textcolor{stringliteral}{ }}
+\DoxyCodeLine{00083\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ stats\ (dict):\ The\ statistics\ used\ for\ normalization\ for\ each\ feature/target. }}
+\DoxyCodeLine{00084\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{if}\ norm\_config\ \textcolor{keywordflow}{is}\ \textcolor{keywordtype}{None}: }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ norm\_config\ =\ \{\} }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{\#\ 1.\ Determine\ Split\ Index }}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{\#\ Assume\ all\ arrays\ have\ same\ length\ N\ in\ dimension\ 0. }}
+\DoxyCodeLine{00090\ \ \ \ \ any\_key\ =\ next(iter(features)) }
+\DoxyCodeLine{00091\ \ \ \ \ N\ =\ len(features[any\_key]) }
+\DoxyCodeLine{00092\ \ \ \ \ split\_idx\ =\ int(N\ *\ (1\ -\/\ test\_ratio)) }
+\DoxyCodeLine{00093\ \ \ \ \  }
+\DoxyCodeLine{00094\ \ \ \ \ split\_data\ =\ \{ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'train'}:\ \{\textcolor{stringliteral}{'inputs'}:\ \{\},\ \textcolor{stringliteral}{'targets'}:\ \{\}\}, }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'test'}:\ \{\textcolor{stringliteral}{'inputs'}:\ \{\},\ \textcolor{stringliteral}{'targets'}:\ \{\}\} }
+\DoxyCodeLine{00097\ \ \ \ \ \} }
+\DoxyCodeLine{00098\ \ \ \ \ stats\_out\ =\ \{\} }
+\DoxyCodeLine{00099\ \ \ \ \  }
+\DoxyCodeLine{00100\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Splitting\ Dataset:\ \{N\}\ Samples\ -\/>\ \{split\_idx\}\ Train,\ \{N\ -\/\ split\_idx\}\ Test"{}}) }
+\DoxyCodeLine{00101\ \ \ \ \  }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{\#\ 2.\ Process\ Inputs\ (Features) }}
+\DoxyCodeLine{00103\ \ \ \ \ print(\textcolor{stringliteral}{"{}Processing\ Features..."{}}) }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ data\ \textcolor{keywordflow}{in}\ features.items(): }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Get\ method\ (Default\ to\ 'standard'\ for\ inputs) }}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ method\ =\ norm\_config.get(name,\ \textcolor{stringliteral}{'standard'}) }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Split }}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ train\_part\ =\ data[:split\_idx] }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ test\_part\ =\ data[split\_idx:] }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Normalize\ Train }}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ -\/\ Normalizing\ '\{name\}'\ with\ \{method\}..."{}}) }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ train\_norm,\ stat\ =\ normalize\_data(train\_part,\ method=method) }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ stats\_out[name]\ =\ stat }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Normalize\ Test\ (using\ Train\ stats) }}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ test\_norm,\ \_\ =\ normalize\_data(test\_part,\ method=method,\ stats=stat) }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ split\_data[\textcolor{stringliteral}{'train'}][\textcolor{stringliteral}{'inputs'}][name]\ =\ train\_norm }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ split\_data[\textcolor{stringliteral}{'test'}][\textcolor{stringliteral}{'inputs'}][name]\ =\ test\_norm }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{comment}{\#\ 3.\ Process\ Targets }}
+\DoxyCodeLine{00124\ \ \ \ \ print(\textcolor{stringliteral}{"{}Processing\ Targets..."{}}) }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{for}\ name,\ data\ \textcolor{keywordflow}{in}\ targets.items(): }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Get\ method\ (Default\ to\ 'none'\ for\ targets\ unless\ specified) }}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Often\ we\ don't\ normalize\ targets\ for\ regression\ unless\ specifically\ asked\ (like\ Log\ Loss) }}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ method\ =\ norm\_config.get(name,\ \textcolor{stringliteral}{'none'}) }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Split }}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ train\_part\ =\ data[:split\_idx] }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ test\_part\ =\ data[split\_idx:] }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Normalize\ Train }}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ method\ !=\ \textcolor{stringliteral}{'none'}: }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ \ -\/\ Normalizing\ Target\ '\{name\}'\ with\ \{method\}..."{}}) }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ train\_norm,\ stat\ =\ normalize\_data(train\_part,\ method=method) }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ method\ !=\ \textcolor{stringliteral}{'none'}: }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ stats\_out[name]\ =\ stat }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Normalize\ Test }}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ test\_norm,\ \_\ =\ normalize\_data(test\_part,\ method=method,\ stats=stat) }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ split\_data[\textcolor{stringliteral}{'train'}][\textcolor{stringliteral}{'targets'}][name]\ =\ train\_norm }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ split\_data[\textcolor{stringliteral}{'test'}][\textcolor{stringliteral}{'targets'}][name]\ =\ test\_norm }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{return}\ split\_data,\ stats\_out }
+\DoxyCodeLine{00149\  }
+\DoxyCodeLine{00150\  }
+\DoxyCodeLine{00151\ \textcolor{comment}{\#\ -\/-\/-\/\ PHYSICS\ FUNCTIONS\ (Vectorized)\ -\/-\/-\/ }}
+\DoxyCodeLine{00152\ \textcolor{comment}{\#\ Kept\ as\ helpers,\ but\ they\ are\ just\ ONE\ way\ to\ generate\ features. }}
+\DoxyCodeLine{00153\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{preprocessing_8py_source_l00009}{normalize\+\_\+data()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{preprocessing_8py_source_l00198}{process\+\_\+magnet\+\_\+dataset()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesrc_1_1data_1_1preprocessing_a84f013aee5c17ec66380873ecbf8445f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesrc_1_1data_1_1preprocessing_a84f013aee5c17ec66380873ecbf8445f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a4bff0b7a0c8070a26001c86ed09d6b93}\index{src.data.preprocessing@{src.data.preprocessing}!process\_magnet\_dataset@{process\_magnet\_dataset}}
+\index{process\_magnet\_dataset@{process\_magnet\_dataset}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{process\_magnet\_dataset()}{process\_magnet\_dataset()}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a4bff0b7a0c8070a26001c86ed09d6b93} 
+src.\+data.\+preprocessing.\+process\+\_\+magnet\+\_\+dataset (\begin{DoxyParamCaption}\item[{}]{voltage}{, }\item[{}]{current}{, }\item[{}]{frequency}{, }\item[{}]{mag\+\_\+props}{, }\item[{}]{dt}{, }\item[{}]{model\+\_\+type}{ = {\ttfamily \textquotesingle{}scaler\textquotesingle{}}, }\item[{}]{config\+\_\+path}{ = {\ttfamily None}, }\item[{}]{extra\+\_\+features}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Orchestrates the physics calculation -> Feature Assembly -> Normalization.
+
+Args:
+    voltage, current: Raw arrays
+    frequency: Raw frequency array
+    mag_props, dt: Constants
+    model_type (str): Key in config['models'] (e.g. 'scaler', 'cnn')
+    config_path (str, optional): Path to config.yaml.
+    extra_features (dict, optional): Additional raw features (e.g. {'Temperature': ..., 'Hdc': ...})
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00198}{198}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00198\ \textcolor{keyword}{def\ }process\_magnet\_dataset(voltage,\ current,\ frequency,\ mag\_props,\ dt,\ model\_type='scaler',\ config\_path=None,\ extra\_features=None): }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00200\ \textcolor{stringliteral}{\ \ \ \ Orchestrates\ the\ physics\ calculation\ -\/>\ Feature\ Assembly\ -\/>\ Normalization. }}
+\DoxyCodeLine{00201\ \textcolor{stringliteral}{\ \ \ \  }}
+\DoxyCodeLine{00202\ \textcolor{stringliteral}{\ \ \ \ Args: }}
+\DoxyCodeLine{00203\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ voltage,\ current:\ Raw\ arrays }}
+\DoxyCodeLine{00204\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ frequency:\ Raw\ frequency\ array }}
+\DoxyCodeLine{00205\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ mag\_props,\ dt:\ Constants }}
+\DoxyCodeLine{00206\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ model\_type\ (str):\ Key\ in\ config['models']\ (e.g.\ 'scaler',\ 'cnn') }}
+\DoxyCodeLine{00207\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ config\_path\ (str,\ optional):\ Path\ to\ config.yaml. }}
+\DoxyCodeLine{00208\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ extra\_features\ (dict,\ optional):\ Additional\ raw\ features\ (e.g.\ \{'Temperature':\ ...,\ 'Hdc':\ ...\}) }}
+\DoxyCodeLine{00209\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00210\ \ \ \ \ norm\_config\ =\ \{\} }
+\DoxyCodeLine{00211\ \ \ \ \  }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{comment}{\#\ 1.\ Load\ Config\ if\ path\ provided }}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordflow}{if}\ config\_path: }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ full\_config\ =\ load\_config(config\_path) }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'models'}\ \textcolor{keywordflow}{in}\ full\_config\ \textcolor{keywordflow}{and}\ model\_type\ \textcolor{keywordflow}{in}\ full\_config[\textcolor{stringliteral}{'models'}]: }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ model\_conf\ =\ full\_config[\textcolor{stringliteral}{'models'}][model\_type] }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'features'}\ \textcolor{keywordflow}{in}\ model\_conf: }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Merge\ inputs\ and\ targets\ into\ one\ simple\ config\ dict\ for\ prepare\_dataset }}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ prepare\_dataset\ expects\ \{'B':\ 'method',\ 'Loss':\ 'method'\} }}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ feats\ =\ model\_conf[\textcolor{stringliteral}{'features'}].get(\textcolor{stringliteral}{'inputs'},\ \{\}) }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ targs\ =\ model\_conf[\textcolor{stringliteral}{'features'}].get(\textcolor{stringliteral}{'targets'},\ \{\}) }
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ norm\_config\ =\ \{**feats,\ **targs\} }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loaded\ config\ for\ '\{model\_type\}':\ \{norm\_config\}"{}}) }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}WARNING:\ No\ 'features'\ section\ found\ for\ model\ '\{model\_type\}'.\ Using\ defaults."{}}) }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}WARNING:\ Model\ '\{model\_type\}'\ not\ found\ in\ config.\ Using\ defaults."{}}) }
+\DoxyCodeLine{00228\ \ \ \ \  }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{comment}{\#\ Fallback\ default\ if\ empty }}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ norm\_config: }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Added\ defaults\ for\ Temp/Hdc\ just\ in\ case }}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ norm\_config\ =\ \{\textcolor{stringliteral}{'B'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'H'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'Loss'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'Frequency'}:\ \textcolor{stringliteral}{'standard'},\  }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Temperature'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'Hdc'}:\ \textcolor{stringliteral}{'standard'},\ \textcolor{stringliteral}{'Duty'}:\ \textcolor{stringliteral}{'standard'}\} }
+\DoxyCodeLine{00234\  }
+\DoxyCodeLine{00235\ \ \ \ \ print(\textcolor{stringliteral}{"{}-\/-\/-\/\ 1.\ Physics\ Calculations\ -\/-\/-\/"{}}) }
+\DoxyCodeLine{00236\ \ \ \ \ B\_raw\ =\ calculate\_flux\_density(voltage,\ dt,\ mag\_props[\textcolor{stringliteral}{'N\_sec'}],\ mag\_props[\textcolor{stringliteral}{'Ae'}]) }
+\DoxyCodeLine{00237\ \ \ \ \ H\_raw\ =\ calculate\_magnetizing\_force(current,\ mag\_props[\textcolor{stringliteral}{'N\_prim'}],\ mag\_props[\textcolor{stringliteral}{'Le'}]) }
+\DoxyCodeLine{00238\ \ \ \ \ Loss\_raw\ =\ calculate\_volumetric\_loss(B\_raw,\ H\_raw,\ frequency) }
+\DoxyCodeLine{00239\ \ \ \ \  }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{comment}{\#\ Calculate\ scalar\ properties\ (Peak-\/to-\/Peak\ /\ 2) }}
+\DoxyCodeLine{00241\ \ \ \ \ B\_pk\ =\ (np.max(B\_raw,\ axis=1,\ keepdims=\textcolor{keyword}{True})\ -\/\ np.min(B\_raw,\ axis=1,\ keepdims=\textcolor{keyword}{True}))\ /\ 2 }
+\DoxyCodeLine{00242\ \ \ \ \ H\_pk\ =\ (np.max(H\_raw,\ axis=1,\ keepdims=\textcolor{keyword}{True})\ -\/\ np.min(H\_raw,\ axis=1,\ keepdims=\textcolor{keyword}{True}))\ /\ 2 }
+\DoxyCodeLine{00243\  }
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{comment}{\#\ Pack\ Potential\ Features }}
+\DoxyCodeLine{00245\ \ \ \ \ all\_features\ =\ \{ }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'B'}:\ B\_raw, }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'H'}:\ H\_raw, }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'B\_pk'}:\ B\_pk, }
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'H\_pk'}:\ H\_pk, }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Frequency'}:\ frequency.reshape(-\/1,\ 1)\ \textcolor{keywordflow}{if}\ np.ndim(frequency)\ >\ 0\ \textcolor{keywordflow}{else}\ np.full((len(B\_raw),\ 1),\ frequency) }
+\DoxyCodeLine{00251\ \ \ \ \ \} }
+\DoxyCodeLine{00252\ \ \ \ \  }
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordflow}{if}\ extra\_features: }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Reshape\ scalers\ if\ needed? }}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Assuming\ extra\_features\ are\ (N\_exp,)\ or\ (N\_exp,\ 1)\ or\ matching\ B\_raw\ length }}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Let's\ ensure\ they\ are\ at\ least\ 2D\ (N,\ 1)\ if\ they\ are\ scalars\ per\ experiment }}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ k,\ v\ \textcolor{keywordflow}{in}\ extra\_features.items(): }
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ np.ndim(v)\ ==\ 1: }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ all\_features[k]\ =\ v.reshape(-\/1,\ 1) }
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ all\_features[k]\ =\ v }
+\DoxyCodeLine{00262\ \ \ \ \  }
+\DoxyCodeLine{00263\ \ \ \ \ all\_targets\ =\ \{ }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Loss'}:\ Loss\_raw }
+\DoxyCodeLine{00265\ \ \ \ \ \} }
+\DoxyCodeLine{00266\ \ \ \ \  }
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{comment}{\#\ 2.\ Filter\ Features/Targets\ based\ on\ Config }}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{comment}{\#\ We\ only\ include\ keys\ that\ are\ in\ the\ norm\_config }}
+\DoxyCodeLine{00269\ \ \ \ \ selected\_features\ =\ \{k:\ v\ \textcolor{keywordflow}{for}\ k,\ v\ \textcolor{keywordflow}{in}\ all\_features.items()\ \textcolor{keywordflow}{if}\ k\ \textcolor{keywordflow}{in}\ norm\_config\} }
+\DoxyCodeLine{00270\ \ \ \ \ selected\_targets\ =\ \{k:\ v\ \textcolor{keywordflow}{for}\ k,\ v\ \textcolor{keywordflow}{in}\ all\_targets.items()\ \textcolor{keywordflow}{if}\ k\ \textcolor{keywordflow}{in}\ norm\_config\} }
+\DoxyCodeLine{00271\ \ \ \ \  }
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ selected\_features: }
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}WARNING:\ No\ features\ selected!\ Checking\ config..."{}}) }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback\ to\ keeping\ all\ if\ config\ was\ malformed\ to\ avoid\ returning\ nothing }}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ selected\_features\ =\ all\_features }
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00277\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Selected\ Features:\ \{list(selected\_features.keys())\}"{}}) }
+\DoxyCodeLine{00278\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Selected\ Targets:\ \{list(selected\_targets.keys())\}"{}}) }
+\DoxyCodeLine{00279\ \ \ \ \  }
+\DoxyCodeLine{00280\ \ \ \ \ print(\textcolor{stringliteral}{"{}-\/-\/-\/\ 2.\ Generic\ Normalization\ \&\ Split\ -\/-\/-\/"{}}) }
+\DoxyCodeLine{00281\ \ \ \ \ data\_split,\ stats\ =\ prepare\_dataset(selected\_features,\ selected\_targets,\ test\_ratio=0.2,\ norm\_config=norm\_config) }
+\DoxyCodeLine{00282\ \ \ \ \  }
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keywordflow}{return}\ data\_split,\ stats }
+\DoxyCodeLine{00284\  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{preprocessing_8py_source_l00154}{calculate\+\_\+flux\+\_\+density()}}, \doxymbox{\hyperlink{preprocessing_8py_source_l00172}{calculate\+\_\+magnetizing\+\_\+force()}}, \doxymbox{\hyperlink{preprocessing_8py_source_l00177}{calculate\+\_\+volumetric\+\_\+loss()}}, \doxymbox{\hyperlink{preprocessing_8py_source_l00193}{load\+\_\+config()}}, and \doxymbox{\hyperlink{preprocessing_8py_source_l00065}{prepare\+\_\+dataset()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesrc_1_1data_1_1preprocessing_a4bff0b7a0c8070a26001c86ed09d6b93_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a8c26c60bf5709d787cd66fb117a302d9}\index{src.data.preprocessing@{src.data.preprocessing}!amps@{amps}}
+\index{amps@{amps}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{amps}{amps}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a8c26c60bf5709d787cd66fb117a302d9} 
+src.\+data.\+preprocessing.\+amps = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}current\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00326}{326}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a15f9ffafb007492caaa7769ed638117d}\index{src.data.preprocessing@{src.data.preprocessing}!ax@{ax}}
+\index{ax@{ax}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{ax}{ax}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a15f9ffafb007492caaa7769ed638117d} 
+src.\+data.\+preprocessing.\+ax = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4360bdf792033574f76644feaf8f60c}{axes}}\+[0, 0]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00400}{400}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_ab4360bdf792033574f76644feaf8f60c}\index{src.data.preprocessing@{src.data.preprocessing}!axes@{axes}}
+\index{axes@{axes}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{axes}{axes}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_ab4360bdf792033574f76644feaf8f60c} 
+src.\+data.\+preprocessing.\+axes}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00397}{397}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a713428b99171b0c68757c056b092e1ea}\index{src.data.preprocessing@{src.data.preprocessing}!B\_norm@{B\_norm}}
+\index{B\_norm@{B\_norm}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{B\_norm}{B\_norm}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a713428b99171b0c68757c056b092e1ea} 
+src.\+data.\+preprocessing.\+B\+\_\+norm = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}}\+[\textquotesingle{}B\textquotesingle{}]\+\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+ if \textquotesingle{}B\textquotesingle{} in \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} else None}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00390}{390}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a376e5f4d2451407dda1a6dac62031072}\index{src.data.preprocessing@{src.data.preprocessing}!B\_raw@{B\_raw}}
+\index{B\_raw@{B\_raw}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{B\_raw}{B\_raw}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a376e5f4d2451407dda1a6dac62031072} 
+src.\+data.\+preprocessing.\+B\+\_\+raw = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a798bccc182e36d11e0da2dce4c6dc31f}{calculate\+\_\+flux\+\_\+density}}(raw\+\_\+v.\+reshape(1, -\/1), \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330}{dt}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}N\+\_\+sec\textquotesingle{}]\+, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}Ae\textquotesingle{}]\+).flatten()}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00394}{394}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a32d2404c107da962891d072caab44cc9}\index{src.data.preprocessing@{src.data.preprocessing}!bbox@{bbox}}
+\index{bbox@{bbox}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{bbox}{bbox}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a32d2404c107da962891d072caab44cc9} 
+src.\+data.\+preprocessing.\+bbox}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00413}{413}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_af33201b48098689fcd6c06c9d3110501}\index{src.data.preprocessing@{src.data.preprocessing}!color@{color}}
+\index{color@{color}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_af33201b48098689fcd6c06c9d3110501} 
+src.\+data.\+preprocessing.\+color}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00401}{401}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a8dd6c815fe028469eda1f8a4ea6ddb3f}\index{src.data.preprocessing@{src.data.preprocessing}!config\_path@{config\_path}}
+\index{config\_path@{config\_path}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{config\_path}{config\_path}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a8dd6c815fe028469eda1f8a4ea6ddb3f} 
+src.\+data.\+preprocessing.\+config\+\_\+path = os.\+path.\+abspath(os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}config\textquotesingle{}, \textquotesingle{}config.\+yaml\textquotesingle{}))}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00342}{342}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}\index{src.data.preprocessing@{src.data.preprocessing}!current\_dir@{current\_dir}}
+\index{current\_dir@{current\_dir}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{current\_dir}{current\_dir}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34} 
+src.\+data.\+preprocessing.\+current\+\_\+dir = os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+))}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00302}{302}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}\index{src.data.preprocessing@{src.data.preprocessing}!data\_dir@{data\_dir}}
+\index{data\_dir@{data\_dir}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{data\_dir}{data\_dir}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66} 
+src.\+data.\+preprocessing.\+data\+\_\+dir = os.\+path.\+abspath(os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}))}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00304}{304}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330}\index{src.data.preprocessing@{src.data.preprocessing}!dt@{dt}}
+\index{dt@{dt}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{dt}{dt}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_af75908b8c578c01dd6a9fad9a4ef3330} 
+src.\+data.\+preprocessing.\+dt = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}meta\textquotesingle{}]\+\+[\textquotesingle{}dt\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00336}{336}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a434d34720d1a32069f3b54b918165c66}\index{src.data.preprocessing@{src.data.preprocessing}!fig@{fig}}
+\index{fig@{fig}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{fig}{fig}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a434d34720d1a32069f3b54b918165c66} 
+src.\+data.\+preprocessing.\+fig}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00397}{397}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_aa153a91dd0990baac28ae7f4f68c1688}\index{src.data.preprocessing@{src.data.preprocessing}!figsize@{figsize}}
+\index{figsize@{figsize}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{figsize}{figsize}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_aa153a91dd0990baac28ae7f4f68c1688} 
+src.\+data.\+preprocessing.\+figsize}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00397}{397}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_af26152f3250702a4b01931111019e0c5}\index{src.data.preprocessing@{src.data.preprocessing}!freqs@{freqs}}
+\index{freqs@{freqs}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{freqs}{freqs}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_af26152f3250702a4b01931111019e0c5} 
+src.\+data.\+preprocessing.\+freqs = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}freq\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00327}{327}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}\index{src.data.preprocessing@{src.data.preprocessing}!full\_data@{full\_data}}
+\index{full\_data@{full\_data}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{full\_data}{full\_data}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a} 
+src.\+data.\+preprocessing.\+full\+\_\+data = load\+\_\+full\+\_\+dataset(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ad38589b31bd58842a55947800239789b}{mat\+\_\+file\+\_\+path}})}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00322}{322}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a43df187d3d218aa26b00bf2aba674580}\index{src.data.preprocessing@{src.data.preprocessing}!H\_norm@{H\_norm}}
+\index{H\_norm@{H\_norm}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{H\_norm}{H\_norm}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a43df187d3d218aa26b00bf2aba674580} 
+src.\+data.\+preprocessing.\+H\+\_\+norm = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}}\+[\textquotesingle{}H\textquotesingle{}]\+\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+ if \textquotesingle{}H\textquotesingle{} in \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} else None}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00391}{391}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_ac0b8b7e99f204297407afffe99987a00}\index{src.data.preprocessing@{src.data.preprocessing}!H\_raw@{H\_raw}}
+\index{H\_raw@{H\_raw}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{H\_raw}{H\_raw}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_ac0b8b7e99f204297407afffe99987a00} 
+src.\+data.\+preprocessing.\+H\+\_\+raw = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a370875391e05027c2ae9687c9e770f23}{calculate\+\_\+magnetizing\+\_\+force}}(raw\+\_\+i.\+reshape(1, -\/1), \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}N\+\_\+prim\textquotesingle{}]\+, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}{props}}\+[\textquotesingle{}Le\textquotesingle{}]\+).flatten()}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00395}{395}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_ac7809073c7e93974cd000ea8e1b50566}\index{src.data.preprocessing@{src.data.preprocessing}!ha@{ha}}
+\index{ha@{ha}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{ha}{ha}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_ac7809073c7e93974cd000ea8e1b50566} 
+src.\+data.\+preprocessing.\+ha}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00415}{415}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}\index{src.data.preprocessing@{src.data.preprocessing}!idx@{idx}}
+\index{idx@{idx}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{idx}{idx}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a} 
+int src.\+data.\+preprocessing.\+idx = 73680}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00370}{370}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}\index{src.data.preprocessing@{src.data.preprocessing}!inputs@{inputs}}
+\index{inputs@{inputs}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{inputs}{inputs}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323} 
+src.\+data.\+preprocessing.\+inputs = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}{split\+\_\+data}}\+[\textquotesingle{}train\textquotesingle{}]\+\+[\textquotesingle{}inputs\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00360}{360}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a9fe1578120f646f0edc1518f37bc5c58}\index{src.data.preprocessing@{src.data.preprocessing}!label@{label}}
+\index{label@{label}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{label}{label}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a9fe1578120f646f0edc1518f37bc5c58} 
+src.\+data.\+preprocessing.\+label}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00401}{401}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}\index{src.data.preprocessing@{src.data.preprocessing}!MAT\_FILE\_NAME@{MAT\_FILE\_NAME}}
+\index{MAT\_FILE\_NAME@{MAT\_FILE\_NAME}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{MAT\_FILE\_NAME}{MAT\_FILE\_NAME}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5} 
+str src.\+data.\+preprocessing.\+MAT\+\_\+\+FILE\+\_\+\+NAME = \textquotesingle{}3C90\+\_\+\+TX-\/25-\/15-\/10\+\_\+\+Data1\+\_\+\+Cycle.\+mat\textquotesingle{}}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00300}{300}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_ad38589b31bd58842a55947800239789b}\index{src.data.preprocessing@{src.data.preprocessing}!mat\_file\_path@{mat\_file\_path}}
+\index{mat\_file\_path@{mat\_file\_path}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{mat\_file\_path}{mat\_file\_path}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_ad38589b31bd58842a55947800239789b} 
+src.\+data.\+preprocessing.\+mat\+\_\+file\+\_\+path = os.\+path.\+abspath(os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}..\textquotesingle{}, \textquotesingle{}..\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}}))}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00313}{313}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a546ef5b271eed66755f8f8595c686a4a}\index{src.data.preprocessing@{src.data.preprocessing}!model\_type@{model\_type}}
+\index{model\_type@{model\_type}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{model\_type}{model\_type}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a546ef5b271eed66755f8f8595c686a4a} 
+src.\+data.\+preprocessing.\+model\+\_\+type}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00349}{349}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_af52e06ab0bf85fb402ea9e26bfa33375}\index{src.data.preprocessing@{src.data.preprocessing}!N\_train@{N\_train}}
+\index{N\_train@{N\_train}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{N\_train}{N\_train}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_af52e06ab0bf85fb402ea9e26bfa33375} 
+str src.\+data.\+preprocessing.\+N\+\_\+train = len(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}}\+[\textquotesingle{}B\textquotesingle{}]\+) if \textquotesingle{}B\textquotesingle{} in \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a104b47e39b20fcf96ba506c04ab10323}{inputs}} else len(list(inputs.\+values())\+[0]\+)}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00369}{369}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a9aa710813cf9cccdd625eab33f3ca563}\index{src.data.preprocessing@{src.data.preprocessing}!possible\_path\_1@{possible\_path\_1}}
+\index{possible\_path\_1@{possible\_path\_1}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{possible\_path\_1}{possible\_path\_1}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a9aa710813cf9cccdd625eab33f3ca563} 
+src.\+data.\+preprocessing.\+possible\+\_\+path\+\_\+1 = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}{data\+\_\+dir}}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}})}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00306}{306}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_ab18c1f18f4a69d9fd6c3aec8ed65085c}\index{src.data.preprocessing@{src.data.preprocessing}!possible\_path\_2@{possible\_path\_2}}
+\index{possible\_path\_2@{possible\_path\_2}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{possible\_path\_2}{possible\_path\_2}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_ab18c1f18f4a69d9fd6c3aec8ed65085c} 
+src.\+data.\+preprocessing.\+possible\+\_\+path\+\_\+2 = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6711af53a5bd2546d0e6beffffbf2f66}{data\+\_\+dir}}, \textquotesingle{}Scripts\textquotesingle{}, \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a81201b1b9a13c8ef613c965fee0dc9c5}{MAT\+\_\+\+FILE\+\_\+\+NAME}})}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00307}{307}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71}\index{src.data.preprocessing@{src.data.preprocessing}!props@{props}}
+\index{props@{props}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{props}{props}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a4076127d8e1f49c16b511e5a213cbd71} 
+dict src.\+data.\+preprocessing.\+props}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_prim'}:\ full\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'N\_prim'}],}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_sec'}:\ full\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'N\_sec'}],}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Ae'}:\ full\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'Ae'}],}
+\DoxyCodeLine{00005\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Le'}:\ full\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'Le'}]}
+\DoxyCodeLine{00006\ \ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00330}{330}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a6ba3896be6c71afcf461900cac1b2a11}\index{src.data.preprocessing@{src.data.preprocessing}!raw\_i@{raw\_i}}
+\index{raw\_i@{raw\_i}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{raw\_i}{raw\_i}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a6ba3896be6c71afcf461900cac1b2a11} 
+src.\+data.\+preprocessing.\+raw\+\_\+i = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a8c26c60bf5709d787cd66fb117a302d9}{amps}}\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00376}{376}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_ac80408f309e7a21705098af0d10522eb}\index{src.data.preprocessing@{src.data.preprocessing}!raw\_v@{raw\_v}}
+\index{raw\_v@{raw\_v}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{raw\_v}{raw\_v}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_ac80408f309e7a21705098af0d10522eb} 
+src.\+data.\+preprocessing.\+raw\+\_\+v = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a6b69238e4448b5ea0c2cbbf35979c47f}{volts}}\+[\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_aac8cec33c147b1eb880b9d483ab4fa9a}{idx}}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00375}{375}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_ad7274507e2fa183880a7e9e36b8280e0}\index{src.data.preprocessing@{src.data.preprocessing}!save\_path@{save\_path}}
+\index{save\_path@{save\_path}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{save\_path}{save\_path}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_ad7274507e2fa183880a7e9e36b8280e0} 
+src.\+data.\+preprocessing.\+save\+\_\+path = os.\+path.\+join(\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_a7d9ce20603261ba0b7428718203dec34}{current\+\_\+dir}}, \textquotesingle{}normalization\+\_\+check.\+png\textquotesingle{})}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00440}{440}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}\index{src.data.preprocessing@{src.data.preprocessing}!split\_data@{split\_data}}
+\index{split\_data@{split\_data}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{split\_data}{split\_data}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c} 
+src.\+data.\+preprocessing.\+split\+\_\+data}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00347}{347}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}\index{src.data.preprocessing@{src.data.preprocessing}!stats@{stats}}
+\index{stats@{stats}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{stats}{stats}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1} 
+src.\+data.\+preprocessing.\+stats}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00347}{347}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a2f8ed3af33832e2be099a7ab6210c919}\index{src.data.preprocessing@{src.data.preprocessing}!targets@{targets}}
+\index{targets@{targets}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{targets}{targets}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a2f8ed3af33832e2be099a7ab6210c919} 
+src.\+data.\+preprocessing.\+targets = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_af6fd653a447aa3cbe0e79fb5e8f3e19c}{split\+\_\+data}}\+[\textquotesingle{}train\textquotesingle{}]\+\+[\textquotesingle{}targets\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00361}{361}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a26bc645e7092a58d5c7896f23d9cafd1}\index{src.data.preprocessing@{src.data.preprocessing}!transAxes@{transAxes}}
+\index{transAxes@{transAxes}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{transAxes}{transAxes}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a26bc645e7092a58d5c7896f23d9cafd1} 
+src.\+data.\+preprocessing.\+trans\+Axes}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00413}{413}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a6fb2610fc598ace2f756a8c3463a8ad0}\index{src.data.preprocessing@{src.data.preprocessing}!transform@{transform}}
+\index{transform@{transform}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{transform}{transform}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a6fb2610fc598ace2f756a8c3463a8ad0} 
+src.\+data.\+preprocessing.\+transform}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00413}{413}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_aef56d257937ab4e2a7ae70154e50bb44}\index{src.data.preprocessing@{src.data.preprocessing}!txt@{txt}}
+\index{txt@{txt}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{txt}{txt}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_aef56d257937ab4e2a7ae70154e50bb44} 
+str src.\+data.\+preprocessing.\+txt = f"{}\+Mean:\+ \{\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{stats}}\+[\textquotesingle{}B\textquotesingle{}]\+.get(\textquotesingle{}mean\textquotesingle{}, 0):\+.\+2e\}\textbackslash{}n\+Std:\+ \{\doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ae9905abbeb5ce720df53d10f8a2adad1}{stats}}\+[\textquotesingle{}B\textquotesingle{}]\+.get(\textquotesingle{}std\textquotesingle{}, 1):\+.\+2e\}"{}}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00412}{412}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a1874e79ffb69245ac9cc62eface5af43}\index{src.data.preprocessing@{src.data.preprocessing}!verticalalignment@{verticalalignment}}
+\index{verticalalignment@{verticalalignment}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{verticalalignment}{verticalalignment}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a1874e79ffb69245ac9cc62eface5af43} 
+src.\+data.\+preprocessing.\+verticalalignment}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00413}{413}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+
+\Hypertarget{namespacesrc_1_1data_1_1preprocessing_a6b69238e4448b5ea0c2cbbf35979c47f}\index{src.data.preprocessing@{src.data.preprocessing}!volts@{volts}}
+\index{volts@{volts}!src.data.preprocessing@{src.data.preprocessing}}
+\doxysubsubsection{\texorpdfstring{volts}{volts}}
+{\footnotesize\ttfamily \label{namespacesrc_1_1data_1_1preprocessing_a6b69238e4448b5ea0c2cbbf35979c47f} 
+src.\+data.\+preprocessing.\+volts = \doxymbox{\hyperlink{namespacesrc_1_1data_1_1preprocessing_ab4de301034659f0f7dbbf93acecc8f5a}{full\+\_\+data}}\+[\textquotesingle{}voltage\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{preprocessing_8py_source_l00325}{325}} of file \doxymbox{\hyperlink{preprocessing_8py_source}{preprocessing.\+py}}.
+

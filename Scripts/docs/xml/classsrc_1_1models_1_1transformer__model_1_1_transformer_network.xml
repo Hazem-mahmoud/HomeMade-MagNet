@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1transformer__model_1_1_transformer_network" kind="class" language="Python" prot="public">
+    <compoundname>src::models::transformer_model::TransformerNetwork</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a1d5f0e15438cd9cbc513ec33b551df2c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.transformer_model.TransformerNetwork::proj_B</definition>
+        <argsstring></argsstring>
+        <name>proj_B</name>
+        <qualifiedname>src.models.transformer_model.TransformerNetwork.proj_B</qualifiedname>
+        <initializer>=  nn.Sequential(
+            nn.Linear(1, dim_hidden),
+            nn.Tanh(),
+            nn.Linear(dim_hidden, dim_hidden))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="47" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="47" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" compoundref="transformer__model_8py" startline="82" endline="116">src.models.transformer_model.TransformerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a689d2bd691d5160b5c6f7fa9c1961161" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.transformer_model.TransformerNetwork::positional_encoding_layer</definition>
+        <argsstring></argsstring>
+        <name>positional_encoding_layer</name>
+        <qualifiedname>src.models.transformer_model.TransformerNetwork.positional_encoding_layer</qualifiedname>
+        <initializer>=  <ref refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding" kindref="compound">PositionalEncoding</ref>(d_model=dim_hidden, 
+                                                            dropout=dropout_pos_enc, 
+                                                            max_len=B_in_channel)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="52" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="52" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" compoundref="transformer__model_8py" startline="82" endline="116">src.models.transformer_model.TransformerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1aea40a2129ffd02f4a12418ba24670037" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.transformer_model.TransformerNetwork::encoder</definition>
+        <argsstring></argsstring>
+        <name>encoder</name>
+        <qualifiedname>src.models.transformer_model.TransformerNetwork.encoder</qualifiedname>
+        <initializer>=  nn.TransformerEncoder(encoder_layer=encoder_layer, 
+                                             num_layers=n_encoder_layers, 
+                                             norm=None)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="66" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="66" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" compoundref="transformer__model_8py" startline="82" endline="116">src.models.transformer_model.TransformerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a4785766fb29a657e28d6aa0c645cffed" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.transformer_model.TransformerNetwork::proj_fusion</definition>
+        <argsstring></argsstring>
+        <name>proj_fusion</name>
+        <qualifiedname>src.models.transformer_model.TransformerNetwork.proj_fusion</qualifiedname>
+        <initializer>=  nn.Sequential(
+            nn.Linear(dim_hidden+2, dim_proj_fusion),
+            nn.Tanh(),
+            nn.Linear(dim_proj_fusion, dim_proj_fusion),
+            nn.Tanh(),
+            nn.Linear(dim_proj_fusion, 1))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="71" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="71" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" compoundref="transformer__model_8py" startline="82" endline="116">src.models.transformer_model.TransformerNetwork.forward</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a7d529f2c456e9ac3906ad019c9aa9912" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.transformer_model.TransformerNetwork::regressor</definition>
+        <argsstring></argsstring>
+        <name>regressor</name>
+        <qualifiedname>src.models.transformer_model.TransformerNetwork.regressor</qualifiedname>
+        <initializer>=  nn.Sequential(
+            nn.Linear(B_in_channel, 1))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="79" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="79" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" compoundref="transformer__model_8py" startline="82" endline="116">src.models.transformer_model.TransformerNetwork.forward</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a0e58e9c4308d8256c1dc05b10bcfe667" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.transformer_model.TransformerNetwork.__init__</definition>
+        <argsstring>(self, B_in_channel=1024, dim_hidden=24, dim_proj_fusion=40, n_encoder_layers=1, n_heads=4, dropout_encoder=0.0, dropout_pos_enc=0.0, dim_feedforward_encoder=40)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.transformer_model.TransformerNetwork.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>B_in_channel</type>
+          <defname>B_in_channel</defname>
+          <defval>1024</defval>
+        </param>
+        <param>
+          <type>dim_hidden</type>
+          <defname>dim_hidden</defname>
+          <defval>24</defval>
+        </param>
+        <param>
+          <type>dim_proj_fusion</type>
+          <defname>dim_proj_fusion</defname>
+          <defval>40</defval>
+        </param>
+        <param>
+          <type>n_encoder_layers</type>
+          <defname>n_encoder_layers</defname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>n_heads</type>
+          <defname>n_heads</defname>
+          <defval>4</defval>
+        </param>
+        <param>
+          <type>dropout_encoder</type>
+          <defname>dropout_encoder</defname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>dropout_pos_enc</type>
+          <defname>dropout_pos_enc</defname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>dim_feedforward_encoder</type>
+          <defname>dim_feedforward_encoder</defname>
+          <defval>40</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="34" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="43" bodyend="81"/>
+        <references refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a0e58e9c4308d8256c1dc05b10bcfe667" compoundref="transformer__model_8py" startline="43" endline="81">src.models.transformer_model.TransformerNetwork.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a0e58e9c4308d8256c1dc05b10bcfe667" compoundref="transformer__model_8py" startline="43" endline="81">src.models.transformer_model.TransformerNetwork.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.transformer_model.TransformerNetwork.forward</definition>
+        <argsstring>(self, b_seq, scalars)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.transformer_model.TransformerNetwork.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>b_seq</type>
+          <defname>b_seq</defname>
+        </param>
+        <param>
+          <type>scalars</type>
+          <defname>scalars</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Unified Interface Wrapper.
+
+Args:
+    b_seq (Tensor): Input B-field curve, shape (batch_size, seq_len, 1).
+    scalars (Tensor): Shape (batch_size, 3) -&gt; Freq, Temp, Hdc.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="82" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="82" bodyend="116"/>
+        <references refid="classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network_1a53eddec3eef86c291241bb531c957f2e" compoundref="seq2seq__model_8py" startline="23">src.models.seq2seq_model.Seq2SeqNetwork.encoder</references>
+        <references refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1aea40a2129ffd02f4a12418ba24670037" compoundref="transformer__model_8py" startline="66">src.models.transformer_model.TransformerNetwork.encoder</references>
+        <references refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a689d2bd691d5160b5c6f7fa9c1961161" compoundref="transformer__model_8py" startline="52">src.models.transformer_model.TransformerNetwork.positional_encoding_layer</references>
+        <references refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a1d5f0e15438cd9cbc513ec33b551df2c" compoundref="transformer__model_8py" startline="47">src.models.transformer_model.TransformerNetwork.proj_B</references>
+        <references refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a4785766fb29a657e28d6aa0c645cffed" compoundref="transformer__model_8py" startline="71">src.models.transformer_model.TransformerNetwork.proj_fusion</references>
+        <references refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a7d529f2c456e9ac3906ad019c9aa9912" compoundref="transformer__model_8py" startline="79">src.models.transformer_model.TransformerNetwork.regressor</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Fuzhou&apos;s Transformer-based architecture.
+</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.transformer_model.TransformerNetwork</label>
+        <link refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.transformer_model.TransformerNetwork</label>
+        <link refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="30" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="30" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a0e58e9c4308d8256c1dc05b10bcfe667" prot="public" virt="non-virtual"><scope>src::models::transformer_model::TransformerNetwork</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1aea40a2129ffd02f4a12418ba24670037" prot="public" virt="non-virtual"><scope>src::models::transformer_model::TransformerNetwork</scope><name>encoder</name></member>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1ab547eea976cd7f9e58fba2d6f9abfd37" prot="public" virt="non-virtual"><scope>src::models::transformer_model::TransformerNetwork</scope><name>forward</name></member>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a689d2bd691d5160b5c6f7fa9c1961161" prot="public" virt="non-virtual"><scope>src::models::transformer_model::TransformerNetwork</scope><name>positional_encoding_layer</name></member>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a1d5f0e15438cd9cbc513ec33b551df2c" prot="public" virt="non-virtual"><scope>src::models::transformer_model::TransformerNetwork</scope><name>proj_B</name></member>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a4785766fb29a657e28d6aa0c645cffed" prot="public" virt="non-virtual"><scope>src::models::transformer_model::TransformerNetwork</scope><name>proj_fusion</name></member>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_transformer_network_1a7d529f2c456e9ac3906ad019c9aa9912" prot="public" virt="non-virtual"><scope>src::models::transformer_model::TransformerNetwork</scope><name>regressor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

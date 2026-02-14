@@ -1,0 +1,5 @@
+<map id="src.models.sequence_model.SequenceToScalerNetwork" name="src.models.sequence_model.SequenceToScalerNetwork">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,231,123"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="77,5,159,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,46,120,81,116,79,116,50"/>
+</map>

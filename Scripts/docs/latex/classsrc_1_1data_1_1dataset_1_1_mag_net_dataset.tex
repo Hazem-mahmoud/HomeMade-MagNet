@@ -1,0 +1,389 @@
+\doxysection{src.\+data.\+dataset.\+Mag\+Net\+Dataset Class Reference}
+\hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset}{}\label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+
+
+Inheritance diagram for src.\+data.\+dataset.\+Mag\+Net\+Dataset:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+data.\+dataset.\+Mag\+Net\+Dataset:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1fdd0e1f023e48a5812ce707de2df13d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, file\+\_\+path, \doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a5e105d56d2907dcdac42db6516772e67}{mode}}=\textquotesingle{}scaler\textquotesingle{}, \doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4}{partition}}=\textquotesingle{}train\textquotesingle{}, \doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_abb6bcdf797bb300b13ffaed914788764}{transform}}=None, config\+\_\+path=None)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a94d4c1bb45894416b37e6291c3fdd84a}{\+\_\+\+\_\+len\+\_\+\+\_\+}} (self)
+\item 
+\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ad0203e1f10d4bd9a83098fca141f6a62}{\+\_\+\+\_\+getitem\+\_\+\+\_\+}} (self, idx)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+str \doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a5e105d56d2907dcdac42db6516772e67}{mode}} = mode
+\item 
+\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4}{partition}} = partition
+\item 
+\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_abb6bcdf797bb300b13ffaed914788764}{transform}} = transform
+\item 
+\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_aaef94aee1bc7ad2bbbf8b843b8b2ef76}{stats}}
+\item 
+\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}{inputs}} = data\+\_\+split\+[\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4}{partition}}]\+\+[\textquotesingle{}inputs\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}{targets}} = data\+\_\+split\+[\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4}{partition}}]\+\+[\textquotesingle{}targets\textquotesingle{}]\+
+\item 
+\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_adfd47e984373ede56a3711188d1fb7e7}{length}} = len(self.\+inputs\+[any\+\_\+key]\+) if self.\+inputs else len(self.\+targets\+[any\+\_\+key]\+)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00025}{25}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1fdd0e1f023e48a5812ce707de2df13d}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1fdd0e1f023e48a5812ce707de2df13d} 
+src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{file\+\_\+path}{, }\item[{}]{mode}{ = {\ttfamily \textquotesingle{}scaler\textquotesingle{}}, }\item[{}]{partition}{ = {\ttfamily \textquotesingle{}train\textquotesingle{}}, }\item[{}]{transform}{ = {\ttfamily None}, }\item[{}]{config\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Args:
+    file_path (str): Path to .mat file.
+    mode (str): 'scaler', 'sequence', 'seq2seq'.
+    partition (str): 'train' or 'test'.
+    transform (callable, optional): Optional transform to be applied.
+    config_path (str): Path to config.yaml (optional).
+\end{DoxyVerb}
+ 
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00026}{26}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ file\_path,\ mode='scaler',\ partition='train',\ transform=None,\ config\_path=None): }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{} }}
+\DoxyCodeLine{00028\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args: }}
+\DoxyCodeLine{00029\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ file\_path\ (str):\ Path\ to\ .mat\ file. }}
+\DoxyCodeLine{00030\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ mode\ (str):\ 'scaler',\ 'sequence',\ 'seq2seq'. }}
+\DoxyCodeLine{00031\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ partition\ (str):\ 'train'\ or\ 'test'. }}
+\DoxyCodeLine{00032\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ transform\ (callable,\ optional):\ Optional\ transform\ to\ be\ applied. }}
+\DoxyCodeLine{00033\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ config\_path\ (str):\ Path\ to\ config.yaml\ (optional). }}
+\DoxyCodeLine{00034\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}} }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ self.mode\ =\ mode }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ self.partition\ =\ partition }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ self.transform\ =\ transform }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Load\ raw\ data }}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loading\ dataset\ from\ \{file\_path\}\ for\ partition\ '\{partition\}'..."{}}) }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ raw\_data\ =\ loader.load\_full\_dataset(file\_path) }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extract\ Standard\ Args }}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ voltage\ =\ raw\_data[\textcolor{stringliteral}{'voltage'}].astype(np.float32) }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ current\ =\ raw\_data[\textcolor{stringliteral}{'current'}].astype(np.float32) }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ freq\ =\ raw\_data[\textcolor{stringliteral}{'freq'}].astype(np.float32) }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ props\ =\ \{ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_prim'}:\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'N\_prim'}], }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'N\_sec'}:\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'N\_sec'}], }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Ae'}:\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'Ae'}], }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Le'}:\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'Le'}] }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ dt\ =\ raw\_data[\textcolor{stringliteral}{'meta'}][\textcolor{stringliteral}{'dt'}] }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ isinstance(dt,\ (list,\ np.ndarray))\ \textcolor{keywordflow}{and}\ len(dt)\ >\ 1: }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ dt\ =\ dt[0] }
+\DoxyCodeLine{00057\  }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Extra\ Features }}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ extra\ =\ \{ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Temperature'}:\ raw\_data[\textcolor{stringliteral}{'temp'}].astype(np.float32), }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Hdc'}:\ raw\_data[\textcolor{stringliteral}{'hdc'}].astype(np.float32), }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Duty'}:\ raw\_data[\textcolor{stringliteral}{'duty'}].astype(np.float32) }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \} }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Use\ Central\ Preprocessing }}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Running\ centralized\ preprocessing..."{}}) }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Determine\ config\ path\ if\ not\ provided }}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ config\_path: }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Try\ to\ find\ it\ relative\ to\ this\ file }}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{import}\ os }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_dir\ =\ os.path.dirname(os.path.abspath(\_\_file\_\_)) }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Scripts/src/data\ -\/>\ ...\ -\/>\ Scripts/config/config.yaml }}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ config\_path\ =\ os.path.abspath(os.path.join(current\_dir,\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'config'},\ \textcolor{stringliteral}{'config.yaml'})) }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(config\_path): }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}WARNING:\ Config\ not\ found\ at\ \{config\_path\}.\ Using\ defaults."{}}) }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ config\_path\ =\ \textcolor{keywordtype}{None} }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ data\_split,\ self.stats\ =\ preprocessing.process\_magnet\_dataset( }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ voltage,\ current,\ freq,\ props,\ dt, }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ model\_type=mode, }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ config\_path=config\_path, }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ extra\_features=extra }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ ) }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Select\ Partition }}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ partition\ \textcolor{keywordflow}{not}\ \textcolor{keywordflow}{in}\ data\_split: }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(f\textcolor{stringliteral}{"{}Partition\ '\{partition\}'\ not\ found\ in\ split\ data."{}}) }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ self.inputs\ =\ data\_split[partition][\textcolor{stringliteral}{'inputs'}] }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ self.targets\ =\ data\_split[partition][\textcolor{stringliteral}{'targets'}] }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Validation\ checks }}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.targets: }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}WARNING:\ No\ targets\ found\ in\ processed\ data."{}}) }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ self.inputs: }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}WARNING:\ No\ inputs\ found\ in\ processed\ data."{}}) }
+\DoxyCodeLine{00100\  }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Store\ length }}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Assuming\ all\ input\ arrays\ are\ same\ length }}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ any\_key\ =\ next(iter(self.inputs))\ \textcolor{keywordflow}{if}\ self.inputs\ \textcolor{keywordflow}{else}\ next(iter(self.targets)) }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ self.length\ =\ len(self.inputs[any\_key])\ \textcolor{keywordflow}{if}\ self.inputs\ \textcolor{keywordflow}{else}\ len(self.targets[any\_key]) }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \  }
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ad0203e1f10d4bd9a83098fca141f6a62}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!\_\_getitem\_\_@{\_\_getitem\_\_}}
+\index{\_\_getitem\_\_@{\_\_getitem\_\_}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{\_\_getitem\_\_()}{\_\_getitem\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ad0203e1f10d4bd9a83098fca141f6a62} 
+src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+\_\+\+\_\+getitem\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{idx}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00109}{109}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{def\ }\_\_getitem\_\_(self,\ idx): }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Retrieve\ normalized\ features\ from\ dictionary }}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ NOTE:\ Keys\ depend\ on\ config.yaml!\  }}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ must\ align\ code\ here\ with\ what\ we\ expect\ to\ be\ in\ the\ config\ for\ each\ mode. }}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Fallback\ logic\ is\ needed\ if\ config\ is\ dynamic. }}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ to\ get\ datum\ safely }}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get(dic,\ key): }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ key\ \textcolor{keywordflow}{in}\ dic: }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\ =\ dic[key][idx] }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ torch.tensor(val,\ dtype=torch.float32) }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Be\ noisy\ if\ missing\ expected\ feature }}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ KeyError(f\textcolor{stringliteral}{"{}Feature\ '\{key\}'\ missing\ from\ dataset.\ Check\ config.yaml\ or\ preprocessing."{}}) }
+\DoxyCodeLine{00123\  }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Helper\ to\ get\ sequence\ or\ scalar }}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keyword}{def\ }get\_tens(dic,\ key,\ unsqueeze=False): }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ get(dic,\ key) }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ unsqueeze: }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ t.unsqueeze(-\/1) }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ t }
+\DoxyCodeLine{00130\  }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.mode\ ==\ \textcolor{stringliteral}{'scaler'}: }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Config\ MUST\ include\ Frequency,\ Temperature,\ Hdc\ in\ inputs }}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Config\ MUST\ include\ Loss\ in\ targets }}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input:\ B\_pk,\ Freq,\ Temp,\ Hdc }}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ assume\ these\ are\ 1D\ arrays\ (scalers)\ in\ the\ input\ dict }}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ get(self.inputs,\ \textcolor{stringliteral}{'B\_pk'}) }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ f\ =\ get(self.inputs,\ \textcolor{stringliteral}{'Frequency'}) }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ get(self.inputs,\ \textcolor{stringliteral}{'Temperature'}) }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ get(self.inputs,\ \textcolor{stringliteral}{'Hdc'}) }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ x\ =\ torch.stack([b.squeeze(),\ f.squeeze(),\ t.squeeze(),\ h.squeeze()])\  }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Note:\ normalized\ scalars\ might\ come\ as\ (1,)\ or\ scalar.\ Squeeze\ ensures\ (3,) }}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ get\_tens(self.targets,\ \textcolor{stringliteral}{'Loss'},\ unsqueeze=\textcolor{keyword}{False})\ \textcolor{comment}{\#\ (1,) }}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ x,\ y }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.mode\ \textcolor{keywordflow}{in}\ [\textcolor{stringliteral}{'sequence'},\ \textcolor{stringliteral}{'cnn'},\ \textcolor{stringliteral}{'transformer'}]: }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input:\ B\ (or\ H) }}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Target:\ Loss }}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ get\_tens(self.inputs,\ \textcolor{stringliteral}{'B'},\ unsqueeze=\textcolor{keyword}{True})\ \textcolor{comment}{\#\ (Seq,\ 1) }}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Scalars:\ Freq,\ Temp,\ Hdc }}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ f\ =\ get(self.inputs,\ \textcolor{stringliteral}{'Frequency'}) }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ get(self.inputs,\ \textcolor{stringliteral}{'Temperature'}) }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ get(self.inputs,\ \textcolor{stringliteral}{'Hdc'}) }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ scalars\ =\ torch.stack([f.squeeze(),\ t.squeeze(),\ h.squeeze()]) }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ y\ =\ get\_tens(self.targets,\ \textcolor{stringliteral}{'Loss'},\ unsqueeze=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ b,\ scalars,\ y }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ self.mode\ ==\ \textcolor{stringliteral}{'seq2seq'}: }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input:\ B }}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Target:\ H }}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ b\ =\ get\_tens(self.inputs,\ \textcolor{stringliteral}{'B'},\ unsqueeze=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ get\_tens(self.inputs,\ \textcolor{stringliteral}{'H'},\ unsqueeze=\textcolor{keyword}{True})\ \textcolor{comment}{\#\ Assuming\ H\ is\ in\ inputs\ or\ targets? }}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Usually\ H\ is\ 'target'\ for\ B-\/>H\ prediction?\ Or\ Input? }}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ If\ we\ want\ to\ predict\ H,\ it\ should\ be\ in\ targets. }}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ But\ process\_magnet\_dataset\ puts\ things\ in\ 'inputs'\ or\ 'targets'\ based\ on\ config. }}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Check\ where\ H\ is. }}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{stringliteral}{'H'}\ \textcolor{keywordflow}{in}\ self.targets: }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ target\ =\ get\_tens(self.targets,\ \textcolor{stringliteral}{'H'},\ unsqueeze=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ \textcolor{stringliteral}{'H'}\ \textcolor{keywordflow}{in}\ self.inputs: }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ target\ =\ get\_tens(self.inputs,\ \textcolor{stringliteral}{'H'},\ unsqueeze=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ KeyError(\textcolor{stringliteral}{"{}H\ field\ not\ found\ in\ inputs\ or\ targets\ for\ seq2seq"{}}) }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ b,\ target }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ValueError(f\textcolor{stringliteral}{"{}Unknown\ mode:\ \{self.mode\}"{}}) }
+\DoxyCodeLine{00183\  }
+\DoxyCodeLine{00184\ \textcolor{comment}{\#\ ========================================== }}
+\DoxyCodeLine{00185\ \textcolor{comment}{\#\ TEST\ SCRIPT }}
+\DoxyCodeLine{00186\ \textcolor{comment}{\#\ ========================================== }}
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{dataset_8py_source_l00091}{inputs}}, \doxymbox{\hyperlink{dataset_8py_source_l00035}{mode}}, and \doxymbox{\hyperlink{dataset_8py_source_l00092}{targets}}.
+
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a94d4c1bb45894416b37e6291c3fdd84a}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!\_\_len\_\_@{\_\_len\_\_}}
+\index{\_\_len\_\_@{\_\_len\_\_}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{\_\_len\_\_()}{\_\_len\_\_()}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a94d4c1bb45894416b37e6291c3fdd84a} 
+src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+\_\+\+\_\+len\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00106}{106}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{def\ }\_\_len\_\_(self): }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ self.length }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \  }
+
+\end{DoxyCode}
+
+
+References \doxymbox{\hyperlink{dataset_8py_source_l00104}{length}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!inputs@{inputs}}
+\index{inputs@{inputs}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{inputs}{inputs}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a1eab846f82fac59ba544f15fd132cff5} 
+src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+inputs = data\+\_\+split\+[\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4}{partition}}]\+\+[\textquotesingle{}inputs\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00091}{91}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{dataset_8py_source_l00109}{\+\_\+\+\_\+getitem\+\_\+\+\_\+()}}.
+
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_adfd47e984373ede56a3711188d1fb7e7}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!length@{length}}
+\index{length@{length}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{length}{length}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_adfd47e984373ede56a3711188d1fb7e7} 
+src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+length = len(self.\+inputs\+[any\+\_\+key]\+) if self.\+inputs else len(self.\+targets\+[any\+\_\+key]\+)}
+
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00104}{104}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{dataset_8py_source_l00106}{\+\_\+\+\_\+len\+\_\+\+\_\+()}}.
+
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a5e105d56d2907dcdac42db6516772e67}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!mode@{mode}}
+\index{mode@{mode}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_a5e105d56d2907dcdac42db6516772e67} 
+str src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+mode = mode}
+
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00035}{35}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{dataset_8py_source_l00109}{\+\_\+\+\_\+getitem\+\_\+\+\_\+()}}.
+
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!partition@{partition}}
+\index{partition@{partition}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{partition}{partition}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4} 
+src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+partition = partition}
+
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00036}{36}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_aaef94aee1bc7ad2bbbf8b843b8b2ef76}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!stats@{stats}}
+\index{stats@{stats}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{stats}{stats}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_aaef94aee1bc7ad2bbbf8b843b8b2ef76} 
+src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+stats}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ preprocessing.process\_magnet\_dataset(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ voltage,\ current,\ freq,\ props,\ dt,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ model\_type=mode,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ config\_path=config\_path,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ extra\_features=extra}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ )}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00080}{80}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!targets@{targets}}
+\index{targets@{targets}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{targets}{targets}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_ada89f591c31ce7592470e74ed08896b5} 
+src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+targets = data\+\_\+split\+[\doxymbox{\hyperlink{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_af0ece58b5e62a068cddd1f41527663b4}{partition}}]\+\+[\textquotesingle{}targets\textquotesingle{}]\+}
+
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00092}{92}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{dataset_8py_source_l00109}{\+\_\+\+\_\+getitem\+\_\+\+\_\+()}}.
+
+\Hypertarget{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_abb6bcdf797bb300b13ffaed914788764}\index{src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}!transform@{transform}}
+\index{transform@{transform}!src.data.dataset.MagNetDataset@{src.data.dataset.MagNetDataset}}
+\doxysubsubsection{\texorpdfstring{transform}{transform}}
+{\footnotesize\ttfamily \label{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset_abb6bcdf797bb300b13ffaed914788764} 
+src.\+data.\+dataset.\+Mag\+Net\+Dataset.\+transform = transform}
+
+
+
+Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00037}{37}} of file \doxymbox{\hyperlink{dataset_8py_source}{dataset.\+py}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+D:\+/\+\+MSc/\+\+Thesis/\+\+Mag\+Net/\+\+Home\+Made Mag\+Net/\+\+Scripts/\+src/\+data/\+\doxymbox{\hyperlink{dataset_8py}{dataset.\+py}}\end{DoxyCompactItemize}

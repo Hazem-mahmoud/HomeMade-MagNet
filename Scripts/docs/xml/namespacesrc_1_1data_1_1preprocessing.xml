@@ -1,0 +1,859 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacesrc_1_1data_1_1preprocessing" kind="namespace" language="Python">
+    <compoundname>src::data::preprocessing</compoundname>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a81201b1b9a13c8ef613c965fee0dc9c5" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>str src::data::preprocessing.MAT_FILE_NAME</definition>
+        <argsstring></argsstring>
+        <name>MAT_FILE_NAME</name>
+        <qualifiedname>src.data.preprocessing.MAT_FILE_NAME</qualifiedname>
+        <initializer>=  &apos;3C90_TX-25-15-10_Data1_Cycle.mat&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="300" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="300" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a7d9ce20603261ba0b7428718203dec34" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.current_dir</definition>
+        <argsstring></argsstring>
+        <name>current_dir</name>
+        <qualifiedname>src.data.preprocessing.current_dir</qualifiedname>
+        <initializer>=  os.path.dirname(os.path.abspath(__file__))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="302" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="302" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a6711af53a5bd2546d0e6beffffbf2f66" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.data_dir</definition>
+        <argsstring></argsstring>
+        <name>data_dir</name>
+        <qualifiedname>src.data.preprocessing.data_dir</qualifiedname>
+        <initializer>=  os.path.abspath(os.path.join(<ref refid="namespacesrc_1_1data_1_1preprocessing_1a7d9ce20603261ba0b7428718203dec34" kindref="member">current_dir</ref>, &apos;..&apos;, &apos;..&apos;, &apos;..&apos;))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="304" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="304" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a9aa710813cf9cccdd625eab33f3ca563" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.possible_path_1</definition>
+        <argsstring></argsstring>
+        <name>possible_path_1</name>
+        <qualifiedname>src.data.preprocessing.possible_path_1</qualifiedname>
+        <initializer>=  os.path.join(<ref refid="namespacesrc_1_1data_1_1preprocessing_1a6711af53a5bd2546d0e6beffffbf2f66" kindref="member">data_dir</ref>, <ref refid="namespacesrc_1_1data_1_1preprocessing_1a81201b1b9a13c8ef613c965fee0dc9c5" kindref="member">MAT_FILE_NAME</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="306" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="306" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1ab18c1f18f4a69d9fd6c3aec8ed65085c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.possible_path_2</definition>
+        <argsstring></argsstring>
+        <name>possible_path_2</name>
+        <qualifiedname>src.data.preprocessing.possible_path_2</qualifiedname>
+        <initializer>=  os.path.join(<ref refid="namespacesrc_1_1data_1_1preprocessing_1a6711af53a5bd2546d0e6beffffbf2f66" kindref="member">data_dir</ref>, &apos;Scripts&apos;, <ref refid="namespacesrc_1_1data_1_1preprocessing_1a81201b1b9a13c8ef613c965fee0dc9c5" kindref="member">MAT_FILE_NAME</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="307" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="307" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1ad38589b31bd58842a55947800239789b" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.mat_file_path</definition>
+        <argsstring></argsstring>
+        <name>mat_file_path</name>
+        <qualifiedname>src.data.preprocessing.mat_file_path</qualifiedname>
+        <initializer>=  os.path.abspath(os.path.join(<ref refid="namespacesrc_1_1data_1_1preprocessing_1a7d9ce20603261ba0b7428718203dec34" kindref="member">current_dir</ref>, &apos;..&apos;, &apos;..&apos;, <ref refid="namespacesrc_1_1data_1_1preprocessing_1a81201b1b9a13c8ef613c965fee0dc9c5" kindref="member">MAT_FILE_NAME</ref>))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="313" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="313" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.full_data</definition>
+        <argsstring></argsstring>
+        <name>full_data</name>
+        <qualifiedname>src.data.preprocessing.full_data</qualifiedname>
+        <initializer>=  load_full_dataset(<ref refid="namespacesrc_1_1data_1_1preprocessing_1ad38589b31bd58842a55947800239789b" kindref="member">mat_file_path</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="322" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="322" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a6b69238e4448b5ea0c2cbbf35979c47f" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.volts</definition>
+        <argsstring></argsstring>
+        <name>volts</name>
+        <qualifiedname>src.data.preprocessing.volts</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" kindref="member">full_data</ref>[&apos;voltage&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="325" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="325" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a8c26c60bf5709d787cd66fb117a302d9" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.amps</definition>
+        <argsstring></argsstring>
+        <name>amps</name>
+        <qualifiedname>src.data.preprocessing.amps</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" kindref="member">full_data</ref>[&apos;current&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="326" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="326" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1af26152f3250702a4b01931111019e0c5" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.freqs</definition>
+        <argsstring></argsstring>
+        <name>freqs</name>
+        <qualifiedname>src.data.preprocessing.freqs</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" kindref="member">full_data</ref>[&apos;freq&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="327" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="327" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a4076127d8e1f49c16b511e5a213cbd71" prot="public" static="no" mutable="no">
+        <type>dict</type>
+        <definition>dict src::data::preprocessing.props</definition>
+        <argsstring></argsstring>
+        <name>props</name>
+        <qualifiedname>src.data.preprocessing.props</qualifiedname>
+        <initializer>=  {
+            &apos;N_prim&apos;: <ref refid="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" kindref="member">full_data</ref>[&apos;meta&apos;][&apos;N_prim&apos;],
+            &apos;N_sec&apos;: <ref refid="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" kindref="member">full_data</ref>[&apos;meta&apos;][&apos;N_sec&apos;],
+            &apos;Ae&apos;: <ref refid="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" kindref="member">full_data</ref>[&apos;meta&apos;][&apos;Ae&apos;],
+            &apos;Le&apos;: <ref refid="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" kindref="member">full_data</ref>[&apos;meta&apos;][&apos;Le&apos;]
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="330" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1af75908b8c578c01dd6a9fad9a4ef3330" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.dt</definition>
+        <argsstring></argsstring>
+        <name>dt</name>
+        <qualifiedname>src.data.preprocessing.dt</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1ab4de301034659f0f7dbbf93acecc8f5a" kindref="member">full_data</ref>[&apos;meta&apos;][&apos;dt&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="336" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="336" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a8dd6c815fe028469eda1f8a4ea6ddb3f" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.config_path</definition>
+        <argsstring></argsstring>
+        <name>config_path</name>
+        <qualifiedname>src.data.preprocessing.config_path</qualifiedname>
+        <initializer>=  os.path.abspath(os.path.join(<ref refid="namespacesrc_1_1data_1_1preprocessing_1a7d9ce20603261ba0b7428718203dec34" kindref="member">current_dir</ref>, &apos;..&apos;, &apos;..&apos;, &apos;config&apos;, &apos;config.yaml&apos;))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="342" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="342" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1af6fd653a447aa3cbe0e79fb5e8f3e19c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.split_data</definition>
+        <argsstring></argsstring>
+        <name>split_data</name>
+        <qualifiedname>src.data.preprocessing.split_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="347" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="347" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1ae9905abbeb5ce720df53d10f8a2adad1" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.stats</definition>
+        <argsstring></argsstring>
+        <name>stats</name>
+        <qualifiedname>src.data.preprocessing.stats</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="347" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="347" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a546ef5b271eed66755f8f8595c686a4a" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.model_type</definition>
+        <argsstring></argsstring>
+        <name>model_type</name>
+        <qualifiedname>src.data.preprocessing.model_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="349" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="349" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a104b47e39b20fcf96ba506c04ab10323" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.inputs</definition>
+        <argsstring></argsstring>
+        <name>inputs</name>
+        <qualifiedname>src.data.preprocessing.inputs</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1af6fd653a447aa3cbe0e79fb5e8f3e19c" kindref="member">split_data</ref>[&apos;train&apos;][&apos;inputs&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="360" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="360" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a2f8ed3af33832e2be099a7ab6210c919" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.targets</definition>
+        <argsstring></argsstring>
+        <name>targets</name>
+        <qualifiedname>src.data.preprocessing.targets</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1af6fd653a447aa3cbe0e79fb5e8f3e19c" kindref="member">split_data</ref>[&apos;train&apos;][&apos;targets&apos;]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="361" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="361" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1af52e06ab0bf85fb402ea9e26bfa33375" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>str src::data::preprocessing.N_train</definition>
+        <argsstring></argsstring>
+        <name>N_train</name>
+        <qualifiedname>src.data.preprocessing.N_train</qualifiedname>
+        <initializer>=  len(<ref refid="namespacesrc_1_1data_1_1preprocessing_1a104b47e39b20fcf96ba506c04ab10323" kindref="member">inputs</ref>[&apos;B&apos;]) if &apos;B&apos; in <ref refid="namespacesrc_1_1data_1_1preprocessing_1a104b47e39b20fcf96ba506c04ab10323" kindref="member">inputs</ref> else len(list(inputs.values())[0])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="369" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="369" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1aac8cec33c147b1eb880b9d483ab4fa9a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int src::data::preprocessing.idx</definition>
+        <argsstring></argsstring>
+        <name>idx</name>
+        <qualifiedname>src.data.preprocessing.idx</qualifiedname>
+        <initializer>=  73680</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="370" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="370" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1ac80408f309e7a21705098af0d10522eb" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.raw_v</definition>
+        <argsstring></argsstring>
+        <name>raw_v</name>
+        <qualifiedname>src.data.preprocessing.raw_v</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1a6b69238e4448b5ea0c2cbbf35979c47f" kindref="member">volts</ref>[<ref refid="namespacesrc_1_1data_1_1preprocessing_1aac8cec33c147b1eb880b9d483ab4fa9a" kindref="member">idx</ref>]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="375" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="375" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a6ba3896be6c71afcf461900cac1b2a11" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.raw_i</definition>
+        <argsstring></argsstring>
+        <name>raw_i</name>
+        <qualifiedname>src.data.preprocessing.raw_i</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1a8c26c60bf5709d787cd66fb117a302d9" kindref="member">amps</ref>[<ref refid="namespacesrc_1_1data_1_1preprocessing_1aac8cec33c147b1eb880b9d483ab4fa9a" kindref="member">idx</ref>]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="376" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="376" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a713428b99171b0c68757c056b092e1ea" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>src::data::preprocessing.B_norm</definition>
+        <argsstring></argsstring>
+        <name>B_norm</name>
+        <qualifiedname>src.data.preprocessing.B_norm</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1a104b47e39b20fcf96ba506c04ab10323" kindref="member">inputs</ref>[&apos;B&apos;][<ref refid="namespacesrc_1_1data_1_1preprocessing_1aac8cec33c147b1eb880b9d483ab4fa9a" kindref="member">idx</ref>] if &apos;B&apos; in <ref refid="namespacesrc_1_1data_1_1preprocessing_1a104b47e39b20fcf96ba506c04ab10323" kindref="member">inputs</ref> else None</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="390" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="390" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a43df187d3d218aa26b00bf2aba674580" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>src::data::preprocessing.H_norm</definition>
+        <argsstring></argsstring>
+        <name>H_norm</name>
+        <qualifiedname>src.data.preprocessing.H_norm</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1a104b47e39b20fcf96ba506c04ab10323" kindref="member">inputs</ref>[&apos;H&apos;][<ref refid="namespacesrc_1_1data_1_1preprocessing_1aac8cec33c147b1eb880b9d483ab4fa9a" kindref="member">idx</ref>] if &apos;H&apos; in <ref refid="namespacesrc_1_1data_1_1preprocessing_1a104b47e39b20fcf96ba506c04ab10323" kindref="member">inputs</ref> else None</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="391" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="391" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a376e5f4d2451407dda1a6dac62031072" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.B_raw</definition>
+        <argsstring></argsstring>
+        <name>B_raw</name>
+        <qualifiedname>src.data.preprocessing.B_raw</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1a798bccc182e36d11e0da2dce4c6dc31f" kindref="member">calculate_flux_density</ref>(raw_v.reshape(1, -1), <ref refid="namespacesrc_1_1data_1_1preprocessing_1af75908b8c578c01dd6a9fad9a4ef3330" kindref="member">dt</ref>, <ref refid="namespacesrc_1_1data_1_1preprocessing_1a4076127d8e1f49c16b511e5a213cbd71" kindref="member">props</ref>[&apos;N_sec&apos;], <ref refid="namespacesrc_1_1data_1_1preprocessing_1a4076127d8e1f49c16b511e5a213cbd71" kindref="member">props</ref>[&apos;Ae&apos;]).flatten()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="394" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="394" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1ac0b8b7e99f204297407afffe99987a00" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.H_raw</definition>
+        <argsstring></argsstring>
+        <name>H_raw</name>
+        <qualifiedname>src.data.preprocessing.H_raw</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1a370875391e05027c2ae9687c9e770f23" kindref="member">calculate_magnetizing_force</ref>(raw_i.reshape(1, -1), <ref refid="namespacesrc_1_1data_1_1preprocessing_1a4076127d8e1f49c16b511e5a213cbd71" kindref="member">props</ref>[&apos;N_prim&apos;], <ref refid="namespacesrc_1_1data_1_1preprocessing_1a4076127d8e1f49c16b511e5a213cbd71" kindref="member">props</ref>[&apos;Le&apos;]).flatten()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="395" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="395" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a434d34720d1a32069f3b54b918165c66" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.fig</definition>
+        <argsstring></argsstring>
+        <name>fig</name>
+        <qualifiedname>src.data.preprocessing.fig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="397" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1ab4360bdf792033574f76644feaf8f60c" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.axes</definition>
+        <argsstring></argsstring>
+        <name>axes</name>
+        <qualifiedname>src.data.preprocessing.axes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="397" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1aa153a91dd0990baac28ae7f4f68c1688" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.figsize</definition>
+        <argsstring></argsstring>
+        <name>figsize</name>
+        <qualifiedname>src.data.preprocessing.figsize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="397" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a15f9ffafb007492caaa7769ed638117d" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.ax</definition>
+        <argsstring></argsstring>
+        <name>ax</name>
+        <qualifiedname>src.data.preprocessing.ax</qualifiedname>
+        <initializer>=  <ref refid="namespacesrc_1_1data_1_1preprocessing_1ab4360bdf792033574f76644feaf8f60c" kindref="member">axes</ref>[0, 0]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="400" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="400" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a9fe1578120f646f0edc1518f37bc5c58" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.label</definition>
+        <argsstring></argsstring>
+        <name>label</name>
+        <qualifiedname>src.data.preprocessing.label</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="401" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="401" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1af33201b48098689fcd6c06c9d3110501" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.color</definition>
+        <argsstring></argsstring>
+        <name>color</name>
+        <qualifiedname>src.data.preprocessing.color</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="401" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="401" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1aef56d257937ab4e2a7ae70154e50bb44" prot="public" static="no" mutable="no">
+        <type>str</type>
+        <definition>str src::data::preprocessing::txt</definition>
+        <argsstring></argsstring>
+        <name>txt</name>
+        <qualifiedname>src.data.preprocessing.txt</qualifiedname>
+        <initializer>=  f&quot;Mean: {<ref refid="namespacesrc_1_1data_1_1preprocessing_1ae9905abbeb5ce720df53d10f8a2adad1" kindref="member">stats</ref>[&apos;B&apos;].get(&apos;mean&apos;, 0):.2e}\nStd: {<ref refid="namespacesrc_1_1data_1_1preprocessing_1ae9905abbeb5ce720df53d10f8a2adad1" kindref="member">stats</ref>[&apos;B&apos;].get(&apos;std&apos;, 1):.2e}&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="412" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="412" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a6fb2610fc598ace2f756a8c3463a8ad0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.transform</definition>
+        <argsstring></argsstring>
+        <name>transform</name>
+        <qualifiedname>src.data.preprocessing.transform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="413" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="413" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a26bc645e7092a58d5c7896f23d9cafd1" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.transAxes</definition>
+        <argsstring></argsstring>
+        <name>transAxes</name>
+        <qualifiedname>src.data.preprocessing.transAxes</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="413" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="413" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a1874e79ffb69245ac9cc62eface5af43" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.verticalalignment</definition>
+        <argsstring></argsstring>
+        <name>verticalalignment</name>
+        <qualifiedname>src.data.preprocessing.verticalalignment</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="413" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="413" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1a32d2404c107da962891d072caab44cc9" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.bbox</definition>
+        <argsstring></argsstring>
+        <name>bbox</name>
+        <qualifiedname>src.data.preprocessing.bbox</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="413" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="413" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1ac7809073c7e93974cd000ea8e1b50566" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.ha</definition>
+        <argsstring></argsstring>
+        <name>ha</name>
+        <qualifiedname>src.data.preprocessing.ha</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="415" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="415" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacesrc_1_1data_1_1preprocessing_1ad7274507e2fa183880a7e9e36b8280e0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src::data::preprocessing.save_path</definition>
+        <argsstring></argsstring>
+        <name>save_path</name>
+        <qualifiedname>src.data.preprocessing.save_path</qualifiedname>
+        <initializer>=  os.path.join(<ref refid="namespacesrc_1_1data_1_1preprocessing_1a7d9ce20603261ba0b7428718203dec34" kindref="member">current_dir</ref>, &apos;normalization_check.png&apos;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="440" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="440" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1preprocessing_1a792ff15e476f8dcf1db97b3bb0fc0050" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.preprocessing.normalize_data</definition>
+        <argsstring>(data, method=&apos;standard&apos;, stats=None)</argsstring>
+        <name>normalize_data</name>
+        <qualifiedname>src.data.preprocessing.normalize_data</qualifiedname>
+        <param>
+          <type><ref refid="namespacesrc_1_1data" kindref="compound">data</ref></type>
+          <defname>data</defname>
+        </param>
+        <param>
+          <type>method</type>
+          <defname>method</defname>
+          <defval>&apos;standard&apos;</defval>
+        </param>
+        <param>
+          <type><ref refid="namespacesrc_1_1data_1_1preprocessing_1ae9905abbeb5ce720df53d10f8a2adad1" kindref="member">stats</ref></type>
+          <defname>stats</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Normalizes data using Global Scaling (Statistics computed over ALL data).
+
+Args:
+    data (np.array): Input data.
+    method (str): &apos;standard&apos; (Z-score), &apos;minmax&apos;, or &apos;none&apos;.
+    stats (dict, optional): Pre-computed stats.
+    
+Returns:
+    norm_data (np.array): Normalized data.
+    stats (dict): Statistics used.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="9" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="9" bodyend="64"/>
+        <referencedby refid="namespacesrc_1_1data_1_1preprocessing_1a84f013aee5c17ec66380873ecbf8445f" compoundref="preprocessing_8py" startline="65" endline="153">src.data.preprocessing.prepare_dataset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1preprocessing_1a84f013aee5c17ec66380873ecbf8445f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.preprocessing.prepare_dataset</definition>
+        <argsstring>(features, targets, test_ratio=0.2, norm_config=None)</argsstring>
+        <name>prepare_dataset</name>
+        <qualifiedname>src.data.preprocessing.prepare_dataset</qualifiedname>
+        <param>
+          <type>features</type>
+          <defname>features</defname>
+        </param>
+        <param>
+          <type><ref refid="namespacesrc_1_1data_1_1preprocessing_1a2f8ed3af33832e2be099a7ab6210c919" kindref="member">targets</ref></type>
+          <defname>targets</defname>
+        </param>
+        <param>
+          <type>test_ratio</type>
+          <defname>test_ratio</defname>
+          <defval>0.2</defval>
+        </param>
+        <param>
+          <type>norm_config</type>
+          <defname>norm_config</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Generic function to split and normalize ANY set of features and targets.
+
+Args:
+    features (dict): Dictionary mapping FeatureName to data array.
+    targets (dict): Dictionary mapping TargetName to data array.
+    test_ratio (float): Fraction of data to use for testing.
+    norm_config (dict): Dictionary mapping feature/target names to methods.
+                        e.g. {&apos;B&apos;: &apos;standard&apos;, &apos;Loss&apos;: &apos;log10&apos;}.
+                        Defaults to &apos;standard&apos; for features and &apos;none&apos; for targets if not specified.
+                        
+Returns:
+    data_split (dict): Contains &apos;train&apos; and &apos;test&apos; dictionaries.
+
+                       - `data_split[&apos;train&apos;][&apos;inputs&apos;][&apos;FeatureName&apos;]`
+                       - `data_split[&apos;train&apos;][&apos;targets&apos;][&apos;TargetName&apos;]`
+
+    stats (dict): The statistics used for normalization for each feature/target.
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="65" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="65" bodyend="153"/>
+        <references refid="namespacesrc_1_1data_1_1preprocessing_1a792ff15e476f8dcf1db97b3bb0fc0050" compoundref="preprocessing_8py" startline="9" endline="64">src.data.preprocessing.normalize_data</references>
+        <referencedby refid="namespacesrc_1_1data_1_1preprocessing_1a4bff0b7a0c8070a26001c86ed09d6b93" compoundref="preprocessing_8py" startline="198" endline="284">src.data.preprocessing.process_magnet_dataset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1preprocessing_1a798bccc182e36d11e0da2dce4c6dc31f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.preprocessing.calculate_flux_density</definition>
+        <argsstring>(voltage, sampling_time, secondary_turns, effective_area)</argsstring>
+        <name>calculate_flux_density</name>
+        <qualifiedname>src.data.preprocessing.calculate_flux_density</qualifiedname>
+        <param>
+          <type>voltage</type>
+          <defname>voltage</defname>
+        </param>
+        <param>
+          <type>sampling_time</type>
+          <defname>sampling_time</defname>
+        </param>
+        <param>
+          <type>secondary_turns</type>
+          <defname>secondary_turns</defname>
+        </param>
+        <param>
+          <type>effective_area</type>
+          <defname>effective_area</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Calculates B (Flux Density). </verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="154" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="154" bodyend="171"/>
+        <referencedby refid="namespacesrc_1_1data_1_1preprocessing_1a4bff0b7a0c8070a26001c86ed09d6b93" compoundref="preprocessing_8py" startline="198" endline="284">src.data.preprocessing.process_magnet_dataset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1preprocessing_1a370875391e05027c2ae9687c9e770f23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.preprocessing.calculate_magnetizing_force</definition>
+        <argsstring>(current, primary_turns, effective_length)</argsstring>
+        <name>calculate_magnetizing_force</name>
+        <qualifiedname>src.data.preprocessing.calculate_magnetizing_force</qualifiedname>
+        <param>
+          <type>current</type>
+          <defname>current</defname>
+        </param>
+        <param>
+          <type>primary_turns</type>
+          <defname>primary_turns</defname>
+        </param>
+        <param>
+          <type>effective_length</type>
+          <defname>effective_length</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Calculates H (Magnetizing Force). </verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="172" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="172" bodyend="176"/>
+        <referencedby refid="namespacesrc_1_1data_1_1preprocessing_1a4bff0b7a0c8070a26001c86ed09d6b93" compoundref="preprocessing_8py" startline="198" endline="284">src.data.preprocessing.process_magnet_dataset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1preprocessing_1a3b6e1a1fc4cd9191d7f6963330cd6b4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.preprocessing.calculate_volumetric_loss</definition>
+        <argsstring>(b_field, h_field, frequency)</argsstring>
+        <name>calculate_volumetric_loss</name>
+        <qualifiedname>src.data.preprocessing.calculate_volumetric_loss</qualifiedname>
+        <param>
+          <type>b_field</type>
+          <defname>b_field</defname>
+        </param>
+        <param>
+          <type>h_field</type>
+          <defname>h_field</defname>
+        </param>
+        <param>
+          <type>frequency</type>
+          <defname>frequency</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Calculates Volumetric Power Loss (Target). </verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="177" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="177" bodyend="192"/>
+        <referencedby refid="namespacesrc_1_1data_1_1preprocessing_1a4bff0b7a0c8070a26001c86ed09d6b93" compoundref="preprocessing_8py" startline="198" endline="284">src.data.preprocessing.process_magnet_dataset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1preprocessing_1a3cfbef7569b765019480a5000aca2586" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.preprocessing.load_config</definition>
+        <argsstring>(config_path)</argsstring>
+        <name>load_config</name>
+        <qualifiedname>src.data.preprocessing.load_config</qualifiedname>
+        <param>
+          <type><ref refid="namespacesrc_1_1data_1_1preprocessing_1a8dd6c815fe028469eda1f8a4ea6ddb3f" kindref="member">config_path</ref></type>
+          <defname>config_path</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="193" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="193" bodyend="197"/>
+        <referencedby refid="namespacesrc_1_1data_1_1preprocessing_1a4bff0b7a0c8070a26001c86ed09d6b93" compoundref="preprocessing_8py" startline="198" endline="284">src.data.preprocessing.process_magnet_dataset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacesrc_1_1data_1_1preprocessing_1a4bff0b7a0c8070a26001c86ed09d6b93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.data.preprocessing.process_magnet_dataset</definition>
+        <argsstring>(voltage, current, frequency, mag_props, dt, model_type=&apos;scaler&apos;, config_path=None, extra_features=None)</argsstring>
+        <name>process_magnet_dataset</name>
+        <qualifiedname>src.data.preprocessing.process_magnet_dataset</qualifiedname>
+        <param>
+          <type>voltage</type>
+          <defname>voltage</defname>
+        </param>
+        <param>
+          <type>current</type>
+          <defname>current</defname>
+        </param>
+        <param>
+          <type>frequency</type>
+          <defname>frequency</defname>
+        </param>
+        <param>
+          <type>mag_props</type>
+          <defname>mag_props</defname>
+        </param>
+        <param>
+          <type><ref refid="namespacesrc_1_1data_1_1preprocessing_1af75908b8c578c01dd6a9fad9a4ef3330" kindref="member">dt</ref></type>
+          <defname>dt</defname>
+        </param>
+        <param>
+          <type><ref refid="namespacesrc_1_1data_1_1preprocessing_1a546ef5b271eed66755f8f8595c686a4a" kindref="member">model_type</ref></type>
+          <defname>model_type</defname>
+          <defval>&apos;scaler&apos;</defval>
+        </param>
+        <param>
+          <type><ref refid="namespacesrc_1_1data_1_1preprocessing_1a8dd6c815fe028469eda1f8a4ea6ddb3f" kindref="member">config_path</ref></type>
+          <defname>config_path</defname>
+          <defval>None</defval>
+        </param>
+        <param>
+          <type>extra_features</type>
+          <defname>extra_features</defname>
+          <defval>None</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Orchestrates the physics calculation -&gt; Feature Assembly -&gt; Normalization.
+
+Args:
+    voltage, current: Raw arrays
+    frequency: Raw frequency array
+    mag_props, dt: Constants
+    model_type (str): Key in config[&apos;models&apos;] (e.g. &apos;scaler&apos;, &apos;cnn&apos;)
+    config_path (str, optional): Path to config.yaml.
+    extra_features (dict, optional): Additional raw features (e.g. {&apos;Temperature&apos;: ..., &apos;Hdc&apos;: ...})
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="198" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" bodystart="198" bodyend="284"/>
+        <references refid="namespacesrc_1_1data_1_1preprocessing_1a798bccc182e36d11e0da2dce4c6dc31f" compoundref="preprocessing_8py" startline="154" endline="171">src.data.preprocessing.calculate_flux_density</references>
+        <references refid="namespacesrc_1_1data_1_1preprocessing_1a370875391e05027c2ae9687c9e770f23" compoundref="preprocessing_8py" startline="172" endline="176">src.data.preprocessing.calculate_magnetizing_force</references>
+        <references refid="namespacesrc_1_1data_1_1preprocessing_1a3b6e1a1fc4cd9191d7f6963330cd6b4f" compoundref="preprocessing_8py" startline="177" endline="192">src.data.preprocessing.calculate_volumetric_loss</references>
+        <references refid="namespacesrc_1_1data_1_1preprocessing_1a3cfbef7569b765019480a5000aca2586" compoundref="preprocessing_8py" startline="193" endline="197">src.data.preprocessing.load_config</references>
+        <references refid="namespacesrc_1_1data_1_1preprocessing_1a84f013aee5c17ec66380873ecbf8445f" compoundref="preprocessing_8py" startline="65" endline="153">src.data.preprocessing.prepare_dataset</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Data Preprocessing Module.
+
+Generic processing for Time-Series FNN.
+</verbatim> </para>
+    </detaileddescription>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/preprocessing.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

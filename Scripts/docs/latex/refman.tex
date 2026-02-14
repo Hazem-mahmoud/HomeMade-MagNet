@@ -1,0 +1,325 @@
+  % Handle batch mode
+  % to overcome problems with too many open files
+  \let\mypdfximage\pdfximage\def\pdfximage{\immediate\mypdfximage}
+  \RequirePackage{iftex}
+  \ifLuaTeX
+    \directlua{pdf.setminorversion(7)}
+  \fi
+  \ifXeTeX
+    \special{pdf:minorversion 7}
+  \fi
+  \ifPDFTeX
+    \pdfminorversion=7
+  \fi
+  % Set document class depending on configuration
+  \documentclass[twoside]{book}
+  % Packages required by doxygen
+  \makeatletter
+  \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
+  % suppress package identification of infwarerr as it contains the word "warning"
+  \let\@@protected@wlog\protected@wlog
+  \def\protected@wlog#1{\wlog{package info suppressed}}
+  \RequirePackage{infwarerr}
+  \let\protected@wlog\@@protected@wlog
+  \makeatother
+  \IfFormatAtLeastTF{2016/01/01}{}{\usepackage{fixltx2e}} % for \textsubscript
+  \ifPDFTeX
+    \IfFormatAtLeastTF{2015/01/01}{\pdfsuppresswarningpagegroup=1}{}
+  \fi
+  \usepackage{doxygen}
+  \usepackage{graphicx}
+  \iftutex
+    \usepackage{fontspec}
+    \defaultfontfeatures{Ligatures={TeX}}
+    \usepackage{unicode-math}
+  \else
+    \usepackage[utf8]{inputenc}
+  \fi
+  \usepackage{makeidx}
+  \PassOptionsToPackage{warn}{textcomp}
+  \usepackage{textcomp}
+  \usepackage[nointegrals]{wasysym}
+  \usepackage{ifxetex}
+  % NLS support packages
+  % Define default fonts
+  % Font selection
+  \iftutex
+  \else
+    \usepackage[T1]{fontenc}
+  \fi
+  % set main and monospaced font
+  \usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\renewcommand{\familydefault}{\sfdefault}
+  \doxyallsectionsfont{%
+    \fontseries{bc}\selectfont%
+    \color{darkgray}%
+  }
+  \renewcommand{\DoxyLabelFont}{%
+    \fontseries{bc}\selectfont%
+    \color{darkgray}%
+  }
+  \newcommand{\+}{\discretionary{\mbox{\scriptsize$\hookleftarrow$}}{}{}}
+   % Arguments of doxygenemoji:
+   % 1) ':<text>:' form of the emoji, already LaTeX-escaped
+   % 2) file with the name of the emoji without the .png extension
+   % in case image exist use this otherwise use the ':<text>:' form
+   \newcommand{\doxygenemoji}[2]{%
+     \IfFileExists{./#2.png}{\raisebox{-0.1em}{\includegraphics[height=0.9em]{./#2.png}}}{#1}%
+   }
+  % Page & text layout
+  \usepackage{geometry}
+  \geometry{%
+    a4paper,%
+    top=2.5cm,%
+    bottom=2.5cm,%
+    left=2.5cm,%
+    right=2.5cm%
+  }
+  \usepackage{changepage}
+  % Allow a bit of overflow to go unnoticed by other means
+  \tolerance=750
+  \hfuzz=15pt
+  \hbadness=750
+  \setlength{\emergencystretch}{15pt}
+  \setlength{\parindent}{0cm}
+  \newcommand{\doxynormalparskip}{\setlength{\parskip}{3ex plus 2ex minus 2ex}}
+  \newcommand{\doxytocparskip}{\setlength{\parskip}{1ex plus 0ex minus 0ex}}
+  \doxynormalparskip
+  % Redefine paragraph/subparagraph environments, using sectsty fonts
+  \makeatletter
+  \renewcommand{\paragraph}{%
+    \@startsection{paragraph}{4}{0ex}{-1.0ex}{1.0ex}{%
+      \normalfont\normalsize\bfseries\SS@parafont%
+    }%
+  }
+  \renewcommand{\subparagraph}{%
+    \@startsection{subparagraph}{5}{0ex}{-1.0ex}{1.0ex}{%
+      \normalfont\normalsize\bfseries\SS@subparafont%
+    }%
+  }
+  \makeatother
+  \makeatletter
+  \newcommand\hrulefilll{\leavevmode\leaders\hrule\hskip 0pt plus 1filll\kern\z@}
+  \makeatother
+  % Headers & footers
+  \usepackage{fancyhdr}
+  \pagestyle{fancyplain}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \fancypagestyle{fancyplain}{
+    \fancyhf{}
+    \fancyhead[LE, RO]{\bfseries\thepage}
+    \fancyhead[LO]{\bfseries\rightmark}
+    \fancyhead[RE]{\bfseries\leftmark}
+    \fancyfoot[LO, RE]{\bfseries\scriptsize Generated on Sat Feb 7 2026 14:\+13:\+50 for Home\+Made Mag\+Net by Doxygen }
+  }
+  \fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[LO, RE]{\bfseries\scriptsize Generated on Sat Feb 7 2026 14:\+13:\+50 for Home\+Made Mag\+Net by Doxygen }
+    \renewcommand{\headrulewidth}{0pt}
+  }
+  \pagestyle{fancyplain}
+  \renewcommand{\chaptermark}[1]{%
+    \markboth{#1}{}%
+  }
+  \renewcommand{\sectionmark}[1]{%
+    \markright{\thesection\ #1}%
+  }
+  % ToC, LoF, LoT, bibliography, and index
+  % Indices & bibliography
+  \usepackage[numbers]{natbib}
+  \usepackage[titles]{tocloft}
+  \setcounter{tocdepth}{3}
+  \setcounter{secnumdepth}{5}
+  % creating indexes
+  \makeindex
+  \ifPDFTeX
+\usepackage{newunicodechar}
+  \makeatletter
+    \def\doxynewunicodechar#1#2{%
+    \@tempswafalse
+    \edef\nuc@tempa{\detokenize{#1}}%
+    \if\relax\nuc@tempa\relax
+      \nuc@emptyargerr
+    \else
+      \edef\@tempb{\expandafter\@car\nuc@tempa\@nil}%
+      \nuc@check
+      \if@tempswa
+        \@namedef{u8:\nuc@tempa}{#2}%
+      \fi
+    \fi
+  }
+  \makeatother
+  \doxynewunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \doxynewunicodechar{²}{${}^{2}$}% Superscript two
+  \doxynewunicodechar{³}{${}^{3}$}% Superscript three
+\fi
+  % Hyperlinks
+    % Hyperlinks (required, but should be loaded last)
+    \ifPDFTeX
+      \usepackage[pdftex,pagebackref=true]{hyperref}
+    \else
+      \ifXeTeX
+        \usepackage[xetex,pagebackref=true]{hyperref}
+      \else
+        \ifLuaTeX
+          \usepackage[luatex,pagebackref=true]{hyperref}
+        \else
+          \usepackage[ps2pdf,pagebackref=true]{hyperref}
+        \fi
+      \fi
+    \fi
+    \hypersetup{%
+      colorlinks=true,%
+      linkcolor=blue,%
+      citecolor=blue,%
+      unicode,%
+      pdftitle={Home\+Made Mag\+Net},%
+      pdfsubject={Deep Learning for Magnetics}%
+    }
+  % Custom commands used by the header
+  % Custom commands
+  \newcommand{\clearemptydoublepage}{%
+    \newpage{\pagestyle{empty}\cleardoublepage}%
+  }
+  % caption style definition
+  \usepackage{caption}
+  \captionsetup{labelsep=space,justification=centering,font={bf},singlelinecheck=off,skip=4pt,position=top}
+  % in page table of contents
+  \IfFormatAtLeastTF{2023/05/01}{\usepackage[deeplevels]{etoc}}{\usepackage[deeplevels]{etoc_doxygen}}
+  \etocsettocstyle{\doxytocparskip}{\doxynormalparskip}
+  \etocsetlevel{subsubsubsection}{4}
+  \etocsetlevel{subsubsubsubsection}{5}
+  \etocsetlevel{subsubsubsubsubsection}{6}
+  \etocsetlevel{subsubsubsubsubsubsection}{7}
+  \etocsetlevel{paragraph}{8}
+  \etocsetlevel{subparagraph}{9}
+  % prevent numbers overlap the titles in toc
+  \renewcommand{\numberline}[1]{#1~}
+% End of preamble, now comes the document contents
+%===== C O N T E N T S =====
+\begin{document}
+  \raggedbottom
+  % Titlepage & ToC
+    % To avoid duplicate page anchors due to reuse of same numbers for
+    % the index (be it as roman numbers)
+    \hypersetup{pageanchor=false,
+                bookmarksnumbered=true,
+                pdfencoding=unicode
+               }
+  \pagenumbering{alph}
+  \begin{titlepage}
+  \vspace*{7cm}
+  \begin{center}%
+  {\Large Home\+Made Mag\+Net}\\
+  [1ex]\large 0.\+1 \\
+  \vspace*{1cm}
+  {\large Generated on Sat Feb 7 2026 14:\+13:\+50 for Home\+Made Mag\+Net by Doxygen 1.16.1}\\
+    \vspace*{0.5cm}
+    {\small Sat Feb 7 2026 14:13:50}
+  \end{center}
+  \end{titlepage}
+  \clearemptydoublepage
+  \pagenumbering{roman}
+  \tableofcontents
+  \clearemptydoublepage
+  \pagenumbering{arabic}
+  % re-enable anchors again
+  \hypersetup{pageanchor=true}
+%--- Begin generated contents ---
+\chapter{Directory Hierarchy}
+\input{dirs}
+\chapter{Namespace Index}
+\input{namespaces}
+\chapter{Hierarchical Index}
+\input{hierarchy}
+\chapter{Class Index}
+\input{annotated}
+\chapter{File Index}
+\input{files}
+\chapter{Directory Documentation}
+\input{dir_c1be8d27e7f84178e95f152701110b19}
+\input{dir_bdeba5f06b852fec80257c0bf4c3c36e}
+\input{dir_68267d1309a1af8e8297ef4c3efbcdba}
+\input{dir_7c7ae07dd2a999045cb78bf7ff8dcbc7}
+\input{dir_313caf1132e152dd9b58bea13a4052ca}
+\chapter{Namespace Documentation}
+\input{namespacemain}
+\input{namespacesrc}
+\input{namespacesrc_1_1data}
+\input{namespacesrc_1_1data_1_1dataset}
+\input{namespacesrc_1_1data_1_1loader}
+\input{namespacesrc_1_1data_1_1preprocessing}
+\input{namespacesrc_1_1models}
+\input{namespacesrc_1_1models_1_1cnn__model}
+\input{namespacesrc_1_1models_1_1scaler__model}
+\input{namespacesrc_1_1models_1_1seq2seq__model}
+\input{namespacesrc_1_1models_1_1sequence__model}
+\input{namespacesrc_1_1models_1_1transformer__model}
+\input{namespacesrc_1_1training}
+\input{namespacesrc_1_1training_1_1evaluate}
+\input{namespacesrc_1_1training_1_1train}
+\input{namespacesrc_1_1training_1_1transfer}
+\input{namespacesrc_1_1utils}
+\input{namespacesrc_1_1utils_1_1visualization}
+\chapter{Class Documentation}
+\input{classsrc_1_1models_1_1cnn__model_1_1_biased___elu}
+\input{classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network}
+\input{classsrc_1_1models_1_1cnn__model_1_1_generalized_cosinus_unit}
+\input{classsrc_1_1models_1_1cnn__model_1_1_loss_predictor}
+\input{classsrc_1_1data_1_1dataset_1_1_mag_net_dataset}
+\input{classsrc_1_1models_1_1transformer__model_1_1_positional_encoding}
+\input{classsrc_1_1models_1_1scaler__model_1_1_scaler_network}
+\input{classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network}
+\input{classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network}
+\input{classsrc_1_1models_1_1cnn__model_1_1_sinus_act}
+\input{classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias}
+\input{classsrc_1_1models_1_1cnn__model_1_1_temporal_block}
+\input{classsrc_1_1models_1_1transformer__model_1_1_transformer_network}
+\chapter{File Documentation}
+\input{main_8py}
+\input{main_8py_source}
+\input{____init_____8py}
+\input{____init_____8py_source}
+\input{data_2____init_____8py}
+\input{data_2____init_____8py_source}
+\input{models_2____init_____8py}
+\input{models_2____init_____8py_source}
+\input{training_2____init_____8py}
+\input{training_2____init_____8py_source}
+\input{utils_2____init_____8py}
+\input{utils_2____init_____8py_source}
+\input{dataset_8py}
+\input{dataset_8py_source}
+\input{loader_8py}
+\input{loader_8py_source}
+\input{preprocessing_8py}
+\input{preprocessing_8py_source}
+\input{cnn__model_8py}
+\input{cnn__model_8py_source}
+\input{scaler__model_8py}
+\input{scaler__model_8py_source}
+\input{seq2seq__model_8py}
+\input{seq2seq__model_8py_source}
+\input{sequence__model_8py}
+\input{sequence__model_8py_source}
+\input{transformer__model_8py}
+\input{transformer__model_8py_source}
+\input{evaluate_8py}
+\input{evaluate_8py_source}
+\input{train_8py}
+\input{train_8py_source}
+\input{transfer_8py}
+\input{transfer_8py_source}
+\input{visualization_8py}
+\input{visualization_8py_source}
+%--- End generated contents ---
+% Index
+  \backmatter
+  \newpage
+  \phantomsection
+  \clearemptydoublepage
+  \addcontentsline{toc}{chapter}{\indexname}
+  \printindex
+% Required for some languages (in combination with latexdocumentpre from the header)
+\end{document}

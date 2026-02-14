@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1cnn__model_1_1_biased___elu" kind="class" language="Python" prot="public">
+    <compoundname>src::models::cnn_model::Biased_Elu</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1ab9d159a6db4ae809a48e6c69fdf6fd96" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.cnn_model.Biased_Elu::elu</definition>
+        <argsstring></argsstring>
+        <name>elu</name>
+        <qualifiedname>src.models.cnn_model.Biased_Elu.elu</qualifiedname>
+        <initializer>=  nn.ELU()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="18" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="18" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1aa543cb9bfdbd3c5ec2e9df76430b8d10" compoundref="cnn__model_8py" startline="20" endline="22">src.models.cnn_model.Biased_Elu.forward</referencedby>
+        <referencedby refid="classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network_1aee08c0acde1f95cae4c67c7b1fcbf4ac" compoundref="sequence__model_8py" startline="47" endline="82">src.models.sequence_model.SequenceToScalerNetwork.forward</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1a374f4fc125b4dafe5ef78939225b2f88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.Biased_Elu.__init__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.cnn_model.Biased_Elu.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="16" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="16" bodyend="19"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1a374f4fc125b4dafe5ef78939225b2f88" compoundref="cnn__model_8py" startline="16" endline="19">src.models.cnn_model.Biased_Elu.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1a374f4fc125b4dafe5ef78939225b2f88" compoundref="cnn__model_8py" startline="16" endline="19">src.models.cnn_model.Biased_Elu.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1aa543cb9bfdbd3c5ec2e9df76430b8d10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.cnn_model.Biased_Elu.forward</definition>
+        <argsstring>(self, x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.cnn_model.Biased_Elu.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>x</type>
+          <defname>x</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="20" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="20" bodyend="22"/>
+        <references refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1ab9d159a6db4ae809a48e6c69fdf6fd96" compoundref="cnn__model_8py" startline="18">src.models.cnn_model.Biased_Elu.elu</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn::Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.Biased_Elu</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn::Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.cnn_model.Biased_Elu</label>
+        <link refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" line="15" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/cnn_model.py" bodystart="15" bodyend="22"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1a374f4fc125b4dafe5ef78939225b2f88" prot="public" virt="non-virtual"><scope>src::models::cnn_model::Biased_Elu</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1ab9d159a6db4ae809a48e6c69fdf6fd96" prot="public" virt="non-virtual"><scope>src::models::cnn_model::Biased_Elu</scope><name>elu</name></member>
+      <member refid="classsrc_1_1models_1_1cnn__model_1_1_biased___elu_1aa543cb9bfdbd3c5ec2e9df76430b8d10" prot="public" virt="non-virtual"><scope>src::models::cnn_model::Biased_Elu</scope><name>forward</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

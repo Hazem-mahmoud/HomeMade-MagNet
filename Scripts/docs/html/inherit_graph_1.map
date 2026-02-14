@@ -1,0 +1,27 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,332,87,359"/>
+<area shape="rect" id="Node000001" href="$classsrc_1_1models_1_1cnn__model_1_1_biased___elu.html" title=" " alt="" coords="141,5,364,32"/>
+<area shape="poly" id="edge2_Node000000_Node000001" title=" " alt="" coords="44,316,47,258,59,185,70,146,85,108,106,73,133,42,152,30,149,35,136,46,111,76,90,110,75,147,64,186,52,259,49,317"/>
+<area shape="rect" id="Node000002" href="$classsrc_1_1models_1_1cnn__model_1_1_c_n_n_network.html" title=" " alt="" coords="135,56,370,83"/>
+<area shape="poly" id="edge3_Node000000_Node000002" title=" " alt="" coords="46,316,52,267,66,207,92,145,110,117,133,93,153,81,150,85,136,97,114,120,96,148,71,208,57,268,51,317"/>
+<area shape="rect" id="Node000003" href="$classsrc_1_1models_1_1cnn__model_1_1_generalized_cosinus_unit.html" title=" " alt="" coords="140,107,365,149"/>
+<area shape="poly" id="edge4_Node000000_Node000003" title=" " alt="" coords="51,316,61,280,77,238,101,196,133,159,153,148,150,152,136,163,105,199,82,240,66,282,56,317"/>
+<area shape="rect" id="Node000004" href="$classsrc_1_1models_1_1cnn__model_1_1_loss_predictor.html" title=" " alt="" coords="160,173,344,216"/>
+<area shape="poly" id="edge5_Node000000_Node000004" title=" " alt="" coords="58,317,89,270,109,246,133,226,162,212,158,216,136,230,113,250,93,273,63,319"/>
+<area shape="rect" id="Node000005" href="$classsrc_1_1models_1_1cnn__model_1_1_sinus_act.html" title=" " alt="" coords="148,240,357,267"/>
+<area shape="poly" id="edge6_Node000000_Node000005" title=" " alt="" coords="71,320,100,296,134,276,168,265,165,269,136,281,103,301,75,323"/>
+<area shape="rect" id="Node000006" href="$classsrc_1_1models_1_1cnn__model_1_1_t_c_n_with_scalars_as_bias.html" title=" " alt="" coords="147,291,358,333"/>
+<area shape="poly" id="edge7_Node000000_Node000006" title=" " alt="" coords="100,334,148,327,144,331,104,339"/>
+<area shape="rect" id="Node000007" href="$classsrc_1_1models_1_1cnn__model_1_1_temporal_block.html" title=" " alt="" coords="148,357,357,400"/>
+<area shape="poly" id="edge8_Node000000_Node000007" title=" " alt="" coords="101,352,149,360,145,363,103,357"/>
+<area shape="rect" id="Node000008" href="$classsrc_1_1models_1_1scaler__model_1_1_scaler_network.html" title=" " alt="" coords="167,424,338,467"/>
+<area shape="poly" id="edge9_Node000000_Node000008" title=" " alt="" coords="72,366,103,389,136,410,169,424,165,426,133,414,100,394,74,372"/>
+<area shape="rect" id="Node000009" href="$classsrc_1_1models_1_1seq2seq__model_1_1_seq2_seq_network.html" title=" " alt="" coords="168,491,337,533"/>
+<area shape="poly" id="edge10_Node000000_Node000009" title=" " alt="" coords="58,370,90,426,111,453,136,476,170,495,165,497,133,481,107,457,85,428,59,376"/>
+<area shape="rect" id="Node000010" href="$classsrc_1_1models_1_1sequence__model_1_1_sequence_to_scaler_network.html" title=" " alt="" coords="140,557,365,600"/>
+<area shape="poly" id="edge11_Node000000_Node000010" title=" " alt="" coords="52,371,64,412,79,458,103,504,136,543,154,556,149,558,133,547,99,507,74,460,59,413,52,377"/>
+<area shape="rect" id="Node000011" href="$classsrc_1_1models_1_1transformer__model_1_1_positional_encoding.html" title=" " alt="" coords="163,624,342,667"/>
+<area shape="poly" id="edge12_Node000000_Node000011" title=" " alt="" coords="48,372,56,425,70,488,96,554,114,584,136,610,165,630,160,631,133,614,110,587,91,556,65,490,51,426,48,377"/>
+<area shape="rect" id="Node000012" href="$classsrc_1_1models_1_1transformer__model_1_1_transformer_network.html" title=" " alt="" coords="159,691,346,733"/>
+<area shape="poly" id="edge13_Node000000_Node000012" title=" " alt="" coords="51,372,65,446,83,537,108,622,122,655,137,677,161,696,156,696,133,681,117,657,102,624,78,538,60,447,51,377"/>
+</map>

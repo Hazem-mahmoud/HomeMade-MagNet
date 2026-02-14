@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding" kind="class" language="Python" prot="public">
+    <compoundname>src::models::transformer_model::PositionalEncoding</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">nn.Module</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1adc9404435d2aff36572de4adcfbbb759" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>src.models.transformer_model.PositionalEncoding::dropout</definition>
+        <argsstring></argsstring>
+        <name>dropout</name>
+        <qualifiedname>src.models.transformer_model.PositionalEncoding.dropout</qualifiedname>
+        <initializer>=  nn.Dropout(p=dropout)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="12" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="12" bodyend="-1"/>
+        <referencedby refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a51a0de3ad593a089d39da0939ec33a22" compoundref="transformer__model_8py" startline="22" endline="29">src.models.transformer_model.PositionalEncoding.forward</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a9bec562f3cfbfb7ec59d2faf8b9fd450" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.transformer_model.PositionalEncoding.__init__</definition>
+        <argsstring>(self, int d_model, float dropout=0.1, int max_len=5000)</argsstring>
+        <name>__init__</name>
+        <qualifiedname>src.models.transformer_model.PositionalEncoding.__init__</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>d_model</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>dropout</declname>
+          <defval>0.1</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>max_len</declname>
+          <defval>5000</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="10" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="10" bodyend="21"/>
+        <references refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a9bec562f3cfbfb7ec59d2faf8b9fd450" compoundref="transformer__model_8py" startline="10" endline="21">src.models.transformer_model.PositionalEncoding.__init__</references>
+        <referencedby refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a9bec562f3cfbfb7ec59d2faf8b9fd450" compoundref="transformer__model_8py" startline="10" endline="21">src.models.transformer_model.PositionalEncoding.__init__</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a51a0de3ad593a089d39da0939ec33a22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>src.models.transformer_model.PositionalEncoding.forward</definition>
+        <argsstring>(self, x)</argsstring>
+        <name>forward</name>
+        <qualifiedname>src.models.transformer_model.PositionalEncoding.forward</qualifiedname>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>x</type>
+          <defname>x</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Args:
+    x: Tensor, shape [batch_size, seq_len, embedding_dim]
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="22" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="22" bodyend="29"/>
+        <references refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1adc9404435d2aff36572de4adcfbbb759" compoundref="transformer__model_8py" startline="12">src.models.transformer_model.PositionalEncoding.dropout</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>Injects some information about the relative or absolute position of the tokens in the sequence.
+</verbatim> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.transformer_model.PositionalEncoding</label>
+        <link refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>nn.Module</label>
+      </node>
+      <node id="1">
+        <label>src.models.transformer_model.PositionalEncoding</label>
+        <link refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" line="6" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/models/transformer_model.py" bodystart="6" bodyend="29"/>
+    <listofallmembers>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a9bec562f3cfbfb7ec59d2faf8b9fd450" prot="public" virt="non-virtual"><scope>src::models::transformer_model::PositionalEncoding</scope><name>__init__</name></member>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1adc9404435d2aff36572de4adcfbbb759" prot="public" virt="non-virtual"><scope>src::models::transformer_model::PositionalEncoding</scope><name>dropout</name></member>
+      <member refid="classsrc_1_1models_1_1transformer__model_1_1_positional_encoding_1a51a0de3ad593a089d39da0939ec33a22" prot="public" virt="non-virtual"><scope>src::models::transformer_model::PositionalEncoding</scope><name>forward</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
