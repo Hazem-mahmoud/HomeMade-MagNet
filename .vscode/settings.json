@@ -1,4 +1,19 @@
 {
     "files.autoSave": "afterDelay",
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
+    "python.analysis.exclude": [
+        "**/Scripts/docs/html/**",
+        "**/Scripts/docs/latex/**",
+        "**/Scripts/docs/xml/**"
+    ],
+    "files.exclude": {
+        "**/Scripts/docs/html": true,
+        "**/Scripts/docs/latex": true,
+        "**/Scripts/docs/xml": true
+    },
+    "files.watcherExclude": {
+        "**/Scripts/docs/html/**": true,
+        "**/Scripts/docs/latex/**": true,
+        "**/Scripts/docs/xml/**": true
+    }
 }
