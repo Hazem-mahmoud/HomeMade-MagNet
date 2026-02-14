@@ -200,7 +200,7 @@
     <member refid="namespacesrc_1_1training_1_1evaluate_1a894a78b4bcd025081ccbfa5616c1401a" kind="function"><name>evaluate_model</name></member>
   </compound>
   <compound refid="namespacesrc_1_1training_1_1train" kind="namespace"><name>src::training::train</name>
-    <member refid="namespacesrc_1_1training_1_1train_1a8ae500222173487c67172ff4a32e7c15" kind="function"><name>train_model</name></member>
+    <member refid="namespacesrc_1_1training_1_1train_1aded776a829389e7ec1ad48b6a77bfe4f" kind="function"><name>train_model</name></member>
   </compound>
   <compound refid="namespacesrc_1_1training_1_1transfer" kind="namespace"><name>src::training::transfer</name>
     <member refid="namespacesrc_1_1training_1_1transfer_1ae8ee342298921bd5f541ad9e468f5804" kind="function"><name>load_pretrained</name></member>

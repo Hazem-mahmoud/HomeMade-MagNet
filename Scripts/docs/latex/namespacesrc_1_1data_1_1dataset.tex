@@ -50,38 +50,40 @@ Definition at line \doxymbox{\hyperlink{dataset_8py_source_l00187}{187}} of file
 \DoxyCodeLine{00190\ \textcolor{stringliteral}{\ \ \ \ "{}"{}"{}} }
 \DoxyCodeLine{00191\ \ \ \ \ \textcolor{keyword}{import}\ os }
 \DoxyCodeLine{00192\ \ \ \ \ print(\textcolor{stringliteral}{"{}Running\ Dataset\ Validation\ Test..."{}}) }
-\DoxyCodeLine{00193\ \ \ \ \  }
+\DoxyCodeLine{00193\  }
 \DoxyCodeLine{00194\ \ \ \ \ current\_dir\ =\ os.path.dirname(os.path.abspath(\_\_file\_\_)) }
-\DoxyCodeLine{00195\ \ \ \ \ project\_root\ =\ os.path.abspath(os.path.join(current\_dir,\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'}))\  }
-\DoxyCodeLine{00196\ \ \ \ \ test\_file\ =\ os.path.join(project\_root,\ \textcolor{stringliteral}{'3C90\_TX-\/25-\/15-\/10\_Data1\_Cycle.mat'}) }
+\DoxyCodeLine{00195\ \ \ \ \ project\_root\ =\ os.path.abspath(os.path.join(current\_dir,\ \textcolor{stringliteral}{'..'},\ \textcolor{stringliteral}{'..'})) }
+\DoxyCodeLine{00196\ \ \ \ \ test\_file\ =\ \textcolor{stringliteral}{"{}/content/drive/MyDrive/MagNet\_DataSet/3C90\_TX-\/25-\/15-\/10\_Data1\_Cycle.mat"{}} }
 \DoxyCodeLine{00197\  }
-\DoxyCodeLine{00198\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loading\ \{test\_file\}..."{}}) }
-\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordflow}{try}: }
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Train\ Split }}
-\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ Testing\ 'train'\ partition\ (mode='scaler')\ -\/-\/-\/"{}}) }
-\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ ds\_train\ =\ MagNetDataset(test\_file,\ mode=\textcolor{stringliteral}{'scaler'},\ partition=\textcolor{stringliteral}{'train'}) }
-\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Dataset\ Loaded\ Successfully."{}}) }
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Num\ Samples:\ \{len(ds\_train)\}"{}}) }
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Item }}
-\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ x,\ y\ =\ ds\_train[0] }
-\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Sample[0]\ Input\ Shape:\ \{x.shape\},\ Target\ Shape:\ \{y.shape\}"{}}) }
-\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Test\ Split }}
-\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ Testing\ 'test'\ partition\ (mode='cnn')\ -\/-\/-\/"{}}) }
-\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ ds\_test\ =\ MagNetDataset(test\_file,\ mode=\textcolor{stringliteral}{'cnn'},\ partition=\textcolor{stringliteral}{'test'}) }
-\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Num\ Samples:\ \{len(ds\_test)\}"{}}) }
-\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Item }}
-\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ x,\ y\ =\ ds\_test[0] }
-\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Sample[0]\ Input\ Shape:\ \{x.shape\},\ Target\ Shape:\ \{y.shape\}"{}}) }
-\DoxyCodeLine{00218\  }
-\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
-\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Dataset\ validation\ failed:\ \{e\}"{}}) }
-\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{keyword}{import}\ traceback }
-\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ traceback.print\_exc() }
-\DoxyCodeLine{00224\  }
+\DoxyCodeLine{00198\  }
+\DoxyCodeLine{00199\ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loading\ \{test\_file\}..."{}}) }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Train\ Split }}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ Testing\ 'train'\ partition\ (mode='scaler')\ -\/-\/-\/"{}}) }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ ds\_train\ =\ MagNetDataset(test\_file,\ mode=\textcolor{stringliteral}{'scaler'},\ partition=\textcolor{stringliteral}{'train'}) }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Dataset\ Loaded\ Successfully."{}}) }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Num\ Samples:\ \{len(ds\_train)\}"{}}) }
+\DoxyCodeLine{00206\  }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Item }}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ x,\ y\ =\ ds\_train[0] }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Sample[0]\ Input\ Shape:\ \{x.shape\},\ Target\ Shape:\ \{y.shape\}"{}}) }
+\DoxyCodeLine{00210\  }
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Test\ Split }}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}\(\backslash\)n-\/-\/-\/\ Testing\ 'test'\ partition\ (mode='cnn')\ -\/-\/-\/"{}}) }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ ds\_test\ =\ MagNetDataset(test\_file,\ mode=\textcolor{stringliteral}{'cnn'},\ partition=\textcolor{stringliteral}{'test'}) }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}\ -\/\ Num\ Samples:\ \{len(ds\_test)\}"{}}) }
+\DoxyCodeLine{00215\  }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Test\ Item }}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ b,\ scalars,\ y\ =\ ds\_test[0] }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ print(b.shape,\ scalars.shape,\ y.shape) }
+\DoxyCodeLine{00219\  }
+\DoxyCodeLine{00220\  }
+\DoxyCodeLine{00221\  }
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Dataset\ validation\ failed:\ \{e\}"{}}) }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keyword}{import}\ traceback }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ traceback.print\_exc() }
+\DoxyCodeLine{00226\  }
 
 \end{DoxyCode}
 
@@ -92,16 +94,14 @@ References \doxymbox{\hyperlink{dataset_8py_source_l00187}{test\+\_\+dataset()}}
 
 Referenced by \doxymbox{\hyperlink{dataset_8py_source_l00187}{test\+\_\+dataset()}}.
 
-Here is the call graph for this function:\+
-\nopagebreak
+Here is the call graph for this function:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=186pt]{namespacesrc_1_1data_1_1dataset_a762a3ddc6045817f8eddb4b2c8d44bd4_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function:\+
-\nopagebreak
+Here is the caller graph for this function:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

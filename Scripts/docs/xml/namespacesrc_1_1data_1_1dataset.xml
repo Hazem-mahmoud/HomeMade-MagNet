@@ -18,9 +18,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="187" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="187" bodyend="224"/>
-        <references refid="namespacesrc_1_1data_1_1dataset_1a762a3ddc6045817f8eddb4b2c8d44bd4" compoundref="dataset_8py" startline="187" endline="224">src.data.dataset.test_dataset</references>
-        <referencedby refid="namespacesrc_1_1data_1_1dataset_1a762a3ddc6045817f8eddb4b2c8d44bd4" compoundref="dataset_8py" startline="187" endline="224">src.data.dataset.test_dataset</referencedby>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" line="187" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/src/data/dataset.py" bodystart="187" bodyend="226"/>
+        <references refid="namespacesrc_1_1data_1_1dataset_1a762a3ddc6045817f8eddb4b2c8d44bd4" compoundref="dataset_8py" startline="187" endline="226">src.data.dataset.test_dataset</references>
+        <referencedby refid="namespacesrc_1_1data_1_1dataset_1a762a3ddc6045817f8eddb4b2c8d44bd4" compoundref="dataset_8py" startline="187" endline="226">src.data.dataset.test_dataset</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

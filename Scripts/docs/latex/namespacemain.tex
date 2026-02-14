@@ -41,8 +41,7 @@ Definition at line \doxymbox{\hyperlink{main_8py_source_l00022}{22}} of file \do
 
 Referenced by \doxymbox{\hyperlink{main_8py_source_l00026}{main()}}.
 
-Here is the caller graph for this function:\+
-\nopagebreak
+Here is the caller graph for this function:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -119,7 +118,7 @@ Definition at line \doxymbox{\hyperlink{main_8py_source_l00026}{26}} of file \do
 \DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Output:\ H\ (1) }}
 \DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ model\_conf\ =\ config[\textcolor{stringliteral}{'models'}][\textcolor{stringliteral}{'seq2seq'}] }
 \DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ model\ =\ Seq2SeqNetwork(input\_dim=1,\ hidden\_dim=model\_conf[\textcolor{stringliteral}{'encoder\_dim'}],\ output\_dim=1) }
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ model\_name\ ==\ \textcolor{stringliteral}{'cnn'}:\ \ \ \  }
 \DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input:\ B\ (1) }}
 \DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Output:\ Log\ Loss\ (1)\ (Scalar) }}
 \DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ model\_conf\ =\ config[\textcolor{stringliteral}{'models'}][\textcolor{stringliteral}{'cnn'}] }
@@ -138,7 +137,7 @@ Definition at line \doxymbox{\hyperlink{main_8py_source_l00026}{26}} of file \do
 \DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Passing\ Stats\ to\ CNN:\ \{freq\_stats\}"{}}) }
 \DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \  }
 \DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ model\ =\ CNNNetwork(input\_dim=1,\ stats=freq\_stats) }
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ model\_name\ ==\ \textcolor{stringliteral}{'transformer'}: }
 \DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input:\ B\ (1) }}
 \DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Output:\ Log\ Loss\ (1)\ (Scalar) }}
 \DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ model\_conf\ =\ config[\textcolor{stringliteral}{'models'}][\textcolor{stringliteral}{'transformer'}] }
@@ -154,101 +153,104 @@ Definition at line \doxymbox{\hyperlink{main_8py_source_l00026}{26}} of file \do
 \DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_heads=model\_conf[\textcolor{stringliteral}{'nhead'}], }
 \DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dropout\_encoder=model\_conf[\textcolor{stringliteral}{'dropout'}] }
 \DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ ) }
-\DoxyCodeLine{00119\  }
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 3.\ Train }}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Starting\ training..."{}}) }
-\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Subset\ config\ for\ training }}
-\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ train\_config\ =\ config[\textcolor{stringliteral}{'training'}] }
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ train\_config[\textcolor{stringliteral}{'save\_dir'}]\ =\ os.path.join(train\_config[\textcolor{stringliteral}{'save\_dir'}],\ model\_name) }
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(train\_config[\textcolor{stringliteral}{'save\_dir'}]): }
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ os.makedirs(train\_config[\textcolor{stringliteral}{'save\_dir'}]) }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}: }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Unknown\ model\ name"{}}) }
+\DoxyCodeLine{00121\  }
+\DoxyCodeLine{00122\  }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 3.\ Train }}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Starting\ training..."{}}) }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Subset\ config\ for\ training }}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ train\_config\ =\ config[\textcolor{stringliteral}{'training'}] }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ train\_config[\textcolor{stringliteral}{'save\_dir'}]\ =\ os.path.join(train\_config[\textcolor{stringliteral}{'save\_dir'}],\ model\_name) }
 \DoxyCodeLine{00128\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ model\ =\ model.to(device) }
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ trained\_model,\ history\ =\ train\_model(model,\ train\_loader,\ val\_loader,\ train\_config,\ device) }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ os.path.exists(train\_config[\textcolor{stringliteral}{'save\_dir'}]): }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ os.makedirs(train\_config[\textcolor{stringliteral}{'save\_dir'}]) }
 \DoxyCodeLine{00131\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 4.\ Evaluate\ \&\ Visualize }}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Evaluating..."{}}) }
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ metrics,\ preds,\ targets\ =\ evaluate\_model(trained\_model,\ val\_loader,\ device) }
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Validation\ Metrics:\ \{metrics\}"{}}) }
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Prepare\ plots\ directory }}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ plots\_dir\ =\ os.path.join(train\_config[\textcolor{stringliteral}{'save\_dir'}],\ \textcolor{stringliteral}{'plots'}) }
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ os.makedirs(plots\_dir,\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ model\ =\ model.to(device) }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ trained\_model,\ history\ =\ train\_model(model,\ train\_loader,\ val\_loader,model\_name\ ,config,\ device) }
+\DoxyCodeLine{00134\  }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ 4.\ Evaluate\ \&\ Visualize }}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ print(\textcolor{stringliteral}{"{}Evaluating..."{}}) }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ metrics,\ preds,\ targets\ =\ evaluate\_model(trained\_model,\ val\_loader,\ device) }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Validation\ Metrics:\ \{metrics\}"{}}) }
 \DoxyCodeLine{00140\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Plot\ Loss }}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ loss\_plot\_path\ =\ os.path.join(plots\_dir,\ \textcolor{stringliteral}{'loss\_curve.png'}) }
-\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ plot\_loss\_curve(history,\ title=f\textcolor{stringliteral}{'\{model\_name\}\ Training\ Loss'},\ save\_path=loss\_plot\_path) }
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loss\ plot\ saved\ to\ \{loss\_plot\_path\}"{}}) }
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Plot\ Predictions }}
-\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ model\_name\ \textcolor{keywordflow}{in}\ [\textcolor{stringliteral}{'scaler'},\ \textcolor{stringliteral}{'sequence'},\ \textcolor{stringliteral}{'cnn'},\ \textcolor{stringliteral}{'transformer'}]: }
-\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ pred\_plot\_path\ =\ os.path.join(plots\_dir,\ \textcolor{stringliteral}{'prediction\_scatter.png'}) }
-\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ plot\_prediction\_scatter(preds,\ targets,\ title=f\textcolor{stringliteral}{'\{model\_name\}:\ Pred\ vs\ Actual\ Loss'},\ save\_path=pred\_plot\_path) }
-\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Prediction\ plot\ saved\ to\ \{pred\_plot\_path\}"{}}) }
-\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ model\_name\ ==\ \textcolor{stringliteral}{'seq2seq'}: }
-\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Visualizing\ B-\/H\ loops }}
-\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ have\ sequences.\ Let's\ plot\ the\ first\ sample\ in\ the\ validation\ set. }}
-\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ preds:\ (N,\ Seq,\ 1),\ targets:\ (N,\ Seq,\ 1) }}
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input\ to\ seq2seq\ was\ B\ (dataset\ mode='seq2seq':\ x=B,\ y=H) }}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Note:\ We\ need\ the\ B\ field\ (Input)\ to\ plot\ B-\/H\ loop,\ but\ evaluate\_model\ returns\ metrics,\ preds,\ targets. }}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ It\ doesn't\ return\ inputs. }}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ For\ B-\/H\ check,\ we\ need\ B\ and\ H.\  }}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ In\ seq2seq\ mode:\ Target\ is\ H.\ Pred\ is\ H.\ Input\ is\ B. }}
-\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ can't\ recover\ B\ easily\ from\ just\ preds/targets\ unless\ we\ modify\ evaluate\ or\ re-\/fetch. }}
-\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Quick\ fix:\ Let's\ fetch\ one\ batch\ from\ val\_loader\ to\ get\ B\ and\ H }}
-\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ And\ assume\ shuffle=False\ for\ val\_loader\ so\ it\ matches?\  }}
-\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ evaluate\_model\ iterates\ over\ whole\ loader. }}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Prepare\ plots\ directory }}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ plots\_dir\ =\ os.path.join(train\_config[\textcolor{stringliteral}{'save\_dir'}],\ \textcolor{stringliteral}{'plots'}) }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ os.makedirs(plots\_dir,\ exist\_ok=\textcolor{keyword}{True}) }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Plot\ Loss }}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ loss\_plot\_path\ =\ os.path.join(plots\_dir,\ \textcolor{stringliteral}{'loss\_curve.png'}) }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ plot\_loss\_curve(history,\ title=f\textcolor{stringliteral}{'\{model\_name\}\ Training\ Loss'},\ save\_path=loss\_plot\_path) }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Loss\ plot\ saved\ to\ \{loss\_plot\_path\}"{}}) }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Plot\ Predictions }}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ model\_name\ \textcolor{keywordflow}{in}\ [\textcolor{stringliteral}{'scaler'},\ \textcolor{stringliteral}{'sequence'},\ \textcolor{stringliteral}{'cnn'},\ \textcolor{stringliteral}{'transformer'}]: }
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ pred\_plot\_path\ =\ os.path.join(plots\_dir,\ \textcolor{stringliteral}{'prediction\_scatter.png'}) }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ plot\_prediction\_scatter(preds,\ targets,\ title=f\textcolor{stringliteral}{'\{model\_name\}:\ Pred\ vs\ Actual\ Loss'},\ save\_path=pred\_plot\_path) }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Prediction\ plot\ saved\ to\ \{pred\_plot\_path\}"{}}) }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{elif}\ model\_name\ ==\ \textcolor{stringliteral}{'seq2seq'}: }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Visualizing\ B-\/H\ loops }}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ have\ sequences.\ Let's\ plot\ the\ first\ sample\ in\ the\ validation\ set. }}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ preds:\ (N,\ Seq,\ 1),\ targets:\ (N,\ Seq,\ 1) }}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Input\ to\ seq2seq\ was\ B\ (dataset\ mode='seq2seq':\ x=B,\ y=H) }}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Note:\ We\ need\ the\ B\ field\ (Input)\ to\ plot\ B-\/H\ loop,\ but\ evaluate\_model\ returns\ metrics,\ preds,\ targets. }}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ It\ doesn't\ return\ inputs. }}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ For\ B-\/H\ check,\ we\ need\ B\ and\ H.\  }}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ In\ seq2seq\ mode:\ Target\ is\ H.\ Pred\ is\ H.\ Input\ is\ B. }}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ We\ can't\ recover\ B\ easily\ from\ just\ preds/targets\ unless\ we\ modify\ evaluate\ or\ re-\/fetch. }}
 \DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Let's\ just\ grab\ the\ first\ batch\ from\ val\_loader\ again\ for\ visualization\ purposes. }}
-\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ This\ is\ safer. }}
-\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Also,\ we\ likely\ want\ to\ inverse\ normalize\ for\ real\ units?\  }}
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ For\ now,\ let's\ plot\ normalized. }}
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ \doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization}{src.utils.visualization}}\ \textcolor{keyword}{import}\ plot\_bh\_loop\ \textcolor{comment}{\#\ Ensure\ imported }}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Get\ one\ batch }}
-\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\_iter\ =\ iter(val\_loader) }
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b\_batch,\ h\_batch\ =\ next(val\_iter) }
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Move\ to\ device\ to\ inference }}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b\_batch\ =\ b\_batch.to(device) }
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.eval() }
-\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ torch.no\_grad(): }
-\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pred\_h\_batch\ =\ model(b\_batch) }
-\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Take\ first\ sample }}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ b\_batch:\ (Batch,\ Seq,\ 1) }}
-\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sample\_idx\ =\ 0 }
-\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ original\_idx\ =\ val\_set.indices[sample\_idx] }
-\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Plotting\ sample\ from\ Validation\ Set\ (Batch\ Index:\ \{sample\_idx\})"{}}) }
-\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Original\ Dataset\ Index\ (Experiment\ ID):\ \{original\_idx\}"{}}) }
-\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual\_b\ =\ b\_batch[sample\_idx].cpu().squeeze().numpy() }
-\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual\_h\ =\ h\_batch[sample\_idx].cpu().squeeze().numpy()\ \textcolor{comment}{\#\ Target\ H }}
-\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pred\_h\ =\ pred\_h\_batch[sample\_idx].cpu().squeeze().numpy() }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Quick\ fix:\ Let's\ fetch\ one\ batch\ from\ val\_loader\ to\ get\ B\ and\ H }}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ And\ assume\ shuffle=False\ for\ val\_loader\ so\ it\ matches?\  }}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ evaluate\_model\ iterates\ over\ whole\ loader. }}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Let's\ just\ grab\ the\ first\ batch\ from\ val\_loader\ again\ for\ visualization\ purposes. }}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ This\ is\ safer. }}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Also,\ we\ likely\ want\ to\ inverse\ normalize\ for\ real\ units?\  }}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ For\ now,\ let's\ plot\ normalized. }}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{from}\ \doxymbox{\hyperlink{namespacesrc_1_1utils_1_1visualization}{src.utils.visualization}}\ \textcolor{keyword}{import}\ plot\_bh\_loop\ \textcolor{comment}{\#\ Ensure\ imported }}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}: }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Get\ one\ batch }}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val\_iter\ =\ iter(val\_loader) }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b\_batch,\ h\_batch\ =\ next(val\_iter) }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Move\ to\ device\ to\ inference }}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ b\_batch\ =\ b\_batch.to(device) }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model.eval() }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{with}\ torch.no\_grad(): }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pred\_h\_batch\ =\ model(b\_batch) }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Take\ first\ sample }}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ b\_batch:\ (Batch,\ Seq,\ 1) }}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sample\_idx\ =\ 0 }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ original\_idx\ =\ val\_set.indices[sample\_idx] }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Plotting\ sample\ from\ Validation\ Set\ (Batch\ Index:\ \{sample\_idx\})"{}}) }
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Original\ Dataset\ Index\ (Experiment\ ID):\ \{original\_idx\}"{}}) }
 \DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bh\_plot\_path\ =\ os.path.join(plots\_dir,\ \textcolor{stringliteral}{'bh\_loop\_comparison.png'}) }
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ plot\_bh\_loop(actual\_b,\ pred\_h,\ actual\_b,\ actual\_h,\ title=f\textcolor{stringliteral}{'\{model\_name\}\ B-\/H\ Loop\ (Norm)'},\ save\_path=bh\_plot\_path) }
-\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}B-\/H\ Loop\ plot\ saved\ to\ \{bh\_plot\_path\}"{}}) }
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual\_b\ =\ b\_batch[sample\_idx].cpu().squeeze().numpy() }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ actual\_h\ =\ h\_batch[sample\_idx].cpu().squeeze().numpy()\ \textcolor{comment}{\#\ Target\ H }}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pred\_h\ =\ pred\_h\_batch[sample\_idx].cpu().squeeze().numpy() }
 \DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
-\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Could\ not\ plot\ B-\/H\ loop:\ \{e\}"{}}) }
-\DoxyCodeLine{00205\  }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bh\_plot\_path\ =\ os.path.join(plots\_dir,\ \textcolor{stringliteral}{'bh\_loop\_comparison.png'}) }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ plot\_bh\_loop(actual\_b,\ pred\_h,\ actual\_b,\ actual\_h,\ title=f\textcolor{stringliteral}{'\{model\_name\}\ B-\/H\ Loop\ (Norm)'},\ save\_path=bh\_plot\_path) }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}B-\/H\ Loop\ plot\ saved\ to\ \{bh\_plot\_path\}"{}}) }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ Exception\ \textcolor{keyword}{as}\ e: }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print(f\textcolor{stringliteral}{"{}Could\ not\ plot\ B-\/H\ loop:\ \{e\}"{}}) }
+\DoxyCodeLine{00209\  }
 
 \end{DoxyCode}
 
 
 References \doxymbox{\hyperlink{main_8py_source_l00022}{load\+\_\+config()}}.
 
-Here is the call graph for this function:\+
-\nopagebreak
+Here is the call graph for this function:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

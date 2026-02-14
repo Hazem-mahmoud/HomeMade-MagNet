@@ -20,7 +20,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" line="22" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" bodystart="22" bodyend="25"/>
-        <referencedby refid="namespacemain_1a3140e9a5b6a71ffbf498198cfc471b88" compoundref="main_8py" startline="26" endline="205">main</referencedby>
+        <referencedby refid="namespacemain_1a3140e9a5b6a71ffbf498198cfc471b88" compoundref="main_8py" startline="26" endline="209">main</referencedby>
       </memberdef>
       <memberdef kind="function" id="namespacemain_1a3140e9a5b6a71ffbf498198cfc471b88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" line="26" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" bodystart="26" bodyend="205"/>
+        <location file="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" line="26" column="1" bodyfile="D:/MSc/Thesis/MagNet/HomeMade MagNet/Scripts/main.py" bodystart="26" bodyend="209"/>
         <references refid="namespacemain_1a7896926bd887efec19288eae30c4ed85" compoundref="main_8py" startline="22" endline="25">load_config</references>
       </memberdef>
     </sectiondef>

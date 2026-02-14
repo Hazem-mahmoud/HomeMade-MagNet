@@ -181,16 +181,16 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   35</span>        self.mode = mode</div>
 <div class="line"><span class="lineno">   36</span>        self.partition = partition</div>
 <div class="line"><span class="lineno">   37</span>        self.transform = transform</div>
-<div class="line"><span class="lineno">   38</span>        </div>
+<div class="line"><span class="lineno">   38</span> </div>
 <div class="line"><span class="lineno">   39</span>        <span class="comment"># Load raw data</span></div>
 <div class="line"><span class="lineno">   40</span>        print(f<span class="stringliteral">&quot;Loading dataset from {file_path} for partition &#39;{partition}&#39;...&quot;</span>)</div>
 <div class="line"><span class="lineno">   41</span>        raw_data = loader.load_full_dataset(file_path)</div>
-<div class="line"><span class="lineno">   42</span>        </div>
+<div class="line"><span class="lineno">   42</span> </div>
 <div class="line"><span class="lineno">   43</span>        <span class="comment"># Extract Standard Args</span></div>
 <div class="line"><span class="lineno">   44</span>        voltage = raw_data[<span class="stringliteral">&#39;voltage&#39;</span>].astype(np.float32)</div>
 <div class="line"><span class="lineno">   45</span>        current = raw_data[<span class="stringliteral">&#39;current&#39;</span>].astype(np.float32)</div>
 <div class="line"><span class="lineno">   46</span>        freq = raw_data[<span class="stringliteral">&#39;freq&#39;</span>].astype(np.float32)</div>
-<div class="line"><span class="lineno">   47</span>        </div>
+<div class="line"><span class="lineno">   47</span> </div>
 <div class="line"><span class="lineno">   48</span>        props = {</div>
 <div class="line"><span class="lineno">   49</span>            <span class="stringliteral">&#39;N_prim&#39;</span>: raw_data[<span class="stringliteral">&#39;meta&#39;</span>][<span class="stringliteral">&#39;N_prim&#39;</span>],</div>
 <div class="line"><span class="lineno">   50</span>            <span class="stringliteral">&#39;N_sec&#39;</span>: raw_data[<span class="stringliteral">&#39;meta&#39;</span>][<span class="stringliteral">&#39;N_sec&#39;</span>],</div>
@@ -207,10 +207,10 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   61</span>            <span class="stringliteral">&#39;Hdc&#39;</span>: raw_data[<span class="stringliteral">&#39;hdc&#39;</span>].astype(np.float32),</div>
 <div class="line"><span class="lineno">   62</span>            <span class="stringliteral">&#39;Duty&#39;</span>: raw_data[<span class="stringliteral">&#39;duty&#39;</span>].astype(np.float32)</div>
 <div class="line"><span class="lineno">   63</span>        }</div>
-<div class="line"><span class="lineno">   64</span>        </div>
+<div class="line"><span class="lineno">   64</span> </div>
 <div class="line"><span class="lineno">   65</span>        <span class="comment"># Use Central Preprocessing</span></div>
 <div class="line"><span class="lineno">   66</span>        print(<span class="stringliteral">&quot;Running centralized preprocessing...&quot;</span>)</div>
-<div class="line"><span class="lineno">   67</span>        </div>
+<div class="line"><span class="lineno">   67</span> </div>
 <div class="line"><span class="lineno">   68</span>        <span class="comment"># Determine config path if not provided</span></div>
 <div class="line"><span class="lineno">   69</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> config_path:</div>
 <div class="line"><span class="lineno">   70</span>             <span class="comment"># Try to find it relative to this file</span></div>
@@ -218,29 +218,29 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   72</span>             current_dir = os.path.dirname(os.path.abspath(__file__))</div>
 <div class="line"><span class="lineno">   73</span>             <span class="comment"># Scripts/src/data -&gt; ... -&gt; Scripts/config/config.yaml</span></div>
 <div class="line"><span class="lineno">   74</span>             config_path = os.path.abspath(os.path.join(current_dir, <span class="stringliteral">&#39;..&#39;</span>, <span class="stringliteral">&#39;..&#39;</span>, <span class="stringliteral">&#39;config&#39;</span>, <span class="stringliteral">&#39;config.yaml&#39;</span>))</div>
-<div class="line"><span class="lineno">   75</span>        </div>
+<div class="line"><span class="lineno">   75</span> </div>
 <div class="line"><span class="lineno">   76</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(config_path):</div>
 <div class="line"><span class="lineno">   77</span>            print(f<span class="stringliteral">&quot;WARNING: Config not found at {config_path}. Using defaults.&quot;</span>)</div>
 <div class="line"><span class="lineno">   78</span>            config_path = <span class="keywordtype">None</span></div>
-<div class="line"><span class="lineno">   79</span>            </div>
+<div class="line"><span class="lineno">   79</span> </div>
 <div class="line"><span class="lineno">   80</span>        data_split, self.stats = preprocessing.process_magnet_dataset(</div>
 <div class="line"><span class="lineno">   81</span>            voltage, current, freq, props, dt,</div>
 <div class="line"><span class="lineno">   82</span>            model_type=mode,</div>
 <div class="line"><span class="lineno">   83</span>            config_path=config_path,</div>
 <div class="line"><span class="lineno">   84</span>            extra_features=extra</div>
 <div class="line"><span class="lineno">   85</span>        )</div>
-<div class="line"><span class="lineno">   86</span>        </div>
+<div class="line"><span class="lineno">   86</span> </div>
 <div class="line"><span class="lineno">   87</span>        <span class="comment"># Select Partition</span></div>
 <div class="line"><span class="lineno">   88</span>        <span class="keywordflow">if</span> partition <span class="keywordflow">not</span> <span class="keywordflow">in</span> data_split:</div>
 <div class="line"><span class="lineno">   89</span>            <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&quot;Partition &#39;{partition}&#39; not found in split data.&quot;</span>)</div>
-<div class="line"><span class="lineno">   90</span>            </div>
+<div class="line"><span class="lineno">   90</span> </div>
 <div class="line"><span class="lineno">   91</span>        self.inputs = data_split[partition][<span class="stringliteral">&#39;inputs&#39;</span>]</div>
 <div class="line"><span class="lineno">   92</span>        self.targets = data_split[partition][<span class="stringliteral">&#39;targets&#39;</span>]</div>
-<div class="line"><span class="lineno">   93</span>        </div>
+<div class="line"><span class="lineno">   93</span> </div>
 <div class="line"><span class="lineno">   94</span>        <span class="comment"># Validation checks</span></div>
 <div class="line"><span class="lineno">   95</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.targets:</div>
 <div class="line"><span class="lineno">   96</span>             print(<span class="stringliteral">&quot;WARNING: No targets found in processed data.&quot;</span>)</div>
-<div class="line"><span class="lineno">   97</span>             </div>
+<div class="line"><span class="lineno">   97</span> </div>
 <div class="line"><span class="lineno">   98</span>        <span class="keywordflow">if</span> <span class="keywordflow">not</span> self.inputs:</div>
 <div class="line"><span class="lineno">   99</span>             print(<span class="stringliteral">&quot;WARNING: No inputs found in processed data.&quot;</span>)</div>
 <div class="line"><span class="lineno">  100</span> </div>
@@ -248,7 +248,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  102</span>        <span class="comment"># Assuming all input arrays are same length</span></div>
 <div class="line"><span class="lineno">  103</span>        any_key = next(iter(self.inputs)) <span class="keywordflow">if</span> self.inputs <span class="keywordflow">else</span> next(iter(self.targets))</div>
 <div class="line"><span class="lineno">  104</span>        self.length = len(self.inputs[any_key]) <span class="keywordflow">if</span> self.inputs <span class="keywordflow">else</span> len(self.targets[any_key])</div>
-<div class="line"><span class="lineno">  105</span>        </div>
+<div class="line"><span class="lineno">  105</span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -275,10 +275,10 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="dataset_8py_source.html#l00109">109</a> of file <a class="el" href="dataset_8py_source.html">dataset.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  109</span>    <span class="keyword">def </span>__getitem__(self, idx):</div>
 <div class="line"><span class="lineno">  110</span>        <span class="comment"># Retrieve normalized features from dictionary</span></div>
-<div class="line"><span class="lineno">  111</span>        <span class="comment"># NOTE: Keys depend on config.yaml! </span></div>
+<div class="line"><span class="lineno">  111</span>        <span class="comment"># NOTE: Keys depend on config.yaml!</span></div>
 <div class="line"><span class="lineno">  112</span>        <span class="comment"># We must align code here with what we expect to be in the config for each mode.</span></div>
 <div class="line"><span class="lineno">  113</span>        <span class="comment"># Fallback logic is needed if config is dynamic.</span></div>
-<div class="line"><span class="lineno">  114</span>        </div>
+<div class="line"><span class="lineno">  114</span> </div>
 <div class="line"><span class="lineno">  115</span>        <span class="comment"># Helper to get datum safely</span></div>
 <div class="line"><span class="lineno">  116</span>        <span class="keyword">def </span>get(dic, key):</div>
 <div class="line"><span class="lineno">  117</span>            <span class="keywordflow">if</span> key <span class="keywordflow">in</span> dic:</div>
@@ -298,34 +298,34 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  131</span>        <span class="keywordflow">if</span> self.mode == <span class="stringliteral">&#39;scaler&#39;</span>:</div>
 <div class="line"><span class="lineno">  132</span>            <span class="comment"># Config MUST include Frequency, Temperature, Hdc in inputs</span></div>
 <div class="line"><span class="lineno">  133</span>            <span class="comment"># Config MUST include Loss in targets</span></div>
-<div class="line"><span class="lineno">  134</span>            </div>
+<div class="line"><span class="lineno">  134</span> </div>
 <div class="line"><span class="lineno">  135</span>            <span class="comment"># Input: B_pk, Freq, Temp, Hdc</span></div>
 <div class="line"><span class="lineno">  136</span>            <span class="comment"># We assume these are 1D arrays (scalers) in the input dict</span></div>
 <div class="line"><span class="lineno">  137</span>            b = get(self.inputs, <span class="stringliteral">&#39;B_pk&#39;</span>)</div>
 <div class="line"><span class="lineno">  138</span>            f = get(self.inputs, <span class="stringliteral">&#39;Frequency&#39;</span>)</div>
 <div class="line"><span class="lineno">  139</span>            t = get(self.inputs, <span class="stringliteral">&#39;Temperature&#39;</span>)</div>
 <div class="line"><span class="lineno">  140</span>            h = get(self.inputs, <span class="stringliteral">&#39;Hdc&#39;</span>)</div>
-<div class="line"><span class="lineno">  141</span>            </div>
-<div class="line"><span class="lineno">  142</span>            x = torch.stack([b.squeeze(), f.squeeze(), t.squeeze(), h.squeeze()]) </div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span>            x = torch.stack([b.squeeze(), f.squeeze(), t.squeeze(), h.squeeze()])</div>
 <div class="line"><span class="lineno">  143</span>            <span class="comment"># Note: normalized scalars might come as (1,) or scalar. Squeeze ensures (3,)</span></div>
-<div class="line"><span class="lineno">  144</span>            </div>
-<div class="line"><span class="lineno">  145</span>            y = get_tens(self.targets, <span class="stringliteral">&#39;Loss&#39;</span>, unsqueeze=<span class="keyword">False</span>) <span class="comment"># (1,)</span></div>
+<div class="line"><span class="lineno">  144</span> </div>
+<div class="line"><span class="lineno">  145</span>            y = get_tens(self.targets, <span class="stringliteral">&#39;Loss&#39;</span>, unsqueeze=<span class="keyword">True</span>) <span class="comment"># (1,)</span></div>
 <div class="line"><span class="lineno">  146</span>            <span class="keywordflow">return</span> x, y</div>
-<div class="line"><span class="lineno">  147</span>            </div>
+<div class="line"><span class="lineno">  147</span> </div>
 <div class="line"><span class="lineno">  148</span>        <span class="keywordflow">elif</span> self.mode <span class="keywordflow">in</span> [<span class="stringliteral">&#39;sequence&#39;</span>, <span class="stringliteral">&#39;cnn&#39;</span>, <span class="stringliteral">&#39;transformer&#39;</span>]:</div>
 <div class="line"><span class="lineno">  149</span>            <span class="comment"># Input: B (or H)</span></div>
 <div class="line"><span class="lineno">  150</span>            <span class="comment"># Target: Loss</span></div>
 <div class="line"><span class="lineno">  151</span>            b = get_tens(self.inputs, <span class="stringliteral">&#39;B&#39;</span>, unsqueeze=<span class="keyword">True</span>) <span class="comment"># (Seq, 1)</span></div>
-<div class="line"><span class="lineno">  152</span>            </div>
+<div class="line"><span class="lineno">  152</span> </div>
 <div class="line"><span class="lineno">  153</span>            <span class="comment"># Scalars: Freq, Temp, Hdc</span></div>
 <div class="line"><span class="lineno">  154</span>            f = get(self.inputs, <span class="stringliteral">&#39;Frequency&#39;</span>)</div>
 <div class="line"><span class="lineno">  155</span>            t = get(self.inputs, <span class="stringliteral">&#39;Temperature&#39;</span>)</div>
 <div class="line"><span class="lineno">  156</span>            h = get(self.inputs, <span class="stringliteral">&#39;Hdc&#39;</span>)</div>
 <div class="line"><span class="lineno">  157</span>            scalars = torch.stack([f.squeeze(), t.squeeze(), h.squeeze()])</div>
-<div class="line"><span class="lineno">  158</span>            </div>
+<div class="line"><span class="lineno">  158</span> </div>
 <div class="line"><span class="lineno">  159</span>            y = get_tens(self.targets, <span class="stringliteral">&#39;Loss&#39;</span>, unsqueeze=<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">  160</span>            <span class="keywordflow">return</span> b, scalars, y</div>
-<div class="line"><span class="lineno">  161</span>            </div>
+<div class="line"><span class="lineno">  161</span> </div>
 <div class="line"><span class="lineno">  162</span>        <span class="keywordflow">elif</span> self.mode == <span class="stringliteral">&#39;seq2seq&#39;</span>:</div>
 <div class="line"><span class="lineno">  163</span>            <span class="comment"># Input: B</span></div>
 <div class="line"><span class="lineno">  164</span>            <span class="comment"># Target: H</span></div>
@@ -335,16 +335,16 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  168</span>            <span class="comment"># If we want to predict H, it should be in targets.</span></div>
 <div class="line"><span class="lineno">  169</span>            <span class="comment"># But process_magnet_dataset puts things in &#39;inputs&#39; or &#39;targets&#39; based on config.</span></div>
 <div class="line"><span class="lineno">  170</span>            <span class="comment"># Check where H is.</span></div>
-<div class="line"><span class="lineno">  171</span>            </div>
+<div class="line"><span class="lineno">  171</span> </div>
 <div class="line"><span class="lineno">  172</span>            <span class="keywordflow">if</span> <span class="stringliteral">&#39;H&#39;</span> <span class="keywordflow">in</span> self.targets:</div>
 <div class="line"><span class="lineno">  173</span>                target = get_tens(self.targets, <span class="stringliteral">&#39;H&#39;</span>, unsqueeze=<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">  174</span>            <span class="keywordflow">elif</span> <span class="stringliteral">&#39;H&#39;</span> <span class="keywordflow">in</span> self.inputs:</div>
 <div class="line"><span class="lineno">  175</span>                 target = get_tens(self.inputs, <span class="stringliteral">&#39;H&#39;</span>, unsqueeze=<span class="keyword">True</span>)</div>
 <div class="line"><span class="lineno">  176</span>            <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">  177</span>                <span class="keywordflow">raise</span> KeyError(<span class="stringliteral">&quot;H field not found in inputs or targets for seq2seq&quot;</span>)</div>
-<div class="line"><span class="lineno">  178</span>                </div>
+<div class="line"><span class="lineno">  178</span> </div>
 <div class="line"><span class="lineno">  179</span>            <span class="keywordflow">return</span> b, target</div>
-<div class="line"><span class="lineno">  180</span>            </div>
+<div class="line"><span class="lineno">  180</span> </div>
 <div class="line"><span class="lineno">  181</span>        <span class="keywordflow">else</span>:</div>
 <div class="line"><span class="lineno">  182</span>            <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&quot;Unknown mode: {self.mode}&quot;</span>)</div>
 <div class="line"><span class="lineno">  183</span> </div>
@@ -374,7 +374,7 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="dataset_8py_source.html#l00106">106</a> of file <a class="el" href="dataset_8py_source.html">dataset.py</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  106</span>    <span class="keyword">def </span>__len__(self):</div>
 <div class="line"><span class="lineno">  107</span>        <span class="keywordflow">return</span> self.length</div>
-<div class="line"><span class="lineno">  108</span>        </div>
+<div class="line"><span class="lineno">  108</span> </div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="dataset_8py_source.html#l00104">length</a>.</p>
 
