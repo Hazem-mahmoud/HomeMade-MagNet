@@ -11,7 +11,7 @@ data:
 models:
   scaler:
     name: scaler
-    version: 1
+    version: 2
     hidden_dim: 64
     layers: 3
     features:
@@ -87,6 +87,19 @@ training:
   learning_rate: 0.001
   save_dir: "/content/drive/MyDrive/MagNet/checkpoints"
 
+  scheduler:
+    type: "ReduceLROnPlateau"   # options: ReduceLROnPlateau, StepLR
+    factor: 0.5
+    patience: 5
+    min_lr: 1e-6
+    step_size: 10      # used only if StepLR
+    gamma: 0.1         # used only if StepLR
+
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.0001
+    
 # logs folder
 tensorboard:
   log_dir: "/content/drive/MyDrive/MagNet/runs"        # root folder for all TB logs

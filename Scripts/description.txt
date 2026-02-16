@@ -1,0 +1,25 @@
+scaler:
+The Scaler model is a fully connected feed-forward network.
+It takes key features like B_pk, Frequency, Temperature, and Hdc as inputs.
+It predicts the scalar Loss value directly.
+Best used for quick regression on single-step measurements.
+
+sequence:
+The Sequence model is an LSTM-based network.
+It uses the historical sequence of B values to predict scalar Loss.
+Useful for capturing temporal dependencies in the dataset.
+
+seq2seq:
+The Seq2Seq model is designed to predict full sequences of H values given sequences of B values.
+It uses an encoder-decoder LSTM architecture.
+Ideal for simulating full B-H loops for magnetic experiments.
+
+cnn:
+The CNN model processes sequences using convolutional layers to extract features.
+It uses Frequency statistics from the dataset for normalization.
+Outputs a scalar Loss value and is robust to sequential patterns in B.
+
+transformer:
+The Transformer model leverages self-attention to model dependencies in the input sequences.
+It can capture long-range interactions in the B input sequence.
+Outputs a scalar Loss value and is suitable for more complex patterns.

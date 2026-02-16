@@ -63,6 +63,8 @@ def main():
             # Input: Dynamic based on config (B_pk, Freq, Temp, Hdc...)
             # Output: Log Loss (1)
             model_conf = config['models']['scaler']
+            model_version = model_conf['version']
+            version_tag = f"{model_name}_v{model_version}"
             input_dim = len(model_conf.get('features', {}).get('inputs', {})) # Default to 3 if missing? Better to rely on config.
             # Fallback if config matches default structure but keys missing?
             # Safe bet:
@@ -74,17 +76,23 @@ def main():
             # Input: B (1)
             # Output: Log Loss (1)
             model_conf = config['models']['sequence']
+            model_version = model_conf['version']
+            version_tag = f"{model_name}_v{model_version}"
             model = SequenceToScalerNetwork(input_dim=1, hidden_dim=model_conf['hidden_dim'], output_dim=1, num_layers=model_conf['num_layers'])
             
         elif model_name == 'seq2seq':
             # Input: B (1)
             # Output: H (1)
             model_conf = config['models']['seq2seq']
+            model_version = model_conf['version']
+            version_tag = f"{model_name}_v{model_version}"
             model = Seq2SeqNetwork(input_dim=1, hidden_dim=model_conf['encoder_dim'], output_dim=1)
         elif model_name == 'cnn':    
             # Input: B (1)
             # Output: Log Loss (1) (Scalar)
             model_conf = config['models']['cnn']
+            model_version = model_conf['version']
+            version_tag = f"{model_name}_v{model_version}"
             # Retrieve Frequency stats from the dataset
             # The keys depend on what preprocessing returns. 
             # Usually: dataset.stats['Frequency']['mean']
@@ -104,6 +112,8 @@ def main():
             # Input: B (1)
             # Output: Log Loss (1) (Scalar)
             model_conf = config['models']['transformer']
+            model_version = model_conf['version']
+            version_tag = f"{model_name}_v{model_version}"
             # Map config keys to Fuzhou Transformer args
             # d_model -> dim_hidden
             # num_layers -> n_encoder_layers
@@ -143,13 +153,13 @@ def main():
         os.makedirs(plots_dir, exist_ok=True)
         
         # Plot Loss
-        loss_plot_path = os.path.join(plots_dir, 'loss_curve.png')
+        loss_plot_path = os.path.join(plots_dir, f'{version_tag}_loss_curve.png')
         plot_loss_curve(history, title=f'{model_name} Training Loss', save_path=loss_plot_path)
         print(f"Loss plot saved to {loss_plot_path}")
         
         # Plot Predictions
         if model_name in ['scaler', 'sequence', 'cnn', 'transformer']:
-            pred_plot_path = os.path.join(plots_dir, 'prediction_scatter.png')
+            pred_plot_path = os.path.join(plots_dir, f'{version_tag}_prediction_scatter.png')
             plot_prediction_scatter(preds, targets, title=f'{model_name}: Pred vs Actual Loss', save_path=pred_plot_path)
             print(f"Prediction plot saved to {pred_plot_path}")
             
@@ -200,7 +210,8 @@ def main():
                 actual_h = h_batch[sample_idx].cpu().squeeze().numpy() # Target H
                 pred_h = pred_h_batch[sample_idx].cpu().squeeze().numpy()
                 
-                bh_plot_path = os.path.join(plots_dir, 'bh_loop_comparison.png')
+                
+                bh_plot_path = os.path.join(plots_dir, f'{version_tag}_bh_loop_comparison.png')
                 plot_bh_loop(actual_b, pred_h, actual_b, actual_h, title=f'{model_name} B-H Loop (Norm)', save_path=bh_plot_path)
                 print(f"B-H Loop plot saved to {bh_plot_path}")
                 
