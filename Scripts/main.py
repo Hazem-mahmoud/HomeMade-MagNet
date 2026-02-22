@@ -14,7 +14,6 @@ from src.models.seq2seq_model import Seq2SeqNetwork
 from src.models.cnn_model import CNNNetwork
 from src.models.transformer_model import TransformerNetwork
 from src.training.train import train_model
-from src.training.evaluate import evaluate_model
 from src.utils.visualization import plot_loss_curve, plot_prediction_scatter
 import yaml
 import os
@@ -60,161 +59,108 @@ def main():
         
         # 2. Model
         if model_name == 'scaler':
-            # Input: Dynamic based on config (B_pk, Freq, Temp, Hdc...)
-            # Output: Log Loss (1)
             model_conf = config['models']['scaler']
             model_version = model_conf['version']
             version_tag = f"{model_name}_v{model_version}"
-            input_dim = len(model_conf.get('features', {}).get('inputs', {})) # Default to 3 if missing? Better to rely on config.
-            # Fallback if config matches default structure but keys missing?
-            # Safe bet:
-            if input_dim == 0: input_dim = 3 # Legacy fallback
-            
+            input_dim = len(model_conf.get('features', {}).get('inputs', {}))
+            if input_dim == 0: input_dim = 3  # legacy fallback
             model = ScalerNetwork(input_dim=input_dim, hidden_dim=model_conf['hidden_dim'], num_layers=model_conf['layers'], output_dim=1)
             
         elif model_name == 'sequence':
-            # Input: B (1)
-            # Output: Log Loss (1)
             model_conf = config['models']['sequence']
             model_version = model_conf['version']
             version_tag = f"{model_name}_v{model_version}"
             model = SequenceToScalerNetwork(input_dim=1, hidden_dim=model_conf['hidden_dim'], output_dim=1, num_layers=model_conf['num_layers'])
             
         elif model_name == 'seq2seq':
-            # Input: B (1)
-            # Output: H (1)
             model_conf = config['models']['seq2seq']
             model_version = model_conf['version']
             version_tag = f"{model_name}_v{model_version}"
             model = Seq2SeqNetwork(input_dim=1, hidden_dim=model_conf['encoder_dim'], output_dim=1)
-        elif model_name == 'cnn':    
-            # Input: B (1)
-            # Output: Log Loss (1) (Scalar)
+
+        elif model_name == 'cnn':
             model_conf = config['models']['cnn']
             model_version = model_conf['version']
             version_tag = f"{model_name}_v{model_version}"
-            # Retrieve Frequency stats from the dataset
-            # The keys depend on what preprocessing returns. 
-            # Usually: dataset.stats['Frequency']['mean']
             freq_stats = {}
             if hasattr(dataset, 'stats') and 'Frequency' in dataset.stats:
                 f_s = dataset.stats['Frequency']
-                # Check if it's standard (has mean/std) or minmax
-                # The model expects mean/std for 'standard' normalization.
                 if 'mean' in f_s:
                     freq_stats['freq_mean'] = f_s['mean']
                     freq_stats['freq_std'] = f_s['std']
-            
             print(f"Passing Stats to CNN: {freq_stats}")
-            
             model = CNNNetwork(input_dim=1, stats=freq_stats)
+
         elif model_name == 'transformer':
-            # Input: B (1)
-            # Output: Log Loss (1) (Scalar)
             model_conf = config['models']['transformer']
             model_version = model_conf['version']
             version_tag = f"{model_name}_v{model_version}"
-            # Map config keys to Fuzhou Transformer args
-            # d_model -> dim_hidden
-            # num_layers -> n_encoder_layers
-            # dim_feedforward -> dim_feedforward_encoder
             model = TransformerNetwork(
-                B_in_channel=1024, # Default seq len
-                dim_hidden=model_conf['d_model'], 
-                n_encoder_layers=model_conf['num_layers'], 
+                B_in_channel=1024,
+                dim_hidden=model_conf['d_model'],
+                n_encoder_layers=model_conf['num_layers'],
                 dim_feedforward_encoder=model_conf['dim_feedforward'],
                 n_heads=model_conf['nhead'],
                 dropout_encoder=model_conf['dropout']
             )
         else:
             print("Unknown model name")
-
+            continue
 
         # 3. Train
+        # train_model evaluates the best checkpoint internally and writes
+        # MSE / MAE / RMSE metrics into the same experiments.txt run block.
         print("Starting training...")
-        # Subset config for training
         train_config = config['training']
         train_config['save_dir'] = os.path.join(train_config['save_dir'], model_name)
-        
         if not os.path.exists(train_config['save_dir']):
             os.makedirs(train_config['save_dir'])
-        
-        model = model.to(device)
-        trained_model, history = train_model(model, train_loader, val_loader,model_name ,config, device)
 
-        
-        # 4. Evaluate & Visualize
-        print("Evaluating...")
-        metrics, preds, targets = evaluate_model(trained_model, val_loader, device)
+        model = model.to(device)
+        trained_model, history, metrics, preds, targets = train_model(
+            model, train_loader, val_loader, model_name, config, device
+        )
         print(f"Validation Metrics: {metrics}")
-        
-        # Prepare plots directory
+
+        # 4. Visualize
         plots_dir = os.path.join(train_config['save_dir'], 'plots')
         os.makedirs(plots_dir, exist_ok=True)
         
-        # Plot Loss
+        # Loss curve
         loss_plot_path = os.path.join(plots_dir, f'{version_tag}_loss_curve.png')
         plot_loss_curve(history, title=f'{model_name} Training Loss', save_path=loss_plot_path)
         print(f"Loss plot saved to {loss_plot_path}")
         
-        # Plot Predictions
+        # Prediction scatter
         if model_name in ['scaler', 'sequence', 'cnn', 'transformer']:
             pred_plot_path = os.path.join(plots_dir, f'{version_tag}_prediction_scatter.png')
             plot_prediction_scatter(preds, targets, title=f'{model_name}: Pred vs Actual Loss', save_path=pred_plot_path)
             print(f"Prediction plot saved to {pred_plot_path}")
             
         elif model_name == 'seq2seq':
-            # Visualizing B-H loops
-            # We have sequences. Let's plot the first sample in the validation set.
-            # preds: (N, Seq, 1), targets: (N, Seq, 1)
-            # Input to seq2seq was B (dataset mode='seq2seq': x=B, y=H)
-            
-            # Note: We need the B field (Input) to plot B-H loop, but evaluate_model returns metrics, preds, targets.
-            # It doesn't return inputs.
-            # For B-H check, we need B and H. 
-            # In seq2seq mode: Target is H. Pred is H. Input is B.
-            # We can't recover B easily from just preds/targets unless we modify evaluate or re-fetch.
-            
-            # Quick fix: Let's fetch one batch from val_loader to get B and H
-            # And assume shuffle=False for val_loader so it matches? 
-            # evaluate_model iterates over whole loader.
-            
-            # Let's just grab the first batch from val_loader again for visualization purposes.
-            # This is safer.
-            
-            # Also, we likely want to inverse normalize for real units? 
-            # For now, let's plot normalized.
-            
-            from src.utils.visualization import plot_bh_loop # Ensure imported
-            
+            from src.utils.visualization import plot_bh_loop
             try:
-                # Get one batch
                 val_iter = iter(val_loader)
                 b_batch, h_batch = next(val_iter)
-                
-                # Move to device to inference
                 b_batch = b_batch.to(device)
-                
-                model.eval()
+
+                trained_model.eval()
                 with torch.no_grad():
-                    pred_h_batch = model(b_batch)
-                    
-                # Take first sample
-                # b_batch: (Batch, Seq, 1)
+                    pred_h_batch = trained_model(b_batch)
+
                 sample_idx = 0
                 original_idx = val_set.indices[sample_idx]
                 print(f"Plotting sample from Validation Set (Batch Index: {sample_idx})")
                 print(f"Original Dataset Index (Experiment ID): {original_idx}")
-                
+
                 actual_b = b_batch[sample_idx].cpu().squeeze().numpy()
-                actual_h = h_batch[sample_idx].cpu().squeeze().numpy() # Target H
-                pred_h = pred_h_batch[sample_idx].cpu().squeeze().numpy()
-                
-                
+                actual_h = h_batch[sample_idx].cpu().squeeze().numpy()
+                pred_h   = pred_h_batch[sample_idx].cpu().squeeze().numpy()
+
                 bh_plot_path = os.path.join(plots_dir, f'{version_tag}_bh_loop_comparison.png')
                 plot_bh_loop(actual_b, pred_h, actual_b, actual_h, title=f'{model_name} B-H Loop (Norm)', save_path=bh_plot_path)
                 print(f"B-H Loop plot saved to {bh_plot_path}")
-                
+
             except Exception as e:
                 print(f"Could not plot B-H loop: {e}")
 
