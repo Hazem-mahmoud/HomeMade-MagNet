@@ -389,6 +389,59 @@ def main():
         )
         print(f"  Validation metrics : {metrics}")
 
+        # ── Additional relative-error statistics on the test split ────────────
+        if model_name in ('scaler', 'sequence', 'cnn', 'transformer'):
+            try:
+                test_ds = PreprocessedDataset(
+                    os.path.join(args.processed, model_name, 'test.npz'),
+                    stats, mode=model_name,
+                )
+                test_loader = DataLoader(
+                    test_ds, batch_size=batch_size, shuffle=False,
+                    num_workers=2, pin_memory=True,
+                )
+                trained_model.eval()
+                all_preds, all_targets = [], []
+                with torch.no_grad():
+                    for batch in test_loader:
+                        if model_name == 'scaler':
+                            x, y = batch
+                            out = trained_model(x.to(device))
+                        else:
+                            B, scalars, y = batch
+                            out = trained_model(B.to(device), scalars.to(device))
+                        all_preds.append(out.cpu().numpy())
+                        all_targets.append(y.numpy())
+
+                all_preds   = np.concatenate(all_preds).flatten()
+                all_targets = np.concatenate(all_targets).flatten()
+
+                rel_errors    = np.abs((all_preds - all_targets) / (np.abs(all_targets) + 1e-8))
+                p95_rel_error = float(np.percentile(rel_errors, 95))
+                max_rel_error = float(np.max(rel_errors))
+
+                print(f"  Test 95th-pct relative error : {p95_rel_error:.6f}")
+                print(f"  Test max relative error       : {max_rel_error:.6f}")
+                metrics['test_p95_relative_error'] = p95_rel_error
+                metrics['test_max_relative_error'] = max_rel_error
+
+                # ── Append test metrics to the same experiments.txt log ───────
+                model_cfg        = config['models'][model_name]
+                model_name_clean = model_cfg['name']
+                experiment_log_path = os.path.join(save_dir, model_name_clean, 'experiments.txt')
+                # Fallback: log lives directly in save_dir when train.py uses save_dir as model_dir
+                if not os.path.exists(experiment_log_path):
+                    experiment_log_path = os.path.join(save_dir, 'experiments.txt')
+
+                with open(experiment_log_path, 'a') as f:
+                    f.write("Test Set Relative-Error Metrics:\n")
+                    f.write(f"  P95 Relative Error: {p95_rel_error:.6f}\n")
+                    f.write(f"  Max Relative Error: {max_rel_error:.6f}\n")
+                    f.write("=" * 70 + "\n\n")
+
+            except FileNotFoundError:
+                print("  test.npz not found — skipping relative-error statistics.")
+
         # ── 5. Plots ──────────────────────────────────────────────────────────
         plots_dir = os.path.join(save_dir, 'plots')
         os.makedirs(plots_dir, exist_ok=True)

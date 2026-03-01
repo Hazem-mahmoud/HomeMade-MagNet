@@ -58,7 +58,8 @@ def load_model_description(desc_path, model_name):
 
 def _compute_metrics(preds: np.ndarray, targets: np.ndarray) -> dict:
     """
-    Compute MSE, MAE, and RMSE between flat numpy arrays.
+    Compute MSE, MAE, RMSE, 95th-percentile relative error, and max relative
+    error between flat numpy arrays.
 
     Parameters
     ----------
@@ -67,14 +68,20 @@ def _compute_metrics(preds: np.ndarray, targets: np.ndarray) -> dict:
 
     Returns
     -------
-    {'mse': float, 'mae': float, 'rmse': float}
+    {'mse': float, 'mae': float, 'rmse': float,
+     'p95_relative_error': float, 'max_relative_error': float}
     """
     preds   = preds.flatten().astype(np.float64)
     targets = targets.flatten().astype(np.float64)
     mse     = float(np.mean((preds - targets) ** 2))
     mae     = float(np.mean(np.abs(preds - targets)))
     rmse    = float(np.sqrt(mse))
-    return {'mse': mse, 'mae': mae, 'rmse': rmse}
+    rel_errors         = np.abs((preds - targets) / (np.abs(targets) + 1e-8))
+    p95_relative_error = float(np.percentile(rel_errors, 95))
+    max_relative_error = float(np.max(rel_errors))
+    return {'mse': mse, 'mae': mae, 'rmse': rmse,
+            'p95_relative_error': p95_relative_error,
+            'max_relative_error': max_relative_error}
 
 
 def _evaluate_best_model(model, val_loader, device: str) -> tuple:
@@ -84,7 +91,8 @@ def _evaluate_best_model(model, val_loader, device: str) -> tuple:
 
     Returns
     -------
-    metrics : dict   {'mse': float, 'mae': float, 'rmse': float}
+    metrics : dict   {'mse': float, 'mae': float, 'rmse': float,
+                      'p95_relative_error': float, 'max_relative_error': float}
     preds   : np.ndarray  (N,)
     targets : np.ndarray  (N,)
     """
@@ -122,8 +130,9 @@ def train_model(model, train_loader, val_loader, model_key, config, device='cpu'
     Train a model with optional early stopping and LR scheduler.
 
     At the end of training the best-checkpoint model is evaluated on the
-    full validation split. Metrics (MSE / MAE / RMSE) are written into the
-    same experiments.txt run block together with all other hyperparameters.
+    full validation split. Metrics (MSE / MAE / RMSE / P95 & Max Relative Error)
+    are written into the same experiments.txt run block together with all other
+    hyperparameters.
 
     Parameters
     ----------
@@ -138,7 +147,8 @@ def train_model(model, train_loader, val_loader, model_key, config, device='cpu'
     -------
     model   : nn.Module   loaded with best weights
     history : dict        {'train_loss': [...], 'val_loss': [...]}
-    metrics : dict        {'mse': float, 'mae': float, 'rmse': float}
+    metrics : dict        {'mse': float, 'mae': float, 'rmse': float,
+                           'p95_relative_error': float, 'max_relative_error': float}
     preds   : np.ndarray  validation predictions  (N, ...)
     targets : np.ndarray  validation ground-truth (N, ...)
     """
@@ -186,32 +196,32 @@ def train_model(model, train_loader, val_loader, model_key, config, device='cpu'
     save_dir   = training_cfg.get('save_dir', 'checkpoints')
     os.makedirs(save_dir, exist_ok=True)
 
-    model_cfg       = config['models'][model_key]
+    model_cfg        = config['models'][model_key]
     model_name_clean = model_cfg['name']
-    model_version   = model_cfg['version']
-    version_tag     = f"{model_name_clean}_v{model_version}"
+    model_version    = model_cfg['version']
+    version_tag      = f"{model_name_clean}_v{model_version}"
 
     model_dir   = os.path.join(save_dir, model_name_clean)
     version_dir = os.path.join(model_dir, version_tag)
     os.makedirs(version_dir, exist_ok=True)
 
-    checkpoint_path      = os.path.join(version_dir, f"{version_tag}_best.pth")
-    experiment_log_path  = os.path.join(model_dir,   "experiments.txt")
-    desc_path            = "/content/HomeMade-MagNet/Scripts/description.txt"
-    model_description    = load_model_description(desc_path, model_name_clean)
+    checkpoint_path     = os.path.join(version_dir, f"{version_tag}_best.pth")
+    experiment_log_path = os.path.join(model_dir,   "experiments.txt")
+    desc_path           = "/content/HomeMade-MagNet/Scripts/description.txt"
+    model_description   = load_model_description(desc_path, model_name_clean)
 
     # ── TensorBoard ───────────────────────────────────────────────────────────
-    tb_cfg    = config.get("tensorboard", {})
-    tb_root   = tb_cfg.get("log_dir", "runs")
-    run_id    = tb_cfg.get("run_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
+    tb_cfg     = config.get("tensorboard", {})
+    tb_root    = tb_cfg.get("log_dir", "runs")
+    run_id     = tb_cfg.get("run_id", datetime.now().strftime("%Y%m%d_%H%M%S"))
     tb_log_dir = os.path.join(tb_root, model_name_clean, f"v{model_version}", run_id)
-    writer    = SummaryWriter(log_dir=tb_log_dir)
+    writer     = SummaryWriter(log_dir=tb_log_dir)
 
     # ── Training state ────────────────────────────────────────────────────────
-    best_loss       = float('inf')
-    best_model_wts  = copy.deepcopy(model.state_dict())
-    best_epoch      = 0
-    history         = {'train_loss': [], 'val_loss': []}
+    best_loss      = float('inf')
+    best_model_wts = copy.deepcopy(model.state_dict())
+    best_epoch     = 0
+    history        = {'train_loss': [], 'val_loss': []}
 
     # ══════════════════════════════════════════════════════════════════════════
     # TRAINING LOOP
@@ -317,14 +327,18 @@ def train_model(model, train_loader, val_loader, model_key, config, device='cpu'
     metrics, preds, val_targets = _evaluate_best_model(model, val_loader, device)
 
     # Log metrics to TensorBoard as well
-    writer.add_scalar("Metrics/MSE",  metrics['mse'],  best_epoch)
-    writer.add_scalar("Metrics/MAE",  metrics['mae'],  best_epoch)
-    writer.add_scalar("Metrics/RMSE", metrics['rmse'], best_epoch)
+    writer.add_scalar("Metrics/MSE",               metrics['mse'],               best_epoch)
+    writer.add_scalar("Metrics/MAE",               metrics['mae'],               best_epoch)
+    writer.add_scalar("Metrics/RMSE",              metrics['rmse'],              best_epoch)
+    writer.add_scalar("Metrics/P95_Relative_Error", metrics['p95_relative_error'], best_epoch)
+    writer.add_scalar("Metrics/Max_Relative_Error", metrics['max_relative_error'], best_epoch)
 
     print(
-        f"  MSE  : {metrics['mse']:.6f}\n"
-        f"  MAE  : {metrics['mae']:.6f}\n"
-        f"  RMSE : {metrics['rmse']:.6f}"
+        f"  MSE               : {metrics['mse']:.6f}\n"
+        f"  MAE               : {metrics['mae']:.6f}\n"
+        f"  RMSE              : {metrics['rmse']:.6f}\n"
+        f"  P95 Relative Error: {metrics['p95_relative_error']:.6f}\n"
+        f"  Max Relative Error: {metrics['max_relative_error']:.6f}"
     )
 
     writer.close()
@@ -356,14 +370,16 @@ def train_model(model, train_loader, val_loader, model_key, config, device='cpu'
                 f.write(f"  {k}: {v}\n")
 
         f.write("\nTraining Results:\n")
-        f.write(f"  Best Val Loss  : {best_loss:.6f}\n")
+        f.write(f"  Best Val Loss   : {best_loss:.6f}\n")
         f.write(f"  Final Train Loss: {history['train_loss'][-1]:.6f}\n")
         f.write(f"  Final Val Loss  : {history['val_loss'][-1]:.6f}\n")
 
         f.write("\nValidation Metrics (best checkpoint):\n")
-        f.write(f"  MSE  : {metrics['mse']:.6f}\n")
-        f.write(f"  MAE  : {metrics['mae']:.6f}\n")
-        f.write(f"  RMSE : {metrics['rmse']:.6f}\n")
+        f.write(f"  MSE               : {metrics['mse']:.6f}\n")
+        f.write(f"  MAE               : {metrics['mae']:.6f}\n")
+        f.write(f"  RMSE              : {metrics['rmse']:.6f}\n")
+        f.write(f"  P95 Relative Error: {metrics['p95_relative_error']:.6f}\n")
+        f.write(f"  Max Relative Error: {metrics['max_relative_error']:.6f}\n")
 
         f.write("=" * 70 + "\n\n")
 

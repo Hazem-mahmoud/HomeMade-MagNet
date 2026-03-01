@@ -18,9 +18,9 @@ def evaluate_model(model, test_loader, device='cpu'):
         device (str): Device.
         
     Returns:
-        metrics (dict): MSE, MAE, Relative Error.
-        predictions (list): List of pred tensors.
-        targets (list): List of target tensors.
+        metrics (dict): MSE, MAE, RMSE, P95 Relative Error, Max Relative Error.
+        predictions (ndarray)
+        targets (ndarray)
     """
     model.eval()
     model.to(device)
@@ -61,10 +61,22 @@ def evaluate_model(model, test_loader, device='cpu'):
     avg_mse = total_mse / num_samples
     avg_mae = total_mae / num_samples
     
+    # ---- Relative Error Calculations ----
+    predictions = np.concatenate(preds)
+    targets = np.concatenate(actuals)
+    
+    epsilon = 1e-8  # numerical stability
+    rel_errors = np.abs(predictions - targets) / (np.abs(targets) + epsilon)
+    
+    p95_rel_error = np.percentile(rel_errors, 95)
+    max_rel_error = np.max(rel_errors)
+    
     metrics = {
         'mse': avg_mse,
         'mae': avg_mae,
-        'rmse': np.sqrt(avg_mse)
+        'rmse': np.sqrt(avg_mse),
+        'p95_relative_error': p95_rel_error,
+        'max_relative_error': max_rel_error
     }
     
-    return metrics, np.concatenate(preds), np.concatenate(actuals)
+    return metrics, predictions, targets
