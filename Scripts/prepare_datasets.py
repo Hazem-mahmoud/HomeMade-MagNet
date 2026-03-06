@@ -5,21 +5,37 @@ Reads config.yaml for per-model feature definitions and normalization methods,
 uses dataset_split.json for train/val/test indices, computes physics features
 (B, H, Loss) once, then normalizes and saves each model's data to disk.
 
+Outlier removal is applied to the TRAINING split only, before normalization,
+using physics-space (raw) values. Val/test are never touched.
+
 Output per model:
   <output_dir>/<model_name>/train.npz
   <output_dir>/<model_name>/val.npz
   <output_dir>/<model_name>/test.npz
   <output_dir>/<model_name>/stats.json
   <output_dir>/preprocessing_summary.json
+  <output_dir>/outlier_report.json          <- NEW
 
 Usage:
-  python prepare_datasets.py \\
-      --data   path/to/data.mat \\
-      --split  dataset_split.json \\
-      --config config.yaml \\
+  python prepare_datasets.py \
+      --data   path/to/data.mat \
+      --split  dataset_split.json \
+      --config config.yaml \
       --output processed_data/
 
-  # Preprocess only specific models:
+  # Outlier removal options (defaults shown):
+  python prepare_datasets.py ... \
+      --outlier-method    iqr \
+      --outlier-threshold 3.0 \
+      --outlier-features  Loss
+
+  # Check multiple features simultaneously:
+  python prepare_datasets.py ... --outlier-features Loss B_pk H_pk
+
+  # Disable outlier removal:
+  python prepare_datasets.py ... --no-outlier-removal
+
+  # Preprocess specific models only:
   python prepare_datasets.py ... --models cnn transformer
 """
 
@@ -259,7 +275,130 @@ def build_feature_pool(raw: dict) -> dict:
 
 
 # ══════════════════════════════════════════════════════════════════
-# 4.  NORMALIZATION
+# 4.  OUTLIER REMOVAL  (training split ONLY)
+# ══════════════════════════════════════════════════════════════════
+
+def remove_outliers(
+    pool:       dict,
+    train_idx:  np.ndarray,
+    features:   list,
+    method:     str   = 'iqr',
+    threshold:  float = 3.0,
+    output_dir: str   = None,
+) -> np.ndarray:
+    """
+    Remove outlier samples from the TRAINING indices only.
+
+    Detection is performed in physics space (raw, un-normalized values) so the
+    threshold has a consistent, interpretable meaning. A sample is dropped if
+    it is an outlier in ANY of the listed features (logical OR).
+
+    Parameters
+    ----------
+    pool        : feature pool from build_feature_pool()
+    train_idx   : 1-D int array of original training indices
+    features    : list of pool feature names to inspect, e.g. ['Loss', 'B_pk']
+    method      : 'iqr'    — flag outside Q1/Q3 ± threshold * IQR
+                  'zscore' — flag where |z-score| > threshold
+    threshold   : IQR multiplier (1.5 aggressive → 3.0 conservative)
+                  OR z-score cutoff (2.5 – 3.5 typical)
+    output_dir  : if given, writes outlier_report.json here
+
+    Returns
+    -------
+    clean_train_idx : np.ndarray  (outlier rows removed)
+    """
+    print(f"\n  Outlier removal — method='{method}', threshold={threshold}")
+    print(f"  Features checked : {features}")
+    print(f"  Training samples before: {len(train_idx):,}")
+
+    if method not in ('iqr', 'zscore'):
+        raise ValueError(f"Unknown method '{method}'. Choose 'iqr' or 'zscore'.")
+
+    # True = keep this sample
+    keep_mask = np.ones(len(train_idx), dtype=bool)
+
+    report = {'method': method, 'threshold': threshold, 'features': {}}
+
+    for feat_name in features:
+        if feat_name not in pool:
+            print(f"  WARNING: '{feat_name}' not in pool — skipping.")
+            continue
+
+        raw_arr = pool[feat_name][train_idx]     # raw physics values for train subset
+
+        # Collapse to a single representative scalar per sample
+        if raw_arr.ndim == 1:
+            values = raw_arr
+        elif raw_arr.ndim == 2 and raw_arr.shape[1] == 1:
+            values = raw_arr.flatten()
+        else:
+            # Waveform (B, H): use half peak-to-peak as representative scalar
+            values = (raw_arr.max(axis=1) - raw_arr.min(axis=1)) / 2.0
+            print(f"    '{feat_name}' is a waveform — using peak amplitude for detection")
+
+        # Compute bounds
+        if method == 'iqr':
+            q1, q3 = np.percentile(values, [25, 75])
+            iqr    = q3 - q1
+            lo, hi = q1 - threshold * iqr, q3 + threshold * iqr
+            feat_mask = (values >= lo) & (values <= hi)
+
+        else:  # zscore
+            mean, std = values.mean(), values.std()
+            if std == 0:
+                print(f"    '{feat_name}' has zero std — skipping.")
+                continue
+            lo, hi    = mean - threshold * std, mean + threshold * std
+            feat_mask = np.abs((values - mean) / std) <= threshold
+
+        n_removed = int((~feat_mask).sum())
+        pct       = 100.0 * n_removed / len(train_idx)
+
+        print(
+            f"    {feat_name:12s}  "
+            f"data=[{values.min():.4g}, {values.max():.4g}]  "
+            f"bounds=[{lo:.4g}, {hi:.4g}]  "
+            f"removed={n_removed:,} ({pct:.2f}%)"
+        )
+
+        report['features'][feat_name] = {
+            'n_removed':   n_removed,
+            'pct_removed': round(pct, 4),
+            'bounds':      [float(lo), float(hi)],
+            'data_range':  [float(values.min()), float(values.max())],
+        }
+
+        keep_mask &= feat_mask    # union: drop if outlier in ANY feature
+
+    clean_train_idx = train_idx[keep_mask]
+    total_removed   = int(len(train_idx) - len(clean_train_idx))
+    total_pct       = 100.0 * total_removed / len(train_idx)
+
+    report.update({
+        'total_removed':     total_removed,
+        'pct_total_removed': round(total_pct, 4),
+        'train_size_before': int(len(train_idx)),
+        'train_size_after':  int(len(clean_train_idx)),
+    })
+
+    print(f"\n  ── Summary ────────────────────────────────────")
+    print(f"  Total removed         : {total_removed:,} ({total_pct:.2f}%)")
+    print(f"  Clean training samples: {len(clean_train_idx):,}")
+    print(f"  ───────────────────────────────────────────────")
+
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        rpath = os.path.join(output_dir, 'outlier_report.json')
+        with open(rpath, 'w') as f:
+            json.dump(report, f, indent=2)
+        print(f"  Outlier report → {rpath}")
+
+    return clean_train_idx
+
+
+# ══════════════════════════════════════════════════════════════════
+# 5.  NORMALIZATION
 # ══════════════════════════════════════════════════════════════════
 
 VALID_METHODS = {'standard', 'minmax', 'log10', 'none'}
@@ -320,7 +459,7 @@ def normalize(data: np.ndarray, method: str, stats: dict = None):
 
 
 # ══════════════════════════════════════════════════════════════════
-# 5.  CORE PREPROCESSING PIPELINE  (per model)
+# 6.  CORE PREPROCESSING PIPELINE  (per model)
 # ══════════════════════════════════════════════════════════════════
 
 def preprocess_model(
@@ -334,13 +473,13 @@ def preprocess_model(
     Split and normalize data for **one model** using the feature config
     read directly from config.yaml.
 
-    Normalization stats are ALWAYS fitted on the training split only —
-    then applied identically to val and test (prevents data leakage).
+    Normalization stats are ALWAYS fitted on the (already cleaned) training
+    split only — then applied identically to val and test (prevents data leakage).
 
     Parameters
     ----------
     pool        : full feature pool from build_feature_pool()
-    train_idx   : np.ndarray  — indices into pool arrays
+    train_idx   : np.ndarray  — CLEAN training indices (outliers already removed)
     val_idx     : np.ndarray
     test_idx    : np.ndarray
     feat_config : dict  {'inputs': {name: method}, 'targets': {name: method}}
@@ -378,8 +517,8 @@ def preprocess_model(
 
             full_arr = pool[feat_name]       # (N_total, ...)
 
-            # ── Fit normalization stats on TRAINING data only ─────────────
-            train_data  = full_arr[train_idx]
+            # ── Fit normalization stats on CLEAN TRAINING data only ────────
+            train_data   = full_arr[train_idx]
             _, fit_stats = normalize(train_data, method)
 
             # Save stats with method name for full traceability
@@ -406,7 +545,7 @@ def preprocess_model(
 
 
 # ══════════════════════════════════════════════════════════════════
-# 6.  SAVE / LOAD UTILITIES
+# 7.  SAVE / LOAD UTILITIES
 # ══════════════════════════════════════════════════════════════════
 
 def save_split(split_data: dict, path: str):
@@ -449,7 +588,7 @@ def stats_to_serializable(stats: dict) -> dict:
 
 
 # ══════════════════════════════════════════════════════════════════
-# 7.  MAIN ENTRY POINT
+# 8.  MAIN ENTRY POINT
 # ══════════════════════════════════════════════════════════════════
 
 def main():
@@ -457,7 +596,9 @@ def main():
         description=(
             "MagNet offline preprocessing.\n"
             "Feature selection and normalization methods are read entirely "
-            "from config.yaml — no hard-coded values in this script."
+            "from config.yaml — no hard-coded values in this script.\n\n"
+            "Outlier removal is applied to the TRAINING split only, "
+            "in physics space (before normalization)."
         )
     )
     parser.add_argument('--data',   required=True,
@@ -470,6 +611,46 @@ def main():
                         help='Root output directory (default: processed_data/)')
     parser.add_argument('--models', nargs='+', default=None,
                         help='Models to preprocess (default: all defined in config)')
+
+    # ── Outlier removal arguments ────────────────────────────────────────────
+    parser.add_argument(
+        '--outlier-method',
+        type=str,
+        default='iqr',
+        choices=['iqr', 'zscore'],
+        help=(
+            "Outlier detection method (default: iqr).\n"
+            "  iqr    : remove samples outside Q1/Q3 ± threshold * IQR\n"
+            "  zscore : remove samples with |z| > threshold"
+        )
+    )
+    parser.add_argument(
+        '--outlier-threshold',
+        type=float,
+        default=3.0,
+        help=(
+            "Threshold multiplier for outlier removal (default: 3.0).\n"
+            "  IQR mode    : 1.5 (aggressive) – 3.0 (conservative)\n"
+            "  Z-score mode: 2.5 – 3.5 typical"
+        )
+    )
+    parser.add_argument(
+        '--outlier-features',
+        nargs='+',
+        default=['Loss', 'B_pk', 'H_pk', 'Frequency', 'Temperature', 'Hdc', 'Duty'],
+        help=(
+            "Feature(s) to use for outlier detection (default: all scalar features).\n"
+            "A sample is removed if it is an outlier in ANY listed feature.\n"
+            "Example: --outlier-features Loss B_pk H_pk"
+        )
+    )
+    parser.add_argument(
+        '--no-outlier-removal',
+        action='store_true',
+        default=False,
+        help="Disable outlier removal entirely (preserves original behaviour)."
+    )
+
     args = parser.parse_args()
 
     # ── STEP 1: Load config.yaml ────────────────────────────────────────────
@@ -482,10 +663,8 @@ def main():
     if not available_models:
         raise ValueError("No 'models' entries found in config.yaml.")
 
-    # Default: preprocess all models defined in config
     models_to_run = args.models if args.models else available_models
 
-    # Validate
     unknown = [m for m in models_to_run if m not in available_models]
     if unknown:
         raise ValueError(
@@ -538,9 +717,33 @@ def main():
     print("═"*62)
     pool = build_feature_pool(raw)
 
+    # ── STEP 4b: Outlier removal (training split ONLY) ──────────────────────
+    print("\n" + "═"*62)
+    print("  STEP 4b — Outlier removal  (train split ONLY — val/test unchanged)")
+    print("═"*62)
+
+    if args.no_outlier_removal:
+        print("  Skipped (--no-outlier-removal flag set).")
+        clean_train_idx = train_idx
+    else:
+        clean_train_idx = remove_outliers(
+            pool        = pool,
+            train_idx   = train_idx,
+            features    = args.outlier_features,
+            method      = args.outlier_method,
+            threshold   = args.outlier_threshold,
+            output_dir  = args.output,
+        )
+
+    print(f"\n  Final split sizes:")
+    print(f"    train (clean) = {len(clean_train_idx):>8,}  "
+          f"({len(train_idx) - len(clean_train_idx):,} removed)")
+    print(f"    val           = {len(val_idx):>8,}  (unchanged)")
+    print(f"    test          = {len(test_idx):>8,}  (unchanged)")
+
     # ── STEP 5: Per-model preprocessing driven by config.yaml ──────────────
     print("\n" + "═"*62)
-    print("  STEP 5 — Per-model preprocessing")
+    print("  STEP 5 — Per-model preprocessing  (stats fit on clean train)")
     print("═"*62)
 
     global_summary = {}
@@ -550,15 +753,15 @@ def main():
         print(f"  │  Model : {model_name.upper():<48}│")
         print(f"  └{'─'*58}┘")
 
-        # Read features + norm methods straight from config.yaml
         feat_config = get_model_feature_config(cfg, model_name)
 
         print(f"  inputs  (config.yaml) : {feat_config['inputs']}")
         print(f"  targets (config.yaml) : {feat_config['targets']}")
         print()
 
+        # Pass CLEAN training indices — normalization stats fit on clean data only
         splits, stats = preprocess_model(
-            pool, train_idx, val_idx, test_idx, feat_config
+            pool, clean_train_idx, val_idx, test_idx, feat_config
         )
 
         # ── Save splits ───────────────────────────────────────────────────
@@ -583,9 +786,16 @@ def main():
             'inputs':      feat_config['inputs'],
             'targets':     feat_config['targets'],
             'split_sizes': {
-                'train': int(len(train_idx)),
+                'train': int(len(clean_train_idx)),
                 'val':   int(len(val_idx)),
                 'test':  int(len(test_idx)),
+            },
+            'outlier_removal': {
+                'enabled':       not args.no_outlier_removal,
+                'method':        args.outlier_method,
+                'threshold':     args.outlier_threshold,
+                'features':      args.outlier_features,
+                'removed_count': int(len(train_idx) - len(clean_train_idx)),
             },
             'stats':    stats_to_serializable(stats),
             'saved_to': out_dir,
@@ -604,7 +814,7 @@ def main():
 
 
 # ══════════════════════════════════════════════════════════════════
-# 8.  PYTORCH DATASET WRAPPER  (drop-in for training scripts)
+# 9.  PYTORCH DATASET WRAPPER  (drop-in for training scripts)
 # ══════════════════════════════════════════════════════════════════
 
 class PreprocessedMagNetDataset:
