@@ -23,7 +23,7 @@ Usage
   python train_preprocessed.py \\
       --processed  processed_data/ \\
       --config     Scripts/config/config.yaml \\
-      --model      cnn
+      --model      cnnv2
 
   # Override epochs
   python train_preprocessed.py ... --epochs 50
@@ -47,7 +47,7 @@ import torch
 import yaml
 from torch.utils.data import Dataset, DataLoader
 
-# ── Project imports (same as main.py) ───────────────────────────────────────
+# ── Project imports ──────────────────────────────────────────────────────────
 from src.models.scaler_model      import ScalerNetwork
 from src.models.sequence_model    import SequenceToScalerNetwork
 from src.models.seq2seq_model     import Seq2SeqNetwork
@@ -73,7 +73,6 @@ def load_config(path: str) -> dict:
 def _load_split(npz_path: str) -> dict:
     """
     Load one .npz split produced by prepare_datasets.py.
-
     Returns {'inputs': {name: array}, 'targets': {name: array}}
     """
     data   = np.load(npz_path)
@@ -88,13 +87,13 @@ class PreprocessedDataset(Dataset):
     """
     PyTorch Dataset backed by a single pre-processed .npz split.
 
-    Item format per mode (matches MagNetDataset / dataset.py)
+    Item format per mode
     ----------------------------------------------------------
-    scaler      ->  x (n_feats,),          y (1,)
-    sequence  ┐
-    cnn       ├->  B (T,1),  scalars (n,), y (1,)
-    transformer┘
-    seq2seq     ->  B (T,1),  H (T,1)
+    scaler / scalerv2  ->  x (n_feats,),          y (1,)
+    sequence        ┐
+    cnn / cnnv2     ├->  B (T,1),  scalars (n,),  y (1,)
+    transformer     ┘
+    seq2seq            ->  B (T,1),  H (T,1)
 
     Parameters
     ----------
@@ -112,13 +111,10 @@ class PreprocessedDataset(Dataset):
         self.inputs  = data['inputs']
         self.targets = data['targets']
 
-        # Determine dataset length from first available array
-        first = (next(iter(self.inputs.values()))  if self.inputs
+        first = (next(iter(self.inputs.values())) if self.inputs
                  else next(iter(self.targets.values())))
         self.length = len(first)
 
-    # expose stats at dataset level so main loop can read them (same pattern
-    # as MagNetDataset.stats used in main.py for CNN freq_stats)
     def __len__(self) -> int:
         return self.length
 
@@ -130,14 +126,14 @@ class PreprocessedDataset(Dataset):
         inp = self.inputs
         tgt = self.targets
 
-        # ── scaler: concatenate all input features → flat vector ──────────
-        if self.mode == 'scaler':
+        # ── scaler / scalerv2 ─────────────────────────────────────────────
+        if self.mode in ('scaler', 'scalerv2'):
             x = torch.cat([self._t(inp[f][idx]).flatten() for f in inp])
             y = self._t(tgt['Loss'][idx]).flatten()
             return x, y
 
-        # ── sequence / cnn / transformer: waveform B + scalar context ─────
-        elif self.mode in ('sequence', 'cnn', 'transformer'):
+        # ── sequence / cnn / cnnv2 / transformer ──────────────────────────
+        elif self.mode in ('sequence', 'cnn', 'cnnv2', 'transformer'):
             B       = self._t(inp['B'][idx]).unsqueeze(-1)            # (T, 1)
             scalars = torch.cat([
                 self._t(inp[f][idx]).flatten() for f in inp if f != 'B'
@@ -145,7 +141,7 @@ class PreprocessedDataset(Dataset):
             y = self._t(tgt['Loss'][idx]).flatten()
             return B, scalars, y
 
-        # ── seq2seq: B waveform → H waveform ─────────────────────────────
+        # ── seq2seq ───────────────────────────────────────────────────────
         elif self.mode == 'seq2seq':
             B = self._t(inp['B'][idx]).unsqueeze(-1)                  # (T, 1)
             H = self._t(tgt['H'][idx]).unsqueeze(-1)                  # (T, 1)
@@ -165,12 +161,11 @@ def build_loaders(
 
     Returns
     -------
-    train_loader, val_loader, stats  (dict loaded from stats.json)
+    train_loader, val_loader, stats
     """
     model_dir  = os.path.join(processed_root, model_name)
     stats_path = os.path.join(model_dir, 'stats.json')
 
-    # ── Validate paths ────────────────────────────────────────────────────
     for split in ('train', 'val'):
         p = os.path.join(model_dir, f"{split}.npz")
         if not os.path.exists(p):
@@ -187,11 +182,14 @@ def build_loaders(
     with open(stats_path) as f:
         stats = json.load(f)
 
+    # v2 variants share item format with their v1 counterparts
+    dataset_mode = _dataset_mode(model_name)
+
     train_ds = PreprocessedDataset(
-        os.path.join(model_dir, 'train.npz'), stats, mode=model_name
+        os.path.join(model_dir, 'train.npz'), stats, mode=dataset_mode
     )
     val_ds = PreprocessedDataset(
-        os.path.join(model_dir, 'val.npz'), stats, mode=model_name
+        os.path.join(model_dir, 'val.npz'), stats, mode=dataset_mode
     )
 
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True,
@@ -205,8 +203,20 @@ def build_loaders(
     return train_loader, val_loader, stats
 
 
+def _dataset_mode(model_name: str) -> str:
+    """
+    Map model name to the dataset item format it needs.
+    v2 variants reuse the same collation logic as their v1 base.
+    """
+    _mode_map = {
+        'scalerv2': 'scaler',
+        'cnnv2':    'cnn',
+    }
+    return _mode_map.get(model_name, model_name)
+
+
 # ══════════════════════════════════════════════════════════════════════════════
-# 3.  MODEL FACTORY  (identical logic to main.py)
+# 3.  MODEL FACTORY
 # ══════════════════════════════════════════════════════════════════════════════
 
 def build_model(model_name: str, config: dict, stats: dict, seq_len: int = 1024):
@@ -215,10 +225,9 @@ def build_model(model_name: str, config: dict, stats: dict, seq_len: int = 1024)
 
     Parameters
     ----------
-    model_name : str   e.g. 'cnn'
+    model_name : str   e.g. 'cnnv2'
     config     : dict  full config loaded from config.yaml
     stats      : dict  normalization stats from stats.json
-                       (used by CNN to embed frequency info)
     seq_len    : int   waveform length — used for TransformerNetwork
 
     Returns
@@ -231,12 +240,11 @@ def build_model(model_name: str, config: dict, stats: dict, seq_len: int = 1024)
 
     # ── scaler ────────────────────────────────────────────────────────────
     if model_name == 'scaler':
-        # input_dim = number of input features defined in config
         input_dim = len(
             config['models']['scaler'].get('features', {}).get('inputs', {})
         )
         if input_dim == 0:
-            input_dim = 3   # legacy fallback
+            input_dim = 3
 
         model = ScalerNetwork(
             input_dim  = input_dim,
@@ -245,7 +253,25 @@ def build_model(model_name: str, config: dict, stats: dict, seq_len: int = 1024)
             output_dim = 1,
         )
 
-    # ── sequence ─────────────────────────────────────────────────────────
+    # ── scalerv2 ──────────────────────────────────────────────────────────
+    elif model_name == 'scalerv2':
+        from src.models.scaler_v2 import ScalerNetwork as ScalerNetworkV2
+
+        input_dim = len(
+            config['models']['scalerv2'].get('features', {}).get('inputs', {})
+        )
+        if input_dim == 0:
+            input_dim = 4
+
+        model = ScalerNetworkV2(
+            input_dim  = input_dim,
+            hidden_dim = model_conf['hidden_dim'],
+            num_layers = model_conf['layers'],
+            output_dim = 1,
+            dropout    = model_conf.get('dropout', 0.2),
+        )
+
+    # ── sequence ──────────────────────────────────────────────────────────
     elif model_name == 'sequence':
         model = SequenceToScalerNetwork(
             input_dim  = 1,
@@ -254,7 +280,7 @@ def build_model(model_name: str, config: dict, stats: dict, seq_len: int = 1024)
             num_layers = model_conf['num_layers'],
         )
 
-    # ── seq2seq ──────────────────────────────────────────────────────────
+    # ── seq2seq ───────────────────────────────────────────────────────────
     elif model_name == 'seq2seq':
         model = Seq2SeqNetwork(
             input_dim  = 1,
@@ -262,9 +288,8 @@ def build_model(model_name: str, config: dict, stats: dict, seq_len: int = 1024)
             output_dim = 1,
         )
 
-    # ── cnn ──────────────────────────────────────────────────────────────
+    # ── cnn ───────────────────────────────────────────────────────────────
     elif model_name == 'cnn':
-        # Pass frequency normalization stats so CNN can embed freq correctly
         freq_stats = {}
         if 'Frequency' in stats:
             f_s = stats['Frequency']
@@ -275,7 +300,30 @@ def build_model(model_name: str, config: dict, stats: dict, seq_len: int = 1024)
 
         model = CNNNetwork(input_dim=1, stats=freq_stats)
 
-    # ── transformer ──────────────────────────────────────────────────────
+    # ── cnnv2 ─────────────────────────────────────────────────────────────
+    elif model_name == 'cnnv2':
+        from src.models.cnn_v2 import CNNNetwork as CNNNetworkV2
+
+        # scalar_dim = number of input features except B
+        # e.g. Frequency, Temperature, Hdc → 3
+        input_features = config['models']['cnnv2'].get('features', {}).get('inputs', {})
+        scalar_dim = len([f for f in input_features if f != 'B'])
+        if scalar_dim == 0:
+            scalar_dim = 3   # fallback: Frequency, Temperature, Hdc
+
+        model = CNNNetworkV2(
+            input_dim    = 1,
+            num_channels = model_conf.get('num_channels', 96),
+            num_layers   = model_conf.get('num_layers',   4),
+            scalar_dim   = scalar_dim,
+            dropout      = model_conf.get('dropout',      0.15),
+            stats        = None,
+        )
+        print(f"  CNNv2 — num_channels={model_conf.get('num_channels', 96)}, "
+              f"num_layers={model_conf.get('num_layers', 4)}, "
+              f"scalar_dim={scalar_dim}")
+
+    # ── transformer ───────────────────────────────────────────────────────
     elif model_name == 'transformer':
         model = TransformerNetwork(
             B_in_channel            = seq_len,
@@ -296,7 +344,7 @@ def build_model(model_name: str, config: dict, stats: dict, seq_len: int = 1024)
 # 4.  MAIN
 # ══════════════════════════════════════════════════════════════════════════════
 
-ALL_MODELS = ['scaler', 'sequence', 'seq2seq', 'cnn', 'transformer']
+ALL_MODELS = ['scaler', 'scalerv2', 'sequence', 'seq2seq', 'cnn', 'cnnv2', 'transformer']
 
 
 def main():
@@ -328,9 +376,9 @@ def main():
     if args.epochs:
         config['training']['epochs'] = args.epochs
 
-    device      = 'cuda' if torch.cuda.is_available() else 'cpu'
-    batch_size  = config['data'].get('batch_size', 32)
-    save_root   = config['training']['save_dir']
+    device     = 'cuda' if torch.cuda.is_available() else 'cpu'
+    batch_size = config['data'].get('batch_size', 32)
+    save_root  = config['training']['save_dir']
 
     print(f"\nDevice     : {device}")
     print(f"Batch size : {batch_size}")
@@ -343,13 +391,13 @@ def main():
     for model_name in models_to_run:
         print(f"\n{'='*20} Training {model_name.upper()} Model {'='*20}")
 
-        # ── 1. DataLoaders from pre-processed .npz ───────────────────────────
+        # ── 1. DataLoaders ───────────────────────────────────────────────────
         print("Loading pre-processed data ...")
         train_loader, val_loader, stats = build_loaders(
             model_name, args.processed, batch_size
         )
 
-        # Infer waveform sequence length from train split (used by Transformer)
+        # Infer waveform sequence length (used by Transformer)
         seq_len = 1024
         try:
             sample_path = os.path.join(args.processed, model_name, 'train.npz')
@@ -374,27 +422,24 @@ def main():
         save_dir = os.path.join(save_root, model_name)
         os.makedirs(save_dir, exist_ok=True)
 
-        # Give train_model its own copy of save_dir so models don't collide
-        train_config = dict(config['training'])
+        train_config        = dict(config['training'])
         train_config['save_dir'] = save_dir
-
-        run_config = dict(config)
+        run_config          = dict(config)
         run_config['training'] = train_config
 
         model = model.to(device)
-        # train_model now evaluates the best checkpoint internally and returns
-        # metrics + predictions so everything is written to the same log block.
         trained_model, history, metrics, preds, targets_out = train_model(
             model, train_loader, val_loader, model_name, run_config, device
         )
         print(f"  Validation metrics : {metrics}")
 
-        # ── Additional relative-error statistics on the test split ────────────
-        if model_name in ('scaler', 'sequence', 'cnn', 'transformer'):
+        # ── 4. Test-split relative-error statistics ───────────────────────────
+        if model_name in ('scaler', 'scalerv2', 'sequence', 'cnn', 'cnnv2', 'transformer'):
             try:
+                dataset_mode = _dataset_mode(model_name)
                 test_ds = PreprocessedDataset(
                     os.path.join(args.processed, model_name, 'test.npz'),
-                    stats, mode=model_name,
+                    stats, mode=dataset_mode,
                 )
                 test_loader = DataLoader(
                     test_ds, batch_size=batch_size, shuffle=False,
@@ -404,7 +449,7 @@ def main():
                 all_preds, all_targets = [], []
                 with torch.no_grad():
                     for batch in test_loader:
-                        if model_name == 'scaler':
+                        if model_name in ('scaler', 'scalerv2'):
                             x, y = batch
                             out = trained_model(x.to(device))
                         else:
@@ -416,7 +461,9 @@ def main():
                 all_preds   = np.concatenate(all_preds).flatten()
                 all_targets = np.concatenate(all_targets).flatten()
 
-                rel_errors    = np.abs((all_preds - all_targets) / (np.abs(all_targets) + 1e-8))
+                rel_errors    = np.abs(
+                    (all_preds - all_targets) / (np.abs(all_targets) + 1e-8)
+                )
                 p95_rel_error = float(np.percentile(rel_errors, 95))
                 max_rel_error = float(np.max(rel_errors))
 
@@ -425,11 +472,10 @@ def main():
                 metrics['test_p95_relative_error'] = p95_rel_error
                 metrics['test_max_relative_error'] = max_rel_error
 
-                # ── Append test metrics to the same experiments.txt log ───────
-                model_cfg        = config['models'][model_name]
-                model_name_clean = model_cfg['name']
+                # Append to experiments.txt log
+                model_cfg           = config['models'][model_name]
+                model_name_clean    = model_cfg['name']
                 experiment_log_path = os.path.join(save_dir, model_name_clean, 'experiments.txt')
-                # Fallback: log lives directly in save_dir when train.py uses save_dir as model_dir
                 if not os.path.exists(experiment_log_path):
                     experiment_log_path = os.path.join(save_dir, 'experiments.txt')
 
@@ -446,7 +492,7 @@ def main():
         plots_dir = os.path.join(save_dir, 'plots')
         os.makedirs(plots_dir, exist_ok=True)
 
-        # Loss curve (all models)
+        # Loss curve — all models
         loss_plot_path = os.path.join(plots_dir, f'{version_tag}_loss_curve.png')
         plot_loss_curve(
             history,
@@ -455,8 +501,8 @@ def main():
         )
         print(f"  Loss plot saved → {loss_plot_path}")
 
-        # Prediction scatter (all models except seq2seq)
-        if model_name in ('scaler', 'sequence', 'cnn', 'transformer'):
+        # Prediction scatter — all models except seq2seq
+        if model_name in ('scaler', 'scalerv2', 'sequence', 'cnn', 'cnnv2', 'transformer'):
             pred_plot_path = os.path.join(
                 plots_dir, f'{version_tag}_prediction_scatter.png'
             )
@@ -468,23 +514,23 @@ def main():
             )
             print(f"  Scatter plot saved → {pred_plot_path}")
 
-        # B-H loop plot (seq2seq only)
+        # B-H loop — seq2seq only
         elif model_name == 'seq2seq':
             try:
                 from src.utils.visualization import plot_bh_loop
 
-                val_iter = iter(val_loader)
+                val_iter         = iter(val_loader)
                 b_batch, h_batch = next(val_iter)
-                b_batch = b_batch.to(device)
+                b_batch          = b_batch.to(device)
 
                 trained_model.eval()
                 with torch.no_grad():
                     pred_h_batch = trained_model(b_batch)
 
                 sample_idx = 0
-                actual_b = b_batch[sample_idx].cpu().squeeze().numpy()
-                actual_h = h_batch[sample_idx].cpu().squeeze().numpy()
-                pred_h   = pred_h_batch[sample_idx].cpu().squeeze().numpy()
+                actual_b   = b_batch[sample_idx].cpu().squeeze().numpy()
+                actual_h   = h_batch[sample_idx].cpu().squeeze().numpy()
+                pred_h     = pred_h_batch[sample_idx].cpu().squeeze().numpy()
 
                 bh_plot_path = os.path.join(
                     plots_dir, f'{version_tag}_bh_loop_comparison.png'

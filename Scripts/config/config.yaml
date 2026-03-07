@@ -1,14 +1,28 @@
-# Configuration parameters for MagNet ML Project
+# MagNet ML Project — Config v2
+# Scaler v3 and CNN v2 changes are marked with [CHANGED]
 
-# Data settings
 data:
   raw_path: "/content/drive/MyDrive/MagNet_DataSet"
   processed_path: "/content/drive/MyDrive/MagNet_DataSet/processed"
-  batch_size: 32
+  batch_size: 64          # [CHANGED] 32 → 64: larger batches stabilize BatchNorm
   test_split: 0.2
 
-# Model settings
 models:
+  scalerv2:
+    name: scalerv2
+    version: 1            # [CHANGED] v2 → v3
+    hidden_dim: 256       # [CHANGED] 64 → 256
+    layers: 5             # [CHANGED] 3 → 5
+    dropout: 0.2          # [CHANGED] added
+    features:
+      inputs:
+        B_pk: standard
+        Frequency: standard
+        Temperature: standard
+        Hdc: standard
+      targets:
+        Loss: log10       # [CHANGED] standard → log10 (power loss spans decades)
+
   scaler:
     name: scaler
     version: 2
@@ -22,6 +36,9 @@ models:
         Hdc: standard
       targets:
         Loss: standard
+
+
+
 
   sequence:
     name: sequence
@@ -45,9 +62,24 @@ models:
     features:
       inputs:
         B: standard
-        H: standard
       targets:
+        H: standard       # [FIXED] H only in targets (was also in inputs — bug)
         Loss: standard
+
+  cnnv2:
+    name: cnnv2
+    version: 1            # [CHANGED] v1 → v2
+    num_channels: 96      # [CHANGED] replaces kernel_size/num_channels — divisible by 3
+    num_layers: 4         # [CHANGED] 3 → 4
+    dropout: 0.15         # [CHANGED] added
+    features:
+      inputs:
+        B: minmax
+        Frequency: standard
+        Temperature: standard
+        Hdc: standard
+      targets:
+        Loss: log10       # [CHANGED] kept log10 — correct for power law targets
 
   cnn:
     name: cnn
@@ -63,6 +95,7 @@ models:
         Hdc: standard
       targets:
         Loss: log10
+
 
   transformer:
     name: transformer
@@ -81,26 +114,26 @@ models:
       targets:
         Loss: standard
 
-# Training settings
 training:
   epochs: 100
   learning_rate: 0.001
+  weight_decay: 0.0001    # [CHANGED] added L2 regularization
+  grad_clip: 1.0          # [CHANGED] added gradient clipping (critical for stability)
   save_dir: "/content/drive/MyDrive/MagNet/checkpoints"
 
   scheduler:
-    type: "ReduceLROnPlateau"   # options: ReduceLROnPlateau, StepLR
+    type: "ReduceLROnPlateau"
     factor: 0.5
     patience: 5
     min_lr: 1e-6
-    step_size: 10      # used only if StepLR
-    gamma: 0.1         # used only if StepLR
+    step_size: 10
+    gamma: 0.1
 
   early_stopping:
     enabled: true
     patience: 10
     min_delta: 0.0001
-    
-# logs folder
+
 tensorboard:
-  log_dir: "/content/drive/MyDrive/MagNet/runs"        # root folder for all TB logs
-  run_id: "baseline"     # change this per experiment
+  log_dir: "/content/drive/MyDrive/MagNet/runs"
+  run_id: "v2_scaler_cnn"   # [CHANGED] updated run tag
