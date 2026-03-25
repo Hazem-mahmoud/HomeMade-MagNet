@@ -1,28 +1,13 @@
-# MagNet ML Project — Config v2
-# Scaler v3 and CNN v2 changes are marked with [CHANGED]
+# MagNet ML Project — Config
+# cnnv3 added: B+H waveform model with FiLM conditioning
 
 data:
   raw_path: "/content/drive/MyDrive/MagNet_DataSet"
   processed_path: "/content/drive/MyDrive/MagNet_DataSet/processed"
-  batch_size: 64          # [CHANGED] 32 → 64: larger batches stabilize BatchNorm
+  batch_size: 64
   test_split: 0.2
 
 models:
-  scalerv2:
-    name: scalerv2
-    version: 1            # [CHANGED] v2 → v3
-    hidden_dim: 256       # [CHANGED] 64 → 256
-    layers: 5             # [CHANGED] 3 → 5
-    dropout: 0.2          # [CHANGED] added
-    features:
-      inputs:
-        B_pk: standard
-        Frequency: standard
-        Temperature: standard
-        Hdc: standard
-      targets:
-        Loss: log10       # [CHANGED] standard → log10 (power loss spans decades)
-
   scaler:
     name: scaler
     version: 2
@@ -37,8 +22,20 @@ models:
       targets:
         Loss: standard
 
-
-
+  scalerv2:
+    name: scalerv2
+    version: 1
+    hidden_dim: 256
+    layers: 5
+    dropout: 0.2
+    features:
+      inputs:
+        B_pk: standard
+        Frequency: standard
+        Temperature: standard
+        Hdc: standard
+      targets:
+        Loss: log10
 
   sequence:
     name: sequence
@@ -63,23 +60,8 @@ models:
       inputs:
         B: standard
       targets:
-        H: standard       # [FIXED] H only in targets (was also in inputs — bug)
+        H: standard
         Loss: standard
-
-  cnnv2:
-    name: cnnv2
-    version: 1            # [CHANGED] v1 → v2
-    num_channels: 96      # [CHANGED] replaces kernel_size/num_channels — divisible by 3
-    num_layers: 4         # [CHANGED] 3 → 4
-    dropout: 0.15         # [CHANGED] added
-    features:
-      inputs:
-        B: minmax
-        Frequency: standard
-        Temperature: standard
-        Hdc: standard
-      targets:
-        Loss: log10       # [CHANGED] kept log10 — correct for power law targets
 
   cnn:
     name: cnn
@@ -96,6 +78,44 @@ models:
       targets:
         Loss: log10
 
+  cnnv2:
+    name: cnnv2
+    version: "A"
+    kernel_size: 3
+    num_channels: 64
+    num_layers: 3
+    features:
+      inputs:
+        B:           minmax
+        Frequency:   standard
+        Temperature: standard
+      targets:
+        Loss:        log10
+
+  # ── CNNv3 ──────────────────────────────────────────────────────────────────
+  # Architecture : MultiScaleConv → FiLM → ResConvBlocks → FiLM → head
+  # Waveform inputs : B  (minmax)  +  H  (standard)
+  # Scalar conditions: Frequency + Temperature   (scalar_dim = 2)
+  # Target           : Loss  (log10 — power law spans decades)
+  #
+  # __getitem__ return signature:
+  #   B (T,1),  H (T,1),  scalars (2,),  y (1,)
+  # ──────────────────────────────────────────────────────────────────────────
+  cnnv3:
+    name: cnnv3
+    version: "1"
+    num_channels: 96      # must be divisible by 3  (MultiScaleConv uses 3 branches)
+    num_layers: 4
+    scalar_dim: 2         # Frequency + Temperature
+    dropout: 0.15
+    features:
+      inputs:
+        B:           minmax    # waveform — shape (N, T)
+        H:           standard  # waveform — shape (N, T)
+        Frequency:   standard  # scalar   — shape (N, 1)
+        Temperature: standard  # scalar   — shape (N, 1)
+      targets:
+        Loss:        log10     # volumetric power loss
 
   transformer:
     name: transformer
@@ -117,8 +137,8 @@ models:
 training:
   epochs: 100
   learning_rate: 0.001
-  weight_decay: 0.0001    # [CHANGED] added L2 regularization
-  grad_clip: 1.0          # [CHANGED] added gradient clipping (critical for stability)
+  weight_decay: 0.0001
+  grad_clip: 1.0
   save_dir: "/content/drive/MyDrive/MagNet/checkpoints"
 
   scheduler:
@@ -136,4 +156,4 @@ training:
 
 tensorboard:
   log_dir: "/content/drive/MyDrive/MagNet/runs"
-  run_id: "v2_scaler_cnn"   # [CHANGED] updated run tag
+  run_id: "v3_cnnv3"
