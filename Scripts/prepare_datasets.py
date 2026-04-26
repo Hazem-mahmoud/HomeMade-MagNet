@@ -14,29 +14,28 @@ Output per model:
   <output_dir>/<model_name>/test.npz
   <output_dir>/<model_name>/stats.json
   <output_dir>/preprocessing_summary.json
-  <output_dir>/outlier_report.json          <- NEW
+  <output_dir>/outlier_report.json
+
+Dataset modes
+-------------
+  scaler / scalerv2  ->  scalar inputs only
+  sequence / cnn
+  cnnv2 / transformer->  B waveform + scalar conditions
+  cnnv3              ->  B waveform + H waveform + scalar conditions  ← NEW
+  seq2seq            ->  B waveform → H waveform
 
 Usage:
-  python prepare_datasets.py \
-      --data   path/to/data.mat \
-      --split  dataset_split.json \
-      --config config.yaml \
+  python prepare_datasets.py \\
+      --data   path/to/data.mat \\
+      --split  dataset_split.json \\
+      --config config.yaml \\
       --output processed_data/
 
-  # Outlier removal options (defaults shown):
-  python prepare_datasets.py ... \
-      --outlier-method    iqr \
-      --outlier-threshold 3.0 \
-      --outlier-features  Loss
-
-  # Check multiple features simultaneously:
-  python prepare_datasets.py ... --outlier-features Loss B_pk H_pk
+  # Preprocess only cnnv3:
+  python prepare_datasets.py ... --models cnnv3
 
   # Disable outlier removal:
   python prepare_datasets.py ... --no-outlier-removal
-
-  # Preprocess specific models only:
-  python prepare_datasets.py ... --models cnn transformer
 """
 
 import os
@@ -65,15 +64,6 @@ def get_model_feature_config(cfg: dict, model_name: str) -> dict:
     """
     Extract the features block for one model from the global config.
 
-    Expected config structure (config.yaml):
-        models:
-          <model_name>:
-            features:
-              inputs:
-                <FeatureName>: <norm_method>   # standard | minmax | log10 | none
-              targets:
-                <FeatureName>: <norm_method>
-
     Returns
     -------
     {
@@ -95,15 +85,7 @@ def get_model_feature_config(cfg: dict, model_name: str) -> dict:
 
     if 'features' not in model_cfg:
         raise KeyError(
-            f"No 'features' section under models.{model_name} in config.yaml.\n"
-            f"Expected:\n"
-            f"  models:\n"
-            f"    {model_name}:\n"
-            f"      features:\n"
-            f"        inputs:\n"
-            f"          B: standard\n"
-            f"        targets:\n"
-            f"          Loss: log10"
+            f"No 'features' section under models.{model_name} in config.yaml."
         )
 
     features = model_cfg['features']
@@ -126,18 +108,6 @@ def load_full_dataset(file_path: str) -> dict:
     """
     Load entire .mat file into memory.
     Supports scipy (MATLAB v7 and earlier) and h5py (MATLAB v7.3 / HDF5).
-
-    Returns
-    -------
-    {
-      'voltage': (N, T) float32,
-      'current': (N, T) float32,
-      'freq':    (N,)   float32,
-      'temp':    (N,)   float32,
-      'hdc':     (N,)   float32,
-      'duty':    (N,)   float32,
-      'meta':    { N_prim, N_sec, Ae, Le, dt }
-    }
     """
     import scipy.io
     import h5py
@@ -169,7 +139,6 @@ def load_full_dataset(file_path: str) -> dict:
             D = f['Data']
             def arr(k):
                 return np.array(D[k]).flatten().astype(np.float32)
-            # h5py stores arrays transposed relative to MATLAB
             return {
                 'voltage': np.array(D['Voltage']).T.astype(np.float32),
                 'current': np.array(D['Current']).T.astype(np.float32),
@@ -219,18 +188,12 @@ def calc_Loss(B: np.ndarray, H: np.ndarray, freq: np.ndarray) -> np.ndarray:
 
 def build_feature_pool(raw: dict) -> dict:
     """
-    Compute every possible feature from raw data **once**.
-    All downstream model preprocessing shares this pool — no redundant
-    physics computation per model.
-
-    Returns
-    -------
-    dict  name -> np.ndarray (N, ...) float32
+    Compute every possible feature from raw data once.
 
     Available feature names
     -----------------------
     B, H            waveforms    (N, T)
-    B_pk, H_pk      peak values  (N, 1)   = (max - min) / 2
+    B_pk, H_pk      peak values  (N, 1)
     Frequency,
     Temperature,
     Hdc, Duty       scalars      (N, 1)
@@ -240,7 +203,6 @@ def build_feature_pool(raw: dict) -> dict:
     N    = raw['voltage'].shape[0]
 
     def col(a: np.ndarray) -> np.ndarray:
-        """Ensure shape (N, 1) for 1-D scalar arrays."""
         return a.reshape(N, 1) if a.ndim == 1 else a
 
     print("  Computing B   ...", end=' ', flush=True)
@@ -288,25 +250,8 @@ def remove_outliers(
 ) -> np.ndarray:
     """
     Remove outlier samples from the TRAINING indices only.
-
-    Detection is performed in physics space (raw, un-normalized values) so the
-    threshold has a consistent, interpretable meaning. A sample is dropped if
-    it is an outlier in ANY of the listed features (logical OR).
-
-    Parameters
-    ----------
-    pool        : feature pool from build_feature_pool()
-    train_idx   : 1-D int array of original training indices
-    features    : list of pool feature names to inspect, e.g. ['Loss', 'B_pk']
-    method      : 'iqr'    — flag outside Q1/Q3 ± threshold * IQR
-                  'zscore' — flag where |z-score| > threshold
-    threshold   : IQR multiplier (1.5 aggressive → 3.0 conservative)
-                  OR z-score cutoff (2.5 – 3.5 typical)
-    output_dir  : if given, writes outlier_report.json here
-
-    Returns
-    -------
-    clean_train_idx : np.ndarray  (outlier rows removed)
+    Detection is performed in physics space (raw, un-normalized values).
+    A sample is dropped if it is an outlier in ANY of the listed features.
     """
     print(f"\n  Outlier removal — method='{method}', threshold={threshold}")
     print(f"  Features checked : {features}")
@@ -315,9 +260,7 @@ def remove_outliers(
     if method not in ('iqr', 'zscore'):
         raise ValueError(f"Unknown method '{method}'. Choose 'iqr' or 'zscore'.")
 
-    # True = keep this sample
     keep_mask = np.ones(len(train_idx), dtype=bool)
-
     report = {'method': method, 'threshold': threshold, 'features': {}}
 
     for feat_name in features:
@@ -325,26 +268,22 @@ def remove_outliers(
             print(f"  WARNING: '{feat_name}' not in pool — skipping.")
             continue
 
-        raw_arr = pool[feat_name][train_idx]     # raw physics values for train subset
+        raw_arr = pool[feat_name][train_idx]
 
-        # Collapse to a single representative scalar per sample
         if raw_arr.ndim == 1:
             values = raw_arr
         elif raw_arr.ndim == 2 and raw_arr.shape[1] == 1:
             values = raw_arr.flatten()
         else:
-            # Waveform (B, H): use half peak-to-peak as representative scalar
             values = (raw_arr.max(axis=1) - raw_arr.min(axis=1)) / 2.0
             print(f"    '{feat_name}' is a waveform — using peak amplitude for detection")
 
-        # Compute bounds
         if method == 'iqr':
             q1, q3 = np.percentile(values, [25, 75])
             iqr    = q3 - q1
             lo, hi = q1 - threshold * iqr, q3 + threshold * iqr
             feat_mask = (values >= lo) & (values <= hi)
-
-        else:  # zscore
+        else:
             mean, std = values.mean(), values.std()
             if std == 0:
                 print(f"    '{feat_name}' has zero std — skipping.")
@@ -369,7 +308,7 @@ def remove_outliers(
             'data_range':  [float(values.min()), float(values.max())],
         }
 
-        keep_mask &= feat_mask    # union: drop if outlier in ANY feature
+        keep_mask &= feat_mask
 
     clean_train_idx = train_idx[keep_mask]
     total_removed   = int(len(train_idx) - len(clean_train_idx))
@@ -412,13 +351,12 @@ def normalize(data: np.ndarray, method: str, stats: dict = None):
     ----------
     data   : np.ndarray
     method : 'standard' | 'minmax' | 'log10' | 'none'
-    stats  : pre-computed stats dict; if None, stats are computed from data
-             (always pass pre-computed stats for val/test splits)
+    stats  : pre-computed stats dict (always pass for val/test splits)
 
     Returns
     -------
     norm_data : np.ndarray  float32
-    stats     : dict        (empty dict for 'none' and 'log10')
+    stats     : dict
     """
     if method not in VALID_METHODS:
         raise ValueError(
@@ -470,61 +408,32 @@ def preprocess_model(
     feat_config: dict,
 ) -> tuple:
     """
-    Split and normalize data for **one model** using the feature config
-    read directly from config.yaml.
-
-    Normalization stats are ALWAYS fitted on the (already cleaned) training
-    split only — then applied identically to val and test (prevents data leakage).
-
-    Parameters
-    ----------
-    pool        : full feature pool from build_feature_pool()
-    train_idx   : np.ndarray  — CLEAN training indices (outliers already removed)
-    val_idx     : np.ndarray
-    test_idx    : np.ndarray
-    feat_config : dict  {'inputs': {name: method}, 'targets': {name: method}}
-                  — comes directly from get_model_feature_config()
-
-    Returns
-    -------
-    splits : {
-        'train': {'inputs': {name: array}, 'targets': {name: array}},
-        'val':   { ... },
-        'test':  { ... }
-    }
-    stats : {
-        feature_name: {'method': str, ...norm_params}
-    }
+    Split and normalize data for one model.
+    Normalization stats are ALWAYS fitted on clean training data only.
     """
     splits  = {s: {'inputs': {}, 'targets': {}} for s in ('train', 'val', 'test')}
     stats   = {}
     idx_map = {'train': train_idx, 'val': val_idx, 'test': test_idx}
 
     for role in ('inputs', 'targets'):
-        # role_cfg = {feature_name: norm_method} — read straight from config.yaml
         role_cfg = feat_config[role]
 
         for feat_name, method in role_cfg.items():
 
-            # ── Validate feature exists in pool ───────────────────────────
             if feat_name not in pool:
                 raise KeyError(
-                    f"Feature '{feat_name}' (config.yaml  models → {role}) "
-                    f"not found in the feature pool.\n"
+                    f"Feature '{feat_name}' not found in the feature pool.\n"
                     f"  Available features: {list(pool.keys())}\n"
                     f"  Check your config.yaml for typos."
                 )
 
-            full_arr = pool[feat_name]       # (N_total, ...)
+            full_arr = pool[feat_name]
 
-            # ── Fit normalization stats on CLEAN TRAINING data only ────────
             train_data   = full_arr[train_idx]
             _, fit_stats = normalize(train_data, method)
 
-            # Save stats with method name for full traceability
             stats[feat_name] = {'method': method, **fit_stats}
 
-            # ── Apply to every split using the same train-fitted stats ────
             for split_name, idx in idx_map.items():
                 norm_arr, _ = normalize(
                     full_arr[idx], method,
@@ -532,7 +441,6 @@ def preprocess_model(
                 )
                 splits[split_name][role][feat_name] = norm_arr
 
-            # ── Log ───────────────────────────────────────────────────────
             params_str = '  '.join(
                 f"{k}={v:.5g}" for k, v in fit_stats.items()
             ) if fit_stats else '(stateless)'
@@ -561,13 +469,7 @@ def save_split(split_data: dict, path: str):
 
 
 def load_split(path: str) -> dict:
-    """
-    Reload a split saved by save_split().
-
-    Returns
-    -------
-    {'inputs': {name: array, ...}, 'targets': {name: array, ...}}
-    """
+    """Reload a split saved by save_split()."""
     data   = np.load(path)
     result = {'inputs': {}, 'targets': {}}
     for key in data.files:
@@ -593,67 +495,26 @@ def stats_to_serializable(stats: dict) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(
-        description=(
-            "MagNet offline preprocessing.\n"
-            "Feature selection and normalization methods are read entirely "
-            "from config.yaml — no hard-coded values in this script.\n\n"
-            "Outlier removal is applied to the TRAINING split only, "
-            "in physics space (before normalization)."
-        )
+        description="MagNet offline preprocessing."
     )
-    parser.add_argument('--data',   required=True,
-                        help='Path to .mat data file')
-    parser.add_argument('--split',  required=True,
-                        help='Path to dataset_split.json')
-    parser.add_argument('--config', required=True,
-                        help='Path to config.yaml')
+    parser.add_argument('--data',   required=True,  help='Path to .mat data file')
+    parser.add_argument('--split',  required=True,  help='Path to dataset_split.json')
+    parser.add_argument('--config', required=True,  help='Path to config.yaml')
     parser.add_argument('--output', default='processed_data',
                         help='Root output directory (default: processed_data/)')
     parser.add_argument('--models', nargs='+', default=None,
                         help='Models to preprocess (default: all defined in config)')
 
-    # ── Outlier removal arguments ────────────────────────────────────────────
-    parser.add_argument(
-        '--outlier-method',
-        type=str,
-        default='iqr',
-        choices=['iqr', 'zscore'],
-        help=(
-            "Outlier detection method (default: iqr).\n"
-            "  iqr    : remove samples outside Q1/Q3 ± threshold * IQR\n"
-            "  zscore : remove samples with |z| > threshold"
-        )
-    )
-    parser.add_argument(
-        '--outlier-threshold',
-        type=float,
-        default=3.0,
-        help=(
-            "Threshold multiplier for outlier removal (default: 3.0).\n"
-            "  IQR mode    : 1.5 (aggressive) – 3.0 (conservative)\n"
-            "  Z-score mode: 2.5 – 3.5 typical"
-        )
-    )
-    parser.add_argument(
-        '--outlier-features',
-        nargs='+',
-        default=['Loss', 'B_pk', 'H_pk', 'Frequency', 'Temperature', 'Hdc', 'Duty'],
-        help=(
-            "Feature(s) to use for outlier detection (default: all scalar features).\n"
-            "A sample is removed if it is an outlier in ANY listed feature.\n"
-            "Example: --outlier-features Loss B_pk H_pk"
-        )
-    )
-    parser.add_argument(
-        '--no-outlier-removal',
-        action='store_true',
-        default=False,
-        help="Disable outlier removal entirely (preserves original behaviour)."
-    )
+    parser.add_argument('--outlier-method',    type=str,   default='iqr',
+                        choices=['iqr', 'zscore'])
+    parser.add_argument('--outlier-threshold', type=float, default=3.0)
+    parser.add_argument('--outlier-features',  nargs='+',
+                        default=['Loss', 'B_pk', 'H_pk', 'Frequency', 'Temperature', 'Hdc', 'Duty'])
+    parser.add_argument('--no-outlier-removal', action='store_true', default=False)
 
     args = parser.parse_args()
 
-    # ── STEP 1: Load config.yaml ────────────────────────────────────────────
+    # ── STEP 1: Load config ──────────────────────────────────────────────────
     print("\n" + "═"*62)
     print("  STEP 1 — Load config.yaml")
     print("═"*62)
@@ -664,17 +525,13 @@ def main():
         raise ValueError("No 'models' entries found in config.yaml.")
 
     models_to_run = args.models if args.models else available_models
-
     unknown = [m for m in models_to_run if m not in available_models]
     if unknown:
-        raise ValueError(
-            f"Requested model(s) {unknown} not in config.yaml.\n"
-            f"Available: {available_models}"
-        )
+        raise ValueError(f"Requested model(s) {unknown} not in config.yaml.\nAvailable: {available_models}")
 
     print(f"  Models to run: {models_to_run}")
 
-    # ── STEP 2: Load split indices ──────────────────────────────────────────
+    # ── STEP 2: Load split indices ───────────────────────────────────────────
     print("\n" + "═"*62)
     print("  STEP 2 — Load dataset_split.json")
     print("═"*62)
@@ -692,7 +549,7 @@ def main():
     print(f"  val   = {len(val_idx):>8,}")
     print(f"  test  = {len(test_idx):>8,}")
 
-    # ── STEP 3: Load raw dataset ────────────────────────────────────────────
+    # ── STEP 3: Load raw dataset ─────────────────────────────────────────────
     print("\n" + "═"*62)
     print("  STEP 3 — Load raw .mat dataset")
     print("═"*62)
@@ -705,19 +562,17 @@ def main():
 
     all_idx = np.concatenate([train_idx, val_idx, test_idx])
     if all_idx.max() >= N:
-        raise IndexError(
-            f"Max index {all_idx.max()} in split file exceeds dataset size {N}."
-        )
+        raise IndexError(f"Max index {all_idx.max()} exceeds dataset size {N}.")
     if all_idx.min() < 0:
         raise IndexError("Negative indices found in split file.")
 
-    # ── STEP 4: Build feature pool once ────────────────────────────────────
+    # ── STEP 4: Build feature pool ───────────────────────────────────────────
     print("\n" + "═"*62)
     print("  STEP 4 — Build feature pool  (physics computed once)")
     print("═"*62)
     pool = build_feature_pool(raw)
 
-    # ── STEP 4b: Outlier removal (training split ONLY) ──────────────────────
+    # ── STEP 4b: Outlier removal ─────────────────────────────────────────────
     print("\n" + "═"*62)
     print("  STEP 4b — Outlier removal  (train split ONLY — val/test unchanged)")
     print("═"*62)
@@ -741,9 +596,9 @@ def main():
     print(f"    val           = {len(val_idx):>8,}  (unchanged)")
     print(f"    test          = {len(test_idx):>8,}  (unchanged)")
 
-    # ── STEP 5: Per-model preprocessing driven by config.yaml ──────────────
+    # ── STEP 5: Per-model preprocessing ─────────────────────────────────────
     print("\n" + "═"*62)
-    print("  STEP 5 — Per-model preprocessing  (stats fit on clean train)")
+    print("  STEP 5 — Per-model preprocessing")
     print("═"*62)
 
     global_summary = {}
@@ -754,17 +609,14 @@ def main():
         print(f"  └{'─'*58}┘")
 
         feat_config = get_model_feature_config(cfg, model_name)
-
-        print(f"  inputs  (config.yaml) : {feat_config['inputs']}")
-        print(f"  targets (config.yaml) : {feat_config['targets']}")
+        print(f"  inputs  : {feat_config['inputs']}")
+        print(f"  targets : {feat_config['targets']}")
         print()
 
-        # Pass CLEAN training indices — normalization stats fit on clean data only
         splits, stats = preprocess_model(
             pool, clean_train_idx, val_idx, test_idx, feat_config
         )
 
-        # ── Save splits ───────────────────────────────────────────────────
         out_dir = os.path.join(args.output, model_name)
         os.makedirs(out_dir, exist_ok=True)
 
@@ -775,13 +627,11 @@ def main():
             size_mb = os.path.getsize(path) / 1e6
             print(f"  Saved {path}  ({size_mb:.1f} MB)")
 
-        # ── Save stats.json ───────────────────────────────────────────────
         stats_path = os.path.join(out_dir, 'stats.json')
         with open(stats_path, 'w') as f:
             json.dump(stats_to_serializable(stats), f, indent=2)
         print(f"  Saved {stats_path}")
 
-        # ── Summary entry ─────────────────────────────────────────────────
         global_summary[model_name] = {
             'inputs':      feat_config['inputs'],
             'targets':     feat_config['targets'],
@@ -801,7 +651,6 @@ def main():
             'saved_to': out_dir,
         }
 
-    # ── STEP 6: Write global summary ────────────────────────────────────────
     os.makedirs(args.output, exist_ok=True)
     summary_path = os.path.join(args.output, 'preprocessing_summary.json')
     with open(summary_path, 'w') as f:
@@ -814,37 +663,24 @@ def main():
 
 
 # ══════════════════════════════════════════════════════════════════
-# 9.  PYTORCH DATASET WRAPPER  (drop-in for training scripts)
+# 9.  PYTORCH DATASET WRAPPER
 # ══════════════════════════════════════════════════════════════════
 
 class PreprocessedMagNetDataset:
     """
     Lightweight PyTorch Dataset backed by pre-saved .npz files.
-    No physics recomputation at training time.
 
     Item format per mode
     --------------------
-    scaler      ->  x  (n_inputs,),           y  (1,)
-    sequence  ┐
-    cnn       ├->  B  (T, 1),  scalars (n,),  y  (1,)
-    transformer┘
-    seq2seq     ->  B  (T, 1),  H  (T, 1)
-
-    Parameters
-    ----------
-    model_dir : str   directory produced by this script, e.g. 'processed_data/cnn'
-    split     : str   'train' | 'val' | 'test'
-    mode      : str   'scaler' | 'sequence' | 'cnn' | 'transformer' | 'seq2seq'
-
-    Example
-    -------
-        from prepare_datasets import PreprocessedMagNetDataset
-        from torch.utils.data import DataLoader
-
-        ds     = PreprocessedMagNetDataset('processed_data/cnn', 'train', 'cnn')
-        loader = DataLoader(ds, batch_size=64, shuffle=True)
-        B, scalars, y = next(iter(loader))
+    scaler / scalerv2  ->  x (n_inputs,),                    y (1,)
+    sequence / cnn
+    cnnv2 / transformer->  B (T,1),  scalars (n,),           y (1,)
+    cnnv3              ->  B (T,1),  H (T,1),  scalars (n,), y (1,)   ← NEW
+    seq2seq            ->  B (T,1),  H (T,1)
     """
+
+    # Waveform feature names for cnnv3 — everything else in inputs is a scalar
+    CNNV3_WAVEFORMS = ('B', 'H')
 
     def __init__(self, model_dir: str, split: str = 'train', mode: str = 'scaler'):
         import torch
@@ -879,28 +715,39 @@ class PreprocessedMagNetDataset:
         inp = self.inputs
         tgt = self.targets
 
-        if self.mode == 'scaler':
+        if self.mode in ('scaler', 'scalerv2'):
             x = self._torch.cat([self._t(inp[f][idx]).flatten() for f in inp])
             y = self._t(tgt['Loss'][idx]).flatten()
             return x, y
 
-        elif self.mode in ('sequence', 'cnn', 'transformer'):
-            B       = self._t(inp['B'][idx]).unsqueeze(-1)          # (T, 1)
+        elif self.mode in ('sequence', 'cnn', 'cnnv2', 'transformer'):
+            B       = self._t(inp['B'][idx]).unsqueeze(-1)
             scalars = self._torch.cat([
                 self._t(inp[f][idx]).flatten() for f in inp if f != 'B'
             ])
             y = self._t(tgt['Loss'][idx]).flatten()
             return B, scalars, y
 
+        elif self.mode == 'cnnv3':
+            # Return B waveform, H waveform, scalar conditions, target
+            B       = self._t(inp['B'][idx]).unsqueeze(-1)          # (T, 1)
+            H       = self._t(inp['H'][idx]).unsqueeze(-1)          # (T, 1)
+            scalars = self._torch.cat([
+                self._t(inp[f][idx]).flatten()
+                for f in inp if f not in self.CNNV3_WAVEFORMS
+            ])
+            y = self._t(tgt['Loss'][idx]).flatten()
+            return B, H, scalars, y
+
         elif self.mode == 'seq2seq':
-            B = self._t(inp['B'][idx]).unsqueeze(-1)                # (T, 1)
-            H = self._t(tgt['H'][idx]).unsqueeze(-1)                # (T, 1)
+            B = self._t(inp['B'][idx]).unsqueeze(-1)
+            H = self._t(tgt['H'][idx]).unsqueeze(-1)
             return B, H
 
         else:
             raise ValueError(
                 f"Unknown mode '{self.mode}'. "
-                f"Valid: scaler, sequence, cnn, transformer, seq2seq"
+                f"Valid: scaler, scalerv2, sequence, cnn, cnnv2, cnnv3, transformer, seq2seq"
             )
 
 

@@ -103,7 +103,7 @@ models:
   # ──────────────────────────────────────────────────────────────────────────
   cnnv3:
     name: cnnv3
-    version: "1"
+    version: "Material_3E6"
     num_channels: 96      # must be divisible by 3  (MultiScaleConv uses 3 branches)
     num_layers: 4
     scalar_dim: 2         # Frequency + Temperature
